@@ -1,0 +1,12 @@
+site_name: MDS-2020-2-G6
+site_description: Repositório da disciplina de MDS
+repo_url: https://github.com/fga-eps-mds/MDS-2020-2-G6 
+
+theme:
+    name: material
+
+plugins:
+    - search
+
+lang:
+    - "pt"
