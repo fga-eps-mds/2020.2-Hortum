@@ -8,5 +8,5 @@ theme:
 plugins:
     - search
 
-lang:
-    - "pt"
+nav:
+    - Home: "index.md"
