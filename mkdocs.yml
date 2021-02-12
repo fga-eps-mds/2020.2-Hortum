@@ -10,3 +10,9 @@ plugins:
 
 nav:
     - Home: "index.md"
+    - Sprints:
+        - Sprint 0:
+            - Planning: "sprints/sprint_0/Planning_sprint_0.md"
+            - Review: "sprints/sprint_0/Review_sprint_0.md"
+        - Sprint 1:
+            - Planning: "sprints/sprint_1/Planning_sprint_1.md"
