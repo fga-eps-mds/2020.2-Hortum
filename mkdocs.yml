@@ -10,6 +10,7 @@ plugins:
 
 nav:
     - Home: "index.md"
+    - Documento de Visão: "docs/Documento_de_visao.md"
     - Sprints:
         - Sprint 0:
             - Planning: "sprints/sprint_0/Planning_sprint_0.md"
