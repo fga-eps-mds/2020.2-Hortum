@@ -1,6 +1,6 @@
 ## Histórico
 |Data|Versão|Modificação| Autor(es)
-|--|--|--|--|--|
+|--|--|--|--|
 |15/02/2021|1.0|Abertura do Documento|Brenno Oliveira e Carlos Eduardo|  
 
 # 1. Introdução
@@ -11,8 +11,10 @@ Este documento tem a finalidade de apresentar a ideia geral, as funcionalidades,
 O projeto em questão tem o objetivo de facilitar a comunicação entre produtores rurais e compradores. Essa mediação será feita por meio de um aplicativo de forma a auxiliar a localização e aquisição de horticulturas.
 
 ## 1.3. Definições, acrônimos e abreviações
-UnB - Universidade de Brasília
-MDS - Métodos e Desenvolvimento de Software
+Abreviação|Significado
+-|-
+**UnB**|Universidade de Brasília
+**MDS**|Métodos e Desenvolvimento de Software
 
 ## 1.4. Referências
 >Documento de Visão - ArBC. Disponível em: < [https://jlucassr.github.io/ArBC-Pages/mds/Documento_de_visao/](https://jlucassr.github.io/ArBC-Pages/mds/Documento_de_visao/) > Acesso em: 14 de Fevereiro de 2021
