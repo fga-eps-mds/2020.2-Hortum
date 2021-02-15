@@ -4,7 +4,8 @@
 
 Data|Versão|Descrição|Autor
 -|-|-|-
-13/02|1.0|Abertura do Documento|João Pedro
+13/02/2021|1.0|Abertura do Documento|João Pedro
+15/02/2021|1.0.1|Padronização de Documento|João Pedro
 
 ## 1. Introdução
 
@@ -25,10 +26,16 @@ Abreviação|Significado
 
 ### 1.4 Referências
 
-- Como documentar a arquitetura de software. Disponível em: </br> http://www.linhadecodigo.com.br/artigo/3343/como-documentar-a-arquitetura-de-software.aspx
-- TEMPLATE Documento de Arquitetura de Software. Disponível em: </br> https://github.com/DroidFoundry/DroidMetronome/wiki/TEMPLATE-Documento-de-Arquitetura-de-Software
-- Documento de arquitetura VCU. Disponível em: </br> https://fga-eps-mds.github.io/2020.1-VC_Usuario/#/docs/Documento_de_Arquitetura
-- Documento de arquitetura Acácia.Disponível em: </br> https://fga-eps-mds.github.io/2019.2-Acacia/#/architecture_document
+> Como documentar a arquitetura de software. Disponível em: [http://www.linhadecodigo.com.br/artigo/3343/como-documentar-a-arquitetura-de-software.aspx](http://www.linhadecodigo.com.br/artigo/3343/como-documentar-a-arquitetura-de-software.aspx) > Acesso em: 13 de Fevereiro de 2021
+
+> TEMPLATE Documento de Arquitetura de Software. Disponível em: [https://github.com/DroidFoundry/DroidMetronome/wiki/TEMPLATE-Documento-de-Arquitetura-de-Software](https://github.com/fga-eps-mds/MDS-2020-2-G6.git) > Acesso em: 13 de Fevereiro de 2021
+
+
+> Documento de arquitetura VCU. Disponível em: [https://fga-eps-mds.github.io/2020.1-VC_Usuario/#/docs/Documento_de_Arquitetura](https://fga-eps-mds.github.io/2020.1-VC_Usuario/#/docs/Documento_de_Arquitetura) > Acesso em: 13 de Fevereiro de 2021
+
+
+> Documento de arquitetura Acácia.Disponível em: [https://fga-eps-mds.github.io/2019.2-Acacia/#/architecture_document](https://github.com/fga-eps-mds/MDS-2020-2-G6.git) > Acesso em: 13 de Fevereiro de 2021
+
 
 ### 1.5 Visão Geral
 
