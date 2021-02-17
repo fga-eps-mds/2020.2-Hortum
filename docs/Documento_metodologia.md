@@ -10,7 +10,7 @@
 Este documento possui a finalidade de descrever e explicar quais serão as metodologias utilizadas no projeto. Será feito uma breve introdução das metodologias que serão utilizadas, assim como uma apresentação de quais artefatos e rituais/cerimônias serão realizadas pela equipe.
 
 ## 2. Metodologias de Base
-A equipe não irá utilizar somente uma metodologia dentro do projeto, sendo então adotada uma metodologia híbrida, com base no SCRUM, Kanban e XP. A ideia é reunir alguns artefatos e rituais dessas diferentes metodologias e colocá-las em prática no andamento do prjeto.
+A equipe não irá utilizar somente uma metodologia dentro do projeto, sendo então adotada uma metodologia híbrida, com base no SCRUM, Kanban e XP. A ideia é reunir alguns artefatos e rituais dessas diferentes metodologias e colocá-las em prática no andamento do projeto.
 
 Acreditamos que a utilização de uma metodologia híbrida possa ajudar na oferta de uma maior experiência e contato com diferentes processos já consolidados no mercado, além disso o objetivo da equipe não é estar preso a um processo irreversível, e sim estar apto a conhecer coisas novas e estar disposto a aplicar mudanças dentro do processo de acordo com o que a equipe sentir necessidade. "Respostas às mudanças do que seguir um contrato", como diz um dos valores das Metodologias Ágeis.
 
@@ -41,7 +41,7 @@ Em relação aos rituais, o SCRUM aplica os seguintes:
 * Sprint Backlog
 
 ### 2.2 Kanban
-Kanban é outra metodologia ágil, foi cirada pela Toyota e ainda hoje é bastante utilizada por diversas empresas e áreas diferentes da de Software por trazer uma organização visual extrema pra dentro de projetos e por ser completamente tranquila de aplicar. Consiste basicamente em um quadro dividos em três principais etapas: **To Do**, **Doing** e **Done**. Desta maneira, as atividades e funcionalidades de um projeto são colocadas na parte de "To Do", assim que começam a ser implementadas passam para o "Doing" e quando finalizadas são colocadas no "Done".
+Kanban é outra metodologia ágil, foi criada pela Toyota e ainda hoje é bastante utilizada por diversas empresas e áreas diferentes da de Software por trazer uma organização visual extrema pra dentro de projetos e por ser completamente tranquila de se aplicar. Consiste basicamente em um quadro dividos em três principais etapas: **To Do**, **Doing** e **Done**. Desta maneira, as atividades e funcionalidades de um projeto são colocadas na parte de "To Do", assim que começam a ser implementadas passam para o "Doing" e quando finalizadas são colocadas no "Done".
 
 Como se pode perceber é uma metodologia muito simples e que colabora com o alinhamento de toda a equipe do que está ocorrendo dentro do projeto como um todo. Os principais pontos desta metodologia são:
 1. Evitar procastinação e tempo ocioso;
@@ -61,7 +61,7 @@ Desta maneira a equipe irá utilizar um quadro virtual que possuirá estas difer
 * Done
 
 ### 2.3 XP
-A XP (Extreme Programming) é uma metodologia ágil bastante conhecida também e fortemente ligada a respostas às mudanças de maneira rápida. Se assemelha bastante com os valores do SCRUM e muitas vezes essas duas metodologias são vistas como complementares, onde o SCRUM acaba sendo uma metodologia mais voltada para a área de gerência e a XP para a área de práticas da Engenharia de Software.
+A XP (Extreme Programming) é uma metodologia ágil bastante conhecida também e fortemente ligada a resposta a mudanças de maneira rápida. Se assemelha bastante com os valores do SCRUM e muitas vezes essas duas metodologias são vistas como complementares, onde o SCRUM acaba sendo uma metodologia mais voltada para a área de gerência e a XP para a área de práticas da Engenharia de Software.
 
 O principal objetivo desta metodologia é levar ao extremo algumas boas práticas da Engenharia de Software, sendo principalmente fundada na ideia de que a equipe deve estar apta a mudanças, trabalhando para que o erro dentro do projeto não seja nenhum grande empecilho, mas algo de baixo custo se assim forem seguidas as suas práticas e valores.
 
@@ -70,7 +70,7 @@ E quais são esses valores do Extreme Programming então ? A metodologia possui 
 
 Para isso, algumas práticas como o **Pareamento**, onde dois desenvolvedores trabalham em uma mesma máquina, sendo um escrevendo o código e o outro observando para evitar e remover qualquer tipo de erro, a **Refatoração** com o objetivo de sempre deixar o código mais simples, mantendo sempre as funcionalidades já desenvolvidas, a prática de **Testes** onde todo código escrito deve passar por uma bateria de testes para ser validado ou não de acordo com os requisitos para entrar no código principal do projeto, a ideia de **Integração Contínua** também é altamente utilizada dento do XP.
 
-Como visto, são várias as diferentes práticas exercidas pela XP, e nem todas foram citadas acima. Então a ideia é conseguir reunir, junto da alpicação do SCRUM algumas dessas boas práticas dentro dos rituais e das reuniões para que a equipe tenha um contato com esta metodologia também.
+Como visto, são várias as diferentes práticas exercidas pela XP, e nem todas foram citadas acima. Então a ideia é conseguir reunir, junto da aplicação do SCRUM algumas dessas boas práticas dentro dos rituais e das reuniões para que a equipe tenha um contato com esta metodologia também.
 
 #### 2.3.1 Recursos utilizados do XP
 * Pareamento
@@ -80,7 +80,7 @@ Como visto, são várias as diferentes práticas exercidas pela XP, e nem todas 
 
 ## 4. Referências
 
->[SCRUM](https://www.desenvolvimentoagil.com.br/scrum/)
->[XP](https://www.devmedia.com.br/introducao-ao-extreme-programming-xp/29249)
->[Kanban](https://www.digitalhouse.com/br/blog/como-usar-metodologia-kanban)
->[Documento de Processo](https://fga-eps-mds.github.io/2019.2-Acacia/#/project_methodology)
+>[SCRUM](https://www.desenvolvimentoagil.com.br/scrum/)>
+>[XP](https://www.devmedia.com.br/introducao-ao-extreme-programming-xp/29249)>
+>[Kanban](https://www.digitalhouse.com/br/blog/como-usar-metodologia-kanban)>
+>[Documento de Processo](https://fga-eps-mds.github.io/2019.2-Acacia/#/project_methodology)>
