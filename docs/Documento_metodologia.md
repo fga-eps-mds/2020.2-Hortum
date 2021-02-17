@@ -80,7 +80,10 @@ Como visto, são várias as diferentes práticas exercidas pela XP, e nem todas 
 
 ## 4. Referências
 
->[SCRUM](https://www.desenvolvimentoagil.com.br/scrum/)>
->[XP](https://www.devmedia.com.br/introducao-ao-extreme-programming-xp/29249)>
->[Kanban](https://www.digitalhouse.com/br/blog/como-usar-metodologia-kanban)>
->[Documento de Processo](https://fga-eps-mds.github.io/2019.2-Acacia/#/project_methodology)>
+>[SCRUM](https://www.desenvolvimentoagil.com.br/scrum/)
+
+>[XP](https://www.devmedia.com.br/introducao-ao-extreme-programming-xp/29249)
+
+>[Kanban](https://www.digitalhouse.com/br/blog/como-usar-metodologia-kanban)
+
+>[Documento de Processo](https://fga-eps-mds.github.io/2019.2-Acacia/#/project_methodology)
