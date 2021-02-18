@@ -29,6 +29,7 @@ Abreviação|Significado
 <p align="justify"> &emsp;&emsp; Esse documento de arquitetura se encontra dividido em 1 tópico, que descrevem os detalhes do software desenvolvido. Se organiza da sequinte forma: </p>
 
 - Introdução: Fornece uma visão geral e introdutória sobre o documento;
+- Representação Arquitetural: Fornece informações sobre as tecnologias e os motivos pelos quais elas foram escolhidas;
 
 ## 2. Representação Arquitetural
 
