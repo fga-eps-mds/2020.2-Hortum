@@ -19,17 +19,21 @@
 
 <p align = "justify"> &emsp;&emsp; O SCRUM possui alguns artefatos e rituais que colaboram de maneira significativa para o projeto. Durante a Sprint são realizadas reuniões diariamente conhecidas por Daily Meeting, que servem para alinhar toda a equipe do que vem acontecendo dentro do projeto, são reuniões rápidas e com o sentimento de urgência para que não seja extensa. Outros artefatos muito utilizados e falado no SCRUM são o <b>Product Backlog</b> que consiste em uma lista com todas as funcionalidades desejadas para o produto, e também o <b>Sprint Backlog</b> que se destina a todas as issues que a equipe se compromete a fazer naquela Sprint. </p>
 
-<p align = "justify"> &emsp;&emsp; Além disso, o SCRUM define três papéis dentro da equipe, sendo eles:
+<p align = "justify"> &emsp;&emsp; Além disso, o SCRUM define três papéis dentro da equipe, sendo eles: </p>
 
-* **Scrum Master**: Responsável por garantir que os valores e práticas do SCRUM estão sendo aplicados pela equipe. Também é responsável por assegurar que a equipe não se comprometa excessivamente durante uma Sprint.
-* **Product Owner**: Responsável por maximizar o valor de produto em desenvolvimento e por priorizar as funcionalidades existentes no Product Backlog.
-* **Development Team**: Responsável por realizar as tarefas que foram lhe designadas para determinada Sprint.</p>
+<ul>
+    <li> <b>Scrum Master</b>: Responsável por garantir que os valores e práticas do SCRUM estão sendo aplicados pela equipe. Também é responsável por assegurar que a equipe não se comprometa excessivamente durante uma Sprint. </li>
+    <li> <b>Product Owner</b>: Responsável por maximizar o valor de produto em desenvolvimento e por priorizar as funcionalidades existentes no Product Backlog. </li>
+    <li> <b>Development Team</b>: Responsável por realizar as tarefas que foram lhe designadas para determinada Sprint. </li>
+</ul>
 
-<p align = "justify"> &emsp;&emsp; Em relação aos rituais, o SCRUM aplica os seguintes:
+<p align = "justify"> &emsp;&emsp; Em relação aos rituais, o SCRUM aplica os seguintes: </p>
 
-* **Sprint Planning**: Reunião que acontece ao início de toda Sprint com o objetivo de selecionar as funcionalidades presentes no Product Backlog que passarão para o Sprint Backlog. Vale ressaltar que o Product Owner possui importância fundamental nesta reunião para assegurar que o valor do produto esteja sendo maximizado.
-* **Sprint Review**: Ocorre ao final da Sprint. É um momento onde a equipe se atualiza de tudo o que foi produzido na Sprint e de como está o projeto atualmente.
-* **Sprint Retrospective**: É um momento de discussão para a equipe entender o que aconteceu na Sprint que pode ser melhorado para as próximas, e também reforçar aquilo que está funcionando bem, para manter para as próximas também. </p>
+<ul>
+    <li> <b>Sprint Planning</b>: Reunião que acontece ao início de toda Sprint com o objetivo de selecionar as funcionalidades presentes no Product Backlog que passarão para o Sprint Backlog. Vale ressaltar que o Product Owner possui importância fundamental nesta reunião para assegurar que o valor do produto esteja sendo maximizado.
+    <li> <b>Sprint Review</b>: Ocorre ao final da Sprint. É um momento onde a equipe se atualiza de tudo o que foi produzido na Sprint e de como está o projeto atualmente.
+    <li> <b>Sprint Retrospective</b>: É um momento de discussão para a equipe entender o que aconteceu na Sprint que pode ser melhorado para as próximas, e também reforçar aquilo que está funcionando bem, para manter para as próximas também.
+</ul>
 
 #### 2.1.1 Recursos utilizados do SCRUM
 * Scrum Master
