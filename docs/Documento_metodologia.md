@@ -15,11 +15,12 @@
 <p align = "justify"> &emsp;&emsp; Acreditamos que a utilização de uma metodologia híbrida possa ajudar na oferta de uma maior experiência e contato com diferentes processos já consolidados no mercado, além disso o objetivo da equipe não é estar preso a um processo irreversível, e sim estar apto a conhecer coisas novas e estar disposto a aplicar mudanças dentro do processo de acordo com o que a equipe sentir necessidade. "Respostas às mudanças do que seguir um contrato", como diz um dos valores das Metodologias Ágeis. </p>
 
 ### 2.1 Scrum
-<p align = "justify"> &emsp;&emsp; O SCRUM é uma metodologia ágil muito conhecida e que já até se expandiu para diversas outras áreas além da Engenharia de Software. Focada no planejamento e gestão de projetos, ocorre de maneira iterativa, onde a iteração é mais conhecida por **Sprint**, que consiste no período que pode variar de 1 a 4 semanas. Dentro do período da Sprint os membros da equipe devem exercer as tarefas que assim foram demandadas naquele período de tempo. </p>
+<p align = "justify"> &emsp;&emsp; O SCRUM é uma metodologia ágil muito conhecida e que já até se expandiu para diversas outras áreas além da Engenharia de Software. Focada no planejamento e gestão de projetos, ocorre de maneira iterativa, onde a iteração é mais conhecida por <b>Sprint</b>, que consiste no período que pode variar de 1 a 4 semanas. Dentro do período da Sprint os membros da equipe devem exercer as tarefas que assim foram demandadas naquele período de tempo. </p>
 
 <p align = "justify"> &emsp;&emsp; O SCRUM possui alguns artefatos e rituais que colaboram de maneira significativa para o projeto. Durante a Sprint são realizadas reuniões diariamente conhecidas por Daily Meeting, que servem para alinhar toda a equipe do que vem acontecendo dentro do projeto, são reuniões rápidas e com o sentimento de urgência para que não seja extensa. Outros artefatos muito utilizados e falado no SCRUM são o **Product Backlog** que consiste em uma lista com todas as funcionalidades desejadas para o produto, e também o **Sprint Backlog** que se destina a todas as issues que a equipe se compromete a fazer naquela Sprint. </p>
 
 <p align = "justify"> &emsp;&emsp; Além disso, o SCRUM define três papéis dentro da equipe, sendo eles:
+
 * **Scrum Master**: Responsável por garantir que os valores e práticas do SCRUM estão sendo aplicados pela equipe. Também é responsável por assegurar que a equipe não se comprometa excessivamente durante uma Sprint.
 * **Product Owner**: Responsável por maximizar o valor de produto em desenvolvimento e por priorizar as funcionalidades existentes no Product Backlog.
 * **Development Team**: Responsável por realizar as tarefas que foram lhe designadas para determinada Sprint.
