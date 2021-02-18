@@ -23,9 +23,10 @@
 
 * **Scrum Master**: Responsável por garantir que os valores e práticas do SCRUM estão sendo aplicados pela equipe. Também é responsável por assegurar que a equipe não se comprometa excessivamente durante uma Sprint.
 * **Product Owner**: Responsável por maximizar o valor de produto em desenvolvimento e por priorizar as funcionalidades existentes no Product Backlog.
-* **Development Team**: Responsável por realizar as tarefas que foram lhe designadas para determinada Sprint.
+* **Development Team**: Responsável por realizar as tarefas que foram lhe designadas para determinada Sprint.</p>
 
-Em relação aos rituais, o SCRUM aplica os seguintes:
+<p align = "justify"> &emsp;&emsp; Em relação aos rituais, o SCRUM aplica os seguintes:
+
 * **Sprint Planning**: Reunião que acontece ao início de toda Sprint com o objetivo de selecionar as funcionalidades presentes no Product Backlog que passarão para o Sprint Backlog. Vale ressaltar que o Product Owner possui importância fundamental nesta reunião para assegurar que o valor do produto esteja sendo maximizado.
 * **Sprint Review**: Ocorre ao final da Sprint. É um momento onde a equipe se atualiza de tudo o que foi produzido na Sprint e de como está o projeto atualmente.
 * **Sprint Retrospective**: É um momento de discussão para a equipe entender o que aconteceu na Sprint que pode ser melhorado para as próximas, e também reforçar aquilo que está funcionando bem, para manter para as próximas também. </p>
