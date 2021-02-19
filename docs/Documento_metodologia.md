@@ -35,6 +35,9 @@
     <li> <b>Sprint Retrospective</b>: É um momento de discussão para a equipe entender o que aconteceu na Sprint que pode ser melhorado para as próximas, e também reforçar aquilo que está funcionando bem, para manter para as próximas também.
 </ul>
 
+<p align = "justify"> &emsp;&emsp; Dentro da Sprint Planning o grupo utilizará uma estratégia da própria metodologia a fim de estimar o trabalho que determinada issue inserida no Sprint Backlog possui em termos de tempo e esforço. Sendo assim o grupo se reúne e cada um estima em valores pré-determinados o trabalho de determinada issue. Essa estratégia foi adotada para facilitar a priorização e a organização das issues entre os membros, a fim de evitar qualquer sobrecarga desnecessária na equipe, além de estar mais uma vez enfatizando o valor de produto ao projeto. </p>
+
+
 #### 2.1.1 Recursos utilizados do SCRUM
 * Scrum Master
 * Product Owner
@@ -45,6 +48,7 @@
 * Daily Meeting
 * Product Backlog
 * Sprint Backlog
+* Planning Poker
 
 ### 2.2 Kanban
 <p align = "justify"> &emsp;&emsp; Kanban é outra metodologia ágil, foi criada pela Toyota e ainda hoje é bastante utilizada por diversas empresas e áreas diferentes da de Software por trazer uma organização visual extrema pra dentro de projetos e por ser completamente tranquila de se aplicar. Consiste basicamente em um quadro dividos em três principais etapas: <b>To Do</b>, <b>Doing</b> e <b>Done</b>. Desta maneira, as atividades e funcionalidades de um projeto são colocadas na parte de "To Do", assim que começam a ser implementadas passam para o "Doing" e quando finalizadas são colocadas no "Done". </p>
