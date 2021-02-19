@@ -5,18 +5,20 @@
 - Duração: 7 dias
  
 ## Objetivos
-Neste planning foram discutidos os seguintes assuntos para formulação da Sprint backlog:
-- Documento de Visão
-- Documento de Arquitetura
-- Documentação de Metodologia
-- Documentação de Tecnologia
-- Backlog de produto
-- Canvas de produto
-- Templates para user storys e política de branchs
-- Estimar a sprint inicial para a codificação do produto
-- Definir/conversar sobre possíveis tecnologias
-- Definição do Discord e telegram como formas primárias de comunicação
-- Separação dos papeis Scrum Master, Product Owner e DevOps
+Neste planning foram discutidos os seguintes assuntos para formulação da Sprint backlog:<br>
+<ul>
+<li>Documento de Visão</li>
+<li>Documento de Arquitetura</li>
+<li>Documentação de Metodologia</li>
+<li>Documentação de Tecnologia</li>
+<li>Backlog de produto</li>
+<li>Canvas de produto</li>
+<li>Templates para user storys e política de branchs</li>
+<li>Estimar a sprint inicial para a codificação do produto</li>
+<li>Definir/conversar sobre possíveis tecnologias</li>
+<li>Definição do Discord e telegram como formas primárias de comunicação</li>
+<li>Separação dos papeis Scrum Master, Product Owner e DevOps</li>
+</ul>
 
 ## Sprint Backlog
 | Issue | Descrição | Responsáveis |
