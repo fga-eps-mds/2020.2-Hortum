@@ -7,6 +7,7 @@ Data|Versão|Descrição|Autor
 13/02/2021|1.0|Abertura do Documento|João Pedro
 15/02/2021|1.0.1|Padronização de Documento|João Pedro
 17/02/2020|1.0.2|Adição do tópico Representação Arquitetural|Victor Lima
+
 ## 1. Introdução
 
 ### 1.1 Finalidade
