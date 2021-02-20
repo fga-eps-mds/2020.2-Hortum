@@ -35,7 +35,7 @@
     <li> <b>Sprint Retrospective</b>: É um momento de discussão para a equipe entender o que aconteceu na Sprint que pode ser melhorado para as próximas, e também reforçar aquilo que está funcionando bem, para manter para as próximas também.
 </ul>
 
-<p align = "justify"> &emsp;&emsp; Dentro da Sprint Planning o grupo utilizará uma estratégia da própria metodologia a fim de estimar o trabalho que determinada issue inserida no Sprint Backlog possui em termos de tempo e esforço. Sendo assim o grupo se reúne e cada um estima em valores pré-determinados o trabalho de determinada issue. Essa estratégia foi adotada para facilitar a priorização e a organização das issues entre os membros, a fim de evitar qualquer sobrecarga desnecessária na equipe, além de estar mais uma vez enfatizando o valor de produto ao projeto. </p>
+<p align = "justify"> &emsp;&emsp; Dentro da Sprint Planning o grupo utilizará uma estratégia da própria metodologia a fim de estimar o trabalho que determinada issue inserida no Sprint Backlog possui em termos de tempo e esforço, o <b>Planning Poker</b>. Sendo assim o grupo se reúne e cada um estima em valores pré-determinados o trabalho de determinada issue. Essa estratégia foi adotada para facilitar a priorização e a organização das issues entre os membros, a fim de evitar qualquer sobrecarga desnecessária na equipe, além de estar mais uma vez enfatizando o valor de produto ao projeto. </p>
 
 
 #### 2.1.1 Recursos utilizados do SCRUM
@@ -89,10 +89,10 @@
 
 ## 4. Referências
 
->Documento de Processo. Disponível em: [https://fga-eps-mds.github.io/2019.2-Acacia/#/project_methodology](https://fga-eps-mds.github.io/2019.2-Acacia/#/project_methodology) > Acesso em: 17 de fevereiro de 2021
+> Documento de Processo. Disponível em: < [https://fga-eps-mds.github.io/2019.2-Acacia/#/project_methodology](https://fga-eps-mds.github.io/2019.2-Acacia/#/project_methodology) > Acesso em: 17 de fevereiro de 2021
 
->Kanban. Disponível em: [https://www.digitalhouse.com/br/blog/como-usar-metodologia-kanban](https://www.digitalhouse.com/br/blog/como-usar-metodologia-kanban) > Acesso em: 17 de fevereiro de 2021
+> Kanban. Disponível em: < [https://www.digitalhouse.com/br/blog/como-usar-metodologia-kanban](https://www.digitalhouse.com/br/blog/como-usar-metodologia-kanban) > Acesso em: 17 de fevereiro de 2021
 
->SCRUM. Disponível em: [https://www.desenvolvimentoagil.com.br/scrum/](https://www.desenvolvimentoagil.com.br/scrum/) > Acesso em: 17 de fevereiro de 2021
+> SCRUM. Disponível em: < [https://www.desenvolvimentoagil.com.br/scrum/](https://www.desenvolvimentoagil.com.br/scrum/) > Acesso em: 17 de fevereiro de 2021
 
->XP. Disponível em: [https://www.devmedia.com.br/introducao-ao-extreme-programming-xp/29249](https://www.devmedia.com.br/introducao-ao-extreme-programming-xp/29249) > Acesso em: 17 de fevereiro de 2021
+> XP. Disponível em: < [https://www.devmedia.com.br/introducao-ao-extreme-programming-xp/29249](https://www.devmedia.com.br/introducao-ao-extreme-programming-xp/29249) > Acesso em: 17 de fevereiro de 2021

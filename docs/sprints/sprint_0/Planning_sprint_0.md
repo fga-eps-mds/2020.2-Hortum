@@ -1,4 +1,4 @@
-# Sprint 0
+# Sprint 0 - Planning
 ## Visão Geral
 - Inicio: 04/02/2021
 - Fim: 10/02/2021
