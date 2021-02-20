@@ -6,8 +6,8 @@ Data|Versão|Descrição|Autor
 -|-|-|-
 13/02/2021|1.0|Abertura do Documento|João Pedro
 15/02/2021|1.0.1|Padronização de Documento|João Pedro
-17/02/2020|1.0.2|Adição do tópico Representação Arquitetural|Victor Lima
-19/02/2021|1.0.3|Padronização de Wiki|Carlos Eduardo e João Pedro
+17/02/2020|1.1|Adição do tópico Representação Arquitetural|Victor Lima
+19/02/2021|1.1.1|Padronização de Wiki|Carlos Eduardo e João Pedro
 
 ## 1. Introdução
 
