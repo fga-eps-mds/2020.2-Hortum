@@ -12,7 +12,7 @@ A Sprint 2 tem os seguintes objetivos:
 - Criação de protótipo de baixa fidelidade
 - Padronização e adição de documentos
 - Modularização do repositório
-- Revisões de epicos, features e user stories
+- Revisões de épicos, features e user stories
 
 ## Sprint Backlog
 | Issue | Descrição | Responsáveis | Pontuação
