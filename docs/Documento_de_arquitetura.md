@@ -8,6 +8,7 @@ Data|Versão|Descrição|Autor
 15/02/2021|1.0.1|Padronização de Documento|João Pedro
 17/02/2020|1.1|Adição do tópico Representação Arquitetural|Victor Lima
 19/02/2021|1.1.1|Padronização de Wiki|Carlos Eduardo e João Pedro
+21/02/2021|1.2|Refatoração do tópico 2 e adição do tópico 3|João Pedro e Matheus
 
 ## 1. Introdução
 
@@ -25,6 +26,10 @@ Abreviação|Significado
 -|-
 **MDS**| Métodos de Desenvolvimento de Software
 **UNB**| Universidade de Brasília
+**DRF**| Django REST Framework
+**ORM**| Object-relational Mapping
+**MVT**| Model-View-Template
+**MVC**| Model-View-Controller
 
 ### 1.4 Visão Geral
 
@@ -35,15 +40,41 @@ Abreviação|Significado
 
 ## 2. Representação Arquitetural
 
-### 2.1 Django REST Framework
-<p align = "justify"> &emsp;&emsp; O Django Rest é uma biblioteca para o framework Django que torna simples e ágil a implementação de APi's REST.</p>
-<p align = "justify"> &emsp;&emsp; REST(Representational State Transfer) é um conjunto de princípios e definições necessários para a criação de um projeto com interfaces bem definidas.</p>
+### 2.1 Back-end
 
-### 2.2 Django
-<p align = "justify"> &emsp;&emsp; Django é um framework web baseado em python de alto nível. O framework dispõe de bastante segurança através do ORM que realiza queries sem utilizar do código SQL para acesso ao banco de dados, o ORM é uiitilizado como ponte de comunicação. Além da segurança é um framework com curva de aprendizagem pequena e por ser baseado em python, a maior parte do grupo têm um pequeno conhecimento para trabalhar com a linguagem no projeto.</p>
+#### 2.1.1 Django REST Framework
+<p align = "justify"> &emsp;&emsp; <i>Representational State Transfer</i> ou REST, representa um conjunto de princípios e definições necessários para a criação de um projeto seguindo boas práticas e com interfaces bem definidas. O DRF então, é um framework do framework Django que permite a criação simples, ágil, poderosa e flexível de API's Web.</p>
 
-### 2.3 Flutter
-<p align = "justify"> &emsp;&emsp;O Flutter é um framework desenvolvido na liguagem Dart e permite que sejam criadas aplicações nativas para os aparelhos IOS e android. Por ter essa facilidade de desenvolvimento para dois sistemas diferentes, a linguagem têm crescido bastante e tornado cada vez maior a quantidade de informação para aprendizado, além disso, alguns dos integrantes do grupo já têm conhecimento prévio relacionados a linguagem e por isso, ela foi selecionada.</p>
+#### 2.1.2 Django
+<p align = "justify"> &emsp;&emsp; Django é um framework web baseado em python de alto nível que preza pelo rápido desenvolvimento com um design limpo e pramático. Um dos motivos pela escolha desse framework como back-end se dá pelo fato da linguagem de desenvolvimento utilizada pelo Django ser de grande interesse dos integrantes do grupo, bem como sua crescente utilização do mercado de trabalho e sua interessante curva de aprendizado.</p>
+<p align="justify"> &emsp;&emsp; Além disso o framework dispõe de bastante segurança através da utilização da técnica de Mapeamento objeto-relacional (ORM) que realiza queries sem se utilizar de código SQL para acesso ao banco de dados, útil para o grupo que possui poucos conhecimentos sobre Sistema de Banco de Dados.</p>
+<p align="justify"> &emsp;&emsp; Outro ponto de interesse no framework se diz respeito da utilização do padrão Model-View-Template, modelo esse baseado no Model-View-Controller. O MVT ao contrário do MVC conta com as funções da Controller disperados pelos outros módulos e o acréscimo da Template.</p>
+
+- **Model**: Camada responsável pelo acesso ao banco de dados.
+- **View**: Camada responsável por processar requests de usuários e retornar responses.
+- **Template**: Camada responsável pela apresentação de informações ao usuário.
+
+### 2.2 Front-End
+
+#### 2.2.1 Flutter
+<p align = "justify"> &emsp;&emsp;O Flutter é um framework desenvolvido na liguagem Dart e permite que sejam criadas aplicações nativas
+para os aparelhos IOS e android. Por ter essa facilidade de desenvolvimento para dois sistemas diferentes, a linguagem têm crescido bastante e tornado cada vez maior a quantidade de informação para aprendizado, além disso, alguns dos integrantes do grupo já têm conhecimento prévio relacionados a linguagem e por isso, ela foi selecionada.</p>
+
+## 3. Metas e Restrições
+
+### 3.1 Metas
+<p align = "justify"> &emsp;&emsp; O projeto visa facilitar a divulgação dos produtos de pequenos produtores rurais bem como a sua comunicação com os possíveis compradores, através de um aplicativo online e de fácil utilização.</p>
+
+### 3.2 Restrições
+
+#### 3.2.1 Compatibilidade
+- O aplicativo será compatível com os aparelhos celulares que possuem o sistema operacional Android e tem acesso à Play Story, bem como é necessário o acesso à internet.
+
+#### 3.2.2 Usabilidade
+- O sistema visa ser intuitivo e de simples uso, evitando assim que a utilização não seja um empecilho.
+
+#### 3.2.3 Confiabilidade
+- A aplicação buscará obter ao menos 90% de cobertura em testes, garantindo assim a funcionalidade do sistema.
 
 ### Referências
 
