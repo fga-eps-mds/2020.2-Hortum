@@ -20,3 +20,5 @@ nav:
         - Sprint 1:
             - Planning: "sprints/sprint_1/Planning_sprint_1.md"
             - Review: "sprints/sprint_1/Review_sprint_1.md"
+        - Sprint 2:
+            - Planning: "sprints/sprint_2/Planning_sprint_2.md"
