@@ -1,3 +1,7 @@
+Django==3.1.7
+djangorestframework==3.12.2
+django-cors-headers==3.7.0
+psycopg2==2.8.6
 mkdocs==1.1.2
 mkdocs-material==6.2.8
 mkdocs-material-extensions==1.0.1
