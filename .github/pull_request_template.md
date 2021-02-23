@@ -9,10 +9,9 @@
  - [ ] Nova feature
  - [ ] Atualização da documentação
  - [ ] Alteração de feature existente
- 
-## Em qual ambiente foi testado?
- - **OS:**
- - **Versão do OS:**
- 
-## Observações
-- Caso queira adicionar algum comentário 
+
+## Tarefas gerais realizadas
+Adicione aqui as tarefas realizadas
+- Tarefa 1
+- Tarefa 2
+- Tarefa 3
