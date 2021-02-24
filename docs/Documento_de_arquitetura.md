@@ -58,8 +58,10 @@ Abreviação|Significado
 ### 2.2 Front-End
 
 #### 2.2.1 Flutter
-<p align = "justify"> &emsp;&emsp;O Flutter é um framework desenvolvido na liguagem Dart e permite que sejam criadas aplicações nativas
-para os aparelhos IOS e android. Por ter essa facilidade de desenvolvimento para dois sistemas diferentes, a linguagem têm crescido bastante e tornado cada vez maior a quantidade de informação para aprendizado, além disso, alguns dos integrantes do grupo já têm conhecimento prévio relacionados a linguagem e por isso, ela foi selecionada.</p>
+<p align = "justify"> &emsp;&emsp;O Flutter é um framework desenvolvido pela Google na liguagem Dart e permite que sejam criadas aplicações nativas para os aparelhos IOS e android. Por ter essa facilidade de desenvolvimento para dois sistemas diferentes, a linguagem têm crescido bastante e tornado cada vez maior a quantidade de informação para aprendizado.</p>
+<p align = "justify"> &emsp;&emsp; Além disso, por ser uma linguagem que possui uma curva de aprendizado muito boa e alguns dos integrantes do grupo já terem conhecimento prévio relacionados a linguagem ela foi selecionada para atuar no front-end.</p>
+<p align = "justify"> &emsp;&emsp; Outro ponto importante na escolha desse framework se deve ao fato do Dart ser otimizado bem como ser especializada para criação de interfáces para usuários através do uso dos widgets (estrutura baseada no React). Assim também, o uso de <b>Blocs</b> permite que o software seja dividido em questão de interface de usuário e regras de negócio, e o uso de <b> 
+Stream</b> permite eventos assíncronos no aplicativo.</p>
 
 ## 3. Metas e Restrições
 
@@ -79,6 +81,8 @@ para os aparelhos IOS e android. Por ter essa facilidade de desenvolvimento para
 
 ### Referências
 
+> BloC Flutter Documentation. Disponível em: < [https://www.flutterparainiciantes.com.br/gerenciamento-de-estado/bloc](https://www.flutterparainiciantes.com.br/gerenciamento-de-estado/bloc) > Acesso em 24 de Fevereiro de 2021
+
 > Como documentar a arquitetura de software. Disponível em: < [http://www.linhadecodigo.com.br/artigo/3343/como-documentar-a-arquitetura-de-software.aspx](http://www.linhadecodigo.com.br/artigo/3343/como-documentar-a-arquitetura-de-software.aspx) > Acesso em: 13 de Fevereiro de 2021
 
 > Django Documentation. Disponivel em: < [https://docs.djangoproject.com/en/3.1/](https://docs.djangoproject.com/en/3.1/) > Acesso em: 22 de Fevereiro de 2021
@@ -86,6 +90,8 @@ para os aparelhos IOS e android. Por ter essa facilidade de desenvolvimento para
 > Documento de arquitetura Acácia. Disponível em: < [https://fga-eps-mds.github.io/2019.2-Acacia/#/architecture_document](https://fga-eps-mds.github.io/2019.2-Acacia/#/architecture_document) > Acesso em: 13 de Fevereiro de 2021
 
 > Documento de arquitetura VCU. Disponível em: < [https://fga-eps-mds.github.io/2020.1-VC_Usuario/#/docs/Documento_de_Arquitetura](https://fga-eps-mds.github.io/2020.1-VC_Usuario/#/docs/Documento_de_Arquitetura) > Acesso em: 13 de Fevereiro de 2021
+
+> Flutter Documentation. Disponível em: < [https://flutter.dev/docs](https://flutter.dev/docs) > Acesso em: 24 de Fevereiro de 2021
 
 > Quickstart - Django REST framework. Disponivel em: < [https://www.django-rest-framework.org/tutorial/quickstart/](https://www.django-rest-framework.org/tutorial/quickstart/) > acesso em: 22 de Fevereiro de 2021
 
