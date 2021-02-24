@@ -13,6 +13,7 @@ nav:
     - Documento de Visão: "Documento_de_visao.md"
     - Documento de Metodologia: "Documento_metodologia.md"
     - Documento de Arquitetura: "Documento_de_arquitetura.md"
+    - Protótipo: "Prototipo.md"
     - Sprints:
         - Sprint 0:
             - Planning: "sprints/sprint_0/Planning_sprint_0.md"
