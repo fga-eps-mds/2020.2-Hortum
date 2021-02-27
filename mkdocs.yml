@@ -1,6 +1,6 @@
-site_name: MDS-2020-2-G6
-site_description: Repositório da disciplina de MDS
-repo_url: https://github.com/fga-eps-mds/MDS-2020-2-G6 
+site_name: Hortum
+site_description: Repositório do Projeto Hortum
+repo_url: https://github.com/fga-eps-mds/2020.2-Hortum 
 
 theme:
     name: material
@@ -25,3 +25,5 @@ nav:
         - Sprint 2:
             - Planning: "sprints/sprint_2/Planning_sprint_2.md"
             - Review: "sprints/sprint_2/Review_sprint_2.md"
+        - Sprint 3:
+            - Planning: "sprints/sprint_3/Planning_sprint_3.md"
