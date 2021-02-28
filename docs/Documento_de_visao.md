@@ -31,3 +31,77 @@ Abreviação|Significado
 > Documento de Visão - Lino, o Bot. Disponível em: < [https://botlino.github.io/docs/doc-visao](https://botlino.github.io/docs/doc-visao) > Acesso em: 14 de Fevereiro de 2021
 
 > IBM Knowledge Center - Documento de Visão. Disponível em: < [https://www.ibm.com/support/knowledgecenter/pt-br/SSYMRC_6.0.3/com.ibm.rational.rrm.help.doc/topics/r_vision_doc.html](https://www.ibm.com/support/knowledgecenter/pt-br/SSYMRC_6.0.3/com.ibm.rational.rrm.help.doc/topics/r_vision_doc.html) > Acesso em: 14 de Fevereiro de 2021
+
+
+
+### 3.4 Principais Necessidades da Parte Interessada ou do Usuário
+Usuário|Necessidade|Solução Atual|Solução Proposta
+-|-|-|-
+Produtor|Plataforma para anunciar produtos|Negociação presencial e por redes sociais|Plataforma que integra produtor ao cliente, possibilitando cadastro de produtos
+Comprador|Achar produtos mais facilmente|Ir a feiras|Plataforma que integra cliente ao produtor, possibilitando a busca de produtos 
+
+### 3.5. Ambiente do Usuário
+<p align = "justify">Aplicativo mobile para Android</p>
+
+### 3.6. Alternativas e Concorrência
+#### 3.6.1. PôeNaCesta 
+<p align = "justify"> Plataforma do Emater(Empresa de Assistência Técnica e Extensão Rural) para localização de produtores.</p>
+Descrição do site: *“O produtor, diretamente de sua propriedade, oferece seus produtos para a população sem a necessidade de intermediação de mercados, é você e o produtor, basta procurar o que quer e falar diretamente com ele!”*.
+
+## 4. Visão Geral do Produto
+
+### 4.1. Perspectiva do Produto
+<p align = "justify"> O aplicativo Hortum busca facilitar a comunicação entre produtor e cliente, por meio de uma plataforma de anúncios, em que o produtor cadastra seus produtos e o cliente busca o que deseja, assim o cliente consegue contato direto com o pequeno produtor.</p>
+
+### 4.2. Resumo das Capacidades
+Benefício|Recursos de suporte
+-|-
+Ajudar pequenos produtores a anunciar sua mercadoria|Aplicativo com uma interface amigável onde poderão cadastrar toda a sua mercadoria
+Auxiliar compradores a encontrar produtos|Interface fácil utilização para pesquisar produtos de horticultura 
+
+### 4.3. Suposições e Dependências
+- O usuário deverá possuir um celular Android com acesso a internet
+- O aplicativo unirá produtores a compradores
+
+## 5. Recursos do Produto
+### 5.1. Recursos do Produtor
+- Cadastrar na plataforma
+- Anunciar produtos
+- Registrar horários 
+- Editar anúncios
+- Compartilhar anúncio
+- Denunciar outro usuário
+
+### 5.2. Recursos do Comprador
+- Cadastrar na plataforma
+- Pesquisar produtos
+- Pesquisar produtor
+- Favoritar produtor
+- Curtir anúncio
+- Compartilhar anúncio
+- Avaliar produtor
+- Denunciar outro usuário
+
+## 6. Restrições
+### 6.1. Restrições de Design
+<p align = "justify">O aplicativo busca proporcionar aos usuários uma utilização autoexplicativa e fácil, dispensando conhecimentos técnicos.</p>
+
+### 6.2. Restrições de implementação
+<p align = "justify">O sistema será implementado utilizando 2 principais frameworks, sendo eles o Django Rest para o back-end e o Flutter para o front-end mobile.</p>
+
+### 6.3. Restrições de Uso
+<p align = "justify">As restrições para utilização do produto se limitam ao usuário possuir um smartphone com acesso a internet.</p>
+
+## 7. Requisitos Funcionais
+Funcionalidades|Prioridade
+-|-
+Cadastro e login de usuário, logar e sair da conta e atualizar dados|Alta
+Definição dos produtos (produtor)|Alta
+Listagem de produtos|Alta
+Listagem de localizações e horários|Média
+Compartilhar anúncio|Baixa
+Favoritar produtor|Média
+Curtir anúncio|Média
+Avaliação de usuário|Baixa
+Chat entre produtor e comprador|Baixa
+Denúncia de usuário|Média
