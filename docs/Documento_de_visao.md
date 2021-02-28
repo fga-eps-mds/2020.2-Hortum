@@ -41,17 +41,17 @@ Produtor|Plataforma para anunciar produtos|Negociação presencial e por redes s
 Comprador|Achar produtos mais facilmente|Ir a feiras|Plataforma que integra cliente ao produtor, possibilitando a busca de produtos 
 
 ### 3.5. Ambiente do Usuário
-<p align = "justify">Aplicativo mobile para Android</p>
+<p align = "justify">&emsp;&emsp; Aplicativo mobile para Android</p>
 
 ### 3.6. Alternativas e Concorrência
 #### 3.6.1. PôeNaCesta 
-<p align = "justify"> Plataforma do Emater(Empresa de Assistência Técnica e Extensão Rural) para localização de produtores.</p>
-Descrição do site: *“O produtor, diretamente de sua propriedade, oferece seus produtos para a população sem a necessidade de intermediação de mercados, é você e o produtor, basta procurar o que quer e falar diretamente com ele!”*.
+<p align = "justify">&emsp;&emsp; Plataforma do Emater(Empresa de Assistência Técnica e Extensão Rural) para localização de produtores.</p>
+&emsp;&emsp; Descrição do site: *“O produtor, diretamente de sua propriedade, oferece seus produtos para a população sem a necessidade de intermediação de mercados, é você e o produtor, basta procurar o que quer e falar diretamente com ele!”*.
 
 ## 4. Visão Geral do Produto
 
 ### 4.1. Perspectiva do Produto
-<p align = "justify"> O aplicativo Hortum busca facilitar a comunicação entre produtor e cliente, por meio de uma plataforma de anúncios, em que o produtor cadastra seus produtos e o cliente busca o que deseja, assim o cliente consegue contato direto com o pequeno produtor.</p>
+<p align = "justify">&emsp;&emsp; O aplicativo Hortum busca facilitar a comunicação entre produtor e cliente, por meio de uma plataforma de anúncios, em que o produtor cadastra seus produtos e o cliente busca o que deseja, assim o cliente consegue contato direto com o pequeno produtor.</p>
 
 ### 4.2. Resumo das Capacidades
 Benefício|Recursos de suporte
@@ -84,13 +84,13 @@ Auxiliar compradores a encontrar produtos|Interface fácil utilização para pes
 
 ## 6. Restrições
 ### 6.1. Restrições de Design
-<p align = "justify">O aplicativo busca proporcionar aos usuários uma utilização autoexplicativa e fácil, dispensando conhecimentos técnicos.</p>
+<p align = "justify">&emsp;&emsp; O aplicativo busca proporcionar aos usuários uma utilização autoexplicativa e fácil, dispensando conhecimentos técnicos.</p>
 
 ### 6.2. Restrições de implementação
-<p align = "justify">O sistema será implementado utilizando 2 principais frameworks, sendo eles o Django Rest para o back-end e o Flutter para o front-end mobile.</p>
+<p align = "justify">&emsp;&emsp; O sistema será implementado utilizando 2 principais frameworks, sendo eles o Django Rest para o back-end e o Flutter para o front-end mobile.</p>
 
 ### 6.3. Restrições de Uso
-<p align = "justify">As restrições para utilização do produto se limitam ao usuário possuir um smartphone com acesso a internet.</p>
+<p align = "justify">&emsp;&emsp; As restrições para utilização do produto se limitam ao usuário possuir um smartphone com acesso a internet.</p>
 
 ## 7. Requisitos Funcionais
 Funcionalidades|Prioridade
