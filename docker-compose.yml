@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    postgres:
+        image: postgres:latest
+        container_name: db
+        hostname: postgres
+        environment:
+            - POSTGRES_PASSWORD=hortum
+            - POSTGRES_USER=hortum
+            - POSTGRES_DB=hortum
+        ports:
+            - 5000:5432
+
+    web:
+         build: .
+         command: /bin/sh ./startup.sh
+         volumes:
+             - .:/code
+         ports:
+             - 8000:8000
+         environment:
+             - DB_NAME=hortum
+             - DB_USER=hortum
+             - DB_PASSWORD=hortum
+             - DB_HOST=postgres
+         depends_on:
+             - postgres

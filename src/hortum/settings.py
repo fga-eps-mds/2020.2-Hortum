@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'hortum.wsgi.application'
 DATABASES = {
     'default': {
 	'ENGINE': 'django.db.backends.postgresql',
-	'NAME': 'hortum',
-	'USER': 'hortum',
-	'PASSWORD': 'hortum',
-	'HOST': '127.0.0.1',
+	'NAME': os.enviorn.get('DB_NAME'),
+	'USER': os.enviorn.get('DB_USER'),
+	'PASSWORD': os.enviorn.get('DB_PASSWORD'),
+	'HOST': os.enviorn.get('DB_HOST'),
 	'PORT': '5432',
     }
 }
