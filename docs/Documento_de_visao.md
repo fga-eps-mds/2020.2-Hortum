@@ -7,6 +7,7 @@
 |15/02/2021|1.0|Abertura do Documento|Brenno Oliveira e Carlos Eduardo|  
 |19/02/2021|1.0.1|Padronização da Wiki|Carlos Eduardo e João Pedro|
 |28/02/2021|1.1|Adição dos tópicos 2, 3, 4, 5, 6 e 7 e incrementação do tópico 1|Brenno Oliveira e Carlos Eduardo
+|01/03/2021|1.1.1|Alteração na formatação dos tópicos 2.2, 2.3, 3.3.1, 3.3.2, 3.4.1, 3.4.2|Brenno Oliveira e Carlos Eduardo
 
 ## 1. Introdução
 ### 1.1 Objetivo
