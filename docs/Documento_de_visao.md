@@ -62,12 +62,12 @@ Cujo impacto|Escoamento da produção do pequeno agricultor
 Boa solução|Serviço para unir produtores e compradores
 
 ### 2.3 Posição do produto
-Para|Pequenos agricultores e interessados em produtos de horticultura
--|-
-Que|Desejam acelerar o processo de compra e venda
-O Hortum|É um aplicativo móvel
-Que|Facilita o comércio de horticultura.
-Nosso produto|-
+- **Para:** Pequenos agricultores e interessados em produtos de horticultura
+- **Que:** Desejam acelerar o processo de compra e venda
+- **O Hortum:** É um aplicativo móvel
+- **Que:** Facilita o comércio de horticultura.
+- **De outro modo:** Os usuários podem utilizar o *Põe na Cesta*
+- **Nosso produto:** Facilita a comunicação entre produtor e cliente por meio de um ambiente mais agradável
 
 ## 3 Descrições da Parte Interessada e do Usuário
 ### 3.1 Resumo dos envolvidos
