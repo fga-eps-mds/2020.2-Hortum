@@ -55,11 +55,10 @@ Abreviação|Significado
 <p align = "justify"> &emsp;&emsp; O Hortum servirá como um serviço em que os produtores irão realizar um cadastro de seus produtos para consulta por qualquer usuário e os clientes poderão procurar por certo produto, junto com a localização para compra e produtor responsável. Facilitando tanto para o produtor quanto para o cliente.</p>
 
 ### 2.2 Resumo do Problema
-O problema|Dificuldade para comércio entre o produtor que deseja vender seus produtos e cliente que deseja comprá-lo
--|-
-Afeta|A demora para adquirir certo produto e as vendas do produtor 
-Cujo impacto|Escoamento da produção do pequeno agricultor
-Boa solução|Serviço para unir produtores e compradores
+- **O problema:** Dificuldade para comércio entre o produtor que deseja vender seus produtos e cliente que deseja comprá-lo
+- **Afeta:** A demora para adquirir certo produto e as vendas do produtor 
+- **Cujo impacto:** Escoamento da produção do pequeno agricultor
+- **Boa solução:** Serviço para unir produtores e compradores
 
 ### 2.3 Posição do produto
 - **Para:** Pequenos agricultores e interessados em produtos de horticultura
@@ -84,41 +83,37 @@ Compradores|Pesquisar produtos
 
 ### 3.3 Perfis dos Usuários
 #### 3.3.1 Produtores
-Representante|Pequeno Produtor
--|-
-Descrição|Produtores a procura de uma plataforma para anunciar os produtos
-Responsabilidades|Se cadastrar e anunciar os produtos
-Critérios de Sucesso|Vender o produto por meio da plataforma
-Envolvimento|Alto
-Problemas/Comentários|Não ter conhecimento no uso de aplicativos móveis
+- **Representante:**         Pequeno Produtor
+- **Descrição:**             Produtores a procura de uma plataforma para anunciar os produtos
+- **Responsabilidades:**     Se cadastrar e anunciar os produtos
+- **Critérios de Sucesso:**  Vender o produto por meio da plataforma
+- **Envolvimento:**          Alto
+- **Problemas/Comentários:** Não ter conhecimento no uso de aplicativos móveis
 
 #### 3.3.2 Compradores
-Representante|Comprador
--|-
-Descrição|Pessoa a procura de determinada horticultura 
-Responsabilidades|Procurar e se comunicar com o vendedor
-Critérios de Sucesso|Encontrar produto desejado
-Envolvimento|Alto
+- **Representante:**        Comprador
+- **Descrição:**            Pessoa a procura de determinada horticultura 
+- **Responsabilidades:**    Procurar e se comunicar com o vendedor
+- **Critérios de Sucesso:** Encontrar produto desejado
+- **Envolvimento:**         Alto
 Problemas/Comentários|Não ter conhecimento no uso de aplicativos móveis
 
 ### 3.4 Perfis dos Envolvidos
 #### 3.4.1 Equipe de desenvolvimento de software
-Representantes|Brenno Oliveira Silva, Carlos Eduardo de Sousa Fiuza, João Pedro Moura Oliveira,  Matheus Calixto Vaz Pinheiro, Victor Souza Dantas Martins Lima, Vitor Magalhães Lamego
--|-
-Descrição|Desenvolvimento e gerenciamento do projeto
-Responsabilidades|Desenvolver e documentar o projeto
-Critérios de Sucesso|Finalizar o aplicativo no prazo determinado com qualidade 
-Envolvimento|Alto
-Problemas/Comentários|Seguir com os prazos estipulados para desenvolver e aplicar soluções
+- **Representantes:** Brenno Oliveira Silva, Carlos Eduardo de Sousa Fiuza, João Pedro Moura Oliveira,  Matheus Calixto Vaz Pinheiro, Victor Souza Dantas Martins Lima, Vitor Magalhães Lamego
+- **Descrição:** Desenvolvimento e gerenciamento do projeto
+- **Responsabilidades:** Desenvolver e documentar o projeto
+- **Critérios de Sucesso:** Finalizar o aplicativo no prazo determinado com qualidade 
+- **Envolvimento:** Alto
+- **Problemas/Comentários:** Seguir com os prazos estipulados para desenvolver e aplicar soluções
 
 #### 3.4.2 Orientadores
-Representantes|Professora Carla Silva Rocha Aguiar e monitores Hugo Sobral e Leonardo Gomes
--|-
-Descrição|Professora da disciplina Métodos de Desenvolvimento de Software e monitores
-Responsabilidades|Orientar e avaliar a equipe de desenvolvimento
-Critérios de Sucesso|Transmitir e observar o sucesso da equipe no desenvolvimento do projeto 
-Envolvimento|Médio
-Problemas/Comentários|-
+- **Representantes:** Professora Carla Silva Rocha Aguiar e monitores Hugo Sobral e Leonardo Gomes
+- **Descrição:** Professora da disciplina Métodos de Desenvolvimento de Software e monitores
+- **Responsabilidades:** Orientar e avaliar a equipe de desenvolvimento
+- **Critérios de Sucesso:** Transmitir e observar o sucesso da equipe no desenvolvimento do projeto 
+- **Envolvimento:** Médio
+- **Problemas/Comentários:** -
 
 ### 3.5 Principais Necessidades da Parte Interessada ou do Usuário
 Usuário|Necessidade|Solução Atual|Solução Proposta
