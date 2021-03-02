@@ -10,6 +10,7 @@ Data|Versão|Descrição|Autor
 19/02/2021|1.1.1|Padronização de Wiki|Carlos Eduardo e João Pedro
 21/02/2021|1.2|Refatoração do tópico 2 e adição do tópico 3|João Pedro e Matheus
 22/02/2021|1.3|Adição de links na parte de referências|João Pedro e Matheus
+01/03/2021|1.4|Adição do tópico 4|João Pedro e Matheus 
 
 ## 1. Introdução
 
@@ -38,6 +39,8 @@ Abreviação|Significado
 
 - Introdução: Fornece uma visão geral e introdutória sobre o documento;
 - Representação Arquitetural: Fornece informações sobre as tecnologias e os motivos pelos quais elas foram escolhidas;
+- Metas e Restrições: Demonstra as metas e restrições aplicadas no projeto;
+- Visão de Dados: Representa a arquitetura implementada no banco de dados;
 
 ## 2. Representação Arquitetural
 
@@ -63,6 +66,11 @@ Abreviação|Significado
 <p align = "justify"> &emsp;&emsp; Outro ponto importante na escolha desse framework se deve ao fato do Dart ser otimizado bem como ser especializada para criação de interfáces para usuários através do uso dos widgets (estrutura baseada no React). Assim também, o uso de <b>Blocs</b> permite que o software seja dividido em questão de interface de usuário e regras de negócio, e o uso de <b> 
 Stream</b> permite eventos assíncronos no aplicativo.</p>
 
+### 2.3 Banco de Dados
+
+#### 2.3.1 PostgreSQL
+<p align = "justify"> &emsp;&emsp;O PostgreSQL é um poderoso, open source e objeto-relacional banco de dados que faz o uso e extenção da linguagem SQL. Por sua robustez, confiabilidade, integridade de dados e dedicação na comunidade open source essa ferramenta tem crescido e muito no mercado de trabalho, por esses motivos esse banco de dados foi escolhido para o projeto.</p>
+
 ## 3. Metas e Restrições
 
 ### 3.1 Metas
@@ -79,7 +87,13 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 #### 3.2.3 Confiabilidade
 - A aplicação buscará obter ao menos 90% de cobertura em testes, garantindo assim a funcionalidade do sistema.
 
+## 4. Visão de Dados
+
+![Arquitetura Banco de Dados](img/diagrama_banco_de_dados.png)
+
 ### Referências
+
+> About PostgreSQL. Disponível em: < [https://www.postgresql.org/about/](https://www.postgresql.org/about/) > Acesso em 01 de Março de 2021
 
 > BloC Flutter Documentation. Disponível em: < [https://www.flutterparainiciantes.com.br/gerenciamento-de-estado/bloc](https://www.flutterparainiciantes.com.br/gerenciamento-de-estado/bloc) > Acesso em 24 de Fevereiro de 2021
 
