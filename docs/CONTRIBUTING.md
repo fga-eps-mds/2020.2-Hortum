@@ -4,7 +4,7 @@
 Então como faço para contribuir com o projeto ?
 Atráves de issues e pull requests é possível reportar bugs, sugerir e/ou implementar novas funcionalidades, melhorar a documentação ou também para sanar possíveis dúvidas.
 Para manter um boa organização é altamente recomendado seguir as dicas, orientações e padrões desse documento.
-Para mais informações sobre o projeto veja o <a href="https://github.com/fga-eps-mds/2020.2-Hortum/blob/main/docs/README.md">README</a> e siga o nosso <a href="https://github.com/fga-eps-mds/2020.2-Hortum/blob/main/docs/CODE_OF_CONDUCT.md">código de conduta</a> para que tenhamos um ambiente acolhedor e amigável. </p> 
+Para mais informações sobre o projeto veja o <a href="https://github.com/fga-eps-mds/2020.2-Hortum/blob/main/README.md">README</a> e siga o nosso <a href="../CODE_OF_CONDUCT">código de conduta</a> para que tenhamos um ambiente acolhedor e amigável. </p> 
 
 ## Issues
 <p align = "justify"> &emsp;&emsp; As issues podem ser criadas para relatar problemas, sugerir melhorias e também para sanar dúvidas. </p>
