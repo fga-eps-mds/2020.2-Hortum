@@ -1,0 +1,15 @@
+# Canvas
+
+## Histórico de Revisão
+
+Data|Versão|Descrição| Autor(es)
+--|--|--|--
+01/03/2021|1.0|Adição do canvas|Brenno Oliveira e Victor Lima
+
+## Canvas
+![Canvas](./img/Canvas.png)
+
+##  Referências
+> Modelo de negócio da Buser. Disponível em: < [https://analistamodelosdenegocios.com.br/modelo-de-negocio-da-buser/](https://analistamodelosdenegocios.com.br/modelo-de-negocio-da-buser/) > Acesso em: 1 de Março de 2021
+
+>  Núcleo de Empreendedorismo da USP - Canvas. Disponível em: < [https://www.youtube.com/watch?v=7NZCxkB10oA](https://www.youtube.com/watch?v=7NZCxkB10oA) > Acesso em: 1 de Março de 2021
