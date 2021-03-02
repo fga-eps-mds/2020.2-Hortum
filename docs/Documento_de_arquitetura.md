@@ -69,7 +69,7 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 ### 2.3 Banco de Dados
 
 #### 2.3.1 PostgreSQL
-<p align = "justify"> &emsp;&emsp;O PostgreSQL é um poderoso, open source e objeto-relacional banco de dados que faz o uso e extenção da linguagem SQL. Por sua robustez, confiabilidade, integridade de dados e dedicação na comunidade open source essa ferramenta tem crescido e muito no mercado de trabalho, por esses e muitos outros motivos esse banco de dados foi escolhido para o projeto.</p>
+<p align = "justify"> &emsp;&emsp;O PostgreSQL é um poderoso, open source e objeto-relacional banco de dados que faz o uso e extenção da linguagem SQL. Por sua robustez, confiabilidade, integridade de dados e dedicação na comunidade open source essa ferramenta tem crescido e muito no mercado de trabalho, por esses motivos esse banco de dados foi escolhido para o projeto.</p>
 
 ## 3. Metas e Restrições
 
