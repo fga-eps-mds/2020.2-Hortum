@@ -132,9 +132,18 @@ Exemplo: #23 Definindo arquitetura do banco de dados
 `Editando os documentos de visão`
 
 </p>
-<b>Observação:</b> Para indicar quem te auxiliou em determinado commit, basta acrescentar à mensagem
+<b>Observação:</b> Para indicar quem te auxiliou em determinado commit, após mudar o caracter de comentário como citado anteriormente, basta acrescentar ao commit a seguinte mensagem:
 
-`Co-Authored-by: nomeDaPessoa <emailDoGitHub>` 
+`Co-Authored-by: nomeDaPessoa <emailDoGitHub>`
+
+<b>Exemplo:</b>
+
+    comando: git commit
+
+    "#20 Criando novo documento
+
+
+    Co-authored-by: Vitor Lamego <email@gmail.com>"
 
 
 ## Referências
