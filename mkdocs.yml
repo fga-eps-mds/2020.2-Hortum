@@ -17,6 +17,10 @@ nav:
     - Protótipo: "Prototipo.md"
     - Product Backlog: "Product_Backlog.md"
     - Canvas: "Canvas.md"
+    - Contribuição:
+        - Como contribuir: "CONTRIBUTING.md"
+        - Política de Contribuição: "Politica_de_Contribuicao.md"
+        - Código de Conduta: "CODE_OF_CONDUCT.md"
     - Sprints:
         - Sprint 0:
             - Planning: "sprints/sprint_0/Planning_sprint_0.md"
