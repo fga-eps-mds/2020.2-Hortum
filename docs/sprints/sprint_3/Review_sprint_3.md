@@ -22,7 +22,7 @@
 ![Retrospective Sprint 3](../../img/retrospective_3.png)
 
 ## Quadro de Burndown
-![Quadro de Burndown Sprint 3](../../img/burndown_2.png)
+![Quadro de Burndown Sprint 3](../../img/burndown_3.png)
 
 ## Quadro de Velocity
 ![Quadro de Velocity Sprint 3](../../img/velocity_3.png)
