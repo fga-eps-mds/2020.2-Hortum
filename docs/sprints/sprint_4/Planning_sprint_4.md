@@ -22,7 +22,7 @@ A Sprint 4 tem os seguintes objetivos:
 |#59|Gerar documentação sobre review sprint 3|João Pedro|2
 |#60|Gerar documentação sobre planning sprint 4|João Pedro|2
 |#61|[US] - Cadastro de conta|João Pedro e Victor Lima|20
-|#65|Documentação de Casos de Uso|Brenno e Carlos|5
+|#65|Documentação de Casos de Uso|Brenno e Matheus|5
 |#66|Definir identidade visual do projeto|Matheus e Carlos|8
 |#67|Melhorar documento de banco de dados|Carlos e Lucas|3
 |#68|Treinamento backend e suas tecnologias|João Pedro e Matheus|5
