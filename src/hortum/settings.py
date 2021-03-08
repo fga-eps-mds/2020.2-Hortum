@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'hortum.assets',
+    'hortum.announcement',
+    'hortum.customer',
+    'hortum.picture',
+    'hortum.productor',
+    'hortum.users',
     'corsheaders',
 ]
 
@@ -130,3 +134,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = './images'
