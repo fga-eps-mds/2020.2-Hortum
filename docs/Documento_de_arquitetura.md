@@ -12,6 +12,7 @@ Data|Versão|Descrição|Autor
 22/02/2021|1.3|Adição de links na parte de referências|João Pedro e Matheus
 01/03/2021|1.4|Adição do tópico 4|João Pedro e Matheus 
 08/03/2021|1.5|Adição do tópico "Visão de Casos de Uso"|Brenno e Matheus
+09/03/2021|1.6|Adição do tópico 5|Carlos Eduardo e Lucas
 
 ## 1. Introdução
 
@@ -104,9 +105,49 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 ### 4.2 Diagrama de Casos de Uso
 ![Diagrama de Casos de Uso](img/diagrama_casos_de_uso.png)
 
-## 5. Visão de Dados
+## 5. Visão de Implementação
+### 5.1 Diagrama de Classes
 
 ![Arquitetura Banco de Dados](img/diagrama_banco_de_dados.png)
+
+### 5.2 Banco de Dados
+<p align = "justify"> &emsp;&emsp; Para desenvolver e instanciar o banco de dados do projeto foi pensado quais seriam as entidades do sistema e seus atributos, além de como se relacionariam, ou seja, suas cardinalidades.</p>
+
+#### 5.2.1 Entidades
+
+- Usuário
+    - Comprador 
+    - Produtor
+- Anúncio
+
+<p align = "justify"> &emsp;&emsp; O usuário pode ser tanto um comprador quanto um produtor, que necessita de autenticação para acessar algumas áreas do aplicativo.</p>
+
+#### 5.2.2 Atributos
+
+<p align = "justify"> &emsp;&emsp; Todos os Usuários irão ter email, nome e senha, sendo o email e senha usados para acessar a conta e nome para reconhecimento.</p>
+
+<p align = "justify"> &emsp;&emsp; Os Compradores e Produtores poderão cadastrar uma foto de perfil. </p>
+
+<p align = "justify"> &emsp;&emsp; Um Anúncio poderá ter uma ou várias fotos cadastradas, para identificar e mostrar os produtos do anúncio.</p>
+
+<p align = "justify"> &emsp;&emsp; Um Anúncio terá em seu cadastro número de likes, um nome, descrição e quantidade em estoque.</p>
+
+<p align = "justify"> &emsp;&emsp; O Produtor terá a possibilidade de adicionar uma ou mais localizações. </p>
+
+#### 5.2.3 Relacionamentos
+<p align = "justify"> &emsp;&emsp; Um Comprador ou Produtor poderá ter foto de perfil ou não, mas uma foto pertence a apenas 1 Comprador ou Produtor. Cardinalidade(0,n)</p>
+
+<p align = "justify"> &emsp;&emsp; Um Anúncio pode ser curtido por vários Compradores ou nenhum, e o Comprador pode curtir vários Anúncios ou nenhum. Cardinalidade(0,n)</p>
+
+<p align = "justify"> &emsp;&emsp; Um Produtor pode possuir vários Anúncios, mas um Anúncio pertence a apenas 1 Produtor. Cardinalidade(1,n)</p>
+
+<p align = "justify"> &emsp;&emsp; Um Anúncio pode ter nenhuma foto ou várias, mas cada foto pertence a apenas 1 Anúncio. Cardinalidade(0,n)</p>
+
+<p align = "justify"> &emsp;&emsp; Um Produtor pode ter várias localizações, mas cada localização pertence a apenas 1 Produtor. Cardinalidade(1.n)</p>
+
+#### 5.2.4 Diagrama Entidade-Relacionamento
+
+![](img/diagrama_entidade_relacionamentos.jpg)
 
 
 ### Referências
