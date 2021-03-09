@@ -9,15 +9,5 @@ class Productor(User):
     idPicture = models.OneToOneField(Picture, on_delete=models.CASCADE, null=True)
     idAnun = models.OneToOneField(Announcement, on_delete=models.CASCADE, null=True)
 
-class ProductorSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=30)
-    email = serializers.CharField(max_length=30)
-    password = serializers.CharField(max_length=30)
-    idPicture = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
-    idAnun = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
 class Localization(models.Model):
     adress = models.CharField(max_length=100)
-
-class LocalizationSerializer(serializers.Serializer):
-    adress = serializers.CharField(max_length=100)
