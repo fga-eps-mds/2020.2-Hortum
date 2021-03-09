@@ -11,6 +11,7 @@ Data|Versão|Descrição|Autor
 21/02/2021|1.2|Refatoração do tópico 2 e adição do tópico 3|João Pedro e Matheus
 22/02/2021|1.3|Adição de links na parte de referências|João Pedro e Matheus
 01/03/2021|1.4|Adição do tópico 4|João Pedro e Matheus 
+08/03/2021|1.5|Adição do tópico "Visão de Casos de Uso"|Brenno e Matheus
 
 ## 1. Introdução
 
@@ -87,9 +88,26 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 #### 3.2.3 Confiabilidade
 - A aplicação buscará obter ao menos 90% de cobertura em testes, garantindo assim a funcionalidade do sistema.
 
-## 4. Visão de Dados
+## 4. Visão de Casos de Uso
+
+### 4.1 Atores
+
+#### 4.1.1 Usuário
+<p align = "justify"> &emsp;&emsp; Ator que compartilha as ações de produtor e comprador.</p>
+
+#### 4.1.2 Pequeno Produtor
+<p align = "justify"> &emsp;&emsp; Especialização de usuário que compreende funcionalidades relacionadas ao anúncio e gerenciamento de produtos.</p>
+
+#### 4.1.3 Comprador
+<p align = "justify"> &emsp;&emsp; Especialização de usuário que abrange as funcionalidades de visualização e compartilhamento de produtos e produtores, além de favoritá-los e/ou curti-los.</p>
+
+### 4.2 Diagrama de Casos de Uso
+![Diagrama de Casos de Uso](img/diagrama_casos_de_uso.png)
+
+## 5. Visão de Dados
 
 ![Arquitetura Banco de Dados](img/diagrama_banco_de_dados.png)
+
 
 ### Referências
 
