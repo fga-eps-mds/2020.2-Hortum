@@ -1,5 +1,7 @@
 # Hortum
 
+![Logo](docs/img/logo.png)
+
 ## Sobre
 O projeto Hortum vem para auxiliar e promover a divulgação das produções de pequenos produtores, com o intúito de auxiliar suas vendas em um aplicativo de fácil utilização.
 
