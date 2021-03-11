@@ -5,6 +5,7 @@ Data|Versão|Descrição|Autor(es)
 -|-|-|-
 23/02/2021|1.0|Abertura do Documento|Brenno Oliveira e Vitor Lamego
 23/02/2021|1.1|Adição Protótipo Baixa Fidelidade|Brenno Oliveira e Vitor Lamego
+10/03/2021|1.2|Adição Protótipo Alta Fidelidade|Vitor Lamego
 
 <br>
 
@@ -13,3 +14,6 @@ Data|Versão|Descrição|Autor(es)
 
 ## 2. Protótipo de Baixa Fidelidade
 ![Protótipo de Baixa Fidelidade](img/Baixa_fidelidade.png)
+
+## 3. Protótipo de Alta Fidelidade
+![Protótipo de Alta Fidelidade](img/Alta_fidelidade.png)
