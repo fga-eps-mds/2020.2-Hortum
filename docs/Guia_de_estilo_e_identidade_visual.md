@@ -47,14 +47,13 @@ font-family: 'Roboto', sans-serif;
 
 ![](img/cor_rosa.png)
 
-![](img/cor_logo.png)
-
 - Cor usada na logo.
 
-
-![](img/cor_logo_secundaria.png)
+![](img/cor_logo.png)
 
 - Cor usada na logo secundária.
+
+![](img/cor_logo_secundaria.png)
 
 Cores escolhidas baseadas no objetivo do aplicativo de anunciar produtos de horticultura.
 
