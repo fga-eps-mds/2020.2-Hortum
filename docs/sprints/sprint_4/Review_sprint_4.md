@@ -29,6 +29,8 @@
 ![Quadro de Velocity Sprint 4](../../img/velocity_4.png)
 
 ## Pareamentos
+- João Pedro e Victor Lima
+- Lucas, Vitor Lamego e Victor Lima
 
 ## Análise do Scrum Master
 - Nessa sprint o grupo demonstrou uma comunicação muito maior em relação às demais sprints, tornando-a muito produtiva. Apesar de ser bem produtiva, o grupo sofreu com algumas dificuldades nas issues #58 e #61 (codificação e aprendizagem com o django) que levou a issue #61 ser estendida para mais dois dias. Outro ponto importante dessa issue é que os treinamentos (#68 e #69) foram retirados da sprint, porém serão realizados de forma prática em issues de programação ou user stories.
