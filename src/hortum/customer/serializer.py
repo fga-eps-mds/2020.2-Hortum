@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import Customer
+from ..users.models import User
 
 from ..users.serializer import UserSerializer
 from ..picture.serializer import PictureSerializer
@@ -19,5 +20,5 @@ class CustomerSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
-        user = UserSerializer.create(UserSerializer(), validated_data=user_data)
+        user = User.objects.create(**user_data)
         return Customer.objects.create(user=user, **validated_data)
