@@ -1,9 +1,7 @@
 from django.db import models
 from rest_framework import serializers
-from rest_framework.renderers import JSONRenderer
 
 from hortum.picture.models import Picture
-
 
 class Announcement(models.Model):
     idPicture = models.ForeignKey(Picture, on_delete=models.CASCADE, null=True)
