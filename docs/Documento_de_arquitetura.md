@@ -13,6 +13,7 @@ Data|Versão|Descrição|Autor
 01/03/2021|1.4|Adição do tópico 4|João Pedro e Matheus 
 08/03/2021|1.5|Adição do tópico "Visão de Casos de Uso"|Brenno e Matheus
 09/03/2021|1.6|Adição do tópico 5|Carlos Eduardo e Lucas
+13/03/2021|1.6.1|Correção de erros na digitação|Lucas Braun
 
 ## 1. Introdução
 
@@ -22,14 +23,14 @@ Data|Versão|Descrição|Autor
 
 ### 1.2 Escopo
 
-<p align = "justify"> &emsp;&emsp; Esse documento visa permitir ao leitor se informar sobre a arquitura utilizada no projeto, incentivando um entendimento mais simples e eficaz acerca do produto.</p>
+<p align = "justify"> &emsp;&emsp; Esse documento visa permitir ao leitor se informar sobre a arquitetura utilizada no projeto, incentivando um entendimento mais simples e eficaz acerca do produto.</p>
 
 ### 1.3 Definições, Acrônimos e Abreviações
 
 Abreviação|Significado
 -|-
 **MDS**| Métodos de Desenvolvimento de Software
-**UNB**| Universidade de Brasília
+**UnB**| Universidade de Brasília
 **DRF**| Django REST Framework
 **ORM**| Object-relational Mapping
 **MVT**| Model-View-Template
@@ -37,7 +38,7 @@ Abreviação|Significado
 
 ### 1.4 Visão Geral
 
-<p align="justify"> &emsp;&emsp; Esse documento de arquitetura se encontra dividido em 1 tópico, que descrevem os detalhes do software desenvolvido. Se organiza da sequinte forma: </p>
+<p align="justify"> &emsp;&emsp; Esse documento de arquitetura se encontra dividido em tópicos que descrevem os detalhes do software desenvolvido. Se organiza da seguinte forma: </p>
 
 - Introdução: Fornece uma visão geral e introdutória sobre o documento;
 - Representação Arquitetural: Fornece informações sobre as tecnologias e os motivos pelos quais elas foram escolhidas;
@@ -52,9 +53,9 @@ Abreviação|Significado
 <p align = "justify"> &emsp;&emsp; <i>Representational State Transfer</i> ou REST, representa um conjunto de princípios e definições necessários para a criação de um projeto seguindo boas práticas e com interfaces bem definidas. O DRF então, é um framework do framework Django que permite a criação simples, ágil, poderosa e flexível de API's Web.</p>
 
 #### 2.1.2 Django
-<p align = "justify"> &emsp;&emsp; Django é um framework web baseado em python de alto nível que preza pelo rápido desenvolvimento com um design limpo e pramático. Um dos motivos pela escolha desse framework como back-end se dá pelo fato da linguagem de desenvolvimento utilizada pelo Django ser de grande interesse dos integrantes do grupo, bem como sua crescente utilização do mercado de trabalho e sua interessante curva de aprendizado.</p>
+<p align = "justify"> &emsp;&emsp; Django é um framework web de alto nível baseado em Python que preza pelo rápido desenvolvimento com um design limpo e pragmático. Um dos motivos pela escolha desse framework como back-end se dá pelo fato da linguagem de desenvolvimento utilizada pelo Django ser de grande interesse dos integrantes do grupo, bem como sua crescente utilização do mercado de trabalho e sua interessante curva de aprendizado.</p>
 <p align="justify"> &emsp;&emsp; Além disso o framework dispõe de bastante segurança através da utilização da técnica de Mapeamento objeto-relacional (ORM) que realiza queries sem se utilizar de código SQL para acesso ao banco de dados, útil para o grupo que possui poucos conhecimentos sobre Sistema de Banco de Dados.</p>
-<p align="justify"> &emsp;&emsp; Outro ponto de interesse no framework se diz respeito da utilização do padrão Model-View-Template, modelo esse baseado no Model-View-Controller. O MVT ao contrário do MVC conta com as funções da Controller disperados pelos outros módulos e o acréscimo da Template.</p>
+<p align="justify"> &emsp;&emsp; Outro ponto de interesse no framework se diz respeito da utilização do padrão Model-View-Template, modelo esse baseado no Model-View-Controller. O MVT, ao contrário do MVC, conta com as funções da Controller disponibilizados pelos outros módulos e o acréscimo da Template.</p>
 
 - **Model**: Camada responsável pelo acesso ao banco de dados.
 - **View**: Camada responsável por processar requests de usuários e retornar responses.
@@ -63,20 +64,20 @@ Abreviação|Significado
 ### 2.2 Front-End
 
 #### 2.2.1 Flutter
-<p align = "justify"> &emsp;&emsp;O Flutter é um framework desenvolvido pela Google na liguagem Dart e permite que sejam criadas aplicações nativas para os aparelhos IOS e android. Por ter essa facilidade de desenvolvimento para dois sistemas diferentes, a linguagem têm crescido bastante e tornado cada vez maior a quantidade de informação para aprendizado.</p>
-<p align = "justify"> &emsp;&emsp; Além disso, por ser uma linguagem que possui uma curva de aprendizado muito boa e alguns dos integrantes do grupo já terem conhecimento prévio relacionados a linguagem ela foi selecionada para atuar no front-end.</p>
-<p align = "justify"> &emsp;&emsp; Outro ponto importante na escolha desse framework se deve ao fato do Dart ser otimizado bem como ser especializada para criação de interfaces para usuários através do uso dos widgets (estrutura baseada no React). Assim também, o uso de <b>Blocs</b> permite que o software seja dividido em questão de interface de usuário e regras de negócio, e o uso de <b> 
+<p align = "justify"> &emsp;&emsp;O Flutter é um framework desenvolvido pela Google na linguagem Dart e permite que sejam criadas aplicações nativas para os aparelhos iOS e Android. Por ter essa facilidade de desenvolvimento para dois sistemas diferentes, a linguagem tem crescido bastante e tornado cada vez maior a quantidade de informação para aprendizado.</p>
+<p align = "justify"> &emsp;&emsp; Além disso, por ser uma linguagem que possui uma curva de aprendizado muito boa e alguns dos integrantes do grupo já terem conhecimento prévio relacionado à linguagem, ela foi selecionada para atuar no front-end.</p>
+<p align = "justify"> &emsp;&emsp; Outro ponto importante na escolha desse framework se deve ao fato do Dart ser otimizado bem como ser especializado para criação de interfaces para usuários através do uso dos widgets (estrutura baseada no React). Assim também, o uso de <b>Blocs</b> permite que o software seja dividido em questão de interface de usuário e regras de negócio, e o uso de <b> 
 Stream</b> permite eventos assíncronos no aplicativo.</p>
 
 ### 2.3 Banco de Dados
 
 #### 2.3.1 PostgreSQL
-<p align = "justify"> &emsp;&emsp;O PostgreSQL é um poderoso, open source e objeto-relacional banco de dados que faz o uso e extensão da linguagem SQL. Por sua robustez, confiabilidade, integridade de dados e dedicação na comunidade open source essa ferramenta tem crescido e muito no mercado de trabalho, por esses motivos esse banco de dados foi escolhido para o projeto.</p>
+<p align = "justify"> &emsp;&emsp;O PostgreSQL é um banco de dados poderoso, open source e objeto-relacional que faz o uso e extensão da linguagem SQL. Por sua robustez, confiabilidade, integridade de dados e dedicação na comunidade open source essa ferramenta tem crescido muito no mercado de trabalho, por esses motivos esse banco de dados foi escolhido para o projeto.</p>
 
 ## 3. Metas e Restrições
 
 ### 3.1 Metas
-<p align = "justify"> &emsp;&emsp; O projeto visa facilitar a divulgação dos produtos de pequenos produtores rurais bem como a sua comunicação com os possíveis compradores, através de um aplicativo online e de fácil utilização.</p>
+<p align = "justify"> &emsp;&emsp; O projeto visa facilitar a divulgação dos produtos de pequenos produtores rurais bem como a comunicação com possíveis compradores, através de um aplicativo online e de fácil utilização.</p>
 
 ### 3.2 Restrições
 
@@ -107,7 +108,7 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 
 ## 5. Visão de Implementação
 ### 5.1 Banco de Dados
-<p align = "justify"> &emsp;&emsp; Para desenvolver e instanciar o banco de dados do projeto foi pensado quais seriam as entidades do sistema e seus atributos, além de como se relacionariam, ou seja, suas cardinalidades.</p>
+<p align = "justify"> &emsp;&emsp; Para desenvolver e instanciar o banco de dados do projeto, foi pensado quais seriam as entidades do sistema e seus atributos, além de como se relacionariam, ou seja, suas cardinalidades.</p>
 
 #### 5.1.1 Entidades
 
