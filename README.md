@@ -1,10 +1,32 @@
 <!-- Logo -->
 
-<!-- (TODO) Badges -->
-
 <!-- Nome do Projeto -->
-
 <h1 align="center"> Hortum </h1>
+
+<!-- Badges -->
+<!-- (TODO) Adicionar as Badges de DevOps -->
+<p align="center">
+	<a href="https://github.com/fga-eps-mds/2020.2-Hortum/issues?q=is%3Aissue+is%3Aclosed">
+        	 <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed-raw/fga-eps-mds/2020.2-Hortum?style=flat-square">
+	</a>
+	<a href="https://github.com/fga-eps-mds/2020.2-Hortum/pulls?q=is%3Apr+is%3Aclosed">
+		<img alt="GitHub closed pull requests" src="https://img.shields.io/github/issues-pr-closed-raw/fga-eps-mds/2020.2-Hortum?style=flat-square">
+        </a>
+	<a href="https://github.com/fga-eps-mds/2020.2-Hortum/blob/main/LICENSE">
+		<img alt="GitHub" src="https://img.shields.io/github/license/fga-eps-mds/2020.2-Hortum?style=flat-square">
+	</a>
+</p>
+
+<!-- Repositórios/wiki -->
+<p align="center">
+	<a href="https://github.com/fga-eps-mds/2020.2-Hortum"><strong>Acesse a API do Hortum</strong></a>
+</p>
+<p align="center">
+	<a href="https://github.com/fga-eps-mds/2020.2-Hortum-Mobile"><strong>Acesse o Frontend do Hortum</strong></a>
+</p>
+<p align="center">
+	<a href="https://fga-eps-mds.github.io/2020.2-Hortum"><strong>Acesse a nossa Wiki</strong></a>
+</p>
 
 <!-- Descrição sobre o Projeto -->
 ## Sobre o Projeto
@@ -19,26 +41,30 @@
 <!-- Funcionalidades Principais -->
 ## Principais Funcionalidades
 
-### Criação de anúncios de produtos
-### Listagem dos anúncios para consumidores
-### Visualização detalhada sobre os Produtos e Produtores
+1. ### Criação de anúncios de produtos
+1. ### Listagem dos anúncios para consumidores
+1. ### Visualização detalhada sobre os Produtos e Produtores
 
-<!-- (TODO) Releases -->
+<!-- Releases -->
+<!-- (TODO) Adicionar a R1 e R2 -->
 
 <!-- Instalação -->
 ## Instalação
 
 <!-- Pré-Requisitos -->
 ### Pré-Requisitos
+#### Obrigatórias
+|Tecnologias|Descrição|
+|-|-|
+|[Git](https://git-scm.com/)|`git` é uma ferramenta de versionamento de código `gratuito` e `open source`, capaz de lidar com tudo desde pequenos até projetos gigantes, com `velocidade` e `eficiência`.|
+|[Docker](https://www.docker.com/get-docker)|o `docker` é uma plataforma `open source` de containerização, ou seja um software para criação de sistemas isolados. Os `containers` são extremamente leves e permitem que os softwares sejam `facilmente` executados e exportados para os diversos sistemas existentes atualmente.|
+|[Docker compose](https://docs.docker.com/compose/install/#install-compose)|O `docker-compose` é uma tecnologia de `multi-dockerização` que permite, através de um único arquivo de configuração `.yml`, criar e rodar todos os serviços/dockers da sua aplição.|
 
-> [Git](https://git-scm.com/)
->
-> [Docker](https://www.docker.com/get-docker)
->
-> [docker-compose](https://docs.docker.com/compose/install/#install-compose)
->
-> [Windows Subsystem for Linux (para sistemas windows)](https://docs.microsoft.com/pt-br/windows/wsl/install-win10)
-> > [docker-compose para WSL](https://docs.docker.com/docker-for-windows/wsl/)
+#### Para sistemas Windows
+|Tecnologias|Descrição|
+|-|-|
+|[Windows Subsystem for Linux](https://docs.microsoft.com/pt-br/windows/wsl/install-win10)|O Subsistema do Windows para Linux permite que os desenvolvedores executem um `ambiente GNU/Linux`, incluindo a maioria das ferramentas de linha de comando, utilitários e aplicativos, diretamente no Windows, sem modificações e sem a sobrecarga de uma `máquina virtual tradicional` ou instalação `dualboot`.|
+|[Docker compose para WSL](https://docs.docker.com/docker-for-windows/wsl/)|O Windows Subsystem for Linux `WSL` apresenta uma mudança significativa na arquitetura, pois é um kernel Linux completo desenvolvido pela Microsoft, permitindo que os contêineres do Linux sejam executados `nativamente`, `sem emulação. |
 
 <!-- Backend -->
 ### Baixando e rodando o Backend
@@ -99,11 +125,11 @@ $ ./src/scripts/clear_migrations.sh
 ||Brenno Oliveira Silva|[brenno-silva](https://github.com/brenno-silva)
 ||Carlos Eduardo de Sousa Fiuza|[CarlosFiuza](https://github.com/CarlosFiuza)
 ||João Pedro Moura Oliveira|[Joao-Moura](https://github.com/Joao-Moura)
-||Lucas Braum Vieira Xavier|[LucasBraunX](https://github.com/LucasBraunX)
+||Lucas Braun Vieira Xavier|[LucasBraunX](https://github.com/LucasBraunX)
 ||Matheus Calixto Vaz Pinheiro|[matheuscvp](https://github.com/matheuscvp)
 ||Victor Souza Dantas Martins Lima|[vital14](https://github.com/vital14)
 ||Vitor Magalhães Lamego|[VitorLamego](https://github.com/VitorLamego)
 
 <!-- License -->
 ## License
-Hortum é distribuido sob a licença GPL-3.0. Para demais informações acesse nosso [LICENSE](./LICENSE)
+GPLv3 © Hortum. Para demais informações acesse nossa [LICENSE](./LICENSE).
