@@ -1,8 +1,11 @@
 from django.urls import path
 
-from .viewsets import ProductorRegistrationAPIView, ProductorRetriveAPIView
+from rest_framework import routers
+
+from . import viewsets
+
+router = routers.SimpleRouter(trailing_slash=False)
+router.register(r'', viewsets.ProductorRegistrationAPIView, basename='productor')
 
 urlpatterns = [
-	path('test/<int:pk>', ProductorRetriveAPIView.as_view()),
-	path('', ProductorRegistrationAPIView.as_view()),
-]
+] + router.urls

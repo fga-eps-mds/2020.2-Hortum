@@ -1,8 +1,11 @@
 from django.urls import path
 
-from .viewsets import CustomerRegistrationAPIView, CustomerRetriveAPIView
+from rest_framework import routers
+
+from . import viewsets
+
+router = routers.SimpleRouter(trailing_slash=False)
+router.register(r'', viewsets.CustomerRegistrationAPIView, basename='customer')
 
 urlpatterns = [
-	path('test/<int:pk>', CustomerRetriveAPIView.as_view()),
-	path('', CustomerRegistrationAPIView.as_view()),
-]
+] + router.urls
