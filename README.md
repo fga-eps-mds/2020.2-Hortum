@@ -1,4 +1,5 @@
 <!-- Logo -->
+![Logo Hortum](docs/img/logo_menor.png)
 
 <!-- Nome do Projeto -->
 <h1 align="center"> Hortum </h1>
@@ -41,9 +42,9 @@
 <!-- Funcionalidades Principais -->
 ## Principais Funcionalidades
 
-1. ### Criação de anúncios de produtos
-1. ### Listagem dos anúncios para consumidores
-1. ### Visualização detalhada sobre os Produtos e Produtores
+1. #### Criação de anúncios de produtos
+1. #### Listagem dos anúncios para consumidores
+1. #### Visualização detalhada sobre os Produtos e Produtores
 
 <!-- Releases -->
 <!-- (TODO) Adicionar a R1 e R2 -->
@@ -82,7 +83,7 @@ $ docker-compose build
 # Rodando o docker
 $ docker-compose up
 ```
-Ao rodar o código a porta 8000 estará aperta para o uso da API.
+Ao rodar o código a *porta 8000* estará aperta para o uso da API.
 
 <!-- Frontend -->
 ### Baixando e rodando o Frontend
@@ -122,13 +123,13 @@ $ ./src/scripts/clear_migrations.sh
 ## Desenvolvedores
 ||**Membros**|**GitHub**|
 |-|-|-|
-||Brenno Oliveira Silva|[brenno-silva](https://github.com/brenno-silva)
-||Carlos Eduardo de Sousa Fiuza|[CarlosFiuza](https://github.com/CarlosFiuza)
-||João Pedro Moura Oliveira|[Joao-Moura](https://github.com/Joao-Moura)
-||Lucas Braun Vieira Xavier|[LucasBraunX](https://github.com/LucasBraunX)
-||Matheus Calixto Vaz Pinheiro|[matheuscvp](https://github.com/matheuscvp)
-||Victor Souza Dantas Martins Lima|[vital14](https://github.com/vital14)
-||Vitor Magalhães Lamego|[VitorLamego](https://github.com/VitorLamego)
+|![](https://avatars.githubusercontent.com/u/54643530?s=460&u=35993e065c3b56710145bc3bdb13b40d36b2d433&v=4)|Brenno Oliveira Silva|[brenno-silva](https://github.com/brenno-silva)
+|![]()|Carlos Eduardo de Sousa Fiuza|[CarlosFiuza](https://github.com/CarlosFiuza)
+|![](https://avatars.githubusercontent.com/u/46077033?s=460&u=f32654cf2f096598e9eca3e48b040641fcff3009&v=4)|João Pedro Moura Oliveira|[Joao-Moura](https://github.com/Joao-Moura)
+|![]()|Lucas Braun Vieira Xavier|[LucasBraunX](https://github.com/LucasBraunX)
+|![]()|Matheus Calixto Vaz Pinheiro|[matheuscvp](https://github.com/matheuscvp)
+|![](https://avatars.githubusercontent.com/u/54643459?s=460&u=d1761ee486cfc4cf7ac0a36adb98572d3db35e32&v=4)|Victor Souza Dantas Martins Lima|[vital14](https://github.com/vital14)
+|![](https://avatars.githubusercontent.com/u/54643464?s=460&u=43a46df920c57476dfe9abe953eba2b89f8f7ca0&v=4)|Vitor Magalhães Lamego|[VitorLamego](https://github.com/VitorLamego)
 
 <!-- License -->
 ## License
