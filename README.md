@@ -1,5 +1,7 @@
 <!-- Logo -->
-<center>![Logo Hortum](docs/img/logo_menor.png)</center>
+<div align="center">
+	<img width=30% src="https://raw.githubusercontent.com/fga-eps-mds/2020.2-Hortum/docs/78-melhoria-README/docs/img/logo.png" alt="Vamos Cuidar" class="lg">
+</div>
 
 <!-- Nome do Projeto -->
 <h1 align="center"> Hortum </h1>
