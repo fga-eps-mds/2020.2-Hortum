@@ -8,11 +8,12 @@
 |19/02/2021|1.0.1|Padronização da Wiki|Carlos Eduardo e João Pedro|
 |28/02/2021|1.1|Adição dos tópicos 2, 3, 4, 5, 6 e 7 e incrementação do tópico 1|Brenno Oliveira e Carlos Eduardo
 |01/03/2021|1.1.1|Alteração na formatação dos tópicos 2.2, 2.3, 3.3.1, 3.3.2, 3.4.1, 3.4.2|Brenno Oliveira e Carlos Eduardo
+|12/03/2021|1.1.2|Correções na digitação do documento|Lucas Braun
 
 ## 1. Introdução
 ### 1.1 Objetivo
 
-<p align = "justify"> &emsp;&emsp; Este documento tem a finalidade de apresentar a ideia geral, as funcionalidades, exemplificar os problemas existentes a serem resolvidos e como o aplicativo é utilizado para resolver tais adversidades. </p>
+<p align = "justify"> &emsp;&emsp; Este documento tem a finalidade de apresentar a ideia geral e as funcionalidades do aplicativo, assim como exemplificar os problemas existentes a serem resolvidos e como o aplicativo é utilizado para resolver tais adversidades. </p>
 
 ### 1.2 Escopo
 
@@ -23,7 +24,7 @@
 Abreviação|Significado
 -|-
 **UnB**|Universidade de Brasília
-**MDS**|Métodos e Desenvolvimento de Software
+**MDS**|Métodos de Desenvolvimento de Software
 
 ### 1.4 Referências
 
@@ -52,12 +53,12 @@ Abreviação|Significado
 
 ## 2 Posicionamento
 ### 2.1 Oportunidade de Negócios
-<p align = "justify"> &emsp;&emsp; Atualmente os pequenos agricultores e compradores possuem alguma feira local ou o CEASA (Centrais de Abastecimento do Distrito Federal) como ponto de encontro para realização do negócio, para a venda de horticulturas. Entretanto, o cliente pode precisar de certo tipo de produto mas não possui nenhum tipo de ideia onde pode encontrá-lo ou o vendedor pode estar a procura de clientes específicos. Por isso a ideia do “nome do app” surge como maneira de facilitar o comércio de pequenos agricultores e a fácil procura e aquisição de tais produtos de horticultura.</p>
-<p align = "justify"> &emsp;&emsp; O Hortum servirá como um serviço em que os produtores irão realizar um cadastro de seus produtos para consulta por qualquer usuário e os clientes poderão procurar por certo produto, junto com a localização para compra e produtor responsável. Facilitando tanto para o produtor quanto para o cliente.</p>
+<p align = "justify"> &emsp;&emsp; Atualmente os pequenos agricultores e compradores possuem alguma feira local ou o CEASA (Centrais de Abastecimento do Distrito Federal) como ponto de encontro para realização do negócio, para a venda de horticulturas. Entretanto, o cliente pode precisar de certo tipo de produto mas não possuir nenhum tipo de ideia de onde encontrá-lo, ou o vendedor pode estar a procura de clientes específicos. Por isso a ideia do Hortum surge como maneira de facilitar o comércio de pequenos agricultores e a procura e aquisição de tais produtos de horticultura.</p>
+<p align = "justify"> &emsp;&emsp; O Hortum servirá como um serviço em que os produtores irão cadastrar seus produtos para consulta por qualquer usuário, e os clientes poderão procurar por certo produto, junto com a localização para a compra e produtor responsável. Facilitando tanto para o produtor quanto para o cliente.</p>
 
 ### 2.2 Resumo do Problema
-- **O problema:** Dificuldade para comércio entre o produtor que deseja vender seus produtos e cliente que deseja comprá-lo
-- **Afeta:** A demora para adquirir certo produto e as vendas do produtor 
+- **O problema:** Dificuldade para comércio entre o produtor que deseja vender seus produtos e cliente que deseja comprá-los
+- **Afeta:** A demora para adquirir ou vender certo produto
 - **Cujo impacto:** Escoamento da produção do pequeno agricultor
 - **Boa solução:** Serviço para unir produtores e compradores
 
@@ -73,8 +74,8 @@ Abreviação|Significado
 ### 3.1 Resumo dos envolvidos
 Nome|Descrição|Responsabilidades
 -|-|-
-Equipe de desenvolvimento de Software|Estudantes da disciplina Métodos de Desenvolvimento de Software(MDS)|Desenvolver e gerir projeto
-Orientadores|Professora e monitores da disciplina Desenvolvimento de Software(MDS)|Orientar a equipe 
+Equipe de desenvolvimento de Software|Estudantes da disciplina Métodos de Desenvolvimento de Software (MDS)|Desenvolver e gerir projeto
+Orientadores|Professora e monitores da disciplina Métodos de Desenvolvimento de Software (MDS)|Orientar a equipe 
 
 ### 3.2 Resumo dos Usuários
 Usuário|Descrição
@@ -92,16 +93,16 @@ Compradores|Pesquisar produtos
 - **Problemas/Comentários:** Não ter conhecimento no uso de aplicativos móveis
 
 #### 3.3.2 Compradores
-- **Representante:**        Comprador
-- **Descrição:**            Pessoa a procura de determinada horticultura 
-- **Responsabilidades:**    Procurar e se comunicar com o vendedor
-- **Critérios de Sucesso:** Encontrar produto desejado
-- **Envolvimento:**         Alto
-Problemas/Comentários|Não ter conhecimento no uso de aplicativos móveis
+- **Representante:**            Comprador
+- **Descrição:**                Pessoa a procura de determinada horticultura 
+- **Responsabilidades:**        Procurar e se comunicar com o vendedor
+- **Critérios de Sucesso:**     Encontrar produto desejado
+- **Envolvimento:**             Alto
+- **Problemas/Comentários:**    Não ter conhecimento no uso de aplicativos móveis
 
 ### 3.4 Perfis dos Envolvidos
 #### 3.4.1 Equipe de desenvolvimento de software
-- **Representantes:** Brenno Oliveira Silva, Carlos Eduardo de Sousa Fiuza, João Pedro Moura Oliveira,  Matheus Calixto Vaz Pinheiro, Victor Souza Dantas Martins Lima, Vitor Magalhães Lamego
+- **Representantes:** Brenno Oliveira Silva, Carlos Eduardo de Sousa Fiuza, João Pedro Moura Oliveira, Lucas Braun Vieira Xavier,  Matheus Calixto Vaz Pinheiro, Victor Souza Dantas Martins Lima, Vitor Magalhães Lamego
 - **Descrição:** Desenvolvimento e gerenciamento do projeto
 - **Responsabilidades:** Desenvolver e documentar o projeto
 - **Critérios de Sucesso:** Finalizar o aplicativo no prazo determinado com qualidade 
@@ -110,7 +111,7 @@ Problemas/Comentários|Não ter conhecimento no uso de aplicativos móveis
 
 #### 3.4.2 Orientadores
 - **Representantes:** Professora Carla Silva Rocha Aguiar e monitores Hugo Sobral e Leonardo Gomes
-- **Descrição:** Professora da disciplina Métodos de Desenvolvimento de Software e monitores
+- **Descrição:** Professora e monitores da disciplina Métodos de Desenvolvimento de Software
 - **Responsabilidades:** Orientar e avaliar a equipe de desenvolvimento
 - **Critérios de Sucesso:** Transmitir e observar o sucesso da equipe no desenvolvimento do projeto 
 - **Envolvimento:** Médio
@@ -123,25 +124,25 @@ Produtor|Plataforma para anunciar produtos|Negociação presencial e por redes s
 Comprador|Achar produtos mais facilmente|Ir a feiras|Plataforma que integra cliente ao produtor, possibilitando a busca de produtos 
 
 ### 3.6 Ambiente do Usuário
-<p align = "justify">&emsp;&emsp; Aplicativo mobile para Android</p>
+<p align = "justify">&emsp;&emsp; Aplicativo mobile para Android.</p>
 
 ### 3.7 Alternativas e Concorrência
-#### 3.7.1 PôeNaCesta 
-<p align = "justify">&emsp;&emsp; Plataforma do Emater(Empresa de Assistência Técnica e Extensão Rural) para localização de produtores.</p>
+#### 3.7.1 PõeNaCesta 
+<p align = "justify">&emsp;&emsp; Plataforma do Emater (Empresa de Assistência Técnica e Extensão Rural) para localização de produtores.</p>
 &emsp;&emsp; Descrição do site: *“O produtor, diretamente de sua propriedade, oferece seus produtos para a população sem a necessidade de intermediação de mercados, é você e o produtor, basta procurar o que quer e falar diretamente com ele!”*.
 
 ## 4 Visão Geral do Produto
 ### 4.1 Perspectiva do Produto
-<p align = "justify">&emsp;&emsp; O aplicativo Hortum busca facilitar a comunicação entre produtor e cliente, por meio de uma plataforma de anúncios, em que o produtor cadastra seus produtos e o cliente busca o que deseja, assim o cliente consegue contato direto com o pequeno produtor.</p>
+<p align = "justify">&emsp;&emsp; O aplicativo Hortum busca facilitar a comunicação entre produtor e cliente, por meio de uma plataforma de anúncios, em que o produtor cadastra seus produtos e o cliente busca o que deseja. Assim o cliente consegue contato direto com o pequeno produtor.</p>
 
 ### 4.2 Resumo das Capacidades
 Benefício|Recursos de suporte
 -|-
 Ajudar pequenos produtores a anunciar sua mercadoria|Aplicativo com uma interface amigável onde poderão cadastrar toda a sua mercadoria
-Auxiliar compradores a encontrar produtos|Interface fácil utilização para pesquisar produtos de horticultura 
+Auxiliar compradores a encontrar produtos|Interface de fácil utilização para pesquisar produtos de horticultura 
 
 ### 4.3 Suposições e Dependências
-- O usuário deverá possuir um celular Android com acesso a internet
+- O usuário deverá possuir um celular Android com acesso à internet
 - O aplicativo unirá produtores a compradores
 
 ## 5 Recursos do Produto

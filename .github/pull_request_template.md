@@ -1,7 +1,7 @@
 ## Descrição
 - Descreva aqui as alterações a serem implementadas no projeto
 
-## Está concertando alguma issue aberta?
+## Está consertando alguma issue aberta?
 - Se sim, informe aqui
 
 ## Tarefas gerais realizadas
