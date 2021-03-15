@@ -1,5 +1,5 @@
 <!-- Logo -->
-![Logo Hortum](docs/img/logo_menor.png)
+<center>![Logo Hortum](docs/img/logo_menor.png)</center>
 
 <!-- Nome do Projeto -->
 <h1 align="center"> Hortum </h1>
@@ -121,15 +121,17 @@ $ ./src/scripts/clear_migrations.sh
 
 <!-- Contributing -->
 ## Desenvolvedores
-||**Membros**|**GitHub**|
-|-|-|-|
-|![](https://avatars.githubusercontent.com/u/54643530?s=460&u=35993e065c3b56710145bc3bdb13b40d36b2d433&v=4)|Brenno Oliveira Silva|[brenno-silva](https://github.com/brenno-silva)
-|![]()|Carlos Eduardo de Sousa Fiuza|[CarlosFiuza](https://github.com/CarlosFiuza)
-|![](https://avatars.githubusercontent.com/u/46077033?s=460&u=f32654cf2f096598e9eca3e48b040641fcff3009&v=4)|João Pedro Moura Oliveira|[Joao-Moura](https://github.com/Joao-Moura)
-|![]()|Lucas Braun Vieira Xavier|[LucasBraunX](https://github.com/LucasBraunX)
-|![]()|Matheus Calixto Vaz Pinheiro|[matheuscvp](https://github.com/matheuscvp)
-|![](https://avatars.githubusercontent.com/u/54643459?s=460&u=d1761ee486cfc4cf7ac0a36adb98572d3db35e32&v=4)|Victor Souza Dantas Martins Lima|[vital14](https://github.com/vital14)
-|![](https://avatars.githubusercontent.com/u/54643464?s=460&u=43a46df920c57476dfe9abe953eba2b89f8f7ca0&v=4)|Vitor Magalhães Lamego|[VitorLamego](https://github.com/VitorLamego)
+<table>
+	<tr>
+		<td align="center"><a href="https://github.com/brenno-silva"><img src="https://avatars.githubusercontent.com/u/54643530?s=460&u=35993e065c3b56710145bc3bdb13b40d36b2d433&v=4" width="100px;" alt=""/><br /><sub><b>Brenno Oliveira Silva</b></sub></a><br /><a href="https://github.com/brenno-silva"></a></td>
+		<td align="center"><a href="https://github.com/CarlosFiuza"><img src="" width="100px;" alt=""/><br /><sub><b>Carlos Eduardo de Sousa Fiuza</b></sub></a><br /><a href="https://github.com/CarlosFiuza"></a></td>
+		<td align="center"><a href="(https://github.com/Joao-Moura"><img src="https://avatars.githubusercontent.com/u/46077033?s=460&u=f32654cf2f096598e9eca3e48b040641fcff3009&v=4" width="100px;" alt=""/><br /><sub><b>João Pedro Moura Oliveira</b></sub></a><br /><a href=(https://github.com/Joao-Moura""></a></td>
+		<td align="center"><a href="https://github.com/LucasBraunX"><img src="" width="100px;" alt=""/><br /><sub><b>Lucas Braun Vieira Xavier</b></sub></a><br /><a href="https://github.com/LucasBraunX"></a></td>
+		<td align="center"><a href="https://github.com/matheuscvp"><img src="" width="100px;" alt=""/><br /><sub><b>Matheus Calixto Vaz Pinheiro</b></sub></a><br /><a href="https://github.com/matheuscvp"></a></td>
+		<td align="center"><a href="https://github.com/vital14"><img src="https://avatars.githubusercontent.com/u/54643459?s=460&u=d1761ee486cfc4cf7ac0a36adb98572d3db35e32&v=4" width="100px;" alt=""/><br /><sub><b>Victor Souza Dantas Martins Lima</b></sub></a><br /><a href="https://github.com/vital14"></a></td>
+		<td align="center"><a href="https://github.com/VitorLamego"><img src="https://avatars.githubusercontent.com/u/54643464?s=460&u=43a46df920c57476dfe9abe953eba2b89f8f7ca0&v=4" width="100px;" alt=""/><br /><sub><b>Vitor Magalhães Lamego</b></sub></a><br /><a href="https://github.com/VitorLamego"></a></td>
+	</tr>
+</table>
 
 <!-- License -->
 ## License
