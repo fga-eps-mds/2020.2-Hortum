@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from .models import Productor, Localization
+from ..users.models import User
 
 from ..users.serializer import UserSerializer
 from ..picture.serializer import PictureSerializer
@@ -17,7 +18,7 @@ class ProductorSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
-        user = UserSerializer.create(UserSerializer(), validated_data=user_data)
+        user = User.objects.create_user(**user_data)
         return Productor.objects.create(user=user, **validated_data)
 
 class LocalizationSerializer(serializers.ModelSerializer):
