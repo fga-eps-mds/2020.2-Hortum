@@ -9,7 +9,7 @@ from ..announcement.serializer import AnnouncementSerializer
 class ProductorSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
     idPicture = PictureSerializer(many=False, read_only=True)
-    idAnunFav = AnnouncementSerializer(many=True, read_only=True)
+    idAnun = AnnouncementSerializer(many=True, read_only=True)
 
     class Meta:
         model = Productor
