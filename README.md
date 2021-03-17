@@ -38,7 +38,7 @@
 <!-- Ideias e Incentivos -->
 ## Ideias e Incentivos
 
-<p align="justify">&emsp; &emsp; A ideia do projeto surgiu relacionada ao site <a href="https://dfrural.emater.df.gov.br/poenacesta/"> PõeNaCesta </a> da EMATER-DF, que tem como princípio promover o contato direto entre produtor e consumidor sem a necessidade de intervenções e intermediações de mercados. Dessa forma, a plataforma Hortum incentivada pelo PõeNaCesta busca seguir com os mesmo princípios em um aplicativo de fácil utilização para todos os seus usuários. </p>
+<p align="justify">&emsp; &emsp; A ideia do projeto surgiu relacionada ao site <a href="https://dfrural.emater.df.gov.br/poenacesta/"> PõeNaCesta </a> da EMATER-DF, que tem como princípio promover o contato direto entre produtor e consumidor sem a necessidade de intervenções e intermediações de mercados. Dessa forma, a plataforma Hortum incentivada pelo PõeNaCesta busca seguir com os mesmos princípios em um aplicativo de fácil utilização para todos os seus usuários. </p>
 
 <!-- Funcionalidades Principais -->
 ## Principais Funcionalidades
@@ -58,7 +58,7 @@
 #### Obrigatórias
 |Tecnologias|Descrição|
 |-|-|
-|[Git](https://git-scm.com/)|`git` é uma ferramenta de versionamento de código `gratuito` e `open source`, capaz de lidar com tudo desde pequenos até projetos gigantes, com `velocidade` e `eficiência`.|
+|[Git](https://git-scm.com/)|`git` é uma ferramenta de versionamento de código `gratuito` e `open source`, capaz de lidar com tudo desde pequenos até grandes projetos, com `velocidade` e `eficiência`.|
 |[Docker](https://www.docker.com/get-docker)|o `docker` é uma plataforma `open source` de containerização, ou seja um software para criação de sistemas isolados. Os `containers` são extremamente leves e permitem que os softwares sejam `facilmente` executados e exportados para os diversos sistemas existentes atualmente.|
 |[Docker compose](https://docs.docker.com/compose/install/#install-compose)|O `docker-compose` é uma tecnologia de `multi-dockerização` que permite, através de um único arquivo de configuração `.yml`, criar e rodar todos os serviços/dockers da sua aplição.|
 
@@ -84,7 +84,7 @@ $ docker-compose build
 # Rodando o docker
 $ docker-compose up
 ```
-Ao rodar o código a *porta 8000* estará aperta para o uso da API.
+Ao rodar o código a *porta 8000* estará aberta para o uso da API.
 
 <!-- Frontend -->
 ### Baixando e rodando o Frontend
