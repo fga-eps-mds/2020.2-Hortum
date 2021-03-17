@@ -30,7 +30,9 @@ body, input{font-family: "Roboto";}
 .md-grid {
     max-width: initial;
 }
-
+.md-nav__title{
+    font-family: "Comfortaa" !important; color: #478C5C !important;
+}
 .md-nav--secondary .md-nav__title[for=__toc]{
     visibility: hidden;
     font-family: "Comfortaa" !important; color: #478C5C !important;
