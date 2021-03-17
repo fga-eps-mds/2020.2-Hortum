@@ -1,6 +1,6 @@
 <!-- Logo -->
 <div align="center">
-	<img style="border-radius: 50%;" width=40% src="https://raw.githubusercontent.com/fga-eps-mds/2020.2-Hortum/docs/78-melhoria-README/docs/img/logo.png" alt="Vamos Cuidar" class="lg">
+	<img width=40% src="https://raw.githubusercontent.com/fga-eps-mds/2020.2-Hortum/main/docs/img/logo.png" alt="Vamos Cuidar" class="lg">
 </div>
 
 <!-- Nome do Projeto -->
