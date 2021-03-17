@@ -1,0 +1,25 @@
+:root {
+    --md-primary-fg-color:  #478C5C;
+    --md-secundary-fg-color: #BACC81;
+}
+
+@font-face {
+    font-family: Comfortaa;
+    src: url(../fonts/Comfortaa-Regular.ttf);
+    
+}
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/Roboto-Regular.ttf);
+    
+}
+
+header{font-family: "Comfortaa";}
+
+h1{font-family: "Comfortaa";color: #478C5C;}
+
+h2{font-family: "Comfortaa";color: #478C5C;}
+
+h3{font-family: "Comfortaa";color: #478C5C;}
+
+body, input{font-family: "Roboto";}

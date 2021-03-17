@@ -3,14 +3,22 @@ site_description: Repositório do Projeto Hortum
 repo_url: https://github.com/fga-eps-mds/2020.2-Hortum 
 dev_addr: '127.0.0.1:8080'
 
+
 theme:
     name: material
+    logo: /img/logo.png
+    favicon: /img/logo.png
+    palette:
+        accent: green
+
+extra_css:
+  - stylesheets/extra.css
 
 plugins:
     - search
 
 nav:
-    - Home: "index.md"
+    - Home: "Hortum - O app do ano"
     - Documento de Visão: "Documento_de_visao.md"
     - Documento de Metodologia: "Documento_metodologia.md"
     - Documento de Arquitetura: "Documento_de_arquitetura.md"
