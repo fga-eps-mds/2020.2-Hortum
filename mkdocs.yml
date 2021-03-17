@@ -6,8 +6,8 @@ dev_addr: '127.0.0.1:8080'
 
 theme:
     name: material
-    logo: /img/logo.png
-    favicon: /img/logo.png
+    logo: img/logo.png
+    favicon: img/logo.png
     palette:
         accent: green
     features:
