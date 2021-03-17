@@ -16,10 +16,33 @@
 
 header{font-family: "Comfortaa";}
 
-h1{font-family: "Comfortaa";color: #478C5C;}
+h1{
+    font-family: "Comfortaa";
+    color:  #478C5C !important;
+}
 
 h2{font-family: "Comfortaa";color: #478C5C;}
 
 h3{font-family: "Comfortaa";color: #478C5C;}
 
 body, input{font-family: "Roboto";}
+
+.md-grid {
+    max-width: initial;
+}
+
+.md-nav--secondary .md-nav__title[for=__toc]{
+    visibility: hidden;
+    font-family: "Comfortaa" !important; color: #478C5C !important;
+}
+
+.md-nav--secondary .md-nav__title::after{
+    visibility: visible;
+    display: block;
+    padding: 0.6rem;
+    overflow: visible;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    font-family: "Comfortaa" !important; color: #478C5C !important;
+    content: "Tópicos";
+}

@@ -10,7 +10,9 @@ theme:
     favicon: /img/logo.png
     palette:
         accent: green
-
+    features:
+        - navigation.tabs
+        
 extra_css:
   - stylesheets/extra.css
 
@@ -18,18 +20,16 @@ plugins:
     - search
 
 nav:
-    - Home: "Hortum - O app do ano"
-    - Documento de Visão: "Documento_de_visao.md"
-    - Documento de Metodologia: "Documento_metodologia.md"
-    - Documento de Arquitetura: "Documento_de_arquitetura.md"
-    - Protótipo: "Prototipo.md"
-    - Guia de Estilo e Manual de Identidade Visual: "Guia_de_estilo_e_identidade_visual.md"
-    - Product Backlog: "Product_Backlog.md"
-    - Canvas: "Canvas.md"
-    - Contribuição:
-        - Como contribuir: "CONTRIBUTING.md"
-        - Política de Contribuição: "Politica_de_Contribuicao.md"
-        - Código de Conduta: "CODE_OF_CONDUCT.md"
+    - Home: "index.md"
+    - Projeto:
+        - Documento de Visão: "Documento_de_visao.md"
+        - Documento de Metodologia: "Documento_metodologia.md"
+        - Documento de Arquitetura: "Documento_de_arquitetura.md"
+    - Produto:
+        - Protótipo: "Prototipo.md"
+        - Guia de Estilo e Manual de Identidade Visual: "Guia_de_estilo_e_identidade_visual.md"
+        - Product Backlog: "Product_Backlog.md"
+        - Canvas: "Canvas.md"
     - Sprints:
         - Sprint 0:
             - Planning: "sprints/sprint_0/Planning_sprint_0.md"
@@ -48,3 +48,7 @@ nav:
             - Review: "sprints/sprint_4/Review_sprint_4.md"
         - Sprint 5:
             - Planning: "sprints/sprint_5/Planning_sprint_5.md"
+    - Contribuição:
+        - Como contribuir: "CONTRIBUTING.md"
+        - Política de Contribuição: "Politica_de_Contribuicao.md"
+        - Código de Conduta: "CODE_OF_CONDUCT.md"
