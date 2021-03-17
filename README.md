@@ -1,6 +1,5 @@
-<!-- Logo -->
 <div align="center">
-	<img width=30% src="https://raw.githubusercontent.com/fga-eps-mds/2020.2-Hortum/docs/78-melhoria-README/docs/img/logo.png" alt="Vamos Cuidar" class="lg">
+	<img width=40% src="https://raw.githubusercontent.com/fga-eps-mds/2020.2-Hortum/main/docs/img/logo.png" alt="Vamos Cuidar" class="lg">
 </div>
 
 <!-- Nome do Projeto -->
@@ -67,7 +66,7 @@
 |Tecnologias|Descrição|
 |-|-|
 |[Windows Subsystem for Linux](https://docs.microsoft.com/pt-br/windows/wsl/install-win10)|O Subsistema do Windows para Linux permite que os desenvolvedores executem um `ambiente GNU/Linux`, incluindo a maioria das ferramentas de linha de comando, utilitários e aplicativos, diretamente no Windows, sem modificações e sem a sobrecarga de uma `máquina virtual tradicional` ou instalação `dualboot`.|
-|[Docker compose para WSL](https://docs.docker.com/docker-for-windows/wsl/)|O Windows Subsystem for Linux `WSL` apresenta uma mudança significativa na arquitetura, pois é um kernel Linux completo desenvolvido pela Microsoft, permitindo que os contêineres do Linux sejam executados `nativamente`, `sem emulação. |
+|[Docker compose para WSL](https://docs.docker.com/docker-for-windows/wsl/)|O Windows Subsystem for Linux `WSL` apresenta uma mudança significativa na arquitetura, pois é um kernel Linux completo desenvolvido pela Microsoft, permitindo que os contêineres do Linux sejam executados `nativamente`, `sem emulação`. |
 
 <!-- Backend -->
 ### Baixando e rodando o Backend
@@ -126,10 +125,10 @@ $ ./src/scripts/clear_migrations.sh
 <table>
 	<tr>
 		<td align="center"><a href="https://github.com/brenno-silva"><img src="https://avatars.githubusercontent.com/u/54643530?s=460&u=35993e065c3b56710145bc3bdb13b40d36b2d433&v=4" width="100px;" alt=""/><br /><sub><b>Brenno Oliveira Silva</b></sub></a><br /><a href="https://github.com/brenno-silva"></a></td>
-		<td align="center"><a href="https://github.com/CarlosFiuza"><img src="" width="100px;" alt=""/><br /><sub><b>Carlos Eduardo de Sousa Fiuza</b></sub></a><br /><a href="https://github.com/CarlosFiuza"></a></td>
-		<td align="center"><a href="(https://github.com/Joao-Moura"><img src="https://avatars.githubusercontent.com/u/46077033?s=460&u=f32654cf2f096598e9eca3e48b040641fcff3009&v=4" width="100px;" alt=""/><br /><sub><b>João Pedro Moura Oliveira</b></sub></a><br /><a href=(https://github.com/Joao-Moura""></a></td>
-		<td align="center"><a href="https://github.com/LucasBraunX"><img src="" width="100px;" alt=""/><br /><sub><b>Lucas Braun Vieira Xavier</b></sub></a><br /><a href="https://github.com/LucasBraunX"></a></td>
-		<td align="center"><a href="https://github.com/matheuscvp"><img src="" width="100px;" alt=""/><br /><sub><b>Matheus Calixto Vaz Pinheiro</b></sub></a><br /><a href="https://github.com/matheuscvp"></a></td>
+		<td align="center"><a href="https://github.com/CarlosFiuza"><img src="https://avatars.githubusercontent.com/u/71738659?s=460&u=61e0cdb48aa16f91870a3c25e1c93e1bf2856072&v=4" width="100px;" alt=""/><br /><sub><b>Carlos Eduardo de Sousa Fiuza</b></sub></a><br /><a href="https://github.com/CarlosFiuza"></a></td>
+		<td align="center"><a href="https://github.com/Joao-Moura"><img src="https://avatars.githubusercontent.com/u/46077033?s=460&u=f32654cf2f096598e9eca3e48b040641fcff3009&v=4" width="100px;" alt=""/><br /><sub><b>João Pedro Moura Oliveira</b></sub></a><br /><a href="https://github.com/Joao-Moura"></a></td>
+		<td align="center"><a href="https://github.com/LucasBraunX"><img src="https://avatars.githubusercontent.com/u/78307547?s=460&u=4850fd4162bdaad78e15d7f133673cacfa61dfb6&v=4" width="100px;" alt=""/><br /><sub><b>Lucas Braun Vieira Xavier</b></sub></a><br /><a href="https://github.com/LucasBraunX"></a></td>
+		<td align="center"><a href="https://github.com/matheuscvp"><img src="https://avatars.githubusercontent.com/u/54119660?s=460&u=c4c6a51b9894b9773ce04caae2a0dd4d16612b83&v=4" width="100px;" alt=""/><br /><sub><b>Matheus Calixto Vaz Pinheiro</b></sub></a><br /><a href="https://github.com/matheuscvp"></a></td>
 		<td align="center"><a href="https://github.com/vital14"><img src="https://avatars.githubusercontent.com/u/54643459?s=460&u=d1761ee486cfc4cf7ac0a36adb98572d3db35e32&v=4" width="100px;" alt=""/><br /><sub><b>Victor Souza Dantas Martins Lima</b></sub></a><br /><a href="https://github.com/vital14"></a></td>
 		<td align="center"><a href="https://github.com/VitorLamego"><img src="https://avatars.githubusercontent.com/u/54643464?s=460&u=43a46df920c57476dfe9abe953eba2b89f8f7ca0&v=4" width="100px;" alt=""/><br /><sub><b>Vitor Magalhães Lamego</b></sub></a><br /><a href="https://github.com/VitorLamego"></a></td>
 	</tr>
