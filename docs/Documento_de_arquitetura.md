@@ -97,14 +97,17 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 
 ### 4.1 Atores
 
+#### 4.1.1 Não Logado
+<p align = "justify"> &emsp;&emsp; Usuário não logado capaz apenas de realizar ações de registro e login.</p>
+
 #### 4.1.1 Usuário
-<p align = "justify"> &emsp;&emsp; Ator que compartilha as ações de produtor e comprador.</p>
+<p align = "justify"> &emsp;&emsp; Ator geral, que possui ações comuns no aplicativo.</p>
 
-#### 4.1.2 Pequeno Produtor
-<p align = "justify"> &emsp;&emsp; Especialização de usuário que compreende funcionalidades relacionadas ao anúncio e gerenciamento de produtos.</p>
+#### 4.1.2 Produtor
+<p align = "justify"> &emsp;&emsp; Especialização de usuário que compreende funcionalidades relacionadas ao anúncio e gerenciamento de produtos e localizações.</p>
 
-#### 4.1.3 Comprador
-<p align = "justify"> &emsp;&emsp; Especialização de usuário que abrange as funcionalidades de visualização e compartilhamento de produtos e produtores, além de favoritá-los e/ou curti-los.</p>
+#### 4.1.3 Consumidor
+<p align = "justify"> &emsp;&emsp; Especialização de usuário que abrange as funcionalidades de visualização e pesquisa de produtos, produtores e localizações, além de favoritá-los e/ou curti-los.</p>
 
 ### 4.2 Diagrama de Casos de Uso
 ![Diagrama de Casos de Uso](img/diagrama_casos_de_uso.png)
