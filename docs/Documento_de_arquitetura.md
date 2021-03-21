@@ -74,6 +74,9 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 #### 2.3.1 PostgreSQL
 <p align = "justify"> &emsp;&emsp;O PostgreSQL é um banco de dados poderoso, open source e objeto-relacional que faz o uso e extensão da linguagem SQL. Por sua robustez, confiabilidade, integridade de dados e dedicação na comunidade open source essa ferramenta tem crescido muito no mercado de trabalho, por esses motivos esse banco de dados foi escolhido para o projeto.</p>
 
+## 2.4 Diagrama de Pacotes
+![Diagrama de Pacotes](img/diagrama_de_pacotes.png)
+
 ## 3. Metas e Restrições
 
 ### 3.1 Metas
@@ -147,10 +150,10 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 <p align = "justify"> &emsp;&emsp; Um Produtor pode ter várias localizações, mas cada localização pertence a apenas 1 Produtor. Cardinalidade(1,n)</p>
 
 #### 5.2 Diagrama Entidade-Relacionamento (DER)
-![](img/diagrama_entidade_relacionamentos.png)
+![DER](img/diagrama_entidade_relacionamentos.png)
 
 ### 5.3 Modelo Entidade-Relacionamento (MER)
-![Arquitetura Banco de Dados](img/diagrama_banco_de_dados.png)
+![MER](img/diagrama_banco_de_dados.png)
 
 
 
