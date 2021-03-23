@@ -155,7 +155,7 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 #### 5.2 Diagrama Entidade-Relacionamento (DER)
 ![DER](img/diagrama_entidade_relacionamentos.png)
 
-### 5.3 Modelo Entidade-Relacionamento (MER)
+#### 5.3 Modelagem do Banco de Dados
 ![MER](img/diagrama_banco_de_dados.png)
 
 
