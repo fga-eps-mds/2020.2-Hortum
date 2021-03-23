@@ -12,7 +12,7 @@ class AnnouncementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Announcement
-        fields = ['email', 'idPicture', 'likes', 'name', 'description', 'price', 'inventory'] 
+        fields = ['email', 'idPicture', 'likes', 'name', 'type_of_product', 'description', 'price', 'inventory'] 
 
     def create(self, validated_data):
         productor_pk = Productor.objects.get(user=User.objects.get(email=validated_data.pop('email')))

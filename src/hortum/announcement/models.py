@@ -5,19 +5,6 @@ from ..productor.models import Productor
 from hortum.picture.models import Picture
 
 class Announcement(models.Model):
-    idProductor = models.ForeignKey(Productor, on_delete=models.CASCADE, related_name='announcements')
-    idPicture = models.ForeignKey(Picture, on_delete=models.CASCADE, null=True)
-    likes = models.IntegerField(default=0)
-    name = models.CharField(max_length=30)
-    description = models.CharField(max_length=200)
-    price = models.FloatField(default=0.0)
-    inventory = models.BooleanField(default=False)
-
-    
-    TYPE_OF_PRODUCTS = [
-        AVICULTURA + BEBIDAS + CARNE + COGUMELOS + CONGELADOS + DERIVADOS_DE_CANA + DERIVADOS_DE_MANDIOCA + DESIDRATADOS + DOCES + FLORES +FRUTAS + GRAO + HORTALICAS + LATICINIOS + PANIFICADOS + OTHERS
-    ]
-
     AVICULTURA = [
         ('Frango Caipira', 'Frango Caipira'),
         ('Galinhos poedeiras', 'Galinhos poedeiras'),
@@ -247,3 +234,14 @@ class Announcement(models.Model):
         ('Leitoes/Leitoas', 'Leitoes/Leitoas'),
         ('Outros', 'Outros'),
     ]
+
+    TYPE_OF_PRODUCTS_CHOICES = AVICULTURA + BEBIDAS + CARNE + COGUMELOS + CONGELADOS + DERIVADOS_DE_CANA + DERIVADOS_DE_MANDIOCA + DESIDRATADOS + DOCES + FLORES +FRUTAS + GRAO + HORTALICAS + LATICINIOS + PANIFICADOS + OTHERS
+    
+    idProductor = models.ForeignKey(Productor, on_delete=models.CASCADE, related_name='announcements')
+    idPicture = models.ForeignKey(Picture, on_delete=models.CASCADE, null=True)
+    likes = models.IntegerField(default=0)
+    name = models.CharField(max_length=30)
+    type_of_product = models.CharField(max_length=200, choices=TYPE_OF_PRODUCTS_CHOICES, default='Outros')
+    description = models.CharField(max_length=200)
+    price = models.FloatField(default=0.0)
+    inventory = models.BooleanField(default=False)
