@@ -8,5 +8,6 @@ urlpatterns = [
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
     path('signup/', include('hortum.users.urls')),
-    path('announcement/', include('hortum.announcement.urls'))
+    path('announcement/', include('hortum.announcement.urls')),
+    path('productor/', include('hortum.productor.urls')),
 ]

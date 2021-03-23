@@ -4,17 +4,17 @@ from .models import Productor, Localization
 from ..users.models import User
 
 from ..users.serializer import UserSerializer
-from ..picture.serializer import PictureSerializer
 from ..announcement.serializer import AnnouncementSerializer
+from ..picture.serializer import PictureSerializer
 
 class ProductorSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
     idPicture = PictureSerializer(many=False, read_only=True)
-    idAnun = AnnouncementSerializer(many=True, read_only=True)
+    announcements = AnnouncementSerializer(read_only=True, many=True)
 
     class Meta:
         model = Productor
-        fields = ['user', 'idPicture', 'idAnun']
+        fields = ['user', 'idPicture', 'announcements']
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
