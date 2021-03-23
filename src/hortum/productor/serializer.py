@@ -19,6 +19,8 @@ class ProductorSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         user = User.objects.create_user(**user_data)
+        user.is_productor = True
+  #      user.is_customer = False
         return Productor.objects.create(user=user, **validated_data)
 
 class LocalizationSerializer(serializers.ModelSerializer):

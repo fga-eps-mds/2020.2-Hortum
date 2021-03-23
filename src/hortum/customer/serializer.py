@@ -21,4 +21,5 @@ class CustomerSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         user = User.objects.create_user(**user_data)
+        user.is_productor = False
         return Customer.objects.create(user=user, **validated_data)
