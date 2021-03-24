@@ -14,6 +14,7 @@ Data|Versão|Descrição|Autor
 08/03/2021|1.5|Adição do tópico "Visão de Casos de Uso"|Brenno e Matheus
 09/03/2021|1.6|Adição do tópico 5|Carlos Eduardo e Lucas
 13/03/2021|1.6.1|Correção de erros na digitação|Lucas Braun
+24/03/2021|1.7|Adição do tópico 6 e mudanças nos diagramas| Brenno, Carlos e João
 
 ## 1. Introdução
 
@@ -73,9 +74,6 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 
 #### 2.3.1 PostgreSQL
 <p align = "justify"> &emsp;&emsp;O PostgreSQL é um banco de dados poderoso, open source e objeto-relacional que faz o uso e extensão da linguagem SQL. Por sua robustez, confiabilidade, integridade de dados e dedicação na comunidade open source essa ferramenta tem crescido muito no mercado de trabalho, por esses motivos esse banco de dados foi escolhido para o projeto.</p>
-
-## 2.4 Diagrama de Pacotes
-![Diagrama de Pacotes](img/diagrama_de_pacotes.png)
 
 ## 3. Metas e Restrições
 
@@ -152,14 +150,45 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 
 <p align = "justify"> &emsp;&emsp; Um Produtor pode ter várias localizações, mas cada localização pertence a apenas 1 Produtor. Cardinalidade(1,n)</p>
 
-#### 5.2 Diagrama Entidade-Relacionamento (DER)
+### 5.2 Diagrama Entidade-Relacionamento (DER)
 ![DER](img/diagrama_entidade_relacionamentos.png)
 
-#### 5.3 Modelagem do Banco de Dados
+### 5.3 Modelagem do Banco de Dados
 ![MER](img/diagrama_banco_de_dados.png)
 
+## 6. Visão Lógica
+### 6.1 Visão Geral: Pacotes e Camadas
+<p align = "justify"> &emsp;&emsp; O sistema será desenvolvido utilizando o Django REST Framework e o Flutter. Irão se comunicar através da API REST fornecida pelo backend do sistema. </p>
+
+#### 6.1.1 Diagrama de Pacotes
+![Diagrama de Pacotes](img/diagrama_de_pacotes.png)
+
+- **Frontend**
+    - **Flutter**: framework para apps mobile android e IOS.
+        - **pubspec.yaml**: é um arquivo transversal a todos os aplicativos e pacotes, onde são adicionados metadados ao projeto, estipulados restrições do SDK do Dart e Flutter, gerenciamento das dependências e configurações do Flutter.
+        - **lib**: diretório onde são inseridos todos os pacotes da aplicação.
+            - **main.dart**: arquivo inicial da aplicação, onde o programa se inicia e termina.
+            - **views**: diretório onde se encontra as páginas/telas da aplicação.
+            - **models**: diretório onde se encontra as models da aplicação.
+            - **componentes globais/data**: diretório onde são usados componentes globais, como por exemplo API para requisição web.
+
+- **Backend**
+    - **Django REST API**: framework para criação de API's Web.
+        - **settings.py**: arquivo em que estão contidas todas as configurações do projeto. Desde a configuração básica do banco de dados até os apps.
+        - **urls.py**: armazena entry-points e endpoints da API.
+        - **app**: diretório constituído de models, viewsets, testes, urls, serializers e admin.
+            - **models**: arquivo de models do app.
+            - **viewsets**: arquivo de views do app.
+            - **testes**: arquivo de testes referente ao app.
+            - **urls**: mapeia as views com template de cada app.
+            - **serializer**: serialização das entidades do app.
+            - **admin**: arquivo de conexão do app com o admin.
+    - **Docker-Compose**: conjunto de containers docker.
+    - **PostgreSQL**: banco de dados da aplicação.
 
 
+
+<p align = "justify"> &emsp;&emsp;  </p>
 
 ### Referências
 
