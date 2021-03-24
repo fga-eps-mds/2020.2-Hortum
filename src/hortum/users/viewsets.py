@@ -1,4 +1,8 @@
 from .serializer import UserSerializer
+from .serializer import CustomTokenObtainPairSerializer
+
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 
 from .models import User
 
@@ -10,3 +14,6 @@ class UserListRetrieveAPIView(GenericViewSet, mixins.ListModelMixin, mixins.Retr
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer
