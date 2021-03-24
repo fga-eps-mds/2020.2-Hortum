@@ -10,8 +10,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('customer', '0002_customer_idprodfav'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('customer', '0002_customer_idprodfav'),
     ]
 
     operations = [
