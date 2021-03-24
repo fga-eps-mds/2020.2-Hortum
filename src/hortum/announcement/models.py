@@ -28,7 +28,7 @@ class Announcement(models.Model):
 
     COGUMELOS = [
         ('Cogumelos em Conserva', 'Cogumelos em Conserva'),
-        ('Champingnon', 'Champingnon'),
+        ('Champignon', 'Champignon'),
         ('Cogumelo Hiratake', 'Cogumelo Hiratake'),
         ('Cogumelo Hiratake Salmão', 'Cogumelo Hiratake Salmão'),
         ('Cogumelo Shimeji', 'Cogumelo Shimeji'),
@@ -42,7 +42,7 @@ class Announcement(models.Model):
     ]
 
     DERIVADOS_DE_CANA = [
-        ('Açucar Mascavo', 'Açucar Mascavo'),
+        ('Açúcar Mascavo', 'Açúcar Mascavo'),
         ('Melado', 'Melado'),
         ('Rapadura', 'Rapadura'),
     ]
@@ -73,7 +73,7 @@ class Announcement(models.Model):
         ('Azaléia', 'Azaléia'),
         ('Babosa', 'Babosa'),
         ('Bambu', 'Bambu'),
-        ('Begonia - Vaso', 'Begonia - Vaso'),
+        ('Begônia - Vaso', 'Begônia - Vaso'),
         ('Boldo', 'Boldo'),
         ('Bromélias', 'Bromélias'),
         ('Buxinho', 'Buxinho'),
@@ -85,7 +85,7 @@ class Announcement(models.Model):
         ('Ficus - Folhagem', 'Ficus - Folhagem'),
         ('Brinco de princesa', 'Brinco de princesa'),
         ('Capuchinha', 'Capuchinha'),
-        ('Geranio comum', 'Geranio comum'),
+        ('Gerânio comum', 'Gerânio comum'),
         ('Heliconias', 'Heliconias'),
         ('Jurubeba', 'Jurubeba'),
         ('Lavanda', 'Lavanda'),
@@ -211,7 +211,7 @@ class Announcement(models.Model):
         ('Farinha de Trigo', 'Farinha de Trigo'),
         ('Linguiça artesanal e defumados', 'Linguiça artesanal e defumados'),
         ('Potros/Potras', 'Potros/Potras'),
-        ('Cana-de-açucar', 'Cana-de-açucar'),
+        ('Cana-de-açúcar', 'Cana-de-açúcar'),
         ('Feno', 'Feno'),
         ('Geléias', 'Geléias'),
         ('Pepino', 'Pepino'),
