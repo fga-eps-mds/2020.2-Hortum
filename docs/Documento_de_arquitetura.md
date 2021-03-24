@@ -157,6 +157,7 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 ![MER](img/diagrama_banco_de_dados.png)
 
 ## 6. Visão Lógica
+![Visão Lógica](img/visao_logica.png)
 ### 6.1 Visão Geral: Pacotes e Camadas
 <p align = "justify"> &emsp;&emsp; O sistema será desenvolvido utilizando o Django REST Framework e o Flutter. Irão se comunicar através da API REST fornecida pelo backend do sistema. </p>
 
@@ -168,6 +169,7 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
         - **pubspec.yaml**: é um arquivo transversal a todos os aplicativos e pacotes, onde são adicionados metadados ao projeto, estipulados restrições do SDK do Dart e Flutter, gerenciamento das dependências e configurações do Flutter.
         - **lib**: diretório onde são inseridos todos os pacotes da aplicação.
             - **main.dart**: arquivo inicial da aplicação, onde o programa se inicia e termina.
+            - **routers.dart**: arquivo que contém as rotas da aplicação.
             - **views**: diretório onde se encontra as páginas/telas da aplicação.
             - **models**: diretório onde se encontra as models da aplicação.
             - **componentes globais/data**: diretório onde são usados componentes globais, como por exemplo API para requisição web.
