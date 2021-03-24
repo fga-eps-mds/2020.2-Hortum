@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from hortum.users import viewsets
 
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path('login/', viewsets.CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
