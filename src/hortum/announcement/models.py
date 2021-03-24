@@ -247,4 +247,4 @@ class Announcement(models.Model):
     type_of_product = models.CharField(max_length=200, choices=TYPE_OF_PRODUCTS_CHOICES, default='Outros')
     description = models.CharField(max_length=200)
     price = models.FloatField(default=0.0)
-    inventory = models.BooleanField(default=False)
+    inventory = models.BooleanField(default=True)
