@@ -26,6 +26,9 @@
 ## Quadro de Velocity
 ![Quadro de Velocity Sprint 5](../../img/velocity_5.png)
 
+## Quadro de Conhecimentos
+![Quadro de Conhecimentos Sprint 5](../../img/conhecimentos_5.png)
+
 ## Pareamentos
 - João Pedro, Brenno e Carlos
 - Victor Lima, Vitor Lamego e Carlos
