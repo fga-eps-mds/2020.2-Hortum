@@ -14,7 +14,7 @@
 |#114|Tela principal do Comprador e do Produtor|Victor Lima e Vitor Lamego|Concluida
 |#115|Melhoria do protótipo de alta fidelidade|Vitor Lima e Brenno|Concluida
 |#116|Revisão dos documentos de arquitetura|João Pedro, Brenno e Carlos|Concluida
-|#117|Criação da tela "Meu Perfil"|Brenno e Vitor Lamego|Concluida
+|#117|Criação da tela "Meu Perfil"|Brenno e Vitor Lamego|Estendida
 |#118|Gerar documentação sobre planning sprint 6|João Pedro|Concluida
 |#119|Gerar documentação sobre review sprint 5|João Pedro|Concluida
 
@@ -35,4 +35,4 @@
 
 ## Análise do Scrum Master
 - Umas das sprints mais pessadas até o momento, principalmente pelo grupo estar entrando na fase de programação pesada. Apesar disso a velocidade com que é produzido código aumentou exponêncialmente. A técnica utilizada para espalhar conhecimento dos frameworks pelo grupo mostrou resultados altamente positivos, visto que permitiu diversos integrantes (por mais que tenham desenvolvido traumas) a entenderem como funcionam as tecnologias.
-- Em decorrência das sprints começarem nas quintas feiras, a equipe começou a ter grandes problemas em relação ao tempo de entrega das issues sendo necessário uma reformulação nos processos de entregas. Apesar de duas issues (#70 e #93) serem consideradas estendidas é necessário apenas o processo de revisão para sofrem merge ao projeto.
+- Em decorrência das sprints começarem nas quintas feiras, a equipe começou a ter grandes problemas em relação ao tempo de entrega das issues sendo necessário uma reformulação nos processos de entregas. Apesar de duas issues (#93 e #117) serem consideradas estendidas é necessário apenas o processo de revisão para sofrem merge ao projeto.
