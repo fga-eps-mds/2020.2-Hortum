@@ -14,6 +14,7 @@ Data|Versão|Descrição|Autor
 08/03/2021|1.5|Adição do tópico "Visão de Casos de Uso"|Brenno e Matheus
 09/03/2021|1.6|Adição do tópico 5|Carlos Eduardo e Lucas
 13/03/2021|1.6.1|Correção de erros na digitação|Lucas Braun
+24/03/2021|1.7|Adição do tópico 6 e mudanças nos diagramas| Brenno, Carlos e João
 
 ## 1. Introdução
 
@@ -94,14 +95,17 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 
 ### 4.1 Atores
 
+#### 4.1.1 Não Logado
+<p align = "justify"> &emsp;&emsp; Usuário não logado capaz apenas de realizar ações de registro e login.</p>
+
 #### 4.1.1 Usuário
-<p align = "justify"> &emsp;&emsp; Ator que compartilha as ações de produtor e comprador.</p>
+<p align = "justify"> &emsp;&emsp; Ator geral, que possui ações comuns no aplicativo.</p>
 
-#### 4.1.2 Pequeno Produtor
-<p align = "justify"> &emsp;&emsp; Especialização de usuário que compreende funcionalidades relacionadas ao anúncio e gerenciamento de produtos.</p>
+#### 4.1.2 Produtor
+<p align = "justify"> &emsp;&emsp; Especialização de usuário que compreende funcionalidades relacionadas ao anúncio e gerenciamento de produtos e localizações.</p>
 
-#### 4.1.3 Comprador
-<p align = "justify"> &emsp;&emsp; Especialização de usuário que abrange as funcionalidades de visualização e compartilhamento de produtos e produtores, além de favoritá-los e/ou curti-los.</p>
+#### 4.1.3 Consumidor
+<p align = "justify"> &emsp;&emsp; Especialização de usuário que abrange as funcionalidades de visualização e pesquisa de produtos, produtores e localizações, além de favoritá-los e/ou curti-los.</p>
 
 ### 4.2 Diagrama de Casos de Uso
 ![Diagrama de Casos de Uso](img/diagrama_casos_de_uso.png)
@@ -146,14 +150,54 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 
 <p align = "justify"> &emsp;&emsp; Um Produtor pode ter várias localizações, mas cada localização pertence a apenas 1 Produtor. Cardinalidade(1,n)</p>
 
-#### 5.2 Diagrama Entidade-Relacionamento (DER)
-![](img/diagrama_entidade_relacionamentos.png)
+### 5.2 Diagrama Entidade-Relacionamento (DER)
+![DER](img/diagrama_entidade_relacionamentos.png)
 
-### 5.3 Modelo Entidade-Relacionamento (MER)
-![Arquitetura Banco de Dados](img/diagrama_banco_de_dados.png)
+### 5.3 Modelagem do Banco de Dados
+![MER](img/diagrama_banco_de_dados.png)
 
+## 6. Visão Lógica
+![Visão Lógica](img/visao_logica.png)
+<p align = "justify"> &emsp;&emsp; As ações do usuário no ambiente mobile serão interpretadas pelo Flutter como gestos, onde cada gesto está associado com um evento que irá disparar uma ação. Algumas dessas ações poderão ser tratadas no lado do cliente (client side), como ações de iteratividade que não precisam de comunicação externa.</p>
 
+<p align = "justify"> &emsp;&emsp;Já em outras ações será preciso consultar um banco de dados no lado do servidor (server side), assim sendo preciso enviar uma solicitação (request) para o servidor, utilizado o protocolo de comunicação HTTP e respeitando as regras de interface REST.</p>
 
+<p align = "justify"> &emsp;&emsp;Uma vez que o servidor receba a solicitação do cliente, será preciso interpretar o request com base na URL e no método HTTP utilizado. Essa computação é realizada no módulo URL Dispatcher, onde é mapeado para endpoint da aplicação com o módulo que possui as informações solicitadas. Quando o app do Django REST está integrado com o Django, essa etapa ocorre em duas etapas. Primeiramente o Django verificar se a url requisitada faz parte da API que o Django REST fornece, se fizer parte o Django passa o controle para o Django REST para que finalize de processar e mapear a requisição.</p>
+
+<p align = "justify"> &emsp;&emsp; Uma vez que a url já foi mapeada para o módulo que possui as informações requisitadas, geralmente uma classe models.py, será responsável por utilizar o OMR (Mapeamento objeto-relacional) para mapear um modelo da aplicação com um modelo do banco de dados. Após o devido mapeamento, o banco de dados irá retornar um conjunto de informações que será tratada pelo Django REST.</p>
+
+<p align = "justify"> &emsp;&emsp; O Django REST já com os dados em mãos, poderá serializar as informações no formato padrão da API, em JSON. A serialização que é importante para definir uma interface que vários sistemas poderão consumir. Uma vez que os dados já foram serializados, o Django REST passa o controle para o Django, que será responsável por retornar uma resposta (response) para o lado do cliente.
+Essa resposta será obtida pelo Flutter, que com os dados recebidos irá disponibilizar uma interface construída em views, de forma que o usuário possa ver e interagir com ela. </p>
+
+### 6.1 Visão Geral: Pacotes e Camadas
+<p align = "justify"> &emsp;&emsp; O sistema será desenvolvido utilizando o Django REST Framework e o Flutter. Irão se comunicar através da API REST fornecida pelo backend do sistema. </p>
+
+#### 6.1.1 Diagrama de Pacotes
+![Diagrama de Pacotes](img/diagrama_de_pacotes.png)
+
+- **Frontend**
+    - **Flutter**: framework para apps mobile android e IOS.
+        - **pubspec.yaml**: é um arquivo transversal a todos os aplicativos e pacotes, onde são adicionados metadados ao projeto, estipulados restrições do SDK do Dart e Flutter, gerenciamento das dependências e configurações do Flutter.
+        - **lib**: diretório onde são inseridos todos os pacotes da aplicação.
+            - **main.dart**: arquivo inicial da aplicação, onde o programa se inicia e termina.
+            - **routers.dart**: arquivo que contém as rotas da aplicação.
+            - **views**: diretório onde se encontra as páginas/telas da aplicação.
+            - **models**: diretório onde se encontra as models da aplicação.
+            - **componentes globais/data**: diretório onde são usados componentes globais, como por exemplo API para requisição web.
+
+- **Backend**
+    - **Django REST API**: framework para criação de API's Web.
+        - **settings.py**: arquivo em que estão contidas todas as configurações do projeto. Desde a configuração básica do banco de dados até os apps.
+        - **urls.py**: armazena entry-points e endpoints da API.
+        - **app**: diretório constituído de models, viewsets, testes, urls, serializers e admin.
+            - **models**: arquivo de models do app.
+            - **viewsets**: arquivo de views do app.
+            - **testes**: arquivo de testes referente ao app.
+            - **urls**: mapeia as views com template de cada app.
+            - **serializer**: serialização das entidades do app.
+            - **admin**: arquivo de conexão do app com o admin.
+    - **Docker-Compose**: conjunto de containers docker.
+    - **PostgreSQL**: banco de dados da aplicação.
 
 ### Referências
 
