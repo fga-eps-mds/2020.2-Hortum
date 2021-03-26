@@ -34,11 +34,11 @@ A Sprint 7 tem os seguintes objetivos:
 |RS05|Planejamento ineficiente|1|5|5|
 |RS06|Arquitetura mal planejada e executada|1|5|5|
 |RS07|Dependência de issues|1|3|3|Utilizar de ferramentas do git, como o merge e o rebase, para não se perder o rítmo do projeto
-|RS08|Pull Requests em cima da hora|4|5|20|Buscar começar o desenvolvimento das issues no final de semana evitando-se assim o seu início nos útlimos dias 
-|RS09|Dependência de um ou mais membros para a progressão do projeto|2|2|4|Planejamente de pareamentos bem feito e treinamentos prévios
+|RS08|Pull Requests em cima da hora|4|5|20|Buscar começar o desenvolvimento das issues no final de semana evitando-se assim o seu início nos últimos dias 
+|RS09|Dependência de um ou mais membros para a progressão do projeto|2|2|4|Planejamento de pareamentos bem feito e treinamentos prévios
 |RS10|Comunicação falha entre membros|1|4|4|
 
-## Papeis da Equipe
+## Papéis da Equipe
 | Nome do Integrante | Papel |
 |--|--|
 |Brenno Oliveira|Product Owner
