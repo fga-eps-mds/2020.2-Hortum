@@ -86,6 +86,15 @@
 * Refatoração
 
 ## 3. Papéis da Equipe
+| Nome do Integrante | Papel |
+|--|--|
+|Brenno Oliveira|Product Owner
+|Carlos Eduardo|Desenvolvedor
+|João Pedro|Scrum Master
+|Lucas Braum|Desenvolvedor
+|Matheus Calixto|Desenvolvedor
+|Victor Lima|Desenvolvedor
+|Vitor Lamego|Desenvolvedor
 
 ## 4. Referências
 
