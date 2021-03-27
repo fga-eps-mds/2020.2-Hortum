@@ -7,6 +7,7 @@
 |08/03/2021|1.0|Criação do documento e adição da introdução| Carlos Eduardo e Matheus Calixto|
 |08/03/2021|1.1|Adição do manual de identidade, justificativas, fontes e paleta de cores|Carlos Eduardo e Matheus Calixto|
 |10/03/2021|1.1.1|Adição tópico componentes|Carlos Eduardo e Matheus Calixto|
+|27/03/2021|1.2|Adição da navbar do produtor| Brenno|
 
 ## 1 Introdução
 <p align = "justify"> &emsp;&emsp; Este documento trata acerca do guia de estilo e manual de identdade visual do projeto Hortum </p>
@@ -74,6 +75,11 @@ Cores escolhidas baseadas no objetivo do aplicativo de anunciar produtos de hort
 
 #### 5.3 Navbar
 
-- **Para celular**
+- **Comprador**
 
 ![](img/navbar.png)
+
+- **Produtor**
+
+![](img/navbarprodutor.png)
+
