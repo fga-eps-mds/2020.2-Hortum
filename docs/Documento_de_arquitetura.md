@@ -14,7 +14,8 @@ Data|Versão|Descrição|Autor
 08/03/2021|1.5|Adição do tópico "Visão de Casos de Uso"|Brenno e Matheus
 09/03/2021|1.6|Adição do tópico 5|Carlos Eduardo e Lucas
 13/03/2021|1.6.1|Correção de erros na digitação|Lucas Braun
-24/03/2021|1.7|Adição do tópico 6 e mudanças nos diagramas| Brenno, Carlos e João
+24/03/2021|1.7|Adição do tópico 6 e mudanças nos diagramas|Brenno, Carlos e João
+28/03/2021|1.7.1|Correção do diagrama de pacotes|João
 
 ## 1. Introdução
 
@@ -180,10 +181,10 @@ Essa resposta será obtida pelo Flutter, que com os dados recebidos irá disponi
         - **pubspec.yaml**: é um arquivo transversal a todos os aplicativos e pacotes, onde são adicionados metadados ao projeto, estipulados restrições do SDK do Dart e Flutter, gerenciamento das dependências e configurações do Flutter.
         - **lib**: diretório onde são inseridos todos os pacotes da aplicação.
             - **main.dart**: arquivo inicial da aplicação, onde o programa se inicia e termina.
-            - **routers.dart**: arquivo que contém as rotas da aplicação.
-            - **views**: diretório onde se encontra as páginas/telas da aplicação.
-            - **models**: diretório onde se encontra as models da aplicação.
-            - **componentes globais/data**: diretório onde são usados componentes globais, como por exemplo API para requisição web.
+            - **data/**: diretório que contem arqivos com requisição à API/backend.
+            - **views/**: diretório onde se encontra as páginas/telas da aplicação.
+            - **models/**: diretório onde se encontra as models globais da aplicação.
+            - **componentes globais/locais**: diretório onde são armazenados os componentes utilizados nas views.
 
 - **Backend**
     - **Django REST API**: framework para criação de API's Web.
@@ -192,7 +193,6 @@ Essa resposta será obtida pelo Flutter, que com os dados recebidos irá disponi
         - **app**: diretório constituído de models, viewsets, testes, urls, serializers e admin.
             - **models**: arquivo de models do app.
             - **viewsets**: arquivo de views do app.
-            - **testes**: arquivo de testes referente ao app.
             - **urls**: mapeia as views com template de cada app.
             - **serializer**: serialização das entidades do app.
             - **admin**: arquivo de conexão do app com o admin.
