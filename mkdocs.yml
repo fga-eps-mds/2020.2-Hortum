@@ -2,7 +2,7 @@ site_name: Hortum
 site_description: Repositório do Projeto Hortum
 repo_url: https://github.com/fga-eps-mds/2020.2-Hortum 
 dev_addr: '127.0.0.1:8080'
-
+edit_uri: ""
 
 theme:
     name: material
