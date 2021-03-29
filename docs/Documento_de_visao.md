@@ -9,6 +9,7 @@
 |28/02/2021|1.1|Adição dos tópicos 2, 3, 4, 5, 6 e 7 e incrementação do tópico 1|Brenno Oliveira e Carlos Eduardo
 |01/03/2021|1.1.1|Alteração na formatação dos tópicos 2.2, 2.3, 3.3.1, 3.3.2, 3.4.1, 3.4.2|Brenno Oliveira e Carlos Eduardo
 |12/03/2021|1.1.2|Correções na digitação do documento|Lucas Braun
+|29/03/2021|1.1.3|Revisão do documento|Joao Moura e Matheus Calixto
 
 ## 1. Introdução
 ### 1.1 Objetivo
@@ -36,39 +37,39 @@ Abreviação|Significado
 
 ### 1.5 Visão Geral
 ***
-**Introdução:**  Introduzir o projeto 
+**Introdução:**  Introduzir o projeto.
 ***
-**Posicionamento:** Como o projeto se relaciona com o problema
+**Posicionamento:** Como o projeto se relaciona com o problema.
 ***
-**Descrições da Parte Interessada e do Usuário:** Visão geral de quem será impactado
+**Descrições da Parte Interessada e do Usuário:** Visão geral de quem será impactado.
 ***
-**Visão Geral do Produto:** Capacidades do aplicativo 
+**Visão Geral do Produto:** Capacidades do aplicativo.
 ***
-**Recursos do Produto:** Explicação mais detalhada das funções
+**Recursos do Produto:** Explicação mais detalhada das funções.
 ***
-**Restrições:** Limitações de desenvolvimento e utilização
+**Restrições:** Limitações de desenvolvimento e utilização.
 ***
-**Requisitos Funcionais:** Funcionalidades e suas prioridades
+**Requisitos Funcionais:** Funcionalidades e suas prioridades.
 ***
 
 ## 2 Posicionamento
 ### 2.1 Oportunidade de Negócios
-<p align = "justify"> &emsp;&emsp; Atualmente os pequenos agricultores e compradores possuem alguma feira local ou o CEASA (Centrais de Abastecimento do Distrito Federal) como ponto de encontro para realização do negócio, para a venda de horticulturas. Entretanto, o cliente pode precisar de certo tipo de produto mas não possuir nenhum tipo de ideia de onde encontrá-lo, ou o vendedor pode estar a procura de clientes específicos. Por isso a ideia do Hortum surge como maneira de facilitar o comércio de pequenos agricultores e a procura e aquisição de tais produtos de horticultura.</p>
+<p align = "justify"> &emsp;&emsp; Atualmente os pequenos agricultores e compradores possuem alguma feira local ou o CEASA (Centrais de Abastecimento do Distrito Federal) como ponto de encontro para realização do negócio, para a venda de horticulturas. Entretanto, o cliente pode precisar de certo tipo de produto, mas não possuir nenhum tipo de ideia de onde encontrá-lo, ou o vendedor pode estar a procura de clientes específicos. Por isso a ideia do Hortum surge como maneira de facilitar o comércio de pequenos produtores e seus possíveis clientes.</p>
 <p align = "justify"> &emsp;&emsp; O Hortum servirá como um serviço em que os produtores irão cadastrar seus produtos para consulta por qualquer usuário, e os clientes poderão procurar por certo produto, junto com a localização para a compra e produtor responsável. Facilitando tanto para o produtor quanto para o cliente.</p>
 
 ### 2.2 Resumo do Problema
-- **O problema:** Dificuldade para comércio entre o produtor que deseja vender seus produtos e cliente que deseja comprá-los
-- **Afeta:** A demora para adquirir ou vender certo produto
-- **Cujo impacto:** Escoamento da produção do pequeno agricultor
-- **Boa solução:** Serviço para unir produtores e compradores
+- **O problema:** Dificuldade no comércio entre o produtor que deseja vender seus produtos e cliente que deseja comprá-los.
+- **Afeta:** Dificuldades para adquirir ou vender certo produto.
+- **Cujo impacto:** Escoamento da produção do pequenos produtores.
+- **Boa solução:** Serviço para unir produtores e compradores.
 
 ### 2.3 Posição do produto
-- **Para:** Pequenos agricultores e interessados em produtos de horticultura
-- **Que:** Desejam acelerar o processo de compra e venda
-- **O Hortum:** É um aplicativo móvel
-- **Que:** Facilita o comércio de horticultura.
-- **De outro modo:** Os usuários podem utilizar o *Põe na Cesta*
-- **Nosso produto:** Facilita a comunicação entre produtor e cliente por meio de um ambiente mais agradável
+- **Para:** Pequenos produtores e interessados em comprar produtos advindos da agricultura familiar ou do artesanato.
+- **Que:** Desejam acelerar o processo de compra e venda.
+- **O Hortum:** É um aplicativo móvel.
+- **Que:** Facilita o comércio de produtos vendidos em pequena escala.
+- **De outro modo:** Os usuários podem utilizar o *Põe na Cesta*.
+- **Nosso produto:** Facilita a comunicação entre produtor e cliente por meio de um ambiente mais agradável.
 
 ## 3 Descrições da Parte Interessada e do Usuário
 ### 3.1 Resumo dos envolvidos
@@ -85,36 +86,36 @@ Compradores|Pesquisar produtos
 
 ### 3.3 Perfis dos Usuários
 #### 3.3.1 Produtores
-- **Representante:**         Pequeno Produtor
-- **Descrição:**             Produtores a procura de uma plataforma para anunciar os produtos
-- **Responsabilidades:**     Se cadastrar e anunciar os produtos
-- **Critérios de Sucesso:**  Vender o produto por meio da plataforma
-- **Envolvimento:**          Alto
-- **Problemas/Comentários:** Não ter conhecimento no uso de aplicativos móveis
+- **Representante:**         Pequeno Produtor.
+- **Descrição:**             Produtores a procura de uma plataforma para anunciar seus produtos.
+- **Responsabilidades:**     Se cadastrar e anunciar produtos.
+- **Critérios de Sucesso:**  Vender o produto por meio da plataforma.
+- **Envolvimento:**          Alto.
+- **Problemas/Comentários:** Não ter conhecimento no uso de aplicativos móveis.
 
 #### 3.3.2 Compradores
-- **Representante:**            Comprador
-- **Descrição:**                Pessoa a procura de determinada horticultura 
-- **Responsabilidades:**        Procurar e se comunicar com o vendedor
-- **Critérios de Sucesso:**     Encontrar produto desejado
-- **Envolvimento:**             Alto
-- **Problemas/Comentários:**    Não ter conhecimento no uso de aplicativos móveis
+- **Representante:**            Comprador.
+- **Descrição:**                Pessoa a procura de determinado produto. 
+- **Responsabilidades:**        Procurar e se comunicar com o vendedor.
+- **Critérios de Sucesso:**     Encontrar produto desejado.
+- **Envolvimento:**             Alto.
+- **Problemas/Comentários:**    Não ter conhecimento no uso de aplicativos móveis.
 
 ### 3.4 Perfis dos Envolvidos
 #### 3.4.1 Equipe de desenvolvimento de software
-- **Representantes:** Brenno Oliveira Silva, Carlos Eduardo de Sousa Fiuza, João Pedro Moura Oliveira, Lucas Braun Vieira Xavier,  Matheus Calixto Vaz Pinheiro, Victor Souza Dantas Martins Lima, Vitor Magalhães Lamego
-- **Descrição:** Desenvolvimento e gerenciamento do projeto
-- **Responsabilidades:** Desenvolver e documentar o projeto
-- **Critérios de Sucesso:** Finalizar o aplicativo no prazo determinado com qualidade 
-- **Envolvimento:** Alto
-- **Problemas/Comentários:** Seguir com os prazos estipulados para desenvolver e aplicar soluções
+- **Representantes:** Brenno Oliveira Silva, Carlos Eduardo de Sousa Fiuza, João Pedro Moura Oliveira, Lucas Braun Vieira Xavier,  Matheus Calixto Vaz Pinheiro, Victor Souza Dantas Martins Lima, Vitor Magalhães Lamego.
+- **Descrição:** Desenvolvimento e gerenciamento do projeto.
+- **Responsabilidades:** Desenvolver e documentar o projeto.
+- **Critérios de Sucesso:** Finalizar o aplicativo no prazo determinado com qualidade. 
+- **Envolvimento:** Alto.
+- **Problemas/Comentários:** Seguir com os prazos estipulados para desenvolver e aplicar soluções.
 
 #### 3.4.2 Orientadores
-- **Representantes:** Professora Carla Silva Rocha Aguiar e monitores Hugo Sobral e Leonardo Gomes
-- **Descrição:** Professora e monitores da disciplina Métodos de Desenvolvimento de Software
-- **Responsabilidades:** Orientar e avaliar a equipe de desenvolvimento
-- **Critérios de Sucesso:** Transmitir e observar o sucesso da equipe no desenvolvimento do projeto 
-- **Envolvimento:** Médio
+- **Representantes:** Professora Carla Silva Rocha Aguiar e monitores Hugo Sobral e Leonardo Gomes.
+- **Descrição:** Professora e monitores da disciplina Métodos de Desenvolvimento de Software.
+- **Responsabilidades:** Orientar e avaliar a equipe de desenvolvimento.
+- **Critérios de Sucesso:** Transmitir e observar o sucesso da equipe no desenvolvimento do projeto. 
+- **Envolvimento:** Médio.
 - **Problemas/Comentários:** -
 
 ### 3.5 Principais Necessidades da Parte Interessada ou do Usuário
@@ -142,14 +143,13 @@ Ajudar pequenos produtores a anunciar sua mercadoria|Aplicativo com uma interfac
 Auxiliar compradores a encontrar produtos|Interface de fácil utilização para pesquisar produtos de horticultura 
 
 ### 4.3 Suposições e Dependências
-- O usuário deverá possuir um celular Android com acesso à internet
-- O aplicativo unirá produtores a compradores
+- O usuário deverá possuir um celular Android com acesso à internet.
+- O aplicativo unirá produtores a compradores.
 
 ## 5 Recursos do Produto
 ### 5.1 Recursos do Produtor
 - Cadastrar na plataforma
 - Anunciar produtos
-- Registrar horários 
 - Editar anúncios
 - Compartilhar anúncio
 - Denunciar outro usuário
