@@ -48,8 +48,8 @@
 1. #### Visualização detalhada sobre os Produtos e Produtores
 
 <!-- Releases -->
-# Releases
-## Release 1 (30/03)
+## Releases
+### Release 1 (30/03)
 #### [Slides](https://docs.google.com/presentation/d/1LPcu3EU9AnJIsrmF4KuUFmTl85_jbg21nd3B3bkKDvI/edit?usp=sharing)
 #### [Apresentação](https://drive.google.com/file/d/1pTRLDNsnZ4VCxlIdEfnUGkJpgglq8PEH/view?usp=sharing)
 <!-- TODO adicionar R2 -->
