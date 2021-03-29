@@ -9,13 +9,13 @@ Para mais informações sobre o projeto veja o <a href="https://github.com/fga-e
 ## Issues
 <p align = "justify"> &emsp;&emsp; As issues podem ser criadas para relatar problemas, sugerir melhorias e também para sanar dúvidas. </p>
 
-- Certifique-se que uma [issue](https://github.com/fga-eps-mds/MDS-2020-2-G6/issues) tratando do problema já não existe
-- A issue deve ser clara tanto no título quanto na descrição
-- Para **report de bugs** ou **dúvidas** utilize os templates disponibilizados no repositório
-- Aguarde uma resposta dos mantenedores do repositório
+- Certifique-se que uma [issue](https://github.com/fga-eps-mds/MDS-2020-2-G6/issues) tratando do problema já não existe.
+- A issue deve ser clara tanto no título quanto na descrição.
+- Para **report de bugs** ou **dúvidas** utilize os templates disponibilizados no repositório.
+- Aguarde uma resposta dos mantenedores do repositório.
 
 ## Pull request
-- O título e o comentário devem ser claros
-- As funcionalidades implementadas devem ter sido testadas e serem funcionais
-- O pull request deve possuir um link para a issue relacionada
-- Utilize o [template](https://github.com/fga-eps-mds/2020.2-Hortum/blob/main/.github/pull_request_template.md) de pull request para issues
+- O título e o comentário devem ser claros.
+- As funcionalidades implementadas devem ter sido testadas e serem funcionais.
+- O pull request deve possuir um link para a issue relacionada.
+- Utilize o [template](https://github.com/fga-eps-mds/2020.2-Hortum/blob/main/.github/pull_request_template.md) de pull request para issues.

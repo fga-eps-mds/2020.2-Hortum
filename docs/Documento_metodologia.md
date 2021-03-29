@@ -17,7 +17,7 @@
 ### 2.1 Scrum
 <p align = "justify"> &emsp;&emsp; O SCRUM é uma metodologia ágil muito conhecida e que já até se expandiu para diversas outras áreas além da Engenharia de Software. Focada no planejamento e gestão de projetos, ocorre de maneira iterativa, onde a iteração é mais conhecida por <b>Sprint</b>, que consiste no período que pode variar de 1 a 4 semanas. Dentro do período da Sprint os membros da equipe devem exercer as tarefas que assim foram demandadas naquele período de tempo. </p>
 
-<p align = "justify"> &emsp;&emsp; O SCRUM possui alguns artefatos e rituais que colaboram de maneira significativa para o projeto. Durante a Sprint são realizadas reuniões diariamente conhecidas por Daily Meeting, que servem para alinhar toda a equipe do que vem acontecendo dentro do projeto, são reuniões rápidas e com o sentimento de urgência para que não seja extensa. Outros artefatos muito utilizados e falado no SCRUM são o <b>Product Backlog</b> que consiste em uma lista com todas as funcionalidades desejadas para o produto, e também o <b>Sprint Backlog</b> que se destina a todas as issues que a equipe se compromete a resolver naquela Sprint. </p>
+<p align = "justify"> &emsp;&emsp; O SCRUM possui alguns artefatos e rituais que colaboram de maneira significativa para o projeto. Durante a Sprint são realizadas reuniões diariamente conhecidas por <b>Daily Meeting</b>, que servem para alinhar toda a equipe do que vem acontecendo dentro do projeto, são reuniões rápidas e com o sentimento de urgência para que não seja extensa. Outros artefatos muito utilizados e comuns no SCRUM são o <b>Product Backlog</b> que consiste em uma lista com todas as funcionalidades desejadas para o produto, e também o <b>Sprint Backlog</b> que se destina a todas as issues que a equipe se compromete a resolver naquela Sprint. </p>
 
 <p align = "justify"> &emsp;&emsp; Além disso, o SCRUM define três papéis dentro da equipe, sendo eles: </p>
 
@@ -32,7 +32,7 @@
 <ul>
     <li> <b>Sprint Planning</b>: Reunião que acontece ao início de toda Sprint com o objetivo de selecionar as funcionalidades presentes no Product Backlog que passarão para o Sprint Backlog. Vale ressaltar que o Product Owner possui importância fundamental nesta reunião para assegurar que o valor do produto esteja sendo maximizado.
     <li> <b>Sprint Review</b>: Ocorre ao final da Sprint. É um momento onde a equipe se atualiza de tudo o que foi produzido na Sprint e de como está o projeto atualmente.
-    <li> <b>Sprint Retrospective</b>: É um momento de discussão para a equipe entender o que aconteceu na Sprint que pode ser melhorado para as próximas, e também reforçar aquilo que está funcionando bem, para manter para as próximas também.
+    <li> <b>Sprint Retrospective</b>: É um momento de discussão para a equipe entender o que aconteceu na Sprint que pode ser melhorado para as próximas iterações, e também reforçar aquilo que está funcionando bem, para que seja mantindo.
 </ul>
 
 <p align = "justify"> &emsp;&emsp; Dentro da Sprint Planning o grupo utilizará uma estratégia da própria metodologia a fim de estimar o trabalho que determinada issue inserida no Sprint Backlog possui em termos de tempo e esforço, o <b>Planning Poker</b>. Sendo assim o grupo se reúne e cada um estima em valores pré-determinados o trabalho de determinada issue. Essa estratégia foi adotada para facilitar a priorização e a organização das issues entre os membros, a fim de evitar qualquer sobrecarga desnecessária na equipe, além de estar mais uma vez enfatizando o valor de produto ao projeto. </p>
@@ -51,16 +51,17 @@
 * Planning Poker
 
 ### 2.2 Kanban
-<p align = "justify"> &emsp;&emsp; Kanban é outra metodologia ágil, foi criada pela Toyota e ainda hoje é bastante utilizada por diversas empresas e áreas diferentes da de Software por trazer uma organização visual extrema pra dentro de projetos e por ser completamente tranquila de se aplicar. Consiste basicamente em um quadro dividos em três principais etapas: <b>To Do</b>, <b>Doing</b> e <b>Done</b>. Desta maneira, as atividades e funcionalidades de um projeto são colocadas na parte de "To Do", assim que começam a ser implementadas passam para o "Doing" e quando finalizadas são colocadas no "Done". </p>
+<p align = "justify"> &emsp;&emsp; Kanban é outra metodologia ágil, foi criada pela Toyota e ainda hoje é bastante utilizada por diversas empresas e áreas diferentes da de Software por trazer uma organização visual extrema para dentro dos projetos e por ser extremamente fácil de se aplicar. Consiste basicamente em um quadro divido em três principais etapas: <b>To Do</b>, <b>Doing</b> e <b>Done</b>. Desta maneira, as atividades e funcionalidades de um projeto são colocadas na parte de "To Do", assim que começam a ser implementadas passam para o "Doing" e quando finalizadas são colocadas no "Done". </p>
 
-<p align = "justify"> &emsp;&emsp; Como se pode perceber é uma metodologia muito simples e que colabora com o alinhamento de toda a equipe do que está ocorrendo dentro do projeto como um todo. Os principais pontos desta metodologia são:
+<p align = "justify"> &emsp;&emsp; Como se pode perceber é uma metodologia muito simples e que colabora com o alinhamento de toda a equipe do que está ocorrendo dentro do projeto como um todo. Os principais pontos desta metodologia são:</p>
+
 1. Evitar procastinação e tempo ocioso;
 2. Economizar tempo;
 3. Prático e fácil implementação;
 4. Hierarquização de tarefas;
 5. Reduz custo e desperdícios;
 6. Ajuda a mensurar a produtividade;
-7. Facilita comunicação. </p>
+7. Facilita comunicação.
 
 <p align = "justify"> &emsp;&emsp; Desta maneira a equipe irá utilizar um quadro virtual que possuirá estas diferentes etapas e também uma ligação ao Product Backlog e Sprint Backlog do SCRUM. </p>
 
@@ -71,7 +72,7 @@
 * Done
 
 ### 2.3 XP
-<p align = "justify"> &emsp;&emsp; A XP (Extreme Programming) é uma metodologia ágil bastante conhecida também e fortemente ligada a resposta a mudanças de maneira rápida. Se assemelha bastante com os valores do SCRUM e muitas vezes essas duas metodologias são vistas como complementares, onde o SCRUM acaba sendo uma metodologia mais voltada para a área de gerência e a XP para a área de práticas da Engenharia de Software. </p>
+<p align = "justify"> &emsp;&emsp; A XP (Extreme Programming) é uma metodologia ágil bastante conhecida também e fortemente ligada a resposta rápidas às mudanças. Se assemelha bastante com os valores do SCRUM e muitas vezes essas duas metodologias são vistas como complementares, onde o SCRUM acaba sendo uma metodologia mais voltada para a área de gerência e a XP para a área de práticas da Engenharia de Software. </p>
 
 <p align = "justify"> &emsp;&emsp; O principal objetivo desta metodologia é levar ao extremo algumas boas práticas da Engenharia de Software, sendo principalmente fundada na ideia de que a equipe deve estar apta a mudanças, trabalhando para que o erro dentro do projeto não seja nenhum grande empecilho, mas algo de baixo custo se assim forem seguidas as suas práticas e valores. </p>
 
@@ -86,6 +87,15 @@
 * Refatoração
 
 ## 3. Papéis da Equipe
+| Nome do Integrante | Papel |
+|--|--|
+|Brenno Oliveira|Product Owner
+|Carlos Eduardo|Desenvolvedor
+|João Pedro|Scrum Master
+|Lucas Braun|Desenvolvedor
+|Matheus Calixto|Desenvolvedor
+|Victor Lima|Desenvolvedor
+|Vitor Lamego|Desenvolvedor
 
 ## 4. Referências
 

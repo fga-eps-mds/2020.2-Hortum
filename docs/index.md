@@ -40,4 +40,4 @@
 
 <!-- License -->
 ## License
-GPLv3 © Hortum. Para demais informações acesse nossa [LICENSE](./LICENSE).
+GPLv3 © Hortum. Para demais informações acesse nossa [LICENSE](https://github.com/fga-eps-mds/2020.2-Hortum/blob/main/LICENSE).

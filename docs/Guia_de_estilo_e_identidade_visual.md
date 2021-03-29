@@ -7,9 +7,11 @@
 |08/03/2021|1.0|Criação do documento e adição da introdução| Carlos Eduardo e Matheus Calixto|
 |08/03/2021|1.1|Adição do manual de identidade, justificativas, fontes e paleta de cores|Carlos Eduardo e Matheus Calixto|
 |10/03/2021|1.1.1|Adição tópico componentes|Carlos Eduardo e Matheus Calixto|
+|27/03/2021|1.2|Adição da navbar do produtor| Brenno|
+|28/03/2021|1.3|Revisão do documento|Joao Moura e Matheus Calixto
 
 ## 1 Introdução
-<p align = "justify"> &emsp;&emsp; Este documento trata acerca do guia de estilo e manual de identdade visual do projeto Hortum </p>
+<p align = "justify"> &emsp;&emsp; Este documento trata acerca do guia de estilo e manual de identdade visual do projeto Hortum.</p>
 
 ## 2 Apresentação do Manual de Identidade Visual
 
@@ -17,7 +19,7 @@
 
 ## 3 Detalhamento e Justificativas
 ### 3.1 Nome da Aplicação
-<p align = "justify"> &emsp;&emsp; Para o nome da aplicação foi traduzido a palavra "horta" para latim "hortum holerum" e escolhido a primeira palavra "hortum". A ideia de buscar um nome referente a horta vem do perfil dos usúarios da plataforma, em especial os pequenos produtores, que possuem sua renda baseada em horticultura.</p>
+<p align = "justify"> &emsp;&emsp; Para o nome da aplicação foi traduzido a palavra "horta" para latim "hortum holerum" e escolhido a primeira palavra "hortum". A ideia de buscar um nome referente a horta vem do perfil dos usúarios da plataforma, em especial os pequenos produtores, que possuem sua renda baseada em sua propriedade.</p>
 
 ### 3.2 Fontes
 <p align = "justify"> &emsp;&emsp; As fontes utilizadas na aplicação são: </p>
@@ -55,7 +57,7 @@ font-family: 'Roboto', sans-serif;
 
 ![](img/cor_logo_secundaria.png)
 
-Cores escolhidas baseadas no objetivo do aplicativo de anunciar produtos de horticultura.
+Cores escolhidas baseadas no objetivo do aplicativo de anunciar produtos.
 
 ### 5 Componentes
 #### 5.1 Botões
@@ -74,6 +76,11 @@ Cores escolhidas baseadas no objetivo do aplicativo de anunciar produtos de hort
 
 #### 5.3 Navbar
 
-- **Para celular**
+- **Comprador**
 
 ![](img/navbar.png)
+
+- **Produtor**
+
+![](img/navbarprodutor.png)
+
