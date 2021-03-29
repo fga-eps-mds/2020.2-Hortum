@@ -92,7 +92,7 @@
 |Brenno Oliveira|Product Owner
 |Carlos Eduardo|Desenvolvedor
 |João Pedro|Scrum Master
-|Lucas Braum|Desenvolvedor
+|Lucas Braun|Desenvolvedor
 |Matheus Calixto|Desenvolvedor
 |Victor Lima|Desenvolvedor
 |Vitor Lamego|Desenvolvedor
