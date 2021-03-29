@@ -16,6 +16,7 @@ Data|Versão|Descrição|Autor
 13/03/2021|1.6.1|Correção de erros na digitação|Lucas Braun
 24/03/2021|1.7|Adição do tópico 6 e mudanças nos diagramas|Brenno, Carlos e João
 28/03/2021|1.7.1|Correção do diagrama de pacotes|João
+29/03/2021|1.7.2|Padronização da Visão Geral|Vitor Lamego
 
 ## 1. Introdução
 
@@ -40,12 +41,16 @@ Abreviação|Significado
 
 ### 1.4 Visão Geral
 
-<p align="justify"> &emsp;&emsp; Esse documento de arquitetura se encontra dividido em tópicos que descrevem os detalhes do software desenvolvido. Se organiza da seguinte forma: </p>
+***
+**Introdução:**  Fornece uma visão geral e introdutória sobre o documento;
+***
+**Representação Arquitetural:** Fornece informações sobre as tecnologias e os motivos pelos quais elas foram escolhidas;
+***
+**Metas e Restrições:** Demonstra as metas e restrições aplicadas no projeto;
+***
+**Visão de Dados:** Representa a arquitetura implementada no banco de dados; 
+***
 
-- Introdução: Fornece uma visão geral e introdutória sobre o documento;
-- Representação Arquitetural: Fornece informações sobre as tecnologias e os motivos pelos quais elas foram escolhidas;
-- Metas e Restrições: Demonstra as metas e restrições aplicadas no projeto;
-- Visão de Dados: Representa a arquitetura implementada no banco de dados;
 
 ## 2. Representação Arquitetural
 
@@ -66,8 +71,8 @@ Abreviação|Significado
 ### 2.2 Front-End
 
 #### 2.2.1 Flutter
-<p align = "justify"> &emsp;&emsp;O Flutter é um framework desenvolvido pela Google na linguagem Dart e permite que sejam criadas aplicações nativas para os aparelhos iOS e Android. Por ter essa facilidade de desenvolvimento para dois sistemas diferentes, a linguagem tem crescido bastante e tornado cada vez maior a quantidade de informação para aprendizado.</p>
-<p align = "justify"> &emsp;&emsp; Além disso, por ser uma linguagem que possui uma curva de aprendizado muito boa e alguns dos integrantes do grupo já terem conhecimento prévio relacionado à linguagem, ela foi selecionada para atuar no front-end.</p>
+<p align = "justify"> &emsp;&emsp;O Flutter é um framework desenvolvido pela Google na linguagem Dart e permite que sejam criadas aplicações nativas para os aparelhos iOS e Android. Por ter essa facilidade de desenvolvimento para dois sistemas diferentes, o framework tem crescido bastante e tornado cada vez maior a quantidade de informação para aprendizado.</p>
+<p align = "justify"> &emsp;&emsp; Além disso, por ser um framework que possui uma curva de aprendizado muito boa e alguns dos integrantes do grupo já terem conhecimento prévio relacionado à linguagem, ela foi selecionada para atuar no front-end.</p>
 <p align = "justify"> &emsp;&emsp; Outro ponto importante na escolha desse framework se deve ao fato do Dart ser otimizado bem como ser especializado para criação de interfaces para usuários através do uso dos widgets (estrutura baseada no React). Assim também, o uso de <b>Blocs</b> permite que o software seja dividido em questão de interface de usuário e regras de negócio, e o uso de <b> 
 Stream</b> permite eventos assíncronos no aplicativo.</p>
 
@@ -159,15 +164,13 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 
 ## 6. Visão Lógica
 ![Visão Lógica](img/visao_logica.png)
-<p align = "justify"> &emsp;&emsp; As ações do usuário no ambiente mobile serão interpretadas pelo Flutter como gestos, onde cada gesto está associado com um evento que irá disparar uma ação. Algumas dessas ações poderão ser tratadas no lado do cliente (client side), como ações de iteratividade que não precisam de comunicação externa.</p>
+<p align = "justify"> &emsp;&emsp; As ações do usuário no ambiente mobile serão interpretadas pelo Flutter como gestos, onde cada gesto está associado com um evento que irá disparar uma ação. Algumas dessas ações poderão ser tratadas no lado do cliente (Client Side), como ações de iteratividade que não precisam de comunicação externa. Já em outras ações será preciso consultar um banco de dados no lado do servidor (Server Side), assim sendo preciso enviar uma solicitação (Request) para o servidor, utilizando o protocolo de comunicação HTTP e respeitando as regras de interface REST.</p>
 
-<p align = "justify"> &emsp;&emsp;Já em outras ações será preciso consultar um banco de dados no lado do servidor (server side), assim sendo preciso enviar uma solicitação (request) para o servidor, utilizado o protocolo de comunicação HTTP e respeitando as regras de interface REST.</p>
-
-<p align = "justify"> &emsp;&emsp;Uma vez que o servidor receba a solicitação do cliente, será preciso interpretar o request com base na URL e no método HTTP utilizado. Essa computação é realizada no módulo URL Dispatcher, onde é mapeado para endpoint da aplicação com o módulo que possui as informações solicitadas. Quando o app do Django REST está integrado com o Django, essa etapa ocorre em duas etapas. Primeiramente o Django verificar se a url requisitada faz parte da API que o Django REST fornece, se fizer parte o Django passa o controle para o Django REST para que finalize de processar e mapear a requisição.</p>
+<p align = "justify"> &emsp;&emsp;Uma vez que o servidor receba a solicitação do cliente, será preciso interpretar o request com base na URL e no método HTTP utilizado. Essa computação é realizada no módulo URL Dispatcher, onde é mapeado para endpoint da aplicação com o módulo que possui as informações solicitadas. Quando o app do Django REST está integrado com o Django, essa ação ocorre em duas etapas. Primeiramente o Django verificar se a url requisitada faz parte da API que o Django REST fornece, se fizer parte o Django passa o controle para o Django REST para que finalize o processamento e mapeamento da requisição.</p>
 
 <p align = "justify"> &emsp;&emsp; Uma vez que a url já foi mapeada para o módulo que possui as informações requisitadas, geralmente uma classe models.py, será responsável por utilizar o OMR (Mapeamento objeto-relacional) para mapear um modelo da aplicação com um modelo do banco de dados. Após o devido mapeamento, o banco de dados irá retornar um conjunto de informações que será tratada pelo Django REST.</p>
 
-<p align = "justify"> &emsp;&emsp; O Django REST já com os dados em mãos, poderá serializar as informações no formato padrão da API, em JSON. A serialização que é importante para definir uma interface que vários sistemas poderão consumir. Uma vez que os dados já foram serializados, o Django REST passa o controle para o Django, que será responsável por retornar uma resposta (response) para o lado do cliente.
+<p align = "justify"> &emsp;&emsp; O Django REST já com os dados em mãos, poderá serializar as informações no formato padrão da API, em JSON. A serialização que é importante para definir uma interface que vários sistemas poderão consumir. Uma vez que os dados já foram serializados, o Django REST passa o controle para o Django, que será responsável por retornar uma resposta (Response) para o lado do cliente.
 Essa resposta será obtida pelo Flutter, que com os dados recebidos irá disponibilizar uma interface construída em views, de forma que o usuário possa ver e interagir com ela. </p>
 
 ### 6.1 Visão Geral: Pacotes e Camadas
@@ -177,11 +180,11 @@ Essa resposta será obtida pelo Flutter, que com os dados recebidos irá disponi
 ![Diagrama de Pacotes](img/diagrama_de_pacotes.png)
 
 - **Frontend**
-    - **Flutter**: framework para apps mobile android e IOS.
+    - **Flutter**: framework para apps mobile Android e IOS.
         - **pubspec.yaml**: é um arquivo transversal a todos os aplicativos e pacotes, onde são adicionados metadados ao projeto, estipulados restrições do SDK do Dart e Flutter, gerenciamento das dependências e configurações do Flutter.
         - **lib**: diretório onde são inseridos todos os pacotes da aplicação.
             - **main.dart**: arquivo inicial da aplicação, onde o programa se inicia e termina.
-            - **data/**: diretório que contem arqivos com requisição à API/backend.
+            - **data/**: diretório que contem arquivos com requisição à API/backend.
             - **views/**: diretório onde se encontra as páginas/telas da aplicação.
             - **models/**: diretório onde se encontra as models globais da aplicação.
             - **componentes globais/locais**: diretório onde são armazenados os componentes utilizados nas views.
