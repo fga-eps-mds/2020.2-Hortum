@@ -5,6 +5,7 @@
 Data|Versão|Descrição| Autor(es)
 --|--|--|--
 01/03/2021|1.0|Adição do canvas|Brenno Oliveira e Victor Lima
+01/04/2021|2.0|Atualizado parcerias chaves e estrutura de custos|Brenno Oliveira
 
 ## 1. Canvas
 ![Canvas](./img/Canvas.png)
