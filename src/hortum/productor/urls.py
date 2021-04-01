@@ -4,9 +4,13 @@ from rest_framework import routers
 
 from . import viewsets
 
-router = routers.SimpleRouter(trailing_slash=False)
-router.register(r'', viewsets.ProductorRegistrationAPIView, basename='productor')
-router.register(r'list', viewsets.ProductorListAPIView, basename='teste')
+routerRegister = routers.SimpleRouter()
+routerRegister.register(r'', viewsets.ProductorRegistrationAPIView, basename='productor')
+
+router = routers.SimpleRouter()
+router.register(r'list', viewsets.ProductorListAPIView, basename='listProductors')
+slashless_router = routers.DefaultRouter(trailing_slash=False)
+slashless_router.registry = router.registry[:]
 
 urlpatterns = [
-] + router.urls
+] + slashless_router.urls + router.urls
