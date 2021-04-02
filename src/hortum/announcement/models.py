@@ -238,7 +238,7 @@ class Announcement(models.Model):
     idProductor = models.ForeignKey(Productor, on_delete=models.CASCADE, related_name='announcements')
     idPicture = models.ForeignKey(Picture, on_delete=models.CASCADE, null=True)
     likes = models.IntegerField(default=0)
-    name = models.CharField(max_length=30)
+    name = models.CharField(unique=True, max_length=30)
     type_of_product = models.CharField(max_length=200, choices=TYPE_OF_PRODUCTS_CHOICES, default='Outros')
     description = models.CharField(max_length=200)
     price = models.FloatField(default=0.0)
