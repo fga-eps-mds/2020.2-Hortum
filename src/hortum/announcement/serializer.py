@@ -14,6 +14,12 @@ class AnnouncementSerializer(serializers.ModelSerializer):
         model = Announcement
         fields = ['email', 'idPicture', 'likes', 'name', 'type_of_product', 'description', 'price', 'inventory'] 
 
+    def validate(self, data):
+        productor = Productor.objects.get(user=User.objects.get(email=data['email']))
+        if productor.announcements.filter(name=data['name']).exists():
+            raise serializers.ValidationError({'name': 'Este nome de anúncio ja foi utilizado.'})
+        return data
+
     def create(self, validated_data):
         productor_pk = Productor.objects.get(user=User.objects.get(email=validated_data.pop('email')))
         announcement = Announcement.objects.create(idProductor=productor_pk, **validated_data)
