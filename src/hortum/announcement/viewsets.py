@@ -13,3 +13,12 @@ class AnnouncementRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
 	permission_classes = (permissions.IsAuthenticated,)
 	serializer_class = AnnouncementSerializer
 	queryset = Announcement.objects.all()
+
+class AnnouncementDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
+    '''
+    EndPoint para remoção de anúncio
+    '''
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = AnnouncementSerializer
+    queryset = Announcement.objects.all()
+    lookup_field = 'name'
