@@ -6,7 +6,7 @@ from ..users.models import User
 
 from ..picture.serializer import PictureSerializer
 
-class AnnouncementSerializer(serializers.ModelSerializer):
+class AnnouncementCreateSerializer(serializers.ModelSerializer):
     idPicture = PictureSerializer(many=True, read_only=True)
     email = serializers.EmailField(write_only=True)
 

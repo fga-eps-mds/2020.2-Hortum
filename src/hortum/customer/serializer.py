@@ -5,13 +5,13 @@ from ..users.models import User
 
 from ..users.serializer import UserSerializer
 from ..picture.serializer import PictureSerializer
-from ..announcement.serializer import AnnouncementSerializer
+from ..announcement.serializer import AnnouncementCreateSerializer
 from ..productor.serializer import ProductorSerializer
 
 class CustomerSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
     idPicture = PictureSerializer(many=False, read_only=True)
-    idAnunFav = AnnouncementSerializer(many=True, read_only=True)
+    idAnunFav = AnnouncementCreateSerializer(many=True, read_only=True)
     idProdFav = ProductorSerializer(many=True, read_only=True)
 
     class Meta:
