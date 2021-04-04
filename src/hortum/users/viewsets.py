@@ -3,12 +3,20 @@ from .serializer import CustomTokenObtainPairSerializer
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-
 from .models import User
 
 from rest_framework.viewsets import GenericViewSet
-from rest_framework import mixins
-from rest_framework import permissions
+from rest_framework import mixins, permissions
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated,])
+def is_token_valid(request):
+    '''
+    EndPoint para checagem do token
+    '''
+    return Response({'token_status': 'valid'})
 
 class UserListRetrieveAPIView(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin):
     permission_classes = (permissions.IsAuthenticated,)
@@ -16,4 +24,7 @@ class UserListRetrieveAPIView(GenericViewSet, mixins.ListModelMixin, mixins.Retr
     queryset = User.objects.all()
 
 class CustomTokenObtainPairView(TokenObtainPairView):
+    '''
+    EndPoint sobrescrito para obtenção do token
+    '''
     serializer_class = CustomTokenObtainPairSerializer
