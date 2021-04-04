@@ -4,13 +4,13 @@ from .models import Productor, Localization
 from ..users.models import User
 
 from ..users.serializer import UserSerializer
-from ..announcement.serializer import AnnouncementSerializer
+from ..announcement.serializer import AnnouncementCreateSerializer
 from ..picture.serializer import PictureSerializer
 
 class ProductorSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
     idPicture = PictureSerializer(many=False, read_only=True)
-    announcements = AnnouncementSerializer(read_only=True, many=True)
+    announcements = AnnouncementCreateSerializer(read_only=True, many=True)
 
     class Meta:
         model = Productor

@@ -6,7 +6,8 @@ from rest_framework import routers
 from . import viewsets
 
 router = routers.SimpleRouter(trailing_slash=False)
-router.register(r'create', viewsets.AnnouncementRegistrationAPIView, basename='announcement')
+router.register(r'create', viewsets.AnnouncementRegistrationAPIView, basename='createAnnoun')
+router.register(r'delete', viewsets.AnnouncementDeleteAPIView, basename='deleteAnnoun')
 
 urlpatterns = [
 ] + router.urls
