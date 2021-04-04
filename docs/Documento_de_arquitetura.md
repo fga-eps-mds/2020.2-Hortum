@@ -18,6 +18,7 @@ Data|Versão|Descrição|Autor
 28/03/2021|1.7.1|Correção do diagrama de pacotes|João
 29/03/2021|1.7.2|Padronização da Visão Geral|Vitor Lamego
 29/03/2021|1.7.3|Revisão do documento|Joao Moura e Matheus Calixto
+04/04/2021|1.7.4|Revisão tópico 6|Carlos Eduardo
 
 ## 1. Introdução
 
@@ -105,9 +106,9 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 ![Visão Lógica](img/visao_logica.png)
 <p align = "justify"> &emsp;&emsp; As ações do usuário no ambiente mobile serão interpretadas pelo Flutter como gestos, onde cada gesto está associado com um evento que irá disparar uma ação. Algumas dessas ações poderão ser tratadas no lado do cliente (client side), como ações de iteratividade que não precisam de comunicação externa.</p>
 
-<p align = "justify"> &emsp;&emsp;Já em outras ações será preciso consultar um banco de dados no lado do servidor (server side), assim sendo preciso enviar uma solicitação (HttpRequest) para o servidor, utilizado o protocolo de comunicação HTTP e respeitando as regras de interface REST.</p>
+<p align = "justify"> &emsp;&emsp;Já em outras ações será preciso consultar um banco de dados no lado do servidor (server side), assim sendo preciso enviar uma solicitação (HttpRequest) para o servidor, utilizado o protocolo de comunicação HTTP e respeitando as regras de interface REST, visto que Django REST é utilizado.</p>
 
-<p align = "justify"> &emsp;&emsp;Uma vez que o servidor receba a solicitação do cliente, será preciso interpretar o request com base na URL e no método HTTP utilizado. Essa computação é realizada no módulo URL Dispatcher, onde é mapeado para endpoint da aplicação com o módulo que possui as informações solicitadas. Quando o app do Django REST está integrado com o Django, essa etapa ocorre em dois processos. Primeiramente o Django verifica se a url requisitada faz parte da API que o Django REST fornece, se fizer parte o Django passa o controle para o Django REST para que finalize o processo e mapeie a requisição.</p>
+<p align = "justify"> &emsp;&emsp;Uma vez que o servidor receba a solicitação do cliente, será preciso interpretar o request com base na URL e no método HTTP utilizado. Essa computação é realizada no módulo URL Dispatcher, onde é verificado se o endpoint faz parte das urlpatterns, caso verdadeiro é mapeado para endpoint da aplicação com o módulo que possui as informações solicitadas. Quando o app do Django REST está integrado com o Django, essa etapa ocorre em dois processos. Primeiramente o Django verifica se a url requisitada faz parte da API que o Django REST fornece, se fizer parte o Django passa o controle para o Django REST para que finalize o processo e mapeie a requisição.</p>
 
 <p align = "justify"> &emsp;&emsp; Uma vez que a url já foi mapeada para o módulo que possui as informações requisitadas, geralmente uma classe models.py, será responsável por utilizar o OMR (Mapeamento objeto-relacional) para mapear um modelo da aplicação com um modelo do banco de dados. Após o devido mapeamento, o banco de dados irá retornar um conjunto de informações que será tratada pelo Django REST.</p>
 
