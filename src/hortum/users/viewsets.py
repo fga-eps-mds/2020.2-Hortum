@@ -1,5 +1,4 @@
-from .serializer import UserSerializer
-from .serializer import CustomTokenObtainPairSerializer
+from . import serializer
 
 from rest_framework_simplejwt.views import TokenObtainPairView
 
@@ -16,15 +15,18 @@ def is_token_valid(request):
     '''
     EndPoint para checagem do token
     '''
-    return Response({'token_status': 'valid'})
+    return Response({
+        'token_status': 'valid',
+        'is_productor': User.objects.get(email=request.user).is_productor
+    })
 
 class UserListRetrieveAPIView(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = UserSerializer
+    serializer_class = serializer.UserSerializer
     queryset = User.objects.all()
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     '''
     EndPoint sobrescrito para obtenção do token
     '''
-    serializer_class = CustomTokenObtainPairSerializer
+    serializer_class = serializer.CustomTokenObtainPairSerializer
