@@ -112,7 +112,7 @@ Stream</b> permite eventos assíncronos no aplicativo.</p>
 
 <p align = "justify"> &emsp;&emsp; Uma vez que a url já foi mapeada para o módulo que possui as informações requisitadas, geralmente uma classe models.py, será responsável por utilizar o OMR (Mapeamento objeto-relacional) para mapear um modelo da aplicação com um modelo do banco de dados. Após o devido mapeamento, o banco de dados irá retornar um conjunto de informações que será tratada pelo Django REST.</p>
 
-<p align = "justify"> &emsp;&emsp; O Django REST já com os dados em mãos, poderá serializar as informações, de maneira mas rápida e fácil que o Django, no formato padrão da API, em JSON. A serialização que é importante para definir uma interface que vários sistemas poderão consumir. Uma vez que os dados já foram serializados, o Django REST passa o controle para o Django que carrega uma viewset apropiada e devolve um objeto HttpResponse.
+<p align = "justify"> &emsp;&emsp; O Django REST já com os dados em mãos, poderá serializar as informações, de maneira mais rápida e fácil que o Django, no formato padrão da API, em JSON. A serialização que é importante para definir uma interface que vários sistemas poderão consumir. Uma vez que os dados já foram serializados, o Django REST passa o controle para o Django que carrega uma viewset apropiada e devolve um objeto HttpResponse.
 Essa resposta será obtida pelo Flutter, que com os dados recebidos irá disponibilizar uma interface construída em views, de forma que o usuário possa ver e interagir com ela. </p>
 
 ### 4.1 Visão Geral: Pacotes e Camadas
