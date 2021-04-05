@@ -15,12 +15,13 @@ class AnnouncementRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
     serializer_class = serializer.AnnouncementCreateSerializer
     queryset = Announcement.objects.all()
 
-class AnnouncementDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
+class AnnouncementDeleteUpdateAPIView(GenericViewSet, mixins.DestroyModelMixin, mixins.UpdateModelMixin):
     '''
     EndPoint para remoção de anúncio
     '''
     permission_classes = (permissions.IsAuthenticated,)
     queryset = Productor.objects.all()
+    serializer_class = serializer.AnnouncementUpdateSerializer
     lookup_field = 'name'
 
     def get_queryset(self):
