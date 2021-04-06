@@ -2,7 +2,7 @@ from rest_framework.test import APITestCase
 
 from .models import Customer
 
-class ProductorAPIViewsTestCase(APITestCase):
+class CustomerAPIViewsTestCase(APITestCase):
     def setUp(self):
         self.user_data = {
             'username': 'Pedro',
@@ -27,3 +27,4 @@ class ProductorAPIViewsTestCase(APITestCase):
             201,
             msg='Falha no registro de comprador'
         )
+        
