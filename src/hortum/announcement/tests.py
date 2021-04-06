@@ -7,18 +7,18 @@ from .models import Announcement
 class AnnouncementsDeleteAPIViewTestCase(APITestCase):
     def create_user(self):
         self.user_data = {
-	    "username": "João",
+	        "username": "João",
             "email": "joao@teste.com",
-	    "password": "teste"
+	        "password": "teste"
         }
 
         url_signup = '/signup/productor/'
 
         response = self.client.post(
             url_signup,
-	    {'user': self.user_data},
-	    format='json'
-	)
+	        {'user': self.user_data},
+	        format='json'
+	    )
         
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
@@ -29,8 +29,8 @@ class AnnouncementsDeleteAPIViewTestCase(APITestCase):
 
         response = self.client.post(
             url_token,
-	    user_cred,
-	    format='json'
+	        user_cred,
+	        format='json'
         )
 
         self.assertEqual(response.status_code, 200, msg='Credenciais inválidas')
@@ -50,9 +50,9 @@ class AnnouncementsDeleteAPIViewTestCase(APITestCase):
 
         response = self.client.post(
             path=url_create_announ,
-	    data=self.announcement_data,
-	    format='json',
-	    **self.creds
+	        data=self.announcement_data,
+	        format='json',
+	        **self.creds
         )
 
         self.assertEqual(response.status_code, 201, msg='Falha na criação do anúncio')
@@ -72,8 +72,8 @@ class AnnouncementsDeleteAPIViewTestCase(APITestCase):
     def test_delete_announcement(self):
         response = self.client.delete(
             path=self.url_delete_announ,
-	    format='json',
-	    **self.creds
+	        format='json',
+	        **self.creds
         )
 
         self.assertEqual(response.status_code, 204, msg='Falha na deleção do anúncio')
