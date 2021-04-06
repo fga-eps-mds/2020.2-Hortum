@@ -15,9 +15,10 @@ def is_token_valid(request):
     '''
     EndPoint para checagem do token
     '''
+    user = User.objects.get(email=request.user)
     return Response({
-        'token_status': 'valid',
-        'is_productor': User.objects.get(email=request.user).is_productor
+        'user': user.username,
+        'is_productor': user.is_productor
     })
 
 class UserListRetrieveAPIView(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin):
