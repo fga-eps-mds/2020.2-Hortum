@@ -27,3 +27,8 @@ class AnnouncementDeleteUpdateAPIView(GenericViewSet, mixins.DestroyModelMixin, 
     def get_queryset(self):
         productor = Productor.objects.get(user=User.objects.get(email=self.request.user))
         return productor.announcements.all()
+
+    def get_serializer_context(self):
+        context = super(AnnouncementDeleteUpdateAPIView, self).get_serializer_context()
+        context.update({'queryset': self.get_queryset()})
+        return context

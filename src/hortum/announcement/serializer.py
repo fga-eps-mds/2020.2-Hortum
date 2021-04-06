@@ -31,3 +31,8 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
         fields = '__all__'
+
+    def validate_name(self, name):
+        if self.context['queryset'].filter(name=name).exists():
+            raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
+        return name
