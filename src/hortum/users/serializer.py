@@ -15,4 +15,3 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data.update({'email': self.user.email})
         data.update({'is_productor': self.user.is_productor})
         return data
-        
