@@ -14,4 +14,4 @@ jobs:
       - name: Subindo ambiente de teste
         run: docker-compose up -d --build
       - name: Rodando teste
-        run: docker exec 20202-hortum_web_1 bash -c "python manage.py test"
+        run: docker exec 20202-hortum_web_1 bash -c "python manage.py test -v 2"
