@@ -102,8 +102,7 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             msg='Criando anúncio sem autenticação'
         )
 
-
-class AnnouncementsDeleteAPIViewTestCase(APITestCase):
+class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
     def create_user(self):
         self.user_data = {
 	        "username": "João",
@@ -161,7 +160,7 @@ class AnnouncementsDeleteAPIViewTestCase(APITestCase):
         self.create_tokens()
         self.create_announcement()
 
-        self.url_delete_announ = '/announcement/delete/' + self.announcement_data['name']
+        self.url_update_announ = '/announcement/update/' + self.announcement_data['name']
 
     def tearDown(self):
         Announcement.objects.all().delete()
@@ -170,9 +169,39 @@ class AnnouncementsDeleteAPIViewTestCase(APITestCase):
 
     def test_delete_announcement(self):
         response = self.client.delete(
-            path=self.url_delete_announ,
-	        format='json',
-	        **self.creds
+            path=self.url_update_announ,
+	    format='json',
+	    **self.creds
         )
 
         self.assertEqual(response.status_code, 204, msg='Falha na deleção do anúncio')
+
+    def test_update_one_attr_announcement(self):
+        new_data = {
+            "name": "Meio quilo de defumados"
+        }
+
+        response = self.client.patch(
+            path=self.url_update_announ,
+	    format='json',
+	    data=new_data,
+	    **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na alteração do anúncio')
+
+    def test_update_multiples_attr_announcement(self):
+        new_data = {
+            "name": "Meio quilo de defumados",
+	    "description": "Defumados",
+	    "price": 60.15
+        }
+
+        response = self.client.patch(
+            path=self.url_update_announ,
+	    format='json',
+	    data=new_data,
+	    **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na alteração do anúncio')
