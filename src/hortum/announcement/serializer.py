@@ -24,3 +24,15 @@ class AnnouncementCreateSerializer(serializers.ModelSerializer):
         productor_pk = Productor.objects.get(user=User.objects.get(email=validated_data.pop('email')))
         announcement = Announcement.objects.create(idProductor=productor_pk, **validated_data)
         return announcement
+
+class AnnouncementUpdateSerializer(serializers.ModelSerializer):
+    idPicture = PictureSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Announcement
+        fields = '__all__'
+
+    def validate_name(self, name):
+        if self.context['queryset'].filter(name=name).exists():
+            raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
+        return name
