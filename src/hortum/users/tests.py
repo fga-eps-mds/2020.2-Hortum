@@ -2,7 +2,7 @@ from rest_framework.test import APITestCase
 
 from ..customer.models import Customer
 
-class UserAPIViewsTestCase(APITestCase):
+class UserTokenObtainAPIViewTestCase(APITestCase):
     def create_user(self):
         self.user_data = {
 	        "username": "Luís",
@@ -20,6 +20,7 @@ class UserAPIViewsTestCase(APITestCase):
 
     def setUp(self):
         self.create_user()
+        self.url_login = '/login/'
 
     def tearDown(self):
         Customer.objects.all().delete()
@@ -30,10 +31,8 @@ class UserAPIViewsTestCase(APITestCase):
             'password': self.user_data['password']
         }
 
-        url_login = '/login/'
-
         response = self.client.post(
-            url_login,
+            self.url_login,
 	        user_credentials,
 	        format='json'
         )
@@ -42,4 +41,22 @@ class UserAPIViewsTestCase(APITestCase):
             response.status_code,
             200,
             msg='Falha no login de usuário'
+        )
+
+    def test_wrong_credentials_login(self):
+        wrong_credentials = {
+            'email': 'luis@teste',
+            'password': 'luis'
+        }
+
+        response = self.client.post(
+            self.url_login,
+            wrong_credentials,
+            format='json'
+        )
+
+        self.assertEqual(
+            response.status_code,
+            401,
+            msg='Login com credenciais incorretas'
         )

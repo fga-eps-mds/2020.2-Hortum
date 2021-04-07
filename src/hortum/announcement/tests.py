@@ -4,6 +4,105 @@ from ..productor.models import Productor
 from ..users.models import User
 from .models import Announcement
 
+class AnnouncementCreateAPIViewTestCase(APITestCase):
+    def create_productor(self):
+        self.user_data = {
+	        "username": "Mário",
+            "email": "mario@teste.com",
+	        "password": "teste"
+        }
+
+        url_signup = '/signup/productor/'
+
+        response = self.client.post(
+            url_signup,
+	        {'user': self.user_data},
+	        format='json'
+	    )
+
+    def create_tokens(self):
+        user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
+
+        url_token = '/login/'
+
+        response = self.client.post(
+            url_token,
+	        user_cred,
+	        format='json'
+        )
+
+        self.auth_token = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
+
+    def setUp(self):
+        self.create_productor()
+        self.create_tokens()
+        self.announcement_data = {
+            "email": self.user_data['email'],
+            "name": "Banana",
+            "type_of_product": "Banana",
+            "description": "vendendo banana",
+            "price": 10.0
+        }
+        self.url_announcement = '/announcement/create'
+
+
+    def test_create_announcement(self):
+        response = self.client.post(
+            self.url_announcement,
+            self.announcement_data,
+            format='json',
+            **self.auth_token
+        )
+
+        self.assertEqual(
+            response.status_code,
+            201,
+            msg='Falha na criação de anúncio'
+        )
+
+    def test_duplicate_announcement_name(self):
+        other_announcement = {
+            "email": self.user_data['email'],
+            "name": "Banana",
+            "type_of_product": "Banana",
+            "description": "banana à venda",
+            "price": 12.5
+        }
+
+        self.client.post(
+            self.url_announcement,
+            self.announcement_data,
+            format='json',
+            **self.auth_token
+        )
+
+        response = self.client.post(
+            self.url_announcement,
+            other_announcement,
+            format='json',
+            **self.auth_token
+        )
+
+        self.assertEqual(
+            response.status_code,
+            400,
+            msg='Criando anúncio com nome duplicado'
+        )
+
+    def test_create_announcement_no_authentication(self):
+        response = self.client.post(
+            self.url_announcement,
+            self.announcement_data,
+            format='json'
+        )
+
+        self.assertEqual(
+            response.status_code,
+            401,
+            msg='Criando anúncio sem autenticação'
+        )
+
+
 class AnnouncementsDeleteAPIViewTestCase(APITestCase):
     def create_user(self):
         self.user_data = {

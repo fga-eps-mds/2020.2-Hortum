@@ -2,7 +2,7 @@ from rest_framework.test import APITestCase
 
 from .models import Customer
 
-class CustomerAPIViewsTestCase(APITestCase):
+class CustomerRegisterAPIViewTestCase(APITestCase):
     def setUp(self):
         self.user_data = {
             'username': 'Pedro',
