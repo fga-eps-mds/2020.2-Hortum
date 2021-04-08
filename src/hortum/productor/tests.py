@@ -82,7 +82,7 @@ class ProductorListAPIViewTestCase(APITestCase):
 
         url_signup = '/signup/productor/'
 
-        response = self.client.post(
+        self.client.post(
             url_signup,
 	        {'user': self.user_data},
 	        format='json'
@@ -131,4 +131,3 @@ class ProductorListAPIViewTestCase(APITestCase):
             401,
             msg='Listando produtores sem autenticação'
         )
-

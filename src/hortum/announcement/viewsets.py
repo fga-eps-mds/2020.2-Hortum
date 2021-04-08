@@ -1,10 +1,10 @@
-from . import serializer 
+from . import serializer
 from .models import Announcement
 
 from ..productor.models import Productor
 from ..users.models import User
 
-from rest_framework.viewsets import GenericViewSet 
+from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins, permissions
 
 class AnnouncementRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):

@@ -14,7 +14,7 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
 
         url_signup = '/signup/productor/'
 
-        response = self.client.post(
+        self.client.post(
             url_signup,
 	        {'user': self.user_data},
 	        format='json'
@@ -44,7 +44,6 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             "price": 10.0
         }
         self.url_announcement = '/announcement/create'
-
 
     def test_create_announcement(self):
         response = self.client.post(
