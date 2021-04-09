@@ -36,17 +36,10 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
         return name
 
-class ProductorListSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(required=True, source='user.username')
-    idPicture = PictureSerializer(many=False, read_only=True)
-
-    class Meta:
-        model = Productor
-        fields = ['username', 'idPicture']
-
 class AnnouncementListSerializer(serializers.ModelSerializer):
-    idProductor = ProductorListSerializer(read_only=True)
+    username = serializers.CharField(required=True, source='idProductor.user.username')
+    idPictureProductor = PictureSerializer(many=False, read_only=True, source='idProductor.idPicture')
 
     class Meta:
         model = Announcement
-        fields = ['idProductor', 'name', 'type_of_product', 'description', 'price', 'idPicture']
+        fields = ['username', 'idPictureProductor', 'name', 'type_of_product', 'description', 'price', 'idPicture']
