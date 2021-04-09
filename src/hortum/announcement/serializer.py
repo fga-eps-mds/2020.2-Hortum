@@ -8,20 +8,18 @@ from ..picture.serializer import PictureSerializer
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
     idPicture = PictureSerializer(many=True, read_only=True)
-    email = serializers.EmailField(write_only=True)
 
     class Meta:
         model = Announcement
-        fields = ['email', 'idPicture', 'likes', 'name', 'type_of_product', 'description', 'price', 'inventory'] 
+        fields = ['idPicture', 'likes', 'name', 'type_of_product', 'description', 'price', 'inventory'] 
 
-    def validate(self, data):
-        productor = Productor.objects.get(user=User.objects.get(email=data['email']))
-        if productor.announcements.filter(name=data['name']).exists():
-            raise serializers.ValidationError({'name': 'Este nome de anúncio ja foi utilizado.'})
-        return data
+    def validate_name(self, name):
+        if self.context['productor'].announcements.all().filter(name=name).exists():
+            raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
+        return name
 
     def create(self, validated_data):
-        productor_pk = Productor.objects.get(user=User.objects.get(email=validated_data.pop('email')))
+        productor_pk = self.context['productor']
         announcement = Announcement.objects.create(idProductor=productor_pk, **validated_data)
         return announcement
 
