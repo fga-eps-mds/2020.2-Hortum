@@ -2,7 +2,7 @@ from .serializer import ProductorSerializer
 
 from .models import Productor
 
-from rest_framework.viewsets import GenericViewSet 
+from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 from rest_framework import permissions
 

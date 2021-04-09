@@ -1,6 +1,4 @@
 from django.db import models
-from rest_framework import serializers
-
 from ..productor.models import Productor
 from hortum.picture.models import Picture
 
@@ -99,7 +97,8 @@ class Announcement(models.Model):
         ('Orquídeas - Catlleya', 'Orquídeas - Catlleya'),
         ('Palmeiras em geral', 'Palmeiras em geral'),
         ('Pata de elefante', 'Pata de elefante'),
-        ('Plantas medicinais , aromáticas e condimentares', 'Plantas medicinais , aromáticas e condimentares'),
+        ('Plantas medicinais , aromáticas e condimentares',
+            'Plantas medicinais , aromáticas e condimentares'),
         ('Primavera - bouganville', 'Primavera - bouganville'),
         ('Rosa - Corte', 'Rosa - Corte'),
         ('Rosa do deserto', 'Rosa do deserto'),
@@ -233,7 +232,7 @@ class Announcement(models.Model):
         ('Outros', 'Outros'),
     ]
 
-    TYPE_OF_PRODUCTS_CHOICES = AVICULTURA + BEBIDAS + CARNE + COGUMELOS + CONGELADOS + DERIVADOS_DE_CANA + DERIVADOS_DE_MANDIOCA + DESIDRATADOS + DOCES + FLORES +FRUTAS + GRAO + HORTALICAS + LATICINIOS + PANIFICADOS + OTHERS
+    TYPE_OF_PRODUCTS_CHOICES = AVICULTURA + BEBIDAS + CARNE + COGUMELOS + CONGELADOS + DERIVADOS_DE_CANA + DERIVADOS_DE_MANDIOCA + DESIDRATADOS + DOCES + FLORES + FRUTAS + GRAO + HORTALICAS + LATICINIOS + PANIFICADOS + OTHERS
     
     idProductor = models.ForeignKey(Productor, on_delete=models.CASCADE, related_name='announcements')
     idPicture = models.ForeignKey(Picture, on_delete=models.CASCADE, null=True)

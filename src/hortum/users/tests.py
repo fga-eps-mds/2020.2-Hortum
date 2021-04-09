@@ -12,7 +12,7 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
 
         url_signup = '/signup/customer/'
 
-        response = self.client.post(
+        self.client.post(
             url_signup,
 	        {'user': self.user_data},
 	        format='json'
