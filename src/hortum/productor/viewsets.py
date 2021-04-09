@@ -13,11 +13,3 @@ class ProductorRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
 	permission_classes = (permissions.AllowAny,)
 	serializer_class = ProductorSerializer
 	queryset = Productor.objects.all()
-
-class ProductorListAPIView(GenericViewSet, mixins.ListModelMixin):
-    '''
-    EndPoint para listar todos produtores e anúncios
-    '''
-    permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = ProductorSerializer
-    queryset = Productor.objects.all()
