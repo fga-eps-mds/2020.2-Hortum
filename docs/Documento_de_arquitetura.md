@@ -71,7 +71,6 @@ Abreviação|Significado
 
 - **Model**: Camada responsável pelo acesso ao banco de dados.
 - **View**: Camada responsável por processar requests de usuários e retornar responses.
-- **Template**: Camada responsável pela apresentação de informações ao usuário.
 
 ### 2.2 Front-End
 
