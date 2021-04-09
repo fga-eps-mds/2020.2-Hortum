@@ -166,8 +166,8 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
     def test_delete_announcement(self):
         response = self.client.delete(
             path=self.url_update_announ,
-	    format='json',
-	    **self.creds
+            format='json',
+            **self.creds
         )
 
         self.assertEqual(response.status_code, 204, msg='Falha na deleção do anúncio')
@@ -179,25 +179,25 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
 
         response = self.client.patch(
             path=self.url_update_announ,
-	    format='json',
-	    data=new_data,
-	    **self.creds
+            format='json',
+            data=new_data,
+            **self.creds
         )
 
         self.assertEqual(response.status_code, 200, msg='Falha na alteração do anúncio')
 
     def test_update_multiples_attr_announcement(self):
         new_data = {
-        "name": "Meio quilo de defumados",
-	    "description": "Defumados",
-	    "price": 60.15
+            "name": "Meio quilo de defumados",
+            "description": "Defumados",
+            "price": 60.15
         }
 
         response = self.client.patch(
             path=self.url_update_announ,
-	    format='json',
-	    data=new_data,
-	    **self.creds
+            format='json',
+            data=new_data,
+            **self.creds
         )
 
         self.assertEqual(response.status_code, 200, msg='Falha na alteração do anúncio')

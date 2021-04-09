@@ -1,18 +1,15 @@
 from rest_framework import serializers
 
 from .models import Announcement
-from ..productor.models import Productor
-from ..users.models import User
 
 from ..picture.serializer import PictureSerializer
-from ..users.serializer import UserSerializer
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
     idPicture = PictureSerializer(many=True, read_only=True)
 
     class Meta:
         model = Announcement
-        fields = ['idPicture', 'likes', 'name', 'type_of_product', 'description', 'price', 'inventory'] 
+        fields = ['idPicture', 'likes', 'name', 'type_of_product', 'description', 'price', 'inventory']
 
     def validate_name(self, name):
         if self.context['productor'].announcements.all().filter(name=name).exists():

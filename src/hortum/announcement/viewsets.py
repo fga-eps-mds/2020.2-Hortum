@@ -1,4 +1,4 @@
-from . import serializer 
+from . import serializer
 
 from .models import Announcement
 from ..productor.models import Productor
