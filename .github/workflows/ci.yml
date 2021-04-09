@@ -17,9 +17,9 @@ jobs:
           pip install flake8
       - name: Lint with flake8
         run: |
-          flake8 --extend-ignore=E302,E101,E131,W191,W293 --count --select=E9,F63,F7,F82 --exclude=*.pyc,*migrations* --show-source --statistics src/
-          flake8 --extend-ignore=E302,E101,E131,W191,W293 --count --max-complexity=10 --max-line-length=226 --exclude=*.pyc,*migrations* --statistics src/
-      - name: Creates test environment
+          flake8 --extend-ignore=E302,E101,E131,W191,W293,W292 --count --select=E9,F63,F7,F82 --exclude=*.pyc,*migrations* --show-source --statistics src/
+          flake8 --extend-ignore=E302,E101,E131,W191,W293,W292 --count --max-complexity=10 --max-line-length=226 --exclude=*.pyc,*migrations* --statistics src/
+      - name: Create test environment
         run: docker-compose up -d --build
       - name: Run tests
         run: docker exec 20202-hortum_web_1 bash -c "python manage.py test -v 2"
