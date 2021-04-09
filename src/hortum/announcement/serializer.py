@@ -5,6 +5,7 @@ from ..productor.models import Productor
 from ..users.models import User
 
 from ..picture.serializer import PictureSerializer
+from ..users.serializer import UserSerializer
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
     idPicture = PictureSerializer(many=True, read_only=True)
@@ -34,3 +35,18 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
         if self.context['queryset'].filter(name=name).exists():
             raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
         return name
+
+class ProductorListSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(required=True, source='user.username')
+    idPicture = PictureSerializer(many=False, read_only=True)
+
+    class Meta:
+        model = Productor
+        fields = ['username', 'idPicture']
+
+class AnnouncementListSerializer(serializers.ModelSerializer):
+    idProductor = ProductorListSerializer(read_only=True)
+
+    class Meta:
+        model = Announcement
+        fields = ['idProductor', 'name', 'type_of_product', 'description', 'price', 'idPicture']

@@ -1,6 +1,6 @@
 from . import serializer 
-from .models import Announcement
 
+from .models import Announcement
 from ..productor.models import Productor
 from ..users.models import User
 
@@ -35,3 +35,8 @@ class AnnouncementDeleteUpdateAPIView(GenericViewSet, mixins.DestroyModelMixin, 
         context = super(AnnouncementDeleteUpdateAPIView, self).get_serializer_context()
         context.update({'queryset': self.get_queryset()})
         return context
+
+class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = serializer.AnnouncementListSerializer
+    queryset = Announcement.objects.filter(inventory=True)
