@@ -37,6 +37,14 @@ class AnnouncementDeleteUpdateAPIView(GenericViewSet, mixins.DestroyModelMixin, 
         return context
 
 class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
+    '''
+    EndPoint para listagem de anúncios em ordem crescente de nome
+    '''
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = serializer.AnnouncementListSerializer
-    queryset = Announcement.objects.filter(inventory=True)
+    
+    def get_queryset(self):
+        queryset = Announcement.objects.filter(inventory=True)
+        if self.kwargs:
+            queryset = queryset.filter(name__icontains=self.kwargs['announcementName'])
+        return queryset.order_by('name')
