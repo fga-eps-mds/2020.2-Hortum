@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
 
-from .serializer import ChangePasswordSerializer
+from .serializer import ChangePasswordSerializer, UpdateUserSerializer
 
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins, permissions, generics
@@ -61,4 +61,34 @@ class ChangePasswordView(generics.UpdateAPIView):
 
             return Response(response)
 
+        return Response(serializer.errors)
+
+class UpdateUserView(generics.UpdateAPIView):
+    serializer_class = UpdateUserSerializer
+    model = User
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = User.objects.all()
+
+    def get_object(self, queryset=None):
+        user = self.request.user
+        return user
+
+    def update(self, request, *args, **kwargs):    
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            if not self.object.email == serializer.data.get("email"):
+                if self.queryset.filter(email=serializer.data.get("email")).exists():
+                    return Response("Email já registrado!")
+                self.object.email = serializer.data.get("email")
+            
+            self.object.username = serializer.data.get("username")
+            self.object.save()
+            response = {
+                'Dados alterados!',
+            }
+
+            return Response(response)
+            
         return Response(serializer.errors)
