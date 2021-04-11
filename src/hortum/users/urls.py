@@ -13,4 +13,5 @@ urlpatterns = [
     path('customer/', include(customerRegister.urls)),
     path('productor/', include(productorRegister.urls)),
     path('change-password/', viewsets.ChangePasswordView.as_view(), name='change-password'),
+    path('update/', viewsets.UpdateUserView.as_view(), name='update-user'),
 ] + router.urls
