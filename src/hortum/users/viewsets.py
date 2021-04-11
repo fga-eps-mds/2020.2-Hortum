@@ -4,12 +4,14 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
 
+from .serializer import ChangePasswordSerializer
+
 from rest_framework.viewsets import GenericViewSet
-from rest_framework import mixins, permissions
+from rest_framework import mixins, permissions, generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
-@api_view(['GET'])
+@api_view(["GET", "PUT"])
 @permission_classes([permissions.IsAuthenticated, ])
 def is_token_valid(request):
     '''
@@ -31,3 +33,32 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     EndPoint sobrescrito para obtenção do token
     '''
     serializer_class = serializer.CustomTokenObtainPairSerializer
+
+class ChangePasswordView(generics.UpdateAPIView):
+    """
+    An endpoint para alterar a senha
+    """
+    serializer_class = ChangePasswordSerializer
+    model = User
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
+    def update(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            if not self.object.check_password(serializer.data.get("old_password")):
+                return Response({"old_password": ["Senha incorreta!"]})
+            self.object.set_password(serializer.data.get("new_password"))
+            self.object.save()
+            response = {
+                'Senha alterada!',
+            }
+
+            return Response(response)
+
+        return Response(serializer.errors)
