@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from .models import User
+from .models import User 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,3 +15,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data.update({'email': self.user.email})
         data.update({'is_productor': self.user.is_productor})
         return data
+
+class ChangePasswordSerializer(serializers.Serializer):
+    """
+    Serializer para alterar endpoint da senha.
+    """
+    model = User
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
