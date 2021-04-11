@@ -12,4 +12,5 @@ router.register(r'confirm', viewsets.UserListRetrieveAPIView, basename='user')
 urlpatterns = [
     path('customer/', include(customerRegister.urls)),
     path('productor/', include(productorRegister.urls)),
+    path('change-password/', viewsets.ChangePasswordView.as_view(), name='change-password'),
 ] + router.urls
