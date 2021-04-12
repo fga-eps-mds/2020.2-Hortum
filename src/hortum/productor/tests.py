@@ -28,46 +28,29 @@ class ProductorRegisterAPIViewTestCase(APITestCase):
             msg='Falha no registro de produtor'
         )
 
-    def test_duplicate_email_register(self):
-        other_user_data = {
+    def test_empty_attr_register_productor(self):
+        response = self.client.post(
+            self.url_signup,
+            {'user': {}},
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, 400, msg='User possível de se criar')
+        self.assertEqual(len(response.json()['user']), 3, msg='Pelo menos um campo é necessário')
+
+    def test_duplicate_email_register_productor(self):
+        self.test_productor_register()
+
+        new_user = {
             'username': 'Marcos Segundo',
             'email': 'marcos@productor.com',
             'password': 'teste dois'
         }
 
-        self.client.post(
-            self.url_signup,
-	        {'user': self.user_data},
-	        format='json'
-	    )
-
         response = self.client.post(
             self.url_signup,
-            {'user': other_user_data},
+            {'user': new_user},
             format='json'
         )
 
-        self.assertEqual(
-            response.status_code,
-            400,
-            msg='Registro com email repetido'
-        )
-
-    def test_empty_field_register(self):
-        incomplete_user_data = {
-            'username': 'Marcos Terceiro',
-            'email': '',
-            'password': ''
-        }
-
-        response = self.client.post(
-            self.url_signup,
-            incomplete_user_data,
-            format='json'
-        )
-
-        self.assertEqual(
-            response.status_code,
-            400,
-            msg='Registro com campos vazios'
-        )
+        self.assertEqual(response.status_code, 400, msg='Email inexistente')
