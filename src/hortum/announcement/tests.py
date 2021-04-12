@@ -317,3 +317,36 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200, msg='Falha na listagem do anúncio')
         self.assertEqual(len(response.data), 1, msg='Falha na quantidade de anúncios listados')
+    
+    def test_list_names_multiples_annoucement(self):
+        self.url_list_announ += '/Meio'
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Nenhum anúncio com o nome inserido')
+        self.assertEqual(len(response.data), 2, msg='Falha na quantidade de anúncios listados')
+
+    def test_list_names_one_announcement(self):
+        self.url_list_announ += '/Meio quilo de linguíça'
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Nenhum anúncio encontrado')
+        self.assertEqual(len(response.data), 1, msg='Falha na busca por anúncio')
+
+    def test_list_containing_name_announcement(self):
+        self.url_list_announ += '/quilo de'
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Nenhum anúncio encontrado')
+        self.assertEqual(len(response.data), 2, msg='Falaha na busca por anúncio')
