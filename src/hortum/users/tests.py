@@ -58,7 +58,7 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
             format='json'
         )
 
-        self.assertEqual(response.status_code, 401, msg='Login com credenciais incorretas')
+        self.assertEqual(response.status_code, 401, msg='Login com credenciais corretas')
 
     def test_token_validator(self):
         self.test_user_login()
