@@ -52,12 +52,11 @@ class ChangePasswordView(generics.UpdateAPIView):
 
         if serializer.is_valid():
             if not self.object.check_password(serializer.data.get("old_password")):
-                return Response({"old_password": ["Senha incorreta!"]})
+                return Response("Senha incorreta!")
             self.object.set_password(serializer.data.get("new_password"))
             self.object.save()
-            response = {
-                'Senha alterada!',
-            }
+            response = 'Senha alterada!'
+
 
             return Response(response)
 
@@ -80,14 +79,12 @@ class UpdateUserView(generics.UpdateAPIView):
         if serializer.is_valid():
             if not self.object.email == serializer.data.get("email"):
                 if self.queryset.filter(email=serializer.data.get("email")).exists():
-                    return Response("Email já registrado!")
+                    return Response("Email ja registrado!")
                 self.object.email = serializer.data.get("email")
             
             self.object.username = serializer.data.get("username")
             self.object.save()
-            response = {
-                'Dados alterados!',
-            }
+            response = 'Dados alterados!'
 
             return Response(response)
             
