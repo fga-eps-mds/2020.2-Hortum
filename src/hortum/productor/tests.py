@@ -160,3 +160,28 @@ class ProductorListAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200, msg='Falha na busca de produtores')
         self.assertEqual(len(response.data), 2, msg='Falha na quantidade de produtores listados na pesquisa')
+
+    def test_only_productors_are_listed(self):
+        customer_data = {
+            'username': 'Customer',
+            'email': 'customer@customer.com',
+            'password': 'teste'
+        }
+
+        url_signup_customer = '/signup/customer/'
+
+        response = self.client.post(
+            url_signup_customer,
+            {'user': customer_data},
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de comprador')
+
+        response = self.client.get(
+            self.url_list,
+            **self.auth_token
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na listagem de produtores')
+        self.assertEqual(len(response.data), 3, msg='Quantidade de produtores errada')
