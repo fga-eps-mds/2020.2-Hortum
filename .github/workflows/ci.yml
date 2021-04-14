@@ -21,5 +21,5 @@ jobs:
           flake8 --extend-ignore=E302,E101,E131,W191,W293,W292 --count --max-complexity=10 --max-line-length=226 --exclude=*.pyc,*migrations* --statistics src/
       - name: Create test environment
         run: docker-compose up -d --build
-      - name: Run tests
-        run: docker exec 20202-hortum_web_1 bash -c "python manage.py test -v 2"
+      - name: Run coverage tests
+        run: docker exec 20202-hortum_web_1 bash -c "coverage run manage.py test && coverage report -m && coverage erase"
