@@ -6,8 +6,7 @@ from .models import User
 
 from .serializer import ChangePasswordSerializer, UpdateUserSerializer
 
-from rest_framework.viewsets import GenericViewSet
-from rest_framework import mixins, permissions, generics
+from rest_framework import permissions, generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
@@ -50,7 +49,6 @@ class ChangePasswordView(generics.UpdateAPIView):
                 return Response('Senha incorreta!', status=401)
             self.object.set_password(serializer.data.get("new_password"))
             self.object.save()
-            response = 'Senha alterada!'
 
             return Response('Senha alterada!', status=200)
 
@@ -66,7 +64,7 @@ class UpdateUserView(generics.UpdateAPIView):
         user = self.request.user
         return user
 
-    def update(self, request, *args, **kwargs):    
+    def update(self, request, *args, **kwargs):
         self.object = self.get_object()
         serializer = self.get_serializer(data=request.data)
 

@@ -157,7 +157,7 @@ class UpdateUserViewTestCase(APITestCase):
             "email": "luis2@productor.com"
         }
 
-        response =  self.client.put(
+        response = self.client.put(
             path=self.url_update_user,
             data=user_username_email,
             format='json',
@@ -167,7 +167,7 @@ class UpdateUserViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 200, msg='Usuario nao atualizado')
     
     def test_empty_update_user(self):
-        response =  self.client.put(
+        response = self.client.put(
             path=self.url_update_user,
             data={},
             format='json',
@@ -275,7 +275,7 @@ class ChangePasswordViewTestCase(APITestCase):
             "new_password": "nova senha"
         }
 
-        response =  self.client.put(
+        response = self.client.put(
             path=self.url_change_password,
             data=user_password,
             format='json',
@@ -323,7 +323,7 @@ class ChangePasswordViewTestCase(APITestCase):
         )
 
     def test_empty_password_fields(self):
-        response =  self.client.put(
+        response = self.client.put(
             path=self.url_change_password,
             data={},
             format='json',
