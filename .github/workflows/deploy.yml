@@ -1,0 +1,16 @@
+name: Deploy-Production
+on:
+  create:
+    tags:
+      - '*'
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+      - name: heroku push
+        run: git push -f https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/${{secrets.HEROKU_APP_NAME}}.git origin/main:main

@@ -1,6 +1,6 @@
 from rest_framework.test import APITestCase
 
-from ..customer.models import Customer
+from .models import User
 
 class UserTokenObtainAPIViewTestCase(APITestCase):
     def create_user(self):
@@ -21,9 +21,10 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
     def setUp(self):
         self.create_user()
         self.url_login = '/login/'
+        self.url_test_token = '/api/test_token/'
 
     def tearDown(self):
-        Customer.objects.all().delete()
+        User.objects.all().delete()
 
     def test_user_login(self):
         user_credentials = {
@@ -43,6 +44,8 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
             msg='Falha no login de usuário'
         )
 
+        self.auth_token = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
+
     def test_wrong_credentials_login(self):
         wrong_credentials = {
             'email': 'luis@teste',
@@ -55,8 +58,29 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
             format='json'
         )
 
-        self.assertEqual(
-            response.status_code,
-            401,
-            msg='Login com credenciais incorretas'
+        self.assertEqual(response.status_code, 401, msg='Login com credenciais corretas')
+
+    def test_token_validator(self):
+        self.test_user_login()
+
+        response = self.client.get(
+            self.url_test_token,
+            format='json',
+            **self.auth_token
         )
+
+        self.assertEqual(response.status_code, 200, msg='Token inválido')
+
+    def test_invalid_token_validator(self):
+        self.test_user_login()
+        
+        invalid_token = {'HTTP_AUTHORIZATION': 'Bearer invalid'}
+        
+        response = self.client.get(
+            self.url_test_token,
+            format='json',
+            **invalid_token
+        )
+
+        self.assertEqual(response.status_code, 401, msg='Token válido')
+        self.assertEqual(response.json()['detail'], 'Given token not valid for any token type', msg='Token válido')
