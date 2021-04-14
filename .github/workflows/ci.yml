@@ -22,4 +22,11 @@ jobs:
       - name: Create test environment
         run: docker-compose up -d --build
       - name: Run coverage tests
-        run: docker exec 20202-hortum_web_1 bash -c "coverage run manage.py test && coverage report -m && coverage erase"
+        run: docker exec 20202-hortum_web_1 bash -c "coverage run manage.py test && coverage report -m && coverage xml -o cov.xml"
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1.0.2
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ./src/cov.xml
+          flags: unittests
+          name: codecov-umbrella
