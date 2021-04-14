@@ -8,9 +8,9 @@
 <!-- Badges -->
 <!-- (TODO) Adicionar as Badges de DevOps -->
 <p align="center">
-	<a href="https://codecov.io/gh/fga-eps-mds/2020.2-Hortum">
-		<img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/fga-aps-mds/2020.2-Hortum/main?label=codecov">
-		</a>
+      	<a href="https://codecov.io/gh/fga-eps-mds/2020.2-Hortum">
+        	<img src="https://codecov.io/gh/fga-eps-mds/2020.2-Hortum/branch/main/graph/badge.svg?token=R7MI4CF8JV"/>
+      		</a>
 	<a href="https://github.com/fga-eps-mds/2020.2-Hortum/actions/workflows/deploy.yml">
 		<img alt="Deploy status" src="https://github.com/fga-eps-mds/2020.2-Hortum/actions/workflows/deploy.yml/badge.svg?style=flat">
 		</a>
