@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
@@ -21,5 +23,12 @@ jobs:
           flake8 --extend-ignore=E302,E101,E131,W191,W293,W292 --count --max-complexity=10 --max-line-length=226 --exclude=*.pyc,*migrations* --statistics src/
       - name: Create test environment
         run: docker-compose up -d --build
-      - name: Run tests
-        run: docker exec 20202-hortum_web_1 bash -c "python manage.py test -v 2"
+      - name: Run coverage tests
+        run: docker exec 20202-hortum_web_1 bash -c "coverage run manage.py test && coverage report -m && coverage xml -o cov.xml"
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1.0.2
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: ./src/cov.xml
+          flags: unittests
+          name: codecov-umbrella
