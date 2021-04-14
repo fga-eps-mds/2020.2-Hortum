@@ -9,10 +9,14 @@
 <!-- (TODO) Adicionar as Badges de DevOps -->
 <p align="center">
 	<a href="https://codecov.io/gh/fga-eps-mds/2020.2-Hortum">
-		<img alt="" src="https://codecov.io/gh/fga-eps-mds/2020.2-Hortum/branch/main/graph/badge.svg">
+		<img alt="Code coverage" src="https://img.shields.io/codecov/c/gh/fga-aps-mds/2020.2-Hortum/main?label=codecov">
+		</a>
+	<a href="https://github.com/fga-eps-mds/2020.2-Hortum/actions/workflows/deploy.yml">
+		<img alt="Deploy status" src="https://github.com/fga-eps-mds/2020.2-Hortum/actions/workflows/deploy.yml/badge.svg">
+		</a>
 	<a href="https://github.com/fga-eps-mds/2020.2-Hortum/issues?q=is%3Aissue+is%3Aclosed">
         	 <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed-raw/fga-eps-mds/2020.2-Hortum?style=flat-square">
-	</a>
+		</a>
 	<a href="https://github.com/fga-eps-mds/2020.2-Hortum/pulls?q=is%3Apr+is%3Aclosed">
 		<img alt="GitHub closed pull requests" src="https://img.shields.io/github/issues-pr-closed-raw/fga-eps-mds/2020.2-Hortum?style=flat-square">
         </a>
