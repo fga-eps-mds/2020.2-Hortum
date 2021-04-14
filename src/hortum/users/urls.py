@@ -2,6 +2,7 @@ from django.urls import path, include
 
 from ..productor.urls import routerRegister as productorRegister
 from ..customer.urls import routerRegister as customerRegister
+from . import viewsets
 
 urlpatterns = [
     path('customer/', include(customerRegister.urls)),
