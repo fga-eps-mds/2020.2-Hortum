@@ -5,6 +5,7 @@ from .models import Productor
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 from rest_framework import permissions
+from django.shortcuts import get_object_or_404
 
 from ..encode import decode_string
 
@@ -24,4 +25,5 @@ class ProductorRetrieveAPIView(GenericViewSet, mixins.RetrieveModelMixin):
 	
 	def get_object(self):
 		email = decode_string(self.kwargs['encoded_email'])
-		return Productor.objects.get(user__email=email)
+		prod = get_object_or_404(self.queryset.filter(user__email=email))
+		return prod
