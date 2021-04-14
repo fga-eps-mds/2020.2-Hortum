@@ -27,4 +27,3 @@ class ProductorListAPIView(GenericViewSet, mixins.ListModelMixin):
 			return Productor.objects.filter(user__username__icontains=self.kwargs['productorName']).order_by('user__username')
 		else:
 			return Productor.objects.order_by('user__username')
-
