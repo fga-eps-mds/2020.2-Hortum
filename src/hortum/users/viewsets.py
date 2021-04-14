@@ -52,15 +52,14 @@ class ChangePasswordView(generics.UpdateAPIView):
 
         if serializer.is_valid():
             if not self.object.check_password(serializer.data.get("old_password")):
-                return Response("Senha incorreta!")
+                return Response('Senha incorreta!', status=401)
             self.object.set_password(serializer.data.get("new_password"))
             self.object.save()
             response = 'Senha alterada!'
 
+            return Response('Senha alterada!', status=200)
 
-            return Response(response)
-
-        return Response(serializer.errors)
+        return Response('Campos vazios', status=400)
 
 class UpdateUserView(generics.UpdateAPIView):
     serializer_class = UpdateUserSerializer
@@ -79,13 +78,12 @@ class UpdateUserView(generics.UpdateAPIView):
         if serializer.is_valid():
             if not self.object.email == serializer.data.get("email"):
                 if self.queryset.filter(email=serializer.data.get("email")).exists():
-                    return Response("Email ja registrado!")
+                    return Response('Email ja registrado!', status=401)
                 self.object.email = serializer.data.get("email")
             
             self.object.username = serializer.data.get("username")
             self.object.save()
-            response = 'Dados alterados!'
 
-            return Response(response)
+            return Response('Dados alterados!', status=200)
             
-        return Response(serializer.errors)
+        return Response('Campos vazios', status=400)
