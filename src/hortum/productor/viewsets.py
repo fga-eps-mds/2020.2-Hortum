@@ -23,7 +23,7 @@ class ProductorListAPIView(GenericViewSet, mixins.ListModelMixin):
 	queryset = Productor.objects.all()
 
 	def get_queryset(self):
+		query = Productor.objects.all()
 		if 'productorName' in self.kwargs:
-			return Productor.objects.filter(user__username__icontains=self.kwargs['productorName']).order_by('user__username')
-		else:
-			return Productor.objects.order_by('user__username')
+			query = query.filter(user__username__icontains=self.kwargs['productorName'])
+		return query.order_by('user__username')
