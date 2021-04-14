@@ -23,11 +23,6 @@ def is_token_valid(request):
         'is_productor': user.is_productor
     })
 
-class UserListRetrieveAPIView(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin):
-    permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = serializer.UserSerializer
-    queryset = User.objects.all()
-
 class CustomTokenObtainPairView(TokenObtainPairView):
     '''
     EndPoint sobrescrito para obtenção do token
