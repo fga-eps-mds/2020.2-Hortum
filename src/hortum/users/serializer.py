@@ -16,13 +16,19 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data.update({'is_productor': self.user.is_productor})
         return data
 
-class ChangePasswordSerializer(serializers.Serializer):
-    """
-    Serializer para alterar endpoint da senha.
-    """
-    model = User
+class ChangePasswordSerializer(serializers.ModelSerializer):
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['old_password', 'new_password']
+
+    def validate_old_password(self, old_password):
+        if not self.context['user'].check_password(old_password):
+            raise serializers.ValidationError('Senha incorreta!')
+        return old_password
+
 
 class UpdateUserSerializer(serializers.Serializer):
     model = User
