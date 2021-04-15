@@ -35,7 +35,6 @@ class ChangePasswordView(GenericViewSet, mixins.UpdateModelMixin):
     """
     serializer_class = ChangePasswordSerializer
     permission_classes = (permissions.IsAuthenticated,)
-    lookup_field = 'username'
 
     def get_object(self):
         return User.objects.get(email=self.request.user)

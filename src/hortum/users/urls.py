@@ -1,12 +1,23 @@
 from django.urls import path, include
 
-from rest_framework import routers
+from rest_framework.routers import SimpleRouter, Route
 
 from ..productor.urls import routerRegister as productorRegister
 from ..customer.urls import routerRegister as customerRegister
 from . import viewsets
 
-router = routers.SimpleRouter(trailing_slash=False)
+class CustomUpdateUserRouter(SimpleRouter):
+    routes = [
+        Route(
+            url=r'^{prefix}/?$',
+            mapping={'patch': 'update'},
+            name='{basename}-update',
+            detail=False,
+            initkwargs={}
+        )
+    ]
+
+router = CustomUpdateUserRouter()
 router.register(r'change-password', viewsets.ChangePasswordView, basename='changePasswordUser')
 
 urlpatterns = [
