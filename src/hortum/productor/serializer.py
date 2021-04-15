@@ -30,6 +30,15 @@ class ProductorRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Productor
         fields = ['username', 'email', 'idPicture', 'announcements']
+        
+class ProductorListSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username')
+    email = serializers.EmailField(source='user.email')
+    idPicture = PictureSerializer()
+
+    class Meta:
+        model = Productor
+        fields = ['username', 'email', 'idPicture']
 
 class LocalizationSerializer(serializers.ModelSerializer):
     class Meta:

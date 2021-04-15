@@ -43,6 +43,11 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             "price": 10.0
         }
         self.url_announcement = '/announcement/create'
+    
+    def tearDown(self):
+        Announcement.objects.all().delete()
+        Productor.objects.all().delete()
+        User.objects.all().delete()
 
     def test_create_announcement(self):
         response = self.client.post(
@@ -171,6 +176,17 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         )
 
         self.assertEqual(response.status_code, 204, msg='Falha na deleção do anúncio')
+    
+    def test_delete_invalid_announcement(self):
+        url_delete_invalid = '/announcement/update/invalid'
+
+        response = self.client.delete(
+            path=url_delete_invalid,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 404, msg='Anúncio válido')
 
     def test_update_one_attr_announcement(self):
         new_data = {
@@ -201,6 +217,20 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         )
 
         self.assertEqual(response.status_code, 200, msg='Falha na alteração do anúncio')
+
+    def test_update_name_in_database_announcement(self):
+        new_data = {
+            "name": "Meio quilo de linguíça"
+        }
+
+        response = self.client.patch(
+            path=self.url_update_announ,
+            format='json',
+            data=new_data,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Nome não existente no banco')
 
 class AnnouncementsListAPIViewTestCase(APITestCase):
     def create_user(self):
@@ -317,3 +347,36 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200, msg='Falha na listagem do anúncio')
         self.assertEqual(len(response.data), 1, msg='Falha na quantidade de anúncios listados')
+    
+    def test_list_names_multiples_annoucement(self):
+        self.url_list_announ += '/Meio'
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Nenhum anúncio com o nome inserido')
+        self.assertEqual(len(response.data), 2, msg='Falha na quantidade de anúncios listados')
+
+    def test_list_names_one_announcement(self):
+        self.url_list_announ += '/Meio quilo de linguíça'
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Nenhum anúncio encontrado')
+        self.assertEqual(len(response.data), 1, msg='Falha na busca por anúncio')
+
+    def test_list_containing_name_announcement(self):
+        self.url_list_announ += '/quilo de'
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Nenhum anúncio encontrado')
+        self.assertEqual(len(response.data), 2, msg='Falaha na busca por anúncio')
