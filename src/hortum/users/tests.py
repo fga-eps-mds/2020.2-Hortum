@@ -113,7 +113,6 @@ class UpdateUserViewTestCase(APITestCase):
 	        format='json'
         )
 
-        self.auth_token = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
         self.creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
 
     def setUp(self):
@@ -245,7 +244,6 @@ class ChangePasswordViewTestCase(APITestCase):
 	        format='json'
         )
 
-        self.auth_token = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
         self.creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
 
     def setUp(self):
