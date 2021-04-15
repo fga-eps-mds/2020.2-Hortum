@@ -25,6 +25,7 @@ class ProductorRetrieveSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username')
     email = serializers.EmailField(source='user.email')
     announcements = AnnouncementListSerializer(many=True)
+    idPicture = idPicture = PictureSerializer(many=False, read_only=True)
 
     class Meta:
         model = Productor
