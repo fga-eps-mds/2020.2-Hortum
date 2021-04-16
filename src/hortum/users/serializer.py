@@ -31,15 +31,19 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
 
 class UpdateUserSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(required=True)
-    username = serializers.CharField(required=True)
+    username = serializers.CharField(required=False, write_only=True)
+    email = serializers.EmailField(required=False, write_only=True)
 
     class Meta:
         model = User
         fields = ['username', 'email']
 
+    def validate(self, data):
+        if len(data) == 0:
+            raise serializers.ValidationError('Campos Vazios!')
+        return data
+
     def validate_email(self, email):
-        if not self.context['user'].email == email:
-            if self.context['queryset'].filter(email=email).exists():
-                raise serializers.ValidationError('Email ja registrado!')
+        if self.context['queryset'].filter(email=email).exists():
+            raise serializers.ValidationError('Email ja registrado!')
         return email
