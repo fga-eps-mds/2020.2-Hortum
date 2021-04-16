@@ -54,6 +54,9 @@ class ChangePasswordView(GenericViewSet, mixins.UpdateModelMixin):
         return Response('Senha alterada com sucesso!', status=200)
 
 class UpdateUserView(GenericViewSet, mixins.UpdateModelMixin):
+    '''
+    EndPoint para trocar username e email
+    '''
     serializer_class = UpdateUserSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -68,13 +71,3 @@ class UpdateUserView(GenericViewSet, mixins.UpdateModelMixin):
         context = super(UpdateUserView, self).get_serializer_context()
         context.update({'user': self.get_object(), 'queryset': self.get_queryset()})
         return context
-
-    def update(self, request, *args, **kwargs):
-        instance = self.get_object()
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        instance.username = serializer.data.get('username')
-        instance.email = serializer.data.get('email')
-        instance.save()
-
-        return Response('Dados alterados!')
