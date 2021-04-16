@@ -6,7 +6,7 @@ from .models import User
 
 from .serializer import ChangePasswordSerializer, UpdateUserSerializer
 
-from rest_framework import permissions, generics, mixins
+from rest_framework import permissions, mixins
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -53,29 +53,28 @@ class ChangePasswordView(GenericViewSet, mixins.UpdateModelMixin):
 
         return Response('Senha alterada com sucesso!', status=200)
 
-class UpdateUserView(generics.UpdateAPIView):
+class UpdateUserView(GenericViewSet, mixins.UpdateModelMixin):
     serializer_class = UpdateUserSerializer
-    model = User
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = User.objects.all()
 
-    def get_object(self, queryset=None):
-        user = self.request.user
+    def get_object(self):
+        return User.objects.get(email=self.request.user)
+
+    def get_queryset(self):
+        user = User.objects.all()
         return user
 
+    def get_serializer_context(self):
+        context = super(UpdateUserView, self).get_serializer_context()
+        context.update({'user': self.get_object(), 'queryset': self.get_queryset()})
+        return context
+
     def update(self, request, *args, **kwargs):
-        self.object = self.get_object()
+        instance = self.get_object()
         serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        instance.username = serializer.data.get('username')
+        instance.email = serializer.data.get('email')
+        instance.save()
 
-        if serializer.is_valid():
-            if not self.object.email == serializer.data.get("email"):
-                if self.queryset.filter(email=serializer.data.get("email")).exists():
-                    return Response('Email ja registrado!', status=401)
-                self.object.email = serializer.data.get("email")
-            
-            self.object.username = serializer.data.get("username")
-            self.object.save()
-
-            return Response('Dados alterados!', status=200)
-            
-        return Response('Campos vazios', status=400)
+        return Response('Dados alterados!')

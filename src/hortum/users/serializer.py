@@ -30,7 +30,16 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         return old_password
 
 
-class UpdateUserSerializer(serializers.Serializer):
-    model = User
+class UpdateUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
     username = serializers.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+    def validate_email(self, email):
+        if not self.context['user'].email == email:
+            if self.context['queryset'].filter(email=email).exists():
+                raise serializers.ValidationError('Email ja registrado!')
+        return email

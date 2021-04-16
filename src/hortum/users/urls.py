@@ -17,11 +17,12 @@ class CustomUpdateUserRouter(SimpleRouter):
         )
     ]
 
+
 router = CustomUpdateUserRouter()
 router.register(r'change-password', viewsets.ChangePasswordView, basename='changePasswordUser')
+router.register(r'update', viewsets.UpdateUserView, basename='updateUser')
 
 urlpatterns = [
     path('customer/', include(customerRegister.urls)),
     path('productor/', include(productorRegister.urls)),
-    path('update/', viewsets.UpdateUserView.as_view(), name='update-user'),
 ] + router.urls

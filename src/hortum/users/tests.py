@@ -141,14 +141,14 @@ class UpdateUserViewTestCase(APITestCase):
             format='json'
         )
 
-        response = self.client.put(
+        response = self.client.patch(
             path=self.url_update_user,
             data=user_username_email,
             format='json',
             **self.creds
         )
         
-        self.assertEqual(response.status_code, 401, msg='Email nao existente')
+        self.assertEqual(response.status_code, 400, msg='Email nao existente')
 
     def test_update_user(self):
         user_username_email = {
@@ -156,7 +156,7 @@ class UpdateUserViewTestCase(APITestCase):
             "email": "luis2@productor.com"
         }
 
-        response = self.client.put(
+        response = self.client.patch(
             path=self.url_update_user,
             data=user_username_email,
             format='json',
@@ -166,7 +166,7 @@ class UpdateUserViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 200, msg='Usuario nao atualizado')
     
     def test_empty_update_user(self):
-        response = self.client.put(
+        response = self.client.patch(
             path=self.url_update_user,
             data={},
             format='json',
@@ -258,14 +258,14 @@ class ChangePasswordViewTestCase(APITestCase):
             "new_password": "gfdfgdgffg"
         }
 
-        response = self.client.put(
+        response = self.client.patch(
             path=self.url_change_password,
             data=user_password,
             format='json',
             **self.creds
         )
         
-        self.assertEqual(response.status_code, 401, msg='Senha correta inserida')
+        self.assertEqual(response.status_code, 400, msg='Senha correta inserida')
 
     def test_change_password(self):
         user_password = {
@@ -273,7 +273,7 @@ class ChangePasswordViewTestCase(APITestCase):
             "new_password": "nova senha"
         }
 
-        response = self.client.put(
+        response = self.client.patch(
             path=self.url_change_password,
             data=user_password,
             format='json',
@@ -321,7 +321,7 @@ class ChangePasswordViewTestCase(APITestCase):
         )
 
     def test_empty_password_fields(self):
-        response = self.client.put(
+        response = self.client.patch(
             path=self.url_change_password,
             data={},
             format='json',
