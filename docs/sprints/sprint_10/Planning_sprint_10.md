@@ -1,12 +1,16 @@
 # Sprint 10 - Planning
 
 ## Visão Geral
-- Inicio: 16/04/2021
-- Fim: 22/04/2021
+- Inicio: 15/04/2021
+- Fim: 21/04/2021
 - Duração: 7 dias
  
 ## Objetivos
 A Sprint 10 tem os seguintes objetivos:
+
+- Desenvolvimento do produto (user storys do backlog)
+- Criação de base no frontend com suporte a imagens e a localizações
+- Melhorias no backend
 
 
 ## Sprint Backlog
