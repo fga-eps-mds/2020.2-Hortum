@@ -7,14 +7,14 @@ from ..users.models import User
 
 from ..users.serializer import UserSerializer
 from ..picture.serializer import PictureSerializer
-from ..announcement.serializer import AnnouncementCreateSerializer
-from ..productor.serializer import ProductorSerializer
+from ..announcement.serializer import AnnouncementCreateSerializer, AnnouncementListSerializer
+from ..productor.serializer import ProductorListSerializer
 
 class CustomerSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
     idPicture = PictureSerializer(read_only=True)
-    idAnunFav = AnnouncementCreateSerializer(many=True, read_only=True)
-    idProdFav = ProductorSerializer(many=True, read_only=True)
+    idAnunFav = AnnouncementListSerializer(many=True, read_only=True)
+    idProdFav = ProductorListSerializer(many=True, read_only=True)
 
     class Meta:
         model = Customer
@@ -42,3 +42,17 @@ class CustomerAddAnnouncementSerializer(serializers.ModelSerializer):
         if not Announcement.objects.filter(name=name).exists():
             raise serializers.ValidationError('Nome de anúncio inexistente')
         return name
+
+class CustomerFavoritesAnnouncementsSerializer(serializers.ModelSerializer):
+    idAnunFav = AnnouncementListSerializer(many=True, read_only=True)
+
+    class Meta:
+       model = Customer
+       fields = ['idAnunFav'] 
+
+class CustomerFavoritesProductorsSerializer(serializers.ModelSerializer):
+    idProdFav = ProductorListSerializer(many=True, read_only=True)
+
+    class Meta:
+       model = Customer
+       fields = ['idProdFav'] 

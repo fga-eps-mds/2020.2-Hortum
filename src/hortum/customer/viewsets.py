@@ -8,6 +8,7 @@ from ..productor.models import Productor
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins, permissions
 from rest_framework.response import Response
+from rest_framework.exceptions import ParseError
 
 class CustomerRegistrationAPIView (GenericViewSet, mixins.CreateModelMixin, mixins.ListModelMixin):
 	'''
@@ -17,7 +18,26 @@ class CustomerRegistrationAPIView (GenericViewSet, mixins.CreateModelMixin, mixi
 	serializer_class = serializer.CustomerSerializer
 	queryset = Customer.objects.all()
 
-class AddFavoritesAnnouncementsAPIView (GenericViewSet, mixins.UpdateModelMixin):
+class CustomerListFavoritesAPIView (GenericViewSet, mixins.RetrieveModelMixin):
+	'''
+	EndPoint para listagem dos favoritos
+	'''
+	permission_classes = (permissions.IsAuthenticated,)
+	lookup_field = 'favorites'
+
+	def get_object(self):
+		return Customer.objects.get(user__email=self.request.user)
+
+	def get_serializer_class(self):
+		favorites = self.kwargs['favorites']
+		if favorites == 'announcements':
+			return serializer.CustomerFavoritesAnnouncementsSerializer
+		elif favorites == 'productors':
+			return serializer.CustomerFavoritesProductorsSerializer
+		raise ParseError({'Favorites': 'Atributo inválido!'})
+
+
+class FavoritesAnnouncementsAPIView (GenericViewSet, mixins.UpdateModelMixin):
 	'''
 	EndPoint para adição/remoção de anúncios da lista de favoritos
 	'''

@@ -7,7 +7,10 @@ routerRegister = SimpleRouter()
 routerRegister.register(r'', viewsets.CustomerRegistrationAPIView, basename='customer')
 
 router = CustomUpdateRouter()
-router.register(r'fav-announcement', viewsets.AddFavoritesAnnouncementsAPIView, basename='favAnnouncement')
+router.register(r'fav-announcement', viewsets.FavoritesAnnouncementsAPIView, basename='favAnnouncement')
+
+listRouter = SimpleRouter()
+listRouter.register(r'favorites', viewsets.CustomerListFavoritesAPIView, basename='listFavAnnouncements')
 
 urlpatterns = [
-] + router.urls
+] + router.urls + listRouter.urls
