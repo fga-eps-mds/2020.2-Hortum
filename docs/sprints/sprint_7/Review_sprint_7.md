@@ -6,7 +6,7 @@
 - Duração: 7 dias
  
 ## Conclusões
-| Issue | Descrição | Responsáveis | Pontuação
+| Issue | Descrição | Responsáveis | Status
 |--|--|--|--|
 |#90|[US04] - Sair da Conta|Carlos|Concluida
 |#127|Revisar documentação do repositório|Todos da equipe|Concluida
