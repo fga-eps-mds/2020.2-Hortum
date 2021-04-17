@@ -47,4 +47,4 @@ class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
         queryset = Announcement.objects.filter(inventory=True)
         if self.kwargs:
             queryset = queryset.filter(name__icontains=self.kwargs['announcementName'])
-        return queryset.order_by('name')
+        return queryset
