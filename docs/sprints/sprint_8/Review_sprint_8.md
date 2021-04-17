@@ -6,7 +6,7 @@
 - Duração: 7 dias
  
 ## Conclusões
-| Issue | Descrição | Responsáveis | Pontuação
+| Issue | Descrição | Responsáveis | Status
 |--|--|--|--|
 |#94|[US08] - Editar Anúncio|João Pedro, Victor Lima e Brenno|Concluida
 |#95|[US09] - Excluir Anúncio|João Pedro e Brenno|Estendida
