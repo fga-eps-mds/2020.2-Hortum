@@ -380,3 +380,12 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200, msg='Nenhum anúncio encontrado')
         self.assertEqual(len(response.data), 2, msg='Falaha na busca por anúncio')
+
+    def test_announcement_order(self):
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        most_recent = response.data[0]
+        self.assertEqual(most_recent['description'], 'Defumados', msg='Ordem de listagem incorreta')
