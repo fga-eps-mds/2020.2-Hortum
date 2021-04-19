@@ -7,7 +7,7 @@ from ..users.models import User
 
 from ..users.serializer import UserSerializer
 from ..picture.serializer import PictureSerializer
-from ..announcement.serializer import AnnouncementCreateSerializer, AnnouncementListSerializer
+from ..announcement.serializer import AnnouncementListSerializer
 from ..productor.serializer import ProductorListSerializer
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -47,12 +47,12 @@ class CustomerFavoritesAnnouncementsSerializer(serializers.ModelSerializer):
     idAnunFav = AnnouncementListSerializer(many=True, read_only=True)
 
     class Meta:
-       model = Customer
-       fields = ['idAnunFav'] 
+        model = Customer
+        fields = ['idAnunFav']
 
 class CustomerFavoritesProductorsSerializer(serializers.ModelSerializer):
     idProdFav = ProductorListSerializer(many=True, read_only=True)
 
     class Meta:
-       model = Customer
-       fields = ['idProdFav'] 
+        model = Customer
+        fields = ['idProdFav']

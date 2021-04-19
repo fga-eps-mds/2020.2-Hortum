@@ -1,5 +1,4 @@
 from . import serializer
-from ..announcement.serializer import AnnouncementListSerializer
 
 from .models import Customer
 from ..announcement.models import Announcement

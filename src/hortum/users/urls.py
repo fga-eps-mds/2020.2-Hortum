@@ -1,7 +1,5 @@
 from django.urls import path, include
 
-from rest_framework.routers import SimpleRouter, Route
-
 from ..productor.urls import routerRegister as productorRegister
 from ..customer.urls import routerRegister as customerRegister
 from ..routers import CustomUpdateRouter
