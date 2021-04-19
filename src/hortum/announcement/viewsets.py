@@ -7,6 +7,8 @@ from ..users.models import User
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins, permissions
 
+from ..encode import decode_string
+
 class AnnouncementRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
     '''
     EndPoint para registro de anúncio
@@ -48,3 +50,12 @@ class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
         if self.kwargs:
             queryset = queryset.filter(name__icontains=self.kwargs['announcementName'])
         return queryset.order_by('name')
+
+class ProductorRetrieveAPIView(GenericViewSet, mixins.ListModelMixin):
+	permission_classes = (permissions.IsAuthenticated,)
+	serializer_class = serializer.AnnouncementListSerializer
+	
+	def get_queryset(self):
+		email = decode_string(self.kwargs['encoded_email'])
+		query = Announcement.objects.all().filter(idProductor__user__email=email)
+		return query if email == self.request.user.get_username() else query.filter(inventory=True)
