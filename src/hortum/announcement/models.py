@@ -242,3 +242,7 @@ class Announcement(models.Model):
     description = models.CharField(max_length=200)
     price = models.FloatField(default=0.0)
     inventory = models.BooleanField(default=True)
+    publicationDate = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-publicationDate']
