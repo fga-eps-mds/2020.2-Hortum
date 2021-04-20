@@ -379,7 +379,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         )
 
         self.assertEqual(response.status_code, 200, msg='Nenhum anúncio encontrado')
-        self.assertEqual(len(response.data), 2, msg='Falaha na busca por anúncio')
+        self.assertEqual(len(response.data), 2, msg='Falha na busca por anúncio')
 
     def test_announcement_order(self):
         response = self.client.get(
