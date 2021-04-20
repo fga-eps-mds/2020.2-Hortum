@@ -15,7 +15,9 @@ class ReclamationCreateSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         if Reclamation.objects.filter(emailCustomer=self.context['customer']).exists():
-            raise serializers.ValidationError({'emailProductor': 'Consumidor já possui reclamação com este produtor.'})
+            productor = Productor.objects.get(user__email=data['emailProductor'])
+            if Reclamation.objects.filter(emailCustomer=self.context['customer']).filter(idProductor=productor).exists():
+                raise serializers.ValidationError({'emailProductor': 'Consumidor já possui reclamação com este produtor.'})
         return data
 
     def create(self, validated_data):
@@ -23,3 +25,10 @@ class ReclamationCreateSerializer(serializers.ModelSerializer):
         print(type(self.context['customer']))
         reclamation = Reclamation.objects.create(idProductor=productor_pk, **validated_data, emailCustomer=self.context['customer'])
         return reclamation
+
+class ReclamationListSerializer(serializers.ModelSerializer):
+    idPicture = PictureSerializer()
+    
+    class Meta:
+        model = Reclamation
+        fields = ['author', 'description', 'idPicture']
