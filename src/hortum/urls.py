@@ -12,5 +12,6 @@ urlpatterns = [
     path('signup/', include('hortum.users.urls')),
     path('announcement/', include('hortum.announcement.urls')),
     path('productor/', include('hortum.productor.urls')),
+    path('customer/', include('hortum.customer.urls')),
     path('users/', include('hortum.users.urls')),
 ]
