@@ -9,6 +9,8 @@ from rest_framework import mixins, permissions
 from rest_framework.response import Response
 from rest_framework.exceptions import ParseError
 
+from django.db.models import F
+
 class CustomerRegistrationAPIView (GenericViewSet, mixins.CreateModelMixin, mixins.ListModelMixin):
 	'''
 	EndPoint para registro de User's
@@ -51,6 +53,12 @@ class FavoritesAnnouncementsAPIView (GenericViewSet, mixins.UpdateModelMixin):
 		serializer = self.get_serializer(data=request.data)
 		serializer.is_valid(raise_exception=True)
 		anun = Announcement.objects.get(idProductor=Productor.objects.get(user__email=serializer.data.get('email')), name=serializer.data.get('announcementName'))
-		instance.idAnunFav.remove(anun) if instance.idAnunFav.filter(pk=anun.pk).exists() else instance.idAnunFav.add(anun)
+		if instance.idAnunFav.filter(pk=anun.pk).exists():
+			instance.idAnunFav.remove(anun)
+			anun.likes = F('likes') - 1 if F('likes') != 0 else 0
+		else:
+			instance.idAnunFav.add(anun)
+			anun.likes = F('likes') + 1
 
-		return Response('Annúncio atualizado com sucesso', status=200)
+		anun.save()
+		return Response('Anúncio atualizado com sucesso', status=200)
