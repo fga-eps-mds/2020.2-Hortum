@@ -13,12 +13,10 @@ class ReclamationCreateSerializer(serializers.ModelSerializer):
         model = Reclamation
         fields = ['author', 'description', 'emailProductor', 'idPicture']
 
-    def validate(self, data):
-        if Reclamation.objects.filter(emailCustomer=self.context['customer']).exists():
-            productor = Productor.objects.get(user__email=data['emailProductor'])
-            if Reclamation.objects.filter(emailCustomer=self.context['customer']).filter(idProductor=productor).exists():
-                raise serializers.ValidationError({'emailProductor': 'Consumidor já possui reclamação com este produtor.'})
-        return data
+    def validate_emailProductor(self, emailProductor):
+        if Reclamation.objects.filter(emailCustomer=self.context['customer'], idProductor__user__email=emailProductor).exists():
+            raise serializers.ValidationError('Consumidor já possui reclamação com este produtor.')
+        return emailProductor
 
     def create(self, validated_data):
         productor_pk = Productor.objects.get(user__email=validated_data.pop('emailProductor'))
@@ -32,3 +30,15 @@ class ReclamationListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reclamation
         fields = ['author', 'description', 'idPicture']
+
+class ReclamationDeleteSerializer(serializers.ModelSerializer):
+    emailProductor = serializers.EmailField(required=True, write_only=True)
+
+    class Meta:
+        model = Reclamation
+        fields = ['emailProductor']
+
+    def validate_emailProductor(self, emailProductor):
+        if not self.context['queryset'].filter(idProductor__user__email=emailProductor).exists():
+            raise serializers.ValidationError({'emailProductor': 'Nenhuma reclamação deste customer com este productor'})
+        return emailProductor
