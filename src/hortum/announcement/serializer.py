@@ -35,14 +35,6 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
 
 class AnnouncementListSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True, source='idProductor.user.username')
-    idPictureProductor = PictureSerializer(many=False, read_only=True, source='idProductor.idPicture')
-
-    class Meta:
-        model = Announcement
-        fields = ['username', 'idPictureProductor', 'name', 'type_of_product', 'description', 'price', 'idPicture']
-
-class AnnouncementFavSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(required=True, source='idProductor.user.username')
     email = serializers.EmailField(required=True, source='idProductor.user.email')
     idPictureProductor = PictureSerializer(many=False, read_only=True, source='idProductor.idPicture')
 
