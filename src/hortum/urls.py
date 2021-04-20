@@ -13,4 +13,5 @@ urlpatterns = [
     path('announcement/', include('hortum.announcement.urls')),
     path('productor/', include('hortum.productor.urls')),
     path('users/', include('hortum.users.urls')),
+    path('reclamation/', include('hortum.reclamation.urls')),
 ]
