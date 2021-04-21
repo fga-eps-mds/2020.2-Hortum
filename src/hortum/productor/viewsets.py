@@ -1,11 +1,10 @@
-from .serializer import ProductorSerializer, ProductorListSerializer, ProductorRetrieveSerializer
+from .serializer import ProductorSerializer, ProductorListSerializer
 
 from .models import Productor
 
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 from rest_framework import permissions
-from django.shortcuts import get_object_or_404
 
 class ProductorRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
 	'''
