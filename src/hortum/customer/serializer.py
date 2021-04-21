@@ -50,6 +50,18 @@ class CustomerFavoritesAnnouncementsSerializer(serializers.ModelSerializer):
         model = Customer
         fields = ['idAnunFav']
 
+class CustomerAddProductorSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required=True)
+
+    class Meta:
+        model = Customer
+        fields = ['email']
+
+    def validate_email(self, email):
+        if not Productor.objects.filter(user__email=email).exists():
+            raise serializers.ValidationError('Email de produtor inexistente')
+        return email
+
 class CustomerFavoritesProductorsSerializer(serializers.ModelSerializer):
     idProdFav = ProductorListSerializer(many=True, read_only=True)
 
