@@ -8,4 +8,4 @@ class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     idPicture = models.OneToOneField(Picture, on_delete=models.CASCADE, null=True)
     idAnunFav = models.ManyToManyField(Announcement)
-    idProdFav = models.ForeignKey(Productor, on_delete=models.CASCADE, null=True)
+    idProdFav = models.ManyToManyField(Productor)
