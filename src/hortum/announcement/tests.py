@@ -1,8 +1,11 @@
 from rest_framework.test import APITestCase
 
 from ..productor.models import Productor
+from ..customer.models import Customer
 from ..users.models import User
 from .models import Announcement
+
+from ..encode import encode_string
 
 class AnnouncementCreateAPIViewTestCase(APITestCase):
     def create_productor(self):
@@ -389,3 +392,133 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
 
         most_recent = response.data[0]
         self.assertEqual(most_recent['description'], 'Defumados', msg='Ordem de listagem incorreta')
+
+class AnnouncementRetrieveAPIViewTestCase(APITestCase):
+    def create_productor(self):
+        self.productor_data = {
+	        "username": "Mário",
+            "email": "mario@teste.com",
+	        "password": "teste"
+        }
+
+        url_signup = '/signup/productor/'
+
+        self.client.post(
+            url_signup,
+	        {'user': self.productor_data},
+	        format='json'
+	    )
+
+    def create_tokens(self, user):
+        user_cred = {'email': user['email'], 'password': user['password']}
+
+        url_token = '/login/'
+
+        response = self.client.post(
+            url_token,
+	        user_cred,
+	        format='json'
+        )
+
+        self.creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
+
+    def create_customer(self):
+        self.customer_data = {
+	        "username": "João Pedro",
+            "email": "joao@teste.com",
+	        "password": "teste"
+        }
+
+        url_signup = '/signup/customer/'
+
+        self.client.post(
+            url_signup,
+	        {'user': self.customer_data},
+	        format='json'
+	    )
+
+    def create_announcements(self):
+        self.announcement_one = {
+            "name": "Meio quilo de linguíça",
+            "type_of_product": "Linguiça artesanal e defumados",
+            "description": "Linquiça",
+            "price": 35.50
+        }
+    
+        self.announcement_two = {
+            "name": "Meio quilo de defumado",
+            "type_of_product": "Linguiça artesanal e defumados",
+            "description": "Defumados",
+            "price": 10.15,
+            "inventory": False
+        }
+
+        url_create_announ = '/announcement/create'
+
+        response = self.client.post(
+            path=url_create_announ,
+	        data=self.announcement_one,
+	        format='json',
+	        **self.creds
+        )
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação do anúncio')
+
+        response = self.client.post(
+            path=url_create_announ,
+	        data=self.announcement_two,
+	        format='json',
+	        **self.creds
+        )
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação do anúncio')
+
+    def setUp(self):
+        self.create_productor()
+        self.create_tokens(self.productor_data)
+        self.create_announcements()
+        self.create_customer()
+
+        self.url_retrieve = '/announcement/retrieve/'
+
+    def tearDown(self):
+        Productor.objects.all().delete()
+        Customer.objects.all().delete()
+        Announcement.objects.all().delete()
+
+    def test_retrieve_productor(self):
+        email_query = 'mario@teste.com'
+        url_retrieve_productor = self.url_retrieve + encode_string(email_query)
+
+        response = self.client.get(
+            url_retrieve_productor,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na obtenção de produtor específico')
+        self.assertEqual(len(response.data), 2, msg='Dados de produtor estão incoerentes')
+
+    def test_invalid_email(self):
+        email_query = 'luigi@teste.com'
+        url_retrieve_productor = self.url_retrieve + encode_string(email_query)
+
+        response = self.client.get(
+            url_retrieve_productor,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Retornando produtor com email inválido')
+
+    def test_retrieve_productor_from_customer(self):
+        self.create_tokens(self.customer_data)
+
+        email_query = 'mario@teste.com'
+        url_retrieve_productor = self.url_retrieve + encode_string(email_query)
+
+        response = self.client.get(
+            url_retrieve_productor,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na obtenção de produtor específico')
+        self.assertEqual(len(response.data), 1, msg='Dados de produtor estão incoerentes')
