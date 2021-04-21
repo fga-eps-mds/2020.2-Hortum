@@ -20,7 +20,6 @@ class ReclamationCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         productor_pk = Productor.objects.get(user__email=validated_data.pop('emailProductor'))
-        print(type(self.context['customer']))
         reclamation = Reclamation.objects.create(idProductor=productor_pk, **validated_data, emailCustomer=self.context['customer'])
         return reclamation
 

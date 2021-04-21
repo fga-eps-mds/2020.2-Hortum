@@ -2,14 +2,10 @@ from .serializer import ReclamationListSerializer, ReclamationCreateSerializer, 
 
 from .models import Reclamation
 from ..productor.models import Productor
-from ..customer.models import Customer
-from ..users.models import User
 
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins, permissions
 from rest_framework.response import Response
-
-from django.shortcuts import get_object_or_404
 
 from ..encode import decode_string
 
@@ -62,4 +58,3 @@ class ReclamationDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
         serializer.is_valid(raise_exception=True)
         self.perform_destroy(instance.filter(idProductor__user__email=request.data['emailProductor']))
         return Response('Deletado com sucesso')
-
