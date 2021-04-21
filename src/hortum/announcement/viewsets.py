@@ -51,7 +51,7 @@ class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
             queryset = queryset.filter(name__icontains=self.kwargs['announcementName'])
         return queryset
 
-class ProductorRetrieveAPIView(GenericViewSet, mixins.ListModelMixin):
+class AnnouncementProductorListAPIView(GenericViewSet, mixins.ListModelMixin):
 	permission_classes = (permissions.IsAuthenticated,)
 	serializer_class = serializer.AnnouncementListSerializer
 	
