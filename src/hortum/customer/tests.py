@@ -140,6 +140,7 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
         self.create_tokens(self.customer_data)
 
         self.announcement_fav_url = '/customer/fav-announcement'
+        self.productor_fav_url = '/customer/fav-productor'
         self.list_fav_announcements_url = '/customer/favorites/announcements'
         self.list_fav_productors_url = '/customer/favorites/productors'
 
@@ -191,7 +192,7 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 200, msg='Falha na listagem de anúncios favoritos')
         self.assertEqual(len(response.data['idAnunFav']), 0, msg='Falha na quantidade de anúncios listados')
 
-    def test_favorite_invalid_productor_email(self):
+    def test_favorite_announ_invalid_productor_email(self):
         fav_announ = {
             'email': 'invalid@exemplo.com',
             'announcementName': self.announcement_one['name']
@@ -256,17 +257,94 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200, msg='Falha na listagem de anúncios favoritos')
         self.assertEqual(len(response.data['idAnunFav']), 0, msg='Falha na quantidade de anúncios lsitados')
+    
+    def test_favorite_valid_productor(self):
+        fav_prod = {
+            'email': self.productor_data['email']
+        }
 
-    # TODO: Ajustar quando a viewset de favoritar produtores estiver pronta
-    # def test_list_favorites_productors(self):
-    #     response = self.client.get(
-    #         path=self.list_fav_productors_url,
-    #         format='json',
-    #         **self.creds
-    #     )
+        response = self.client.patch(
+            path=self.productor_fav_url,
+            data=fav_prod,
+            format='json',
+            **self.creds
+        )
 
-    #     self.assertEqual(response.status_code, 200, msg='Falha na listagem de produtores favoritos')
-    #     self.assertEqual(len(response.data['idProdFav']), 0, msg='Falha na quantidade de produtores lsitados')
+        self.assertEqual(response.status_code, 200, msg='Falha no registro do favorito')
+
+        response = self.client.get(
+            path=self.list_fav_productors_url,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na listagem de produtores favoritos')
+        self.assertEqual(len(response.data['idProdFav']), 1, msg='Falha na quantidade de produtores listados')
+
+    def test_favorite_invalid_productor(self):
+        invalid_fav_prod = {
+            'email': 'thomas@teste.com'
+        }
+
+        response = self.client.patch(
+            path=self.productor_fav_url,
+            data=invalid_fav_prod,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Registrado favorito com email invalido')
+
+        response = self.client.get(
+            path=self.list_fav_productors_url,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na listagem de produtores favoritos')
+        self.assertEqual(len(response.data['idProdFav']), 0, msg='Falha na quantidade de produtores listados')
+
+    def test_unfavorite_productor(self):
+        fav_prod = {
+            'email': self.productor_data['email'],
+        }
+
+        response = self.client.patch(
+            path=self.productor_fav_url,
+            format='json',
+            data=fav_prod,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha no registro do favorito')
+
+        response = self.client.patch(
+            path=self.productor_fav_url,
+            format='json',
+            data=fav_prod,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na remoção de favorito')
+
+        response = self.client.get(
+            path=self.list_fav_productors_url,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na listagem de produtores favoritos')
+        self.assertEqual(len(response.data['idProdFav']), 0, msg='Falha na quantidade de produtores listados')
+
+    def test_list_favorites_productors(self):
+        response = self.client.get(
+            path=self.list_fav_productors_url,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na listagem de produtores favoritos')
+        self.assertEqual(len(response.data['idProdFav']), 0, msg='Falha na quantidade de produtores lsitados')
 
     def test_list_invalid_favorites_category(self):
         invalid_url = '/customer/favorites/invalid'

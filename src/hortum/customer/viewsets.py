@@ -62,3 +62,27 @@ class FavoritesAnnouncementsAPIView (GenericViewSet, mixins.UpdateModelMixin):
 
 		anun.save()
 		return Response('Anúncio atualizado com sucesso', status=200)
+
+class FavoriteProductorsAPIView(GenericViewSet, mixins.UpdateModelMixin):
+	'''
+	EndPoint para adição/remoção de produtores na lista de favoritos
+	'''
+	permission_classes = (permissions.IsAuthenticated,)
+	serializer_class = serializer.CustomerAddProductorSerializer
+
+	def get_object(self):
+		return Customer.objects.get(user__email=self.request.user)
+
+	def update(self, request, *args, **kwargs):
+		instance = self.get_object()
+		serializer = self.get_serializer(data=request.data)
+		serializer.is_valid(raise_exception=True)
+		productor = Productor.objects.get(user__email=serializer.data.get('email'))
+	
+		if instance.idProdFav.filter(pk=productor.pk).exists():
+			instance.idProdFav.remove(productor)
+		else:
+			instance.idProdFav.add(productor)
+
+		productor.save()
+		return Response('Produtores favoritos atualizados com sucesso')
