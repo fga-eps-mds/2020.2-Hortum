@@ -11,7 +11,7 @@
     <a href="https://github.com/fga-eps-mds/2020.2-Hortum/actions/workflows/deploy.yml">
 		<img alt="Deploy status" src="https://github.com/fga-eps-mds/2020.2-Hortum/actions/workflows/deploy.yml/badge.svg?style=flat">
 		</a>
-	<a href="https://codeclimate.com/github/fga-eps-mds/2020.2-Hortum/maintainability%22%3E">
+	<a href="https://codeclimate.com/github/fga-eps-mds/2020.2-Hortum/maintainability">
 		<img src="https://api.codeclimate.com/v1/badges/2f0b4388e4d6fc55c27f/maintainability"/>
 		</a>
     <a href="https://codecov.io/gh/fga-eps-mds/2020.2-Hortum">
