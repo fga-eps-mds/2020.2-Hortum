@@ -6,6 +6,7 @@ from ..productor.models import Productor
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins, permissions
 from rest_framework.response import Response
+from rest_framework.exceptions import ParseError
 
 from ..encode import decode_string
 
@@ -31,7 +32,9 @@ class ReclamationListAPIView(GenericViewSet, mixins.ListModelMixin):
     
     def get_queryset(self):
         emailProductor = decode_string(self.kwargs['emailProductor'])
-        queryset = Reclamation.objects.filter(idProductor=Productor.objects.get(user__email=emailProductor))
+        if not Productor.objects.filter(user__email=emailProductor).exists():
+            raise ParseError({'emailProductor': 'Email inexistente de produtor'})
+        queryset = Reclamation.objects.filter(idProductor__user__email=emailProductor)
         return queryset.order_by('author')
 
 class ReclamationDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):

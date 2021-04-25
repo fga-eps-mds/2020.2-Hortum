@@ -15,12 +15,14 @@ class ReclamationRegistrationAPIViewTestCase(APITestCase):
 
         url_signup = '/signup/customer/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.user_data},
 	        format='json'
 	    )
     
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
+
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
 
@@ -32,13 +34,9 @@ class ReclamationRegistrationAPIViewTestCase(APITestCase):
 	        format='json'
         )
 
+        self.assertEqual(response.status_code, 200, msg='Credenciais inválidas')
+
         self.creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
-    
-    def setUp(self):
-        self.create_user()
-        self.create_tokens()
-        self.url_login = '/login/'
-        self.url_register_reclamation = '/reclamation/create/'
 
     def register_productor(self):
         productor_data = {
@@ -49,15 +47,22 @@ class ReclamationRegistrationAPIViewTestCase(APITestCase):
 
         url_signup = '/signup/productor/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': productor_data},
 	        format='json'
 	    )
 
-    def test_register_reclamation(self):
+        self.assertEqual(response.status_code, 201, msg='Falha no signup de productor')
+    
+    def setUp(self):
+        self.create_user()
+        self.create_tokens()
         self.register_productor()
+        self.url_login = '/login/'
+        self.url_register_reclamation = '/reclamation/create/'
 
+    def test_register_reclamation(self):
         reclamation_data = {
             'author': "Jose",
             'description': "produtor do bom",
@@ -74,19 +79,20 @@ class ReclamationRegistrationAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 201, msg="Falha ao registrar reclamação")
 
     def test_register_reclamation_again(self):
-        self.register_productor()
         reclamation_data = {
             'author': "Jose",
             'description': "produtor do perfeito",
             'emailProductor': "productor@teste.com"
         }
 
-        self.client.post(
+        response = self.client.post(
             path=self.url_register_reclamation,
             data=reclamation_data,
             format='json',
             **self.creds
         )
+
+        self.assertEqual(response.status_code, 201, msg='Falha no registro de reclamação')
 
         response = self.client.post(
             path=self.url_register_reclamation,
@@ -98,8 +104,6 @@ class ReclamationRegistrationAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 400, msg="Registro de mais de uma reclamação realizada com sucesso")
 
     def test_empty_fields(self):
-        self.register_productor()
-        
         response = self.client.post(
             path=self.url_register_reclamation,
             data={},
@@ -125,11 +129,13 @@ class ReclamationListAPIViewTestCase(APITestCase):
 
         url_signup = '/signup/customer/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
     
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
@@ -142,14 +148,9 @@ class ReclamationListAPIViewTestCase(APITestCase):
 	        format='json'
         )
 
+        self.assertEqual(response.status_code, 200, msg='Credenciais inválidas')
+
         self.creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
-    
-    def setUp(self):
-        self.create_user()
-        self.create_tokens()
-        self.url_login = '/login/'
-        self.url_register_reclamation = '/reclamation/create/'
-        self.url_list_reclamations = '/reclamation/list/'
 
     def register_productor(self):
         productor_data = {
@@ -160,32 +161,41 @@ class ReclamationListAPIViewTestCase(APITestCase):
 
         url_signup = '/signup/productor/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': productor_data},
 	        format='json'
 	    )
 
-    def test_list_reclamation(self):
+        self.assertEqual(response.status_code, 201, msg='Falha no signup de productor')
+    
+    def setUp(self):
+        self.create_user()
+        self.create_tokens()
         self.register_productor()
-
+        self.url_login = '/login/'
+        self.url_register_reclamation = '/reclamation/create/'
+        encodedEmail = 'cHJvZHVjdG9yQHRlc3RlLmNvbQ=='
+        self.url_list_reclamations = '/reclamation/list/' + encodedEmail
+        
+    def test_list_reclamation(self):
         reclamation_data = {
             'author': "Jose",
             'description': "produtor do bom",
             'emailProductor': "productor@teste.com"
         }
 
-        self.client.post(
+        response = self.client.post(
             path=self.url_register_reclamation,
             data=reclamation_data,
             format='json',
             **self.creds
         )
 
-        encodedEmail = 'cHJvZHVjdG9yQHRlc3RlLmNvbQ=='
+        self.assertEqual(response.status_code, 201, msg='Falha ao registrar reclamação')
 
         response = self.client.get(
-            path=self.url_list_reclamations+encodedEmail,
+            path=self.url_list_reclamations,
             **self.creds,
             follow=True
         )
@@ -193,17 +203,24 @@ class ReclamationListAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 200, msg="Falha ao listar reclamações")
 
     def test_list_reclamation_empty(self):
-        self.register_productor()
-
-        encodedEmail = 'cHJvZHVjdG9yQHRlc3RlLmNvbQ=='
-
         response = self.client.get(
-            path=self.url_list_reclamations+encodedEmail,
+            path=self.url_list_reclamations,
             **self.creds,
             follow=True
         )
 
         self.assertEqual(response.status_code, 200, msg="Falha ao listar produtor sem reclamações")
+
+    def test_list_reclamation_non_existent_productor(self):
+        emailNonExistentProductor = 'cHJvZHVjdG9yMjNAZ21haWwuY29t'
+
+        response = self.client.get(
+            path='/reclamation/list/' + emailNonExistentProductor,
+            **self.creds,
+            follow=True
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Listou reclamações de produtor não existente')
 
     def tearDown(self):
         Customer.objects.all().delete()
@@ -232,6 +249,8 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
 	        format='json'
         )
 
+        self.assertEqual(response.status_code, 200, msg='Credenciais inválidas')
+
         creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
 
         return creds
@@ -252,11 +271,13 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
 
         url_signup = '/signup/productor/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.productor_data},
 	        format='json'
 	    )
+
+        self.assertEqual(response.status_code, 201, msg='Falha no signup de productor')
 
     def register_customer(self):
         self.customer_data = {
@@ -267,11 +288,13 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
 
         url_signup = '/signup/customer/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.customer_data},
 	        format='json'
 	    )
+
+        self.assertEqual(response.status_code, 201, msg='Falha no signup de customer')
 
     def register_reclamation(self):
         self.register_productor()
@@ -286,12 +309,14 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
             'emailProductor': "productor@teste.com"
         }
 
-        self.client.post(
+        response = self.client.post(
             path=self.url_register_reclamation,
             data=reclamation_data,
             format='json',
             **creds,
         )
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de reclamação')
 
     def test_delete_reclamation(self):
         self.register_reclamation()
