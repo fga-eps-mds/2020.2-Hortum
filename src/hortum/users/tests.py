@@ -4,7 +4,7 @@ from ..customer.models import Customer
 from .models import User
 
 class UserCreateAPIViewTestCase(APITestCase):
-    def setUp(self): 
+    def setUp(self):
         self.url_login = '/signup/customer/'
 
     def tearDown(self):
