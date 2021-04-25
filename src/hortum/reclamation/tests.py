@@ -112,6 +112,7 @@ class ReclamationRegistrationAPIViewTestCase(APITestCase):
     def tearDown(self):
         Customer.objects.all().delete()
         Productor.objects.all().delete()
+        Reclamation.objects.all().delete()
         User.objects.all().delete()
 
 class ReclamationListAPIViewTestCase(APITestCase):
@@ -150,7 +151,7 @@ class ReclamationListAPIViewTestCase(APITestCase):
         self.url_register_reclamation = '/reclamation/create/'
         self.url_list_reclamations = '/reclamation/list/'
 
-    def test_list_reclamation(self):
+    def register_productor(self):
         productor_data = {
             "username": "Raimundo",
             "email": "productor@teste.com",
@@ -164,6 +165,9 @@ class ReclamationListAPIViewTestCase(APITestCase):
 	        {'user': productor_data},
 	        format='json'
 	    )
+
+    def test_list_reclamation(self):
+        self.register_productor()
 
         reclamation_data = {
             'author': "Jose",
@@ -186,25 +190,12 @@ class ReclamationListAPIViewTestCase(APITestCase):
             follow=True
         )
 
-
         self.assertEqual(response.status_code, 200, msg="Falha ao listar reclamações")
 
     def test_list_reclamation_empty(self):
-        productor_data = {
-            "username": "Marcio",
-            "email": "productor2@teste.com",
-	        "password": "teste2"
-        }
+        self.register_productor()
 
-        url_signup = '/signup/productor/'
-
-        self.client.post(
-            url_signup,
-	        {'user': productor_data},
-	        format='json'
-	    )
-
-        encodedEmail = 'cHJvZHVjdG9yMkB0ZXN0ZS5jb20='
+        encodedEmail = 'cHJvZHVjdG9yQHRlc3RlLmNvbQ=='
 
         response = self.client.get(
             path=self.url_list_reclamations+encodedEmail,
@@ -217,8 +208,133 @@ class ReclamationListAPIViewTestCase(APITestCase):
     def tearDown(self):
         Customer.objects.all().delete()
         Productor.objects.all().delete()
+        Reclamation.objects.all().delete()
         User.objects.all().delete()
 
+class ReclmationDeleteAPIViewTestCase(APITestCase):
+    def create_admin(self):
+        admin = User(username='admin', email='admin@teste.com', is_staff=True)
+        admin.set_password('test')
+        admin.save()
+        self.admin_data = {
+            "email": 'admin@teste.com',
+	        "password": 'test'
+        }
 
-    
+    def create_tokens(self, user_data):
+        user_cred = {'email': user_data['email'], 'password': user_data['password']}
 
+        url_token = '/login/'
+
+        response = self.client.post(
+            url_token,
+	        user_cred,
+	        format='json'
+        )
+
+        creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
+
+        return creds
+
+    def setUp(self):
+        self.create_admin()
+        self.creds = self.create_tokens(user_data=self.admin_data)
+        self.url_login = '/login/'
+        self.url_delete_reclamation = '/reclamation/delete/'
+        self.url_register_reclamation = '/reclamation/create/'
+
+    def register_productor(self):
+        self.productor_data = {
+            "username": "Raimundo",
+            "email": "productor@teste.com",
+	        "password": "teste"
+        }
+
+        url_signup = '/signup/productor/'
+
+        self.client.post(
+            url_signup,
+	        {'user': self.productor_data},
+	        format='json'
+	    )
+
+    def register_customer(self):
+        self.customer_data = {
+            "username": "Jose",
+            "email": "customer@teste.com",
+	        "password": "teste"
+        }
+
+        url_signup = '/signup/customer/'
+
+        self.client.post(
+            url_signup,
+	        {'user': self.customer_data},
+	        format='json'
+	    )
+
+    def register_reclamation(self):
+        self.register_productor()
+
+        self.register_customer()
+
+        creds = self.create_tokens(user_data=self.customer_data)
+
+        reclamation_data = {
+            'author': "Jose",
+            'description': "produtor do bom",
+            'emailProductor': "productor@teste.com"
+        }
+
+        self.client.post(
+            path=self.url_register_reclamation,
+            data=reclamation_data,
+            format='json',
+            **creds,
+        )
+
+    def test_delete_reclamation(self):
+        self.register_reclamation()
+
+        emailCustomer = 'Y3VzdG9tZXJAdGVzdGUuY29t/'
+
+        delete_data = {
+            'emailProductor': self.productor_data['email']
+        }
+
+        response = self.client.delete(
+            path=self.url_delete_reclamation + emailCustomer,
+            data=delete_data,
+            format='json',
+            **self.creds,
+            follow=True
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na deleção de reclamação')
+
+    def test_delete_non_existent_reclamation(self):
+        self.register_productor()
+
+        self.register_customer()
+
+        emailCustomer = 'Y3VzdG9tZXJAdGVzdGUuY29t/'
+
+        delete_data = {
+            'emailProductor': self.productor_data['email']
+        }
+
+        response = self.client.delete(
+            path=self.url_delete_reclamation + emailCustomer,
+            data=delete_data,
+            format='json',
+            **self.creds,
+            follow=True
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Reclamação não existente deletada')
+
+    def tearDown(self):
+        Customer.objects.all().delete()
+        Productor.objects.all().delete()
+        Reclamation.objects.all().delete()
+        User.objects.all().delete()
