@@ -6,7 +6,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'is_productor']
+        fields = ['username', 'email', 'phone_number', 'password', 'is_productor']
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -36,7 +36,7 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email']
+        fields = ['username', 'email', 'phone_number']
 
     def validate(self, data):
         if len(data) == 0:
@@ -47,3 +47,8 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         if self.context['queryset'].filter(email=email).exists():
             raise serializers.ValidationError('Email ja registrado!')
         return email
+
+    def validate_phone_number(self, phone_number):
+        if self.context['queryset'].filter(phone_number=phone_number).exists():
+            raise serializers.ValidationError('Telefone celular ja registrado!')
+        return phone_number

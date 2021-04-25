@@ -59,13 +59,10 @@ class UpdateUserView(GenericViewSet, mixins.UpdateModelMixin):
     '''
     serializer_class = UpdateUserSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    queryset = User.objects.all()
 
     def get_object(self):
         return User.objects.get(email=self.request.user)
-
-    def get_queryset(self):
-        user = User.objects.all()
-        return user
 
     def get_serializer_context(self):
         context = super(UpdateUserView, self).get_serializer_context()
