@@ -1,6 +1,6 @@
-from .serializer import ReclamationListSerializer, ReclamationCreateSerializer, ReclamationDeleteSerializer
+from .serializer import ComplaintListSerializer, ComplaintCreateSerializer, ComplaintDeleteSerializer
 
-from .models import Reclamation
+from .models import Complaint
 from ..productor.models import Productor
 
 from rest_framework.viewsets import GenericViewSet
@@ -10,48 +10,48 @@ from rest_framework.exceptions import ParseError
 
 from ..encode import decode_string
 
-class ReclamationRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
+class ComplaintRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
     '''
     EndPoint para registro de reclamação
     '''
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = ReclamationCreateSerializer
-    queryset = Reclamation.objects.all()
+    serializer_class = ComplaintCreateSerializer
+    queryset = Complaint.objects.all()
 
     def get_serializer_context(self):
-        context = super(ReclamationRegistrationAPIView, self).get_serializer_context()
+        context = super(ComplaintRegistrationAPIView, self).get_serializer_context()
         context.update({'customer': self.request.user})
         return context
 
-class ReclamationListAPIView(GenericViewSet, mixins.ListModelMixin):
+class ComplaintListAPIView(GenericViewSet, mixins.ListModelMixin):
     '''
     EndPoint para listagem de reclamações
     '''
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = ReclamationListSerializer
+    serializer_class = ComplaintListSerializer
     
     def get_queryset(self):
         emailProductor = decode_string(self.kwargs['emailProductor'])
         if not Productor.objects.filter(user__email=emailProductor).exists():
             raise ParseError({'emailProductor': 'Email inexistente de produtor'})
-        queryset = Reclamation.objects.filter(idProductor__user__email=emailProductor)
+        queryset = Complaint.objects.filter(idProductor__user__email=emailProductor)
         return queryset.order_by('author')
 
-class ReclamationDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
+class ComplaintDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
     '''
     EndPoint para remoção de reclamação
     '''
     permission_classes = (permissions.IsAdminUser,)
-    serializer_class = ReclamationDeleteSerializer
+    serializer_class = ComplaintDeleteSerializer
     lookup_field = 'emailCustomer'
 
     def get_queryset(self):
         emailCustomer = decode_string(self.kwargs['emailCustomer'])
-        queryset = Reclamation.objects.filter(emailCustomer=emailCustomer)
+        queryset = Complaint.objects.filter(emailCustomer=emailCustomer)
         return queryset
 
     def get_serializer_context(self):
-        context = super(ReclamationDeleteAPIView, self).get_serializer_context()
+        context = super(ComplaintDeleteAPIView, self).get_serializer_context()
         context.update({'queryset': self.get_queryset()})
         return context
 
