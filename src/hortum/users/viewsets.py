@@ -1,5 +1,3 @@
-from . import serializer
-
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
