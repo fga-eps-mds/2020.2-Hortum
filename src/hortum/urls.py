@@ -21,6 +21,7 @@ schema_view = get_schema_view(
    permission_classes=(permissions.AllowAny,),
 )
 
+
 urlpatterns = [
     path('login/', viewsets.CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
