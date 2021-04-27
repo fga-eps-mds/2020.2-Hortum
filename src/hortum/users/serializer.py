@@ -6,7 +6,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'is_productor']
+        fields = ['username', 'email', 'password', 'profile_picture']
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -14,6 +14,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data.update({'username': self.user.username})
         data.update({'email': self.user.email})
         data.update({'is_productor': self.user.is_productor})
+        data.update({'profile_picture': self.user.profile_picture.url})
         return data
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
