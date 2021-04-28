@@ -1,10 +1,12 @@
 from django.db import models
-from hortum.picture.models import Picture
 from hortum.productor.models import Productor
 
 class Complaint(models.Model):
+    def upload_image(instance, filename):
+        return f"{instance.author}-{filename}"
+
     author = models.CharField(max_length=100)
     description = models.CharField(max_length=450)
     idProductor = models.ForeignKey(Productor, on_delete=models.CASCADE, related_name='reclamations')
-    idPicture = models.ForeignKey(Picture, on_delete=models.CASCADE, null=True)
+    image = models.ImageField(upload_to=upload_image, null=True)
     emailCustomer = models.EmailField(max_length=100)

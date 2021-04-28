@@ -10,13 +10,13 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('productor', '0001_initial'),
-        ('announcement', '0001_initial'),
+        ('complaint', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='announcement',
+            model_name='complaint',
             name='idProductor',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='announcements', to='productor.productor'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reclamations', to='productor.productor'),
         ),
     ]
