@@ -8,7 +8,7 @@ class User(AbstractUser):
     username = models.CharField(max_length=100)
     email = models.EmailField(unique=True, max_length=120)
     is_productor = models.BooleanField(default=False)
-    profile_picture = models.ImageField(upload_to=upload_image, null=True)
+    profile_picture = models.ImageField(upload_to=upload_image, null=True, default="src/hortum/img/person-male.png")
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
