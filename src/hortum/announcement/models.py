@@ -246,3 +246,7 @@ class Announcement(models.Model):
 
     class Meta:
         ordering = ['-publicationDate']
+
+class Localization(models.Model):
+    idAnnoun = models.ForeignKey(Announcement, on_delete=models.CASCADE, related_name='localizations')
+    adress = models.CharField(max_length=100)
