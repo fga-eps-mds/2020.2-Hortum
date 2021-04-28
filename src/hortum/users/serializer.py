@@ -14,6 +14,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data.update({'username': self.user.username})
         data.update({'email': self.user.email})
         data.update({'is_productor': self.user.is_productor})
+        data.update({'phone_number': self.user.phone_number})
         return data
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
