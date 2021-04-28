@@ -14,7 +14,7 @@ class UserCreateAPIViewTestCase(APITestCase):
         user_data = {
             "username": "João",
             "email": "joao@email.com",
-            "phone_number": 61123456789,
+            "phone_number": "61123456789",
             "password": "teste"
         }
 
@@ -45,7 +45,7 @@ class UserCreateAPIViewTestCase(APITestCase):
         user_data = {
             "username": "João",
             "email": "joao@email.com",
-            "phone_number": 61123456789,
+            "phone_number": "61123456789",
             "password": "teste"
         }
 
@@ -145,7 +145,7 @@ class UpdateUserViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
-            "phone_number": 61123456789,
+            "phone_number": "61123456789",
 	        "password": "teste"
         }
 
@@ -222,7 +222,7 @@ class UpdateUserViewTestCase(APITestCase):
     
     def test_update_valid_phone_number_user(self):
         new_information = {
-            "phone_number": 61987654321
+            "phone_number": "61987654321"
         }
 
         response = self.client.patch(
@@ -236,7 +236,7 @@ class UpdateUserViewTestCase(APITestCase):
 
     def test_update_duplicate_phone_number_user(self):
         new_information = {
-            "phone_number": 61123456789
+            "phone_number": "61123456789"
         }
 
         response = self.client.patch(
