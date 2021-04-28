@@ -15,6 +15,7 @@ services:
     web:
          build: .
          command: bash -c "./scripts/startup.sh"
+         env_file: .env
          volumes:
              - .:/code
          ports:
