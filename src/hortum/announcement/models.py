@@ -1,7 +1,6 @@
 from django.db import models
 
 from ..productor.models import Productor
-from django.contrib.postgres.fields import ArrayField
 
 
 class Announcement(models.Model):
@@ -236,7 +235,6 @@ class Announcement(models.Model):
 
     TYPE_OF_PRODUCTS_CHOICES = AVICULTURA + BEBIDAS + CARNE + COGUMELOS + CONGELADOS + DERIVADOS_DE_CANA + DERIVADOS_DE_MANDIOCA + DESIDRATADOS + DOCES + FLORES + FRUTAS + GRAO + HORTALICAS + LATICINIOS + PANIFICADOS + OTHERS
     
-
     idProductor = models.ForeignKey(Productor, on_delete=models.CASCADE, related_name='announcements')
     likes = models.IntegerField(default=0)
     name = models.CharField(max_length=30)

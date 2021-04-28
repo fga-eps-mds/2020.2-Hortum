@@ -4,7 +4,7 @@ from .models import Announcement, AnnouncementImage
 
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
-    images = serializers.ListField(child=serializers.ImageField(), write_only=True)
+    images = serializers.ListField(child=serializers.ImageField(), write_only=True, allow_empty=True)
 
     class Meta:
         model = Announcement

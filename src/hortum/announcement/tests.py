@@ -43,7 +43,8 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             "name": "Banana",
             "type_of_product": "Banana",
             "description": "vendendo banana",
-            "price": 10.0
+            "price": 10.0,
+            "images": []
         }
         self.url_announcement = '/announcement/create'
     
@@ -145,7 +146,8 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
             "name": "Meio quilo de linguíça",
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
-            "price": 35.50
+            "price": 35.50,
+            "images": []
         }
 
         url_create_announ = '/announcement/create'
@@ -273,14 +275,16 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
             "name": "Meio quilo de linguíça",
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
-            "price": 35.50
+            "price": 35.50,
+            "images": []
         }
     
         self.announcement_data_extra = {
             "name": "Meio quilo de defumado",
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Defumados",
-            "price": 10.15
+            "price": 10.15,
+            "images": []
         }
 
         url_create_announ = '/announcement/create'
@@ -442,7 +446,8 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
             "name": "Meio quilo de linguíça",
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
-            "price": 35.50
+            "price": 35.50,
+            "images": []
         }
     
         self.announcement_two = {
@@ -450,7 +455,8 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Defumados",
             "price": 10.15,
-            "inventory": False
+            "inventory": False,
+            "images": []
         }
 
         url_create_announ = '/announcement/create'
