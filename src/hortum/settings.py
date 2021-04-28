@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'drf_yasg',
 ]
 
 LOCAL_APPS = [
@@ -54,6 +55,7 @@ LOCAL_APPS = [
     'hortum.customer',
     'hortum.productor',
     'hortum.users',
+    'hortum.complaint',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
