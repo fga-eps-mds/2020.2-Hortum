@@ -1,9 +1,11 @@
 from rest_framework import serializers
 
-from .models import Announcement
+from .models import Announcement, AnnouncementImage
 
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
+    images = serializers.ListField(child=serializers.ImageField(), write_only=True)
+
     class Meta:
         model = Announcement
         fields = ['likes', 'name', 'type_of_product', 'description', 'price', 'inventory', 'images']
@@ -14,8 +16,10 @@ class AnnouncementCreateSerializer(serializers.ModelSerializer):
         return name
 
     def create(self, validated_data):
+        images = validated_data.pop('images')
         productor_pk = self.context['productor']
         announcement = Announcement.objects.create(idProductor=productor_pk, **validated_data)
+        [AnnouncementImage.objects.create(idImage=announcement, picture=picture) for picture in images]
         return announcement
 
 class AnnouncementUpdateSerializer(serializers.ModelSerializer):
