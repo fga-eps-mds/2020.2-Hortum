@@ -20,7 +20,7 @@ class ComplaintCreateSerializer(serializers.ModelSerializer):
         complaint = Complaint.objects.create(idProductor=productor_pk, **validated_data, emailCustomer=self.context['customer'])
         return complaint
 
-class ComplaintListSerializer(serializers.ModelSerializer):    
+class ComplaintListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Complaint
         fields = ['author', 'description', 'image']
