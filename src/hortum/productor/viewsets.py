@@ -1,13 +1,14 @@
 from .serializer import ProductorSerializer, ProductorListSerializer, ProductorRetrieveSerializer
 
 from .models import Productor
+from ..users.models import User
 
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 
-from ..encode import decode_string
+from ..encode import decode_string, encode_string
 
 class ProductorRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
 	'''
@@ -16,6 +17,13 @@ class ProductorRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
 	permission_classes = (permissions.AllowAny,)
 	serializer_class = ProductorSerializer
 	queryset = Productor.objects.all()
+
+	def create(self, request, *args, **kwargs):
+		response = super().create(request, *args, **kwargs)
+		if response.status_code == 201:
+			email = self.request.data['user']['email']
+			User.send_verification_email(email)
+		return response
 
 class ProductorRetrieveAPIView(GenericViewSet, mixins.RetrieveModelMixin):
 	permission_classes = (permissions.IsAuthenticated,)

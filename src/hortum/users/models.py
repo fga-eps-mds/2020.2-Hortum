@@ -1,5 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
+from ..settings import EMAIL_HOST_USER as email_sender
+
+from ..encode import encode_string
 
 class User(AbstractUser):
     username = models.CharField(max_length=100)
@@ -10,3 +14,14 @@ class User(AbstractUser):
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
+
+    def send_verification_email(email):
+        encoded_email = encode_string(email)
+        url_verify = 'http://localhost:8000/users/verify/' + encoded_email
+        send_mail(
+            'Hortum - verifique seu email',
+			'Você está a um passo de acessar o Hortum, clique no link abaixo para concluir seu registro:\n' + url_verify,
+			email_sender,
+			[email],
+			fail_silently=False,
+		)
