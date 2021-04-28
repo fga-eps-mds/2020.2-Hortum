@@ -5,11 +5,14 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import User
 
 from .serializer import ChangePasswordSerializer, UpdateUserSerializer
+from .permissions import IsVerified
 
 from rest_framework import permissions, mixins
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+
+from ..encode import decode_string
 
 @api_view(["GET", "PUT"])
 @permission_classes([permissions.IsAuthenticated, ])
@@ -23,11 +26,33 @@ def is_token_valid(request):
         'is_productor': user.is_productor
     })
 
+class VerifyAccountView(GenericViewSet, mixins.RetrieveModelMixin):
+    '''
+    EndPoint para confirmação de email da conta
+    '''
+    serializer_class = serializer.UserSerializer
+    permission_classes = (permissions.AllowAny,)
+    lookup_field = 'encoded_email'
+
+    def get_object(self):
+        email = decode_string(self.kwargs['encoded_email'])
+        return User.objects.get(email=email)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.is_verified:
+            return Response('Email já está verificado', status=400)
+            
+        instance.is_verified = True
+        instance.save()
+        return Response('Email verificado com sucesso', status=200)
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     '''
     EndPoint sobrescrito para obtenção do token
     '''
     serializer_class = serializer.CustomTokenObtainPairSerializer
+    permission_classes = (IsVerified,)
 
 class ChangePasswordView(GenericViewSet, mixins.UpdateModelMixin):
     """
