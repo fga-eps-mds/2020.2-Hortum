@@ -56,6 +56,7 @@ LOCAL_APPS = [
     'hortum.picture',
     'hortum.productor',
     'hortum.users',
+    'hortum.complaint',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS

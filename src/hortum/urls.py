@@ -32,6 +32,7 @@ urlpatterns = [
     path('productor/', include('hortum.productor.urls')),
     path('customer/', include('hortum.customer.urls')),
     path('users/', include('hortum.users.urls')),
+    path('complaint/', include('hortum.complaint.urls')),
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
