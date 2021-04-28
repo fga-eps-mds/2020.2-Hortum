@@ -8,7 +8,8 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'is_verified': True
         }
 
         url_signup = '/signup/customer/'
@@ -91,7 +92,8 @@ class UpdateUserViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'is_verified': True
         }
 
         url_signup = '/signup/customer/'
@@ -222,7 +224,8 @@ class ChangePasswordViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'is_verified': True
         }
 
         url_signup = '/signup/customer/'

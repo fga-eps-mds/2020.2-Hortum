@@ -9,7 +9,8 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Mário",
             "email": "mario@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "is_verified": True
         }
 
         url_signup = '/signup/productor/'
@@ -19,6 +20,10 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        # self.client.get(
+        #     '/users/verify' + 
+        # )
 
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
@@ -109,7 +114,8 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "João",
             "email": "joao@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "is_verified": True
         }
 
         url_signup = '/signup/productor/'
@@ -237,7 +243,8 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "João",
             "email": "joao@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "is_verified": True
         }
 
         url_signup = '/signup/productor/'

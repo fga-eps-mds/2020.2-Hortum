@@ -9,7 +9,8 @@ class ProductorRegisterAPIViewTestCase(APITestCase):
         self.user_data = {
             'username': 'Marcos',
             'email': 'marcos@productor.com',
-            'password': 'teste'
+            'password': 'teste',
+            'is_verified': True
         }
 
         self.url_signup = '/signup/productor/'
@@ -46,7 +47,8 @@ class ProductorRegisterAPIViewTestCase(APITestCase):
         new_user = {
             'username': 'Marcos Segundo',
             'email': 'marcos@productor.com',
-            'password': 'teste dois'
+            'password': 'teste dois',
+            'is_verified': True
         }
 
         response = self.client.post(
@@ -62,7 +64,8 @@ class ProductorListAPIViewTestCase(APITestCase):
         self.user_data = {
             'username': 'Marcos',
             'email': 'marcos@productor.com',
-            'password': 'teste'
+            'password': 'teste',
+            'is_verified': True
         }
 
         url_signup = '/signup/productor/'
@@ -150,7 +153,8 @@ class ProductorListAPIViewTestCase(APITestCase):
         customer_data = {
             'username': 'Customer',
             'email': 'customer@customer.com',
-            'password': 'teste'
+            'password': 'teste',
+            'is_verified': True
         }
 
         url_signup_customer = '/signup/customer/'
@@ -176,7 +180,8 @@ class ProductorRetrieveAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Marcelo",
             "email": "marcelo@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'is_verified': True
         }
 
         url_signup = '/signup/customer/'
