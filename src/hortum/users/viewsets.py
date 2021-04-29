@@ -11,6 +11,7 @@ from rest_framework import permissions, mixins
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from django.shortcuts import render
 
 from ..encode import decode_string
 
@@ -45,8 +46,8 @@ class VerifyAccountView(GenericViewSet, mixins.RetrieveModelMixin):
             
         instance.is_verified = True
         instance.save()
-        return Response('Email verificado com sucesso', status=200)
-
+        return render(request, 'hortum/user_verify_page.html') 
+        
 class CustomTokenObtainPairView(TokenObtainPairView):
     '''
     EndPoint sobrescrito para obtenção do token

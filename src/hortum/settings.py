@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'hortum',
     'hortum.announcement',
     'hortum.customer',
     'hortum.picture',
