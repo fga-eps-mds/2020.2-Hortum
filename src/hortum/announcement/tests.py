@@ -72,7 +72,8 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             "name": "Banana",
             "type_of_product": "Banana",
             "description": "banana à venda",
-            "price": 12.5
+            "price": 12.5,
+            "images": []
         }
 
         self.client.post(

@@ -6,8 +6,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-
-        fields = ['username', 'email', 'phone_number', 'password', 'profile_picture' ,'is_productor']
+        fields = ['username', 'email', 'phone_number', 'password', 'profile_picture']
 
 class UserDeleteSerializer(serializers.ModelSerializer):
     password = serializers.CharField(required=True)
@@ -27,8 +26,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data.update({'username': self.user.username})
         data.update({'email': self.user.email})
         data.update({'phone_number': self.user.phone_number})
-        data.update({'is_productor': self.user.is_productor})
         data.update({'profile_picture': self.user.profile_picture.url})
+        data.update({'is_productor': self.user.is_productor})
         return data
 
 class ChangePasswordSerializer(serializers.ModelSerializer):

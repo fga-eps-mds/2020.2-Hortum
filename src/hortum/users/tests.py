@@ -459,7 +459,8 @@ class DeleteUserAPIViewTestCase(APITestCase):
             "name": "Meio quilo de linguíça",
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
-            "price": 35.50
+            "price": 35.50,
+            "images": []
         }
     
         url_create_announ = '/announcement/create'
