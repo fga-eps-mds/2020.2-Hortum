@@ -8,6 +8,18 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'email', 'password', 'profile_picture']
 
+class UserDeleteSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['password']
+
+    def validate_password(self, password):
+        if not self.context['user'].check_password(password):
+            raise serializers.ValidationError('Senha incorreta!')
+        return password
+
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super(CustomTokenObtainPairSerializer, self).validate(attrs)
