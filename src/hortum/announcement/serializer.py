@@ -40,9 +40,10 @@ class AnnouncementImageSerializer(serializers.ModelSerializer):
 class AnnouncementListSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True, source='idProductor.user.username')
     email = serializers.EmailField(required=True, source='idProductor.user.email')
+    phone_number = serializers.CharField(required=True, source='idProductor.user.phone_number')
     pictureProductor = serializers.ImageField(required=True, source='idProductor.user.profile_picture')
     images = AnnouncementImageSerializer(many=True)
-
+    
     class Meta:
         model = Announcement
-        fields = ['email', 'username', 'pictureProductor', 'name', 'type_of_product', 'description', 'price', 'likes', 'images']
+        fields = ['email', 'username', 'phone_number', 'pictureProductor', 'name', 'type_of_product', 'description', 'price', 'likes', 'images']

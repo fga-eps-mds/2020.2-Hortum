@@ -5,6 +5,60 @@ from ..productor.models import Productor
 from ..announcement.models import Announcement
 from .models import User
 
+class UserCreateAPIViewTestCase(APITestCase):
+    def setUp(self):
+        self.url_login = '/signup/customer/'
+
+    def tearDown(self):
+        User.objects.all().delete()
+
+    def test_create_valid_user(self):
+        user_data = {
+            "username": "João",
+            "email": "joao@email.com",
+            "phone_number": "61123456789",
+            "password": "teste"
+        }
+
+        response = self.client.post(
+            self.url_login,
+            {'user': user_data},
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
+
+    def test_create_invalid_user(self):
+        user_data = {
+            "username": "João",
+            "password": "teste"
+        }
+
+        response = self.client.post(
+            self.url_login,
+            {'user': user_data},
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Usuário criado com sucesso')
+
+    def test_create_duplicated_phone_number_user(self):
+        self.test_create_valid_user()
+        user_data = {
+            "username": "João",
+            "email": "joao@email.com",
+            "phone_number": "61123456789",
+            "password": "teste"
+        }
+
+        response = self.client.post(
+            self.url_login,
+            {'user': user_data},
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Falha na criação de usuário')
+
 class UserTokenObtainAPIViewTestCase(APITestCase):
     def create_user(self):
         self.user_data = {
@@ -93,6 +147,7 @@ class UpdateUserViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
+            "phone_number": "61123456789",
 	        "password": "teste"
         }
 
@@ -167,6 +222,34 @@ class UpdateUserViewTestCase(APITestCase):
         
         self.assertEqual(response.status_code, 200, msg='Usuario nao atualizado')
     
+    def test_update_valid_phone_number_user(self):
+        new_information = {
+            "phone_number": "61987654321"
+        }
+
+        response = self.client.patch(
+            path=self.url_update_user,
+            data=new_information,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Número de celuar não existente')
+
+    def test_update_duplicate_phone_number_user(self):
+        new_information = {
+            "phone_number": "61123456789"
+        }
+
+        response = self.client.patch(
+            path=self.url_update_user,
+            data=new_information,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Número de celuar não existente')
+
     def test_empty_update_user(self):
         response = self.client.patch(
             path=self.url_update_user,
