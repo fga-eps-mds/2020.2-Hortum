@@ -42,11 +42,11 @@ class VerifyAccountView(GenericViewSet, mixins.RetrieveModelMixin):
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         if instance.is_verified:
-            return Response('Email já está verificado', status=400)
+            return render(request, 'hortum/user_already_verified_page.html', status=400)
             
         instance.is_verified = True
         instance.save()
-        return render(request, 'hortum/user_verify_page.html') 
+        return render(request, 'hortum/user_verify_page.html')
         
 class CustomTokenObtainPairView(TokenObtainPairView):
     '''
