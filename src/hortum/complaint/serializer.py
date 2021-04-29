@@ -3,15 +3,12 @@ from rest_framework import serializers
 from .models import Complaint
 from ..productor.models import Productor
 
-from ..picture.serializer import PictureSerializer
-
 class ComplaintCreateSerializer(serializers.ModelSerializer):
-    idPicture = PictureSerializer(read_only=True)
     emailProductor = serializers.EmailField(required=True, write_only=True)
 
     class Meta:
         model = Complaint
-        fields = ['author', 'description', 'emailProductor', 'idPicture']
+        fields = ['author', 'description', 'emailProductor', 'image']
 
     def validate_emailProductor(self, emailProductor):
         if Complaint.objects.filter(emailCustomer=self.context['customer'], idProductor__user__email=emailProductor).exists():
@@ -24,11 +21,9 @@ class ComplaintCreateSerializer(serializers.ModelSerializer):
         return complaint
 
 class ComplaintListSerializer(serializers.ModelSerializer):
-    idPicture = PictureSerializer()
-    
     class Meta:
         model = Complaint
-        fields = ['author', 'description', 'idPicture']
+        fields = ['author', 'description', 'image']
 
 class ComplaintDeleteSerializer(serializers.ModelSerializer):
     emailProductor = serializers.EmailField(required=True, write_only=True)

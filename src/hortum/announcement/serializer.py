@@ -1,15 +1,14 @@
 from rest_framework import serializers
 
-from .models import Announcement
+from .models import Announcement, AnnouncementImage
 
-from ..picture.serializer import PictureSerializer
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
-    idPicture = PictureSerializer(many=True, read_only=True)
+    images = serializers.ListField(child=serializers.ImageField(), write_only=True, allow_empty=True)
 
     class Meta:
         model = Announcement
-        fields = ['idPicture', 'likes', 'name', 'type_of_product', 'description', 'price', 'inventory']
+        fields = ['likes', 'name', 'type_of_product', 'description', 'price', 'inventory', 'images']
 
     def validate_name(self, name):
         if self.context['productor'].announcements.all().filter(name=name).exists():
@@ -17,13 +16,13 @@ class AnnouncementCreateSerializer(serializers.ModelSerializer):
         return name
 
     def create(self, validated_data):
+        images = validated_data.pop('images')
         productor_pk = self.context['productor']
         announcement = Announcement.objects.create(idProductor=productor_pk, **validated_data)
+        [AnnouncementImage.objects.create(idImage=announcement, picture=picture) for picture in images]
         return announcement
 
 class AnnouncementUpdateSerializer(serializers.ModelSerializer):
-    idPicture = PictureSerializer(many=True, read_only=True)
-
     class Meta:
         model = Announcement
         fields = '__all__'
@@ -33,11 +32,17 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
         return name
 
+class AnnouncementImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnnouncementImage
+        fields = ['picture']
+
 class AnnouncementListSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True, source='idProductor.user.username')
     email = serializers.EmailField(required=True, source='idProductor.user.email')
-    idPictureProductor = PictureSerializer(many=False, read_only=True, source='idProductor.idPicture')
+    pictureProductor = serializers.ImageField(required=True, source='idProductor.user.profile_picture')
+    images = AnnouncementImageSerializer(many=True)
 
     class Meta:
         model = Announcement
-        fields = ['email', 'username', 'idPictureProductor', 'name', 'type_of_product', 'description', 'price', 'idPicture', 'likes']
+        fields = ['email', 'username', 'pictureProductor', 'name', 'type_of_product', 'description', 'price', 'likes', 'images']

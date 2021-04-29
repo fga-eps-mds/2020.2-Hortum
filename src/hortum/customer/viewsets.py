@@ -12,77 +12,77 @@ from rest_framework.exceptions import ParseError
 from django.db.models import F
 
 class CustomerRegistrationAPIView (GenericViewSet, mixins.CreateModelMixin, mixins.ListModelMixin):
-	'''
+    '''
 	EndPoint para registro de User's
 	'''
-	permission_classes = (permissions.AllowAny,)
-	serializer_class = serializer.CustomerSerializer
-	queryset = Customer.objects.all()
+    permission_classes = (permissions.AllowAny,)
+    serializer_class = serializer.CustomerSerializer
+    queryset = Customer.objects.all()
 
 class CustomerListFavoritesAPIView (GenericViewSet, mixins.RetrieveModelMixin):
-	'''
+    '''
 	EndPoint para listagem dos favoritos
 	'''
-	permission_classes = (permissions.IsAuthenticated,)
-	lookup_field = 'favorites'
+    permission_classes = (permissions.IsAuthenticated,)
+    lookup_field = 'favorites'
 
-	def get_object(self):
-		return Customer.objects.get(user__email=self.request.user)
+    def get_object(self):
+        return Customer.objects.get(user__email=self.request.user)
 
-	def get_serializer_class(self):
-		favorites = self.kwargs['favorites']
-		if favorites == 'announcements':
-			return serializer.CustomerFavoritesAnnouncementsSerializer
-		elif favorites == 'productors':
-			return serializer.CustomerFavoritesProductorsSerializer
-		raise ParseError({'Favorites': 'Atributo inválido!'})
+    def get_serializer_class(self):
+        favorites = self.kwargs['favorites']
+        if favorites == 'announcements':
+            return serializer.CustomerFavoritesAnnouncementsSerializer
+        elif favorites == 'productors':
+            return serializer.CustomerFavoritesProductorsSerializer
+        raise ParseError({'Favorites': 'Atributo inválido!'})
 
 
 class FavoritesAnnouncementsAPIView (GenericViewSet, mixins.UpdateModelMixin):
-	'''
+    '''
 	EndPoint para adição/remoção de anúncios da lista de favoritos
 	'''
-	permission_classes = (permissions.IsAuthenticated,)
-	serializer_class = serializer.CustomerAddAnnouncementSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = serializer.CustomerAddAnnouncementSerializer
 
-	def get_object(self):
-		return Customer.objects.get(user__email=self.request.user)
+    def get_object(self):
+        return Customer.objects.get(user__email=self.request.user)
 
-	def update(self, request, *args, **kwargs):
-		instance = self.get_object()
-		serializer = self.get_serializer(data=request.data)
-		serializer.is_valid(raise_exception=True)
-		anun = Announcement.objects.get(idProductor=Productor.objects.get(user__email=serializer.data.get('email')), name=serializer.data.get('announcementName'))
-		if instance.idAnunFav.filter(pk=anun.pk).exists():
-			instance.idAnunFav.remove(anun)
-			anun.likes = F('likes') - 1 if F('likes') != 0 else 0
-		else:
-			instance.idAnunFav.add(anun)
-			anun.likes = F('likes') + 1
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        anun = Announcement.objects.get(idProductor=Productor.objects.get(user__email=serializer.data.get('email')), name=serializer.data.get('announcementName'))
+        if instance.idAnunFav.filter(pk=anun.pk).exists():
+            instance.idAnunFav.remove(anun)
+            anun.likes = F('likes') - 1 if F('likes') != 0 else 0
+        else:
+            instance.idAnunFav.add(anun)
+            anun.likes = F('likes') + 1
 
-		anun.save()
-		return Response('Anúncio atualizado com sucesso', status=200)
+        anun.save()
+        return Response('Anúncio atualizado com sucesso', status=200)
 
 class FavoriteProductorsAPIView(GenericViewSet, mixins.UpdateModelMixin):
-	'''
+    '''
 	EndPoint para adição/remoção de produtores na lista de favoritos
 	'''
-	permission_classes = (permissions.IsAuthenticated,)
-	serializer_class = serializer.CustomerAddProductorSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = serializer.CustomerAddProductorSerializer
 
-	def get_object(self):
-		return Customer.objects.get(user__email=self.request.user)
+    def get_object(self):
+        return Customer.objects.get(user__email=self.request.user)
 
-	def update(self, request, *args, **kwargs):
-		instance = self.get_object()
-		serializer = self.get_serializer(data=request.data)
-		serializer.is_valid(raise_exception=True)
-		productor = Productor.objects.get(user__email=serializer.data.get('email'))
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        productor = Productor.objects.get(user__email=serializer.data.get('email'))
 	
-		if instance.idProdFav.filter(pk=productor.pk).exists():
-			instance.idProdFav.remove(productor)
-		else:
-			instance.idProdFav.add(productor)
+        if instance.idProdFav.filter(pk=productor.pk).exists():
+            instance.idProdFav.remove(productor)
+        else:
+            instance.idProdFav.add(productor)
 
-		productor.save()
-		return Response('Produtores favoritos atualizados com sucesso')
+        productor.save()
+        return Response('Produtores favoritos atualizados com sucesso')
