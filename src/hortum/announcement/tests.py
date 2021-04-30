@@ -212,7 +212,10 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         new_data = {
             "name": "Meio quilo de defumados",
             "description": "Defumados",
-            "price": 60.15
+            "price": 60.15,
+            "localizations": [
+                "new local 1"
+            ]
         }
 
         response = self.client.patch(
@@ -224,7 +227,7 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200, msg='Falha na alteração do anúncio')
 
-    def test_update_name_in_database_announcement(self):
+    def test_update_duplicated_name_announcement(self):
         new_data = {
             "name": "Meio quilo de linguíça"
         }
@@ -237,6 +240,23 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         )
 
         self.assertEqual(response.status_code, 400, msg='Nome não existente no banco')
+
+    def test_update_localizations_announcement(self):
+        new_data = {
+            "localizations": [
+                "new local 1",
+                "new local 2"
+            ]
+        }
+
+        response = self.client.patch(
+            path=self.url_update_announ,
+            format='json',
+            data=new_data,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na alteração das localizações')
 
 class AnnouncementsListAPIViewTestCase(APITestCase):
     def create_user(self):
