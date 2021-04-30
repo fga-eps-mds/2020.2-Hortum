@@ -39,12 +39,13 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
         return name
 
     def update(self, instance, validated_data):
-        localizations = validated_data.pop('localizations')
-        Localization.objects.filter(Q(idAnnoun=instance) & ~Q(adress=localizations)).delete()
-        for local in localizations:
-            if not instance.__class__.objects.filter(localizations__adress=local).exists():
-                Localization.objects.create(idAnnoun=instance, adress=local)
-        instance.save()
+        if 'localizations' in validated_data:
+            localizations = validated_data.pop('localizations')
+            Localization.objects.filter(Q(idAnnoun=instance) & ~Q(adress=localizations)).delete()
+            for local in localizations:
+                if not instance.__class__.objects.filter(localizations__adress=local).exists():
+                    Localization.objects.create(idAnnoun=instance, adress=local)
+            instance.save()
         super().update(instance, validated_data)
         return instance
 
