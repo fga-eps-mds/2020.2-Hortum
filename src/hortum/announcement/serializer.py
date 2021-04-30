@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from django.db.models import Q
+
 from .models import Announcement, Localization
 
 from ..picture.serializer import PictureSerializer
@@ -25,15 +27,26 @@ class AnnouncementCreateSerializer(serializers.ModelSerializer):
 
 class AnnouncementUpdateSerializer(serializers.ModelSerializer):
     idPicture = PictureSerializer(many=True, read_only=True)
+    localizations = serializers.ListField(child=serializers.CharField(), allow_empty=True, write_only=True)
 
     class Meta:
         model = Announcement
-        fields = '__all__'
+        fields = ['idPicture', 'name', 'type_of_product', 'description', 'price', 'inventory', 'localizations']
 
     def validate_name(self, name):
         if self.context['queryset'].filter(name=name).exists():
             raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
         return name
+
+    def update(self, instance, validated_data):
+        localizations = validated_data.pop('localizations')
+        Localization.objects.filter(Q(idAnnoun=instance) & ~Q(adress=localizations)).delete()
+        for local in localizations:
+            if not instance.__class__.objects.filter(localizations__adress=local).exists():
+                Localization.objects.create(idAnnoun=instance, adress=local)
+        instance.save()
+        super().update(instance, validated_data)
+        return instance
 
 class AnnouncementListSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True, source='idProductor.user.username')
