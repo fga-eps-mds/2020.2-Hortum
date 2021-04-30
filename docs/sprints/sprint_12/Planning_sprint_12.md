@@ -26,6 +26,7 @@ A Sprint 12 tem os seguintes objetivos:
 |#209|Integrar imagens ao frontend|Vitor Lamego e Victor Lima|8
 |#210|Gerar documentação sobre planning sprint 12|João Pedro|2
 |#211|Gerar documentação sobre review sprint 11|João Pedro|2
+|#214|Implementação do Dio no lugar do http|Vitor Lamego|1
 
 ## Gerência de Riscos
 | ID | Descrição | Probabilidade | Impacto | Nível de Risco | Ação
