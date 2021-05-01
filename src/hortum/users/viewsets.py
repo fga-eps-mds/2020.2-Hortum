@@ -1,12 +1,9 @@
-from . import serializer
-
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
+from . import serializer
 
-from .serializer import ChangePasswordSerializer, UpdateUserSerializer
-
-from rest_framework import permissions, mixins
+from rest_framework import permissions, mixins, status
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -29,11 +26,33 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     '''
     serializer_class = serializer.CustomTokenObtainPairSerializer
 
+class UserDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
+    '''
+    EndPoint para deleção de usuários
+    '''
+    serializer_class = serializer.UserDeleteSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_object(self):
+        return User.objects.get(email=self.request.user)
+
+    def get_serializer_context(self):
+        context = super(UserDeleteAPIView, self).get_serializer_context()
+        context.update({'user': self.request.user})
+        return context
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 class ChangePasswordView(GenericViewSet, mixins.UpdateModelMixin):
     """
     EndPoint para trocar a senha
     """
-    serializer_class = ChangePasswordSerializer
+    serializer_class = serializer.ChangePasswordSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_object(self):
@@ -57,15 +76,12 @@ class UpdateUserView(GenericViewSet, mixins.UpdateModelMixin):
     '''
     EndPoint para trocar username e email
     '''
-    serializer_class = UpdateUserSerializer
+    serializer_class = serializer.UpdateUserSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    queryset = User.objects.all()
 
     def get_object(self):
         return User.objects.get(email=self.request.user)
-
-    def get_queryset(self):
-        user = User.objects.all()
-        return user
 
     def get_serializer_context(self):
         context = super(UpdateUserView, self).get_serializer_context()

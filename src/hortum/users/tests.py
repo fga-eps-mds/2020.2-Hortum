@@ -1,7 +1,63 @@
 from rest_framework.test import APITestCase
 
 from ..customer.models import Customer
+from ..productor.models import Productor
+from ..announcement.models import Announcement
 from .models import User
+
+class UserCreateAPIViewTestCase(APITestCase):
+    def setUp(self):
+        self.url_login = '/signup/customer/'
+
+    def tearDown(self):
+        User.objects.all().delete()
+
+    def test_create_valid_user(self):
+        user_data = {
+            "username": "João",
+            "email": "joao@email.com",
+            "phone_number": "61123456789",
+            "password": "teste"
+        }
+
+        response = self.client.post(
+            self.url_login,
+            {'user': user_data},
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
+
+    def test_create_invalid_user(self):
+        user_data = {
+            "username": "João",
+            "password": "teste"
+        }
+
+        response = self.client.post(
+            self.url_login,
+            {'user': user_data},
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Usuário criado com sucesso')
+
+    def test_create_duplicated_phone_number_user(self):
+        self.test_create_valid_user()
+        user_data = {
+            "username": "João",
+            "email": "joao@email.com",
+            "phone_number": "61123456789",
+            "password": "teste"
+        }
+
+        response = self.client.post(
+            self.url_login,
+            {'user': user_data},
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Falha na criação de usuário')
 
 class UserTokenObtainAPIViewTestCase(APITestCase):
     def create_user(self):
@@ -91,6 +147,7 @@ class UpdateUserViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
+            "phone_number": "61123456789",
 	        "password": "teste"
         }
 
@@ -165,6 +222,34 @@ class UpdateUserViewTestCase(APITestCase):
         
         self.assertEqual(response.status_code, 200, msg='Usuario nao atualizado')
     
+    def test_update_valid_phone_number_user(self):
+        new_information = {
+            "phone_number": "61987654321"
+        }
+
+        response = self.client.patch(
+            path=self.url_update_user,
+            data=new_information,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Número de celuar não existente')
+
+    def test_update_duplicate_phone_number_user(self):
+        new_information = {
+            "phone_number": "61123456789"
+        }
+
+        response = self.client.patch(
+            path=self.url_update_user,
+            data=new_information,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Número de celuar não existente')
+
     def test_empty_update_user(self):
         response = self.client.patch(
             path=self.url_update_user,
@@ -333,3 +418,158 @@ class ChangePasswordViewTestCase(APITestCase):
     def tearDown(self):
         Customer.objects.all().delete()
         User.objects.all().delete()
+
+class DeleteUserAPIViewTestCase(APITestCase):
+    def create_customer(self):
+        self.customer_data = {
+	        "username": "Luís",
+            "email": "luis@teste.com",
+	        "password": "teste"
+        }
+
+        url_signup = '/signup/customer/'
+
+        response = self.client.post(
+            url_signup,
+	        {'user': self.customer_data},
+	        format='json'
+	    )
+
+        self.assertEqual(response.status_code, 201, msg='Erro na criação do customer')
+
+    def create_productor(self):
+        self.productor_data = {
+	        "username": "João",
+            "email": "joao@teste.com",
+	        "password": "teste"
+        }
+
+        url_signup = '/signup/productor/'
+
+        response = self.client.post(
+            url_signup,
+	        {'user': self.productor_data},
+	        format='json'
+	    )
+
+        self.assertEqual(response.status_code, 201, msg='Erro na criação do productor')
+
+    def create_announcements(self):
+        self.announcement = {
+            "name": "Meio quilo de linguíça",
+            "type_of_product": "Linguiça artesanal e defumados",
+            "description": "Linquiça",
+            "price": 35.50,
+            "images": [],
+            "localizations": []
+        }
+    
+        url_create_announ = '/announcement/create'
+
+        response = self.client.post(
+            path=url_create_announ,
+	        data=self.announcement,
+	        format='json',
+	        **self.creds
+        )
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação do anúncio')
+
+    def favorite_announcement(self):
+        fav_announ = {
+            'email': self.productor_data['email'],
+            'announcementName': self.announcement['name']
+        }
+
+        announcement_fav_url = '/customer/fav-announcement'
+
+        response = self.client.patch(
+            path=announcement_fav_url,
+            format='json',
+            data=fav_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha no registro do favorito')
+
+    def create_tokens(self, user_data):
+        user_cred = {'email': user_data['email'], 'password': user_data['password']}
+
+        url_token = '/login/'
+
+        response = self.client.post(
+            url_token,
+	        user_cred,
+	        format='json'
+        )
+
+        self.creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
+
+    def setUp(self):
+        self.create_customer()
+        self.create_productor()
+        self.create_tokens(self.productor_data)
+        self.create_announcements()
+        self.create_tokens(self.customer_data)
+        self.favorite_announcement()
+
+        self.delete_user_url = '/users/delete'
+
+    def tearDown(self):
+        Customer.objects.all().delete()
+        Productor.objects.all().delete()
+        Announcement.objects.all().delete()
+
+    def test_delete_with_invalid_password_user(self):
+        delete_info = {
+            'password': 'invalid'
+        }
+
+        response = self.client.delete(
+            path=self.delete_user_url,
+            format='json',
+            data=delete_info,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Deleção correta do user')
+
+    def test_delete_valid_customer(self):
+        delete_info = {
+            'password': self.customer_data['password']
+        }
+
+        response = self.client.delete(
+            path=self.delete_user_url,
+            format='json',
+            data=delete_info,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 204, msg='Falha na deleção do user')
+
+    def test_delete_valid_productor(self):
+        self.create_tokens(self.productor_data)
+        delete_info = {
+            'password': self.productor_data['password']
+        }
+
+        response = self.client.delete(
+            path=self.delete_user_url,
+            format='json',
+            data=delete_info,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 204, msg='Falha na deleção do user')
+
+        self.create_tokens(self.customer_data)
+        list_fav_announcements_url = '/customer/favorites/announcements'
+        response = self.client.get(
+            path=list_fav_announcements_url,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na listagem de anúncios favoritos')
+        self.assertEqual(len(response.data['idAnunFav']), 0, msg='Falha na quantidade de anúncios listados')

@@ -104,6 +104,7 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
             "description": "Linquiça",
             "price": 35.50,
             "localizations": [],
+            "images": []
         }
     
         self.announcement_two = {
@@ -112,6 +113,7 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
             "description": "Defumados",
             "price": 10.15,
             "localizations": [],
+            "images": []
         }
 
         url_create_announ = '/announcement/create'

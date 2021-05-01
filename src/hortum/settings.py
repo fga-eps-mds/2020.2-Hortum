@@ -53,9 +53,9 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'hortum.announcement',
     'hortum.customer',
-    'hortum.picture',
     'hortum.productor',
     'hortum.users',
+    'hortum.complaint',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -148,7 +148,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = './images'
+MEDIA_URL = '/images/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

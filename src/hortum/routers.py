@@ -10,3 +10,14 @@ class CustomUpdateRouter(SimpleRouter):
             initkwargs={}
         )
     ]
+
+class CustomDeleteRouter(SimpleRouter):
+    routes = [
+        Route(
+            url=r'^{prefix}/?$',
+            mapping={'delete': 'destroy'},
+            name='{basename}-destroy',
+            detail=False,
+            initkwargs={}
+        )
+    ]

@@ -5,16 +5,14 @@ from ..users.models import User
 
 from ..users.serializer import UserSerializer
 from ..announcement.serializer import AnnouncementCreateSerializer, AnnouncementListSerializer
-from ..picture.serializer import PictureSerializer
 
 class ProductorSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
-    idPicture = PictureSerializer(many=False, read_only=True)
     announcements = AnnouncementCreateSerializer(read_only=True, many=True)
 
     class Meta:
         model = Productor
-        fields = ['user', 'idPicture', 'announcements']
+        fields = ['user', 'announcements']
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
@@ -25,17 +23,17 @@ class ProductorRetrieveSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username')
     email = serializers.EmailField(source='user.email')
     announcements = AnnouncementListSerializer(many=True)
-    idPicture = idPicture = PictureSerializer(many=False, read_only=True)
+    profile_picture = serializers.ImageField(source='user.profile_picture')
 
     class Meta:
         model = Productor
-        fields = ['username', 'email', 'idPicture', 'announcements']
+        fields = ['username', 'email', 'announcements', 'profile_picture']
         
 class ProductorListSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username')
     email = serializers.EmailField(source='user.email')
-    idPicture = PictureSerializer()
+    profile_picture = serializers.ImageField(source='user.profile_picture')
 
     class Meta:
         model = Productor
-        fields = ['username', 'email', 'idPicture']
+        fields = ['username', 'email', 'profile_picture']

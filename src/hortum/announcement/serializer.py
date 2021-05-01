@@ -2,17 +2,16 @@ from rest_framework import serializers
 
 from django.db.models import Q
 
-from .models import Announcement, Localization
+from .models import Announcement, AnnouncementImage, Localization
 
-from ..picture.serializer import PictureSerializer
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
-    idPicture = PictureSerializer(many=True, read_only=True)
     localizations = serializers.ListField(child=serializers.CharField(), allow_empty=True, write_only=True)
+    images = serializers.ListField(child=serializers.ImageField(), write_only=True, allow_empty=True)
 
     class Meta:
         model = Announcement
-        fields = ['idPicture', 'likes', 'name', 'type_of_product', 'description', 'price', 'inventory', 'localizations']
+        fields = ['likes', 'name', 'type_of_product', 'description', 'price', 'inventory', 'localizations', 'images']
 
     def validate_name(self, name):
         if self.context['productor'].announcements.all().filter(name=name).exists():
@@ -21,17 +20,18 @@ class AnnouncementCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         localizations = validated_data.pop('localizations')
+        images = validated_data.pop('images')
         announcement = Announcement.objects.create(idProductor=self.context['productor'], **validated_data)
+        [AnnouncementImage.objects.create(idImage=announcement, picture=picture) for picture in images]
         [Localization.objects.create(idAnnoun=announcement, adress=local) for local in localizations]
         return announcement
 
 class AnnouncementUpdateSerializer(serializers.ModelSerializer):
-    idPicture = PictureSerializer(many=True, read_only=True)
     localizations = serializers.ListField(child=serializers.CharField(), allow_empty=True, write_only=True)
 
     class Meta:
         model = Announcement
-        fields = ['idPicture', 'name', 'type_of_product', 'description', 'price', 'inventory', 'localizations']
+        fields = ['name', 'type_of_product', 'description', 'price', 'inventory', 'localizations']
 
     def validate_name(self, name):
         if self.context['queryset'].filter(name=name).exists():
@@ -46,15 +46,21 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
                 if not instance.__class__.objects.filter(localizations__adress=local).exists():
                     Localization.objects.create(idAnnoun=instance, adress=local)
             instance.save()
-        super().update(instance, validated_data)
-        return instance
+        return super().update(instance, validated_data)
+
+class AnnouncementImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnnouncementImage
+        fields = ['picture']
 
 class AnnouncementListSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True, source='idProductor.user.username')
     email = serializers.EmailField(required=True, source='idProductor.user.email')
-    idPictureProductor = PictureSerializer(many=False, read_only=True, source='idProductor.idPicture')
     localizations = serializers.SlugRelatedField(many=True, slug_field='adress', read_only=True)
-
+    phone_number = serializers.CharField(required=True, source='idProductor.user.phone_number')
+    pictureProductor = serializers.ImageField(required=True, source='idProductor.user.profile_picture')
+    images = AnnouncementImageSerializer(many=True)
+    
     class Meta:
         model = Announcement
-        fields = ['email', 'username', 'idPictureProductor', 'name', 'type_of_product', 'description', 'price', 'idPicture', 'likes', 'localizations']
+        fields = ['email', 'username', 'phone_number', 'pictureProductor', 'name', 'type_of_product', 'description', 'price', 'likes', 'images', 'localizations']

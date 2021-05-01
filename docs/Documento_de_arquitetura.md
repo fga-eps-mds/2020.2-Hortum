@@ -19,6 +19,7 @@ Data|Versão|Descrição|Autor
 29/03/2021|1.7.2|Padronização da Visão Geral|Vitor Lamego
 29/03/2021|1.7.3|Revisão do documento|Joao Moura e Matheus Calixto
 04/04/2021|1.7.4|Revisão tópico 6|Carlos Eduardo
+25/04/2021|1.8|Mudanças na visão de implementação e casos de uso|Carlos Eduardo
 
 ## 1. Introdução
 
@@ -157,7 +158,7 @@ Essa resposta será obtida pelo Flutter, que com os dados recebidos irá disponi
 <p align = "justify"> &emsp;&emsp; Especialização de usuário que compreende funcionalidades relacionadas ao anúncio e gerenciamento de produtos e localizações.</p>
 
 #### 5.1.4 Consumidor
-<p align = "justify"> &emsp;&emsp; Especialização de usuário que abrange as funcionalidades de visualização e pesquisa de produtos, produtores e localizações, além de favoritá-los e/ou curti-los.</p>
+<p align = "justify"> &emsp;&emsp; Especialização de usuário que abrange as funcionalidades de visualização e pesquisa de produtos, produtores, reclamações e localizações, além de favoritá-los e/ou curti-los e criar reclamações.</p>
 
 ### 5.2 Diagrama de Casos de Uso
 ![Diagrama de Casos de Uso](img/diagrama_casos_de_uso.png)
@@ -174,6 +175,7 @@ Essa resposta será obtida pelo Flutter, que com os dados recebidos irá disponi
 - Anúncio
 - Imagem
 - Localização
+- Reclamação
 
 <p align = "justify"> &emsp;&emsp; O usuário pode ser tanto um comprador quanto um produtor, que necessita de autenticação para acessar algumas áreas do aplicativo.</p>
 
@@ -189,6 +191,8 @@ Essa resposta será obtida pelo Flutter, que com os dados recebidos irá disponi
 
 <p align = "justify"> &emsp;&emsp; O Produtor terá a possibilidade de adicionar uma ou mais localizações. </p>
 
+<p align = "justify"> &emsp;&emsp; O Comprador terá a possibilidade de adicionar uma Reclamação contra vários Produtores. </p>
+
 #### 6.1.3 Relacionamentos
 <p align = "justify"> &emsp;&emsp; Um Comprador ou Produtor poderá ter foto de perfil ou não, mas uma foto pertence a apenas 1 Comprador ou Produtor. Cardinalidade(0,n)</p>
 
@@ -196,11 +200,18 @@ Essa resposta será obtida pelo Flutter, que com os dados recebidos irá disponi
 
 <p align = "justify"> &emsp;&emsp; Um Comprador pode favoritar vários Produtores, e um Produtor pode ser favoritado por vários Compradores. Cardinalidade(0,n)</p>
 
+<p align = "justify"> &emsp;&emsp; Um Comprador pode criar uma reclamação para cada Produtor. Cardinalidade(0,n)</p>
+
+<p align = "justify"> &emsp;&emsp; Um Produtor pode ter várias reclamações ou não, mas cada reclamação pertence a apenas 1 Produtor. Cardinalidade(0,n)</p>
+
+<p align = "justify"> &emsp;&emsp; Uma Reclamação poderá ter foto ou não, mas uma foto pertence a apenas 1 Reclamação. Cardinalidade(0,n)</p>
+
 <p align = "justify"> &emsp;&emsp; Um Produtor pode possuir vários Anúncios, mas um Anúncio pertence a apenas 1 Produtor. Cardinalidade(1,n)</p>
 
 <p align = "justify"> &emsp;&emsp; Um Anúncio pode ter nenhuma foto ou várias, mas cada foto pertence a apenas 1 Anúncio. Cardinalidade(0,n)</p>
 
 <p align = "justify"> &emsp;&emsp; Um Produtor pode ter várias localizações, mas cada localização pertence a apenas 1 Produtor. Cardinalidade(1,n)</p>
+
 
 ### 6.2 Diagrama Entidade-Relacionamento (DER)
 ![DER](img/diagrama_entidade_relacionamentos.png)

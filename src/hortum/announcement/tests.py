@@ -44,7 +44,8 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             "type_of_product": "Banana",
             "description": "vendendo banana",
             "price": 10.0,
-            "localizations": []
+            "localizations": [],
+            "images": []
         }
         self.url_announcement = '/announcement/create'
     
@@ -73,7 +74,8 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             "type_of_product": "Banana",
             "description": "banana à venda",
             "price": 12.5,
-            "localizations": []
+            "localizations": [],
+            "images": []
         }
 
         self.client.post(
@@ -148,7 +150,8 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
             "price": 35.50,
-            "localizations": []
+            "localizations": [],
+            "images": []
         }
 
         url_create_announ = '/announcement/create'
@@ -297,7 +300,8 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
             "price": 35.50,
-            "localizations": []
+            "localizations": [],
+            "images": []
         }
     
         self.announcement_data_extra = {
@@ -305,7 +309,8 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Defumados",
             "price": 10.15,
-            "localizations": []
+            "localizations": [],
+            "images": []
         }
 
         url_create_announ = '/announcement/create'
@@ -468,7 +473,8 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
             "price": 35.50,
-            "localizations": []
+            "localizations": [],
+            "images": []
         }
     
         self.announcement_two = {
@@ -476,8 +482,9 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Defumados",
             "price": 10.15,
+            "inventory": False,
             "localizations": [],
-            "inventory": False
+            "images": []
         }
 
         url_create_announ = '/announcement/create'

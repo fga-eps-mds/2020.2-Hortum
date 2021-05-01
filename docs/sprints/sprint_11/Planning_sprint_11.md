@@ -22,13 +22,13 @@ A Sprint 11 tem os seguintes objetivos:
 |#193|Adição de testes ao frontend|Vitor Lamego, Carlos e Lucas|8
 |#194|Adição de número de telefone do produtor|João Pedro e Victor Lima|5
 |#195|Gerar documentação sobre review sprint 10|João Pedro|2
-|3196|Gerar documentação sobre planning sprint 11|João Pedro|2
+|#196|Gerar documentação sobre planning sprint 11|João Pedro|2
 
 
 ## Gerência de Riscos
 | ID | Descrição | Probabilidade | Impacto | Nível de Risco | Ação
 |--|--|--|--|--|--|
-|RS01|Baixa produtividade dos integrantes|2|4|8|Buscar implementar nos finais de semanas ao menos um pouco
+|RS01|Baixa produtividade dos integrantes|1|4|4|Buscar implementar nos finais de semanas ao menos um pouco
 |RS02|Não entendimento da visão do projeto|1|4|4|
 |RS03|Falta de comprometimento|1|4|4|
 |RS04|Tarefas em outras disciplinas|2|3|6|
