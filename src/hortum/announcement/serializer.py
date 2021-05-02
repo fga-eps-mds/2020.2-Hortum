@@ -18,6 +18,11 @@ class AnnouncementCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
         return name
 
+    def validate_localizations(self, localizations):
+        if len(localizations) > 3:
+            raise serializers.ValidationError('Mais de três localizações para um único anúncio')
+        return localizations
+
     def create(self, validated_data):
         localizations = validated_data.pop('localizations')
         images = validated_data.pop('images')
@@ -38,12 +43,17 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
         return name
 
+    def validate_localizations(self, localizations):
+        if len(localizations) > 3:
+            raise serializers.ValidationError('Mais de três localizações para um único anúncio')
+        return localizations
+
     def update(self, instance, validated_data):
         if 'localizations' in validated_data:
             localizations = validated_data.pop('localizations')
             Localization.objects.filter(Q(idAnnoun=instance) & ~Q(adress=localizations)).delete()
             for local in localizations:
-                if not instance.__class__.objects.filter(localizations__adress=local).exists():
+                if not instance.__class__.objects.filter(name=instance.name, localizations__adress=local).exists():
                     Localization.objects.create(idAnnoun=instance, adress=local)
             instance.save()
         return super().update(instance, validated_data)
