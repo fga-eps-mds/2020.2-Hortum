@@ -111,6 +111,23 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             msg='Criando anúncio sem autenticação'
         )
 
+    def test_create_announcement_with_four_locations(self):
+        self.announcement_data['localizations'] = [
+            "teste 1",
+            "teste 2",
+            "teste 3",
+            "teste 4"
+        ]
+
+        response = self.client.post(
+            self.url_announcement,
+            self.announcement_data,
+            format='json',
+            **self.auth_token
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Anúncio criado com sucesso')
+
 class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
     def create_user(self):
         self.user_data = {
@@ -260,6 +277,25 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         )
 
         self.assertEqual(response.status_code, 200, msg='Falha na alteração das localizações')
+        
+    def test_update_announcement_with_four_locations(self):
+        new_data = {
+            "localizations": [
+                "teste 1",
+                "teste 2",
+                "teste 3",
+                "teste 4"
+            ]
+        }
+
+        response = self.client.patch(
+            self.url_update_announ,
+            new_data,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Anúncio atualizado com sucesso')
 
 class AnnouncementsListAPIViewTestCase(APITestCase):
     def create_user(self):
