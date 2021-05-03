@@ -8,6 +8,7 @@ routerRegister.register(r'', viewsets.CustomerRegistrationAPIView, basename='cus
 
 router = CustomUpdateRouter()
 router.register(r'fav-announcement', viewsets.FavoritesAnnouncementsAPIView, basename='favAnnouncement')
+router.register(r'fav-productor', viewsets.FavoriteProductorsAPIView, basename='favProductor')
 
 listRouter = SimpleRouter()
 listRouter.register(r'favorites', viewsets.CustomerListFavoritesAPIView, basename='listFavAnnouncements')

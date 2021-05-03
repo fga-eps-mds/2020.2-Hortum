@@ -63,6 +63,10 @@ nav:
             - Review: "sprints/sprint_9/Review_sprint_9.md"
         - Sprint 10:
             - Planning: "sprints/sprint_10/Planning_sprint_10.md"
+            - Review: "sprints/sprint_10/Review_sprint_10.md"
+        - Sprint 11:
+            - Planning: "sprints/sprint_11/Planning_sprint_11.md"
+            - Review: "sprints/sprint_11/Review_sprint_11.md"
     - Contribuição:
         - Como contribuir: "CONTRIBUTING.md"
         - Política de Contribuição: "Politica_de_Contribuicao.md"

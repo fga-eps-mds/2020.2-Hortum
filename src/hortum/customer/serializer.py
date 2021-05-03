@@ -6,19 +6,17 @@ from ..announcement.models import Announcement
 from ..users.models import User
 
 from ..users.serializer import UserSerializer
-from ..picture.serializer import PictureSerializer
 from ..announcement.serializer import AnnouncementListSerializer
 from ..productor.serializer import ProductorListSerializer
 
 class CustomerSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
-    idPicture = PictureSerializer(read_only=True)
     idAnunFav = AnnouncementListSerializer(many=True, read_only=True)
     idProdFav = ProductorListSerializer(many=True, read_only=True)
 
     class Meta:
         model = Customer
-        fields = ['user', 'idPicture', 'idAnunFav', 'idProdFav']
+        fields = ['user', 'idAnunFav', 'idProdFav']
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
@@ -49,6 +47,18 @@ class CustomerFavoritesAnnouncementsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = ['idAnunFav']
+
+class CustomerAddProductorSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required=True)
+
+    class Meta:
+        model = Customer
+        fields = ['email']
+
+    def validate_email(self, email):
+        if not Productor.objects.filter(user__email=email).exists():
+            raise serializers.ValidationError('Email de produtor inexistente')
+        return email
 
 class CustomerFavoritesProductorsSerializer(serializers.ModelSerializer):
     idProdFav = ProductorListSerializer(many=True, read_only=True)

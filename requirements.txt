@@ -10,3 +10,4 @@ djangorestframework-simplejwt
 django_heroku
 gunicorn
 coverage
+drf-yasg
