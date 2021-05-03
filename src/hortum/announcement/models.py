@@ -5,7 +5,7 @@ from ..productor.models import Productor
 
 class Announcement(models.Model):
     AVICULTURA = [
-        ('Frangos Caipira', 'Frangos Caipira'),
+        ('Frango Caipira', 'Frango Caipira'),
         ('Galinhas', 'Galinhas'),
         ('Ovos de Galinha', 'Ovos de Galinha'),
         ('Ovos férteis', 'Ovos férteis'),
@@ -27,7 +27,7 @@ class Announcement(models.Model):
     ]
 
     DERIVADOS_DE_CANA = [
-        ('Açúcar Mascavo', 'Açúcar Mascavo'),
+        ('Açúcar', 'Açúcar'),
         ('Melado', 'Melado'),
         ('Rapadura', 'Rapadura'),
     ]
@@ -37,11 +37,6 @@ class Announcement(models.Model):
         ('Farinha de Tapioca', 'Farinha de Tapioca'),
         ('Massa de Tapioca', 'Massa de Tapioca'),
         ('Massa para Bolos', 'Massa para Bolos'),
-    ]
-
-    DOCES = [
-        ('Doce de Corte', 'Doce de Corte'),
-        ('Doce Pastoso', 'Doce Pastoso'),
     ]
 
     LATICINIOS = [
@@ -56,15 +51,17 @@ class Announcement(models.Model):
         ('Café', 'Café'),
         ('Cogumelos', 'Cogumelos'),
         ('Derivados de trigo', 'Derivados de trigo'),
-        ('Desidatrados', 'Desidratados'),    
+        ('Desidatrados', 'Desidratados'),
+        ('Doces', 'Doces'),    
         ('Flores', 'Flores'),
         ('Frutas', 'Frutas'),
         ('Graos', 'Graos'),
         ('Hortaliças', 'Hortaliças'),
+        ('Legumes', 'Legumes'),
         ('Outros', 'Outros'),
     ]
 
-    TYPE_OF_PRODUCTS_CHOICES = AVICULTURA + CARNE + CONGELADOS + DERIVADOS_DE_CANA + DERIVADOS_DE_MANDIOCA + DOCES + LATICINIOS + OTHERS
+    TYPE_OF_PRODUCTS_CHOICES = AVICULTURA + CARNE + CONGELADOS + DERIVADOS_DE_CANA + DERIVADOS_DE_MANDIOCA + LATICINIOS + OTHERS
 
     idProductor = models.ForeignKey(Productor, on_delete=models.CASCADE, related_name='announcements')
     likes = models.IntegerField(default=0)
