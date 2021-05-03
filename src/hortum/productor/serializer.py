@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Productor, Localization
+from .models import Productor
 from ..users.models import User
 
 from ..users.serializer import UserSerializer
@@ -37,8 +37,3 @@ class ProductorListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Productor
         fields = ['username', 'email', 'profile_picture']
-
-class LocalizationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Localization
-        fields = ['adress']

@@ -460,7 +460,8 @@ class DeleteUserAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
             "price": 35.50,
-            "images": []
+            "images": [],
+            "localizations": []
         }
     
         url_create_announ = '/announcement/create'
