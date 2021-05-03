@@ -4,6 +4,7 @@ from ..customer.models import Customer
 from ..productor.models import Productor
 from ..announcement.models import Announcement
 from .models import User
+from ..encode import encode_string
 
 class UserCreateAPIViewTestCase(APITestCase):
     def setUp(self):
@@ -583,3 +584,60 @@ class DeleteUserAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200, msg='Falha na listagem de anúncios favoritos')
         self.assertEqual(len(response.data['idAnunFav']), 0, msg='Falha na quantidade de anúncios listados')
+
+class VerifyAccountViewTestCase(APITestCase):
+    def create_user(self):
+        self.user_data = {
+	        "username": "Luís",
+            "email": "luis@teste.com",
+	        "password": "teste",
+            "phone_number": "61121456789"
+        }
+
+        url_signup = '/signup/customer/'
+
+        self.client.post(
+            url_signup,
+	        {'user': self.user_data},
+	        format='json'
+	    )
+    
+    def user_login(self):
+        user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
+
+        url_login = '/login/'
+
+        self.login_response = self.client.post(
+            url_login,
+	        user_cred,
+	        format='json'
+        )
+
+    def setUp(self):
+        self.create_user()
+
+    def test_user_not_verified(self):
+        self.user_login()        
+        self.assertEqual(self.login_response.status_code, 403, msg='Usuário logou sem ser verificado')
+
+    def test_user_verified(self):
+        verify_url= '/users/verify/'+encode_string(self.user_data['email'])
+
+        verify_response = self.client.get(
+            verify_url,
+	        format='json'
+        )
+        
+        self.assertEqual(verify_response.status_code, 301, msg='Usuario não conseguiu ser verificado')
+
+    def test_user_verified_login(self):
+        verify_url= '/users/verify/'+encode_string(self.user_data['email'])
+
+        verify_response = self.client.get(
+            verify_url,
+	        format='json'
+        )
+        
+    def tearDown(self):
+        Customer.objects.all().delete()
+        User.objects.all().delete()
