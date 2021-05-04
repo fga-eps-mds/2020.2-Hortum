@@ -4,64 +4,33 @@ from ..productor.models import Productor
 
 
 class Announcement(models.Model):
-    AVICULTURA = [
-        ('Frango Caipira', 'Frango Caipira'),
-        ('Galinhas', 'Galinhas'),
-        ('Ovos de Galinha', 'Ovos de Galinha'),
-        ('Ovos férteis', 'Ovos férteis'),
-    ]
 
-    CARNE = [
-        ('Carne bovina', 'Carne bovina'),
-        ('Carne suína', 'Carne suína'),
-        ('Carne Caprina/Ovina', 'Carne Caprina/Ovina'),
-        ('Carne de Frango', 'Carne de Frango'),
-        ('Carne de Outras Aves', 'Carne de Outras Aves'),
-        ('Peixes', 'Peixes'),
-    ]
-
-    CONGELADOS = [
-        ('Polpa de frutas', 'Polpa de frutas'),
-        ('Pratos congelados', 'Pratos congelados'),
-        ('Sorvetes', 'Sorvetes'),
-    ]
-
-    DERIVADOS_DE_CANA = [
-        ('Açúcar', 'Açúcar'),
-        ('Melado', 'Melado'),
-        ('Rapadura', 'Rapadura'),
-    ]
-
-    DERIVADOS_DE_MANDIOCA = [
-        ('Farinha de Mandioca', 'Farinha de Mandioca'),
-        ('Farinha de Tapioca', 'Farinha de Tapioca'),
-        ('Massa de Tapioca', 'Massa de Tapioca'),
-        ('Massa para Bolos', 'Massa para Bolos'),
-    ]
-
-    LATICINIOS = [
-        ('Iogurte', 'Iogurte'),
-        ('Queijo', 'Queijo'),
-        ('Leite', 'Leite'),
-    ]
-
-    OTHERS = [
+    TYPE_OF_PRODUCTS_CHOICES = [
         ('Artesanato', 'Artesanato'),
+        ('Açúcar', 'Açúcar'),
         ('Bebidas', 'Bebidas'),
         ('Café', 'Café'),
+        ('Carnes', 'Carnes'),
         ('Cogumelos', 'Cogumelos'),
         ('Derivados de trigo', 'Derivados de trigo'),
+        ('Derivados de mandioca', 'Derivados de mandioca'),
+        ('Derivados de cana', 'Derivados de cana'),
         ('Desidatrados', 'Desidratados'),
         ('Doces', 'Doces'),    
         ('Flores', 'Flores'),
+        ('Frango Caipira', 'Frango Caipira'),
         ('Frutas', 'Frutas'),
         ('Graos', 'Graos'),
         ('Hortaliças', 'Hortaliças'),
+        ('Laticinios', 'Laticinios'),
         ('Legumes', 'Legumes'),
+        ('Ovos de Galinha', 'Ovos de Galinha'),
+        ('Peixes', 'Peixes'),
+        ('Polpa de frutas', 'Polpa de frutas'),
+        ('Pratos congelados', 'Pratos congelados'),
+        ('Sorvetes', 'Sorvetes'),
         ('Outros', 'Outros'),
     ]
-
-    TYPE_OF_PRODUCTS_CHOICES = AVICULTURA + CARNE + CONGELADOS + DERIVADOS_DE_CANA + DERIVADOS_DE_MANDIOCA + LATICINIOS + OTHERS
 
     idProductor = models.ForeignKey(Productor, on_delete=models.CASCADE, related_name='announcements')
     likes = models.IntegerField(default=0)
