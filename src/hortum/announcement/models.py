@@ -16,6 +16,7 @@ class Announcement(models.Model):
         ('Derivados de mandioca', 'Derivados de mandioca'),
         ('Derivados de cana', 'Derivados de cana'),
         ('Desidatrados', 'Desidratados'),
+        ('Defumados', 'Defumados'),
         ('Doces', 'Doces'),
         ('Flores', 'Flores'),
         ('Frango Caipira', 'Frango Caipira'),
