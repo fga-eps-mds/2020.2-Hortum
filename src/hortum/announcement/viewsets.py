@@ -6,7 +6,7 @@ from ..users.models import User
 
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins, permissions
-from rest_framework.exceptions import ParseError
+from rest_framework.exceptions import ParseError, NotFound
 
 from ..encode import decode_string
 
@@ -48,9 +48,16 @@ class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
 	
     def get_queryset(self):
         queryset = Announcement.objects.filter(inventory=True)
-        if self.kwargs:
-            queryset = queryset.filter(name__icontains=self.kwargs['announcementName'])
-        return queryset
+        query_params = self.request.GET
+        if len(query_params) == 0:
+            return queryset
+        if 'filter' and 'value' not in query_params or len(query_params) != 2:
+            raise NotFound({'query_params': 'Parametros passados para a query incoerentes'})
+        if query_params.get('filter') == 'name':
+            return queryset.filter(name__icontains=self.request.query_params.get('value'))
+        elif query_params.get('filter') == 'localizations':
+            return queryset.filter(localizations__adress__icontains=self.request.query_params.get('value')).distinct()
+        raise ParseError({'filter': 'Campo para filtragem inexistente'})
 
 class AnnouncementProductorListAPIView(GenericViewSet, mixins.ListModelMixin):
     permission_classes = (permissions.IsAuthenticated,)
