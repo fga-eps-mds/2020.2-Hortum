@@ -62,3 +62,13 @@ class AnnouncementProductorListAPIView(GenericViewSet, mixins.ListModelMixin):
             raise ParseError({'ProductorEmail': 'Email inexistente de produtor'})
         query = Announcement.objects.filter(idProductor__user__email=email)
         return query if email == self.request.user.get_username() else query.filter(inventory=True)
+
+class AnnouncementListCategoryView(GenericViewSet, mixins.ListModelMixin):
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = serializer.AnnouncementListSerializer
+
+    def get_queryset(self):
+        queryset = Announcement.objects.filter(inventory=True)
+        if self.kwargs:
+            queryset = queryset.filter(type_of_product__icontains=self.kwargs['type_of_product'])
+        return queryset
