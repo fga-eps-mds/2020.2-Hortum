@@ -68,4 +68,6 @@ class AnnouncementListCategoryView(GenericViewSet, mixins.ListModelMixin):
     serializer_class = serializer.AnnouncementListSerializer
 
     def get_queryset(self):
+        if not (self.kwargs['type_of_product'],  self.kwargs['type_of_product']) in Announcement.TYPE_OF_PRODUCTS_CHOICES:
+            raise ParseError({'Type_of_product': 'Categoria inexistente!'})
         return Announcement.objects.filter(inventory=True, type_of_product=self.kwargs['type_of_product'])
