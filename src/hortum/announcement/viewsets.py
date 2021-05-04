@@ -68,7 +68,4 @@ class AnnouncementListCategoryView(GenericViewSet, mixins.ListModelMixin):
     serializer_class = serializer.AnnouncementListSerializer
 
     def get_queryset(self):
-        queryset = Announcement.objects.filter(inventory=True)
-        if self.kwargs:
-            queryset = queryset.filter(type_of_product__icontains=self.kwargs['type_of_product'])
-        return queryset
+        return Announcement.objects.filter(inventory=True, type_of_product=self.kwargs['type_of_product'])
