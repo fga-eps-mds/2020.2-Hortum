@@ -342,7 +342,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
     
         self.announcement_data_extra = {
             "name": "Meio quilo de defumado",
-            "type_of_product": "Linguiça artesanal e defumados",
+            "type_of_product": "Defumados",
             "description": "Defumados",
             "price": 10.15,
             "localizations": [],
