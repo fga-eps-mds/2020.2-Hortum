@@ -630,14 +630,6 @@ class VerifyAccountViewTestCase(APITestCase):
         
         self.assertEqual(verify_response.status_code, 301, msg='Usuario não conseguiu ser verificado')
 
-    def test_user_verified_login(self):
-        verify_url= '/users/verify/'+encode_string(self.user_data['email'])
-
-        verify_response = self.client.get(
-            verify_url,
-	        format='json'
-        )
-        
     def tearDown(self):
         Customer.objects.all().delete()
         User.objects.all().delete()
