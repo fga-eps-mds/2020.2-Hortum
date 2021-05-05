@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 from hortum.users import viewsets
+from hortum.users.forms import CustomPasswordForm
 from django.conf.urls import url
 
 from django.conf.urls.static import static
@@ -37,16 +38,22 @@ urlpatterns = [
     path('customer/', include('hortum.customer.urls')),
     path('users/', include('hortum.users.urls')),
     path('complaint/', include('hortum.complaint.urls')),
+
     path('reset_password/', auth_views.PasswordResetView.as_view(
        template_name="hortum/password_reset.html",
        html_email_template_name="hortum/email_reset_password.html",
        email_template_name="hortum/email_reset_password.html"), name='reset_password'),
+
     path('reset_password_done/', auth_views.PasswordResetDoneView.as_view(
        template_name="hortum/password_reset_done.html"), name='password_reset_done'),
+
     path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(
-       template_name="hortum/password_reset_confirm.html"), name='password_reset_confirm'),
+       template_name="hortum/password_reset_confirm.html",
+       form_class=CustomPasswordForm), name='password_reset_confirm'),
+
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(
       template_name="hortum/password_reset_complete.html"), name='password_reset_complete'),
+      
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
