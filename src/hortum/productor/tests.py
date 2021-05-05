@@ -1,8 +1,6 @@
 from rest_framework.test import APITestCase
 
 from .models import Productor
-from ..customer.models import Customer
-from ..encode import encode_string
 
 class ProductorRegisterAPIViewTestCase(APITestCase):
     def setUp(self):

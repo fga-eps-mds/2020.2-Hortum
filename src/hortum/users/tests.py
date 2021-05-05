@@ -617,11 +617,11 @@ class VerifyAccountViewTestCase(APITestCase):
         self.create_user()
 
     def test_user_not_verified(self):
-        self.user_login()        
+        self.user_login()
         self.assertEqual(self.login_response.status_code, 403, msg='Usuário logou sem ser verificado')
 
     def test_user_verified(self):
-        verify_url= '/users/verify/'+encode_string(self.user_data['email'])
+        verify_url = '/users/verify/'+encode_string(self.user_data['email'])
 
         verify_response = self.client.get(
             verify_url,

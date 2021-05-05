@@ -238,7 +238,7 @@ class ComplaintListAPIViewTestCase(APITestCase):
 
 class ReclmationDeleteAPIViewTestCase(APITestCase):
     def create_admin(self):
-        admin = User(username='admin', email='admin@teste.com', is_verified= True, is_staff=True)
+        admin = User(username='admin', email='admin@teste.com', is_verified=True, is_staff=True)
         admin.set_password('test')
         admin.save()
         self.admin_data = {

@@ -24,10 +24,6 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
 	        format='json'
 	    )
 
-        # self.client.get(
-        #     '/users/verify' + 
-        # )
-
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
 

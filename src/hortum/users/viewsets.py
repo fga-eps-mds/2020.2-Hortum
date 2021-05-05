@@ -3,7 +3,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import User
 from . import serializer
 
-from .serializer import ChangePasswordSerializer, UpdateUserSerializer
 from .permissions import IsVerified
 
 from rest_framework import permissions, mixins, status

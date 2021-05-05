@@ -8,7 +8,7 @@ from rest_framework import mixins
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 
-from ..encode import decode_string, encode_string
+from ..encode import decode_string
 
 class ProductorRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
 	'''
