@@ -106,6 +106,7 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
             "price": 35.50,
+            "localizations": [],
             "images": []
         }
     
@@ -114,6 +115,7 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Defumados",
             "price": 10.15,
+            "localizations": [],
             "images": []
         }
 

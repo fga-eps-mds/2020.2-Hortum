@@ -45,6 +45,7 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             "type_of_product": "Banana",
             "description": "vendendo banana",
             "price": 10.0,
+            "localizations": [],
             "images": []
         }
         self.url_announcement = '/announcement/create'
@@ -74,6 +75,7 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             "type_of_product": "Banana",
             "description": "banana à venda",
             "price": 12.5,
+            "localizations": [],
             "images": []
         }
 
@@ -109,6 +111,23 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             401,
             msg='Criando anúncio sem autenticação'
         )
+
+    def test_create_announcement_with_four_locations(self):
+        self.announcement_data['localizations'] = [
+            "teste 1",
+            "teste 2",
+            "teste 3",
+            "teste 4"
+        ]
+
+        response = self.client.post(
+            self.url_announcement,
+            self.announcement_data,
+            format='json',
+            **self.auth_token
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Anúncio criado com sucesso')
 
 class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
     def create_user(self):
@@ -150,6 +169,7 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
             "price": 35.50,
+            "localizations": [],
             "images": []
         }
 
@@ -214,7 +234,10 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         new_data = {
             "name": "Meio quilo de defumados",
             "description": "Defumados",
-            "price": 60.15
+            "price": 60.15,
+            "localizations": [
+                "new local 1"
+            ]
         }
 
         response = self.client.patch(
@@ -226,7 +249,7 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200, msg='Falha na alteração do anúncio')
 
-    def test_update_name_in_database_announcement(self):
+    def test_update_duplicated_name_announcement(self):
         new_data = {
             "name": "Meio quilo de linguíça"
         }
@@ -239,6 +262,42 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         )
 
         self.assertEqual(response.status_code, 400, msg='Nome não existente no banco')
+
+    def test_update_localizations_announcement(self):
+        new_data = {
+            "localizations": [
+                "new local 1",
+                "new local 2"
+            ]
+        }
+
+        response = self.client.patch(
+            path=self.url_update_announ,
+            format='json',
+            data=new_data,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na alteração das localizações')
+        
+    def test_update_announcement_with_four_locations(self):
+        new_data = {
+            "localizations": [
+                "teste 1",
+                "teste 2",
+                "teste 3",
+                "teste 4"
+            ]
+        }
+
+        response = self.client.patch(
+            self.url_update_announ,
+            new_data,
+            format='json',
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Anúncio atualizado com sucesso')
 
 class AnnouncementsListAPIViewTestCase(APITestCase):
     def create_user(self):
@@ -280,6 +339,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
             "price": 35.50,
+            "localizations": [],
             "images": []
         }
     
@@ -288,6 +348,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Defumados",
             "price": 10.15,
+            "localizations": [],
             "images": []
         }
 
@@ -453,6 +514,7 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
             "price": 35.50,
+            "localizations": [],
             "images": []
         }
     
@@ -462,6 +524,7 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
             "description": "Defumados",
             "price": 10.15,
             "inventory": False,
+            "localizations": [],
             "images": []
         }
 
