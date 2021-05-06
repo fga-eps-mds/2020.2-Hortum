@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'hortum',
     'hortum.announcement',
     'hortum.customer',
     'hortum.productor',
@@ -170,3 +171,9 @@ SIMPLE_JWT = {
 }
 
 django_heroku.settings(locals())
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
