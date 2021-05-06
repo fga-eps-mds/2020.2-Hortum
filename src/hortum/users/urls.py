@@ -10,10 +10,11 @@ router = CustomUpdateRouter()
 router.register(r'change-password', viewsets.ChangePasswordView, basename='changePasswordUser')
 router.register(r'update', viewsets.UpdateUserView, basename='updateUser')
 
-routerVerify = routers.SimpleRouter(trailing_slash=True)
-routerVerify.register(r'verify', viewsets.VerifyAccountView, basename='verifyEmail')
 customRouter = CustomDeleteRouter()
 customRouter.register(r'delete', viewsets.UserDeleteAPIView, basename='deleteUser')
+
+routerVerify = routers.SimpleRouter(trailing_slash=True)
+routerVerify.register(r'verify', viewsets.VerifyAccountView, basename='verifyEmail')
 
 urlpatterns = [
     path('customer/', include(customerRegister.urls)),

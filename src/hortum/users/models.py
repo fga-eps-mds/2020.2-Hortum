@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.mail import send_mail
+
 from ..settings import EMAIL_HOST_USER as email_sender
+
 from ..encode import encode_string
 
 def upload_image(instance, filename):
@@ -22,7 +24,6 @@ class User(AbstractUser):
     def send_verification_email(request, email):
         encoded_email = encode_string(email)
         url_verify = 'http://' + request.get_host() + '/users/verify/' + encoded_email
-        print('ASDASD:', url_verify)
         send_mail(
             'Hortum - verifique seu email',
 			'Você está a um passo de acessar o Hortum, clique no link abaixo para concluir seu registro:\n' + url_verify,
