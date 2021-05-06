@@ -34,8 +34,7 @@ class VerifyAccountView(GenericViewSet, mixins.RetrieveModelMixin):
     lookup_field = 'encoded_email'
 
     def get_object(self):
-        email = decode_string(self.kwargs['encoded_email'])
-        return User.objects.get(email=email)
+        return User.objects.get(email=decode_string(self.kwargs['encoded_email']))
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()

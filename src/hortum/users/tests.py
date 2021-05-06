@@ -4,7 +4,6 @@ from ..customer.models import Customer
 from ..productor.models import Productor
 from ..announcement.models import Announcement
 from .models import User
-from ..encode import encode_string
 
 class UserCreateAPIViewTestCase(APITestCase):
     def setUp(self):
@@ -620,16 +619,6 @@ class VerifyAccountViewTestCase(APITestCase):
     def test_user_not_verified(self):
         self.user_login()
         self.assertEqual(self.login_response.status_code, 403, msg='Usuário logou sem ser verificado')
-
-    def test_user_verified(self):
-        verify_url = '/users/verify/'+encode_string(self.user_data['email'])
-
-        verify_response = self.client.get(
-            verify_url,
-	        format='json'
-        )
-        
-        self.assertEqual(verify_response.status_code, 301, msg='Usuario não conseguiu ser verificado')
 
     def tearDown(self):
         Customer.objects.all().delete()
