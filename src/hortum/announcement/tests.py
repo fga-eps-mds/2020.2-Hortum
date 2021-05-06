@@ -464,7 +464,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(len(response.data), 2, msg='Falha na busca por anúncio')
 
     def test_list_locals_multiples_annoucement(self):
-        self.filter_option += 'localizations'
+        self.filter_option += 'localizations__adress'
         self.value_option += 'local 1'
         self.url_list_announ += self.filter_option + self.value_option
 
@@ -477,7 +477,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(len(response.data), 2, msg='Falha na quantidade de anúncios listados')
 
     def test_list_local_one_announcement(self):
-        self.filter_option += 'localizations'
+        self.filter_option += 'localizations__adress'
         self.value_option += 'local 2'
         self.url_list_announ += self.filter_option + self.value_option
 
@@ -490,7 +490,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(len(response.data), 1, msg='Falha na busca por anúncio')
 
     def test_list_containing_local_announcement(self):
-        self.filter_option += 'localizations'
+        self.filter_option += 'localizations__adress'
         self.value_option += 'local'
         self.url_list_announ += self.filter_option + self.value_option
 

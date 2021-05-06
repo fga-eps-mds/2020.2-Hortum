@@ -3,14 +3,14 @@ from rest_framework.routers import SimpleRouter, Route
 class CustomListRouter(SimpleRouter):
     routes = [
         Route(
-            url=r'^{prefix}/{lookup}?$',
+            url=r'^{prefix}/{lookup}/?$',
             mapping={'get': 'list'},
             name='{basename}-list',
             detail=False,
             initkwargs={}
         ),
         Route(
-            url=r'^{prefix}?$',
+            url=r'^{prefix}/?$',
             mapping={'get': 'list'},
             name='{basename}-list',
             detail=False,

@@ -41,7 +41,7 @@ class AnnouncementDeleteUpdateAPIView(GenericViewSet, mixins.DestroyModelMixin, 
 
 class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
     '''
-	EndPoint para listagem de anúncios em ordem crescente de nome
+	EndPoint para listagem de anúncios de acordo com o filtro e o valor passados
 	'''
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = serializer.AnnouncementListSerializer
@@ -53,10 +53,8 @@ class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
             return queryset
         if 'filter' and 'value' not in query_params or len(query_params) != 2:
             raise NotFound({'query_params': 'Parametros passados para a query incoerentes'})
-        if query_params.get('filter') == 'name':
-            return queryset.filter(name__icontains=self.request.query_params.get('value'))
-        elif query_params.get('filter') == 'localizations':
-            return queryset.filter(localizations__adress__icontains=self.request.query_params.get('value')).distinct()
+        if query_params.get('filter') in ['name', 'localizations__adress']: 
+            return queryset.filter(**{query_params.get('filter') + '__icontains': query_params.get('value')}).distinct()
         raise ParseError({'filter': 'Campo para filtragem inexistente'})
 
 class AnnouncementProductorListAPIView(GenericViewSet, mixins.ListModelMixin):
