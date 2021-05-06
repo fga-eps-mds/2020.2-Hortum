@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from .models import User
@@ -6,7 +7,8 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'phone_number', 'password', 'profile_picture', 'is_verified']
+        fields = ['username', 'email', 'phone_number', 'password', 'profile_picture']
+        extra_kwargs = {'password': {'write_only': True}}
 
 class UserDeleteSerializer(serializers.ModelSerializer):
     password = serializers.CharField(required=True)
@@ -45,24 +47,16 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
 
 class UpdateUserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(required=False, write_only=True)
-    email = serializers.EmailField(required=False, write_only=True)
-
     class Meta:
         model = User
         fields = ['username', 'email', 'phone_number']
+        extra_kwargs = {
+            'email': {'required': False, 'validators': [UniqueValidator(queryset=User.objects.all())]},
+            'username': {'required': False},
+            'phone_number': {'required': False, 'validators': [UniqueValidator(queryset=User.objects.all())]}
+        }
 
     def validate(self, data):
         if len(data) == 0:
             raise serializers.ValidationError('Campos Vazios!')
         return data
-
-    def validate_email(self, email):
-        if self.context['queryset'].filter(email=email).exists():
-            raise serializers.ValidationError('Email ja registrado!')
-        return email
-
-    def validate_phone_number(self, phone_number):
-        if self.context['queryset'].filter(phone_number=phone_number).exists():
-            raise serializers.ValidationError('Telefone celular ja registrado!')
-        return phone_number
