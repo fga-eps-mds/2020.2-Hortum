@@ -41,8 +41,7 @@ urlpatterns = [
 
     path('reset_password/', auth_views.PasswordResetView.as_view(
        template_name="hortum/password_reset.html",
-       html_email_template_name="hortum/email_reset_password.html",
-       email_template_name="hortum/email_reset_password.html"), name='reset_password'),
+       html_email_template_name="hortum/email_template_name.htm",), name='reset_password'),
 
     path('reset_password_done/', auth_views.PasswordResetDoneView.as_view(
        template_name="hortum/password_reset_done.html"), name='password_reset_done'),
