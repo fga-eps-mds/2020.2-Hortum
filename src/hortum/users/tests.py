@@ -26,9 +26,7 @@ class UserCreateAPIViewTestCase(APITestCase):
             format='json'
         )
 
-        instance = User.objects.get(email=user_data['email'])
-        instance.is_verified = True
-        instance.save()
+        User.objects.filter(email=user_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
@@ -61,9 +59,7 @@ class UserCreateAPIViewTestCase(APITestCase):
             format='json'
         )
 
-        instance = User.objects.get(email=user_data['email'])
-        instance.is_verified = True
-        instance.save()
+        User.objects.filter(email=user_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 400, msg='Falha na criação de usuário')
 
@@ -84,9 +80,7 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
 	        format='json'
 	    )
 
-        instance = User.objects.get(email=self.user_data['email'])
-        instance.is_verified = True
-        instance.save()
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
 
     def setUp(self):
         self.create_user()
@@ -172,9 +166,7 @@ class UpdateUserViewTestCase(APITestCase):
 	        format='json'
 	    )
 
-        instance = User.objects.get(email=self.user_data['email'])
-        instance.is_verified = True
-        instance.save()
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
     
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
@@ -216,9 +208,7 @@ class UpdateUserViewTestCase(APITestCase):
             format='json'
         )
 
-        instance = User.objects.get(email=other_user_data['email'])
-        instance.is_verified = True
-        instance.save()
+        User.objects.filter(email=other_user_data['email']).update(is_verified=True)
 
         response = self.client.patch(
             path=self.url_update_user,
@@ -340,9 +330,7 @@ class ChangePasswordViewTestCase(APITestCase):
 	        format='json'
 	    )
 
-        instance = User.objects.get(email=self.user_data['email'])
-        instance.is_verified = True
-        instance.save()
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
     
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
@@ -462,9 +450,7 @@ class DeleteUserAPIViewTestCase(APITestCase):
 	        format='json'
 	    )
 
-        instance = User.objects.get(email=self.customer_data['email'])
-        instance.is_verified = True
-        instance.save()
+        User.objects.filter(email=self.customer_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Erro na criação do customer')
 
@@ -484,9 +470,7 @@ class DeleteUserAPIViewTestCase(APITestCase):
 	        format='json'
 	    )
 
-        instance = User.objects.get(email=self.productor_data['email'])
-        instance.is_verified = True
-        instance.save()
+        User.objects.filter(email=self.productor_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Erro na criação do productor')
 
