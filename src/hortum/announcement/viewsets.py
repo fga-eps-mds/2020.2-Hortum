@@ -54,7 +54,7 @@ class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
             return queryset
         if 'filter' and 'value' not in query_params or len(query_params) != 2:
             raise NotFound({'query_params': 'Parametros passados para a query incoerentes'})
-        if query_params.get('filter') in possible_filters: 
+        if query_params.get('filter') in possible_filters:
             return queryset.filter(**{query_params.get('filter') + '__icontains': query_params.get('value')}).distinct()
         raise ParseError({'filter': 'Campo para filtragem inexistente'})
 
