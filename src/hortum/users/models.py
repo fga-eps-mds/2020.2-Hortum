@@ -21,7 +21,6 @@ class User(AbstractUser):
 
     def send_verification_email(request, email):
         encoded_email = encode_string(email)
-        #url_verify = 'http://localhost:8000/users/verify/' + encoded_email
         url_verify = 'http://' + request.get_host() + '/users/verify/' + encoded_email
         print('ASDASD:', url_verify)
         send_mail(
