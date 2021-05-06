@@ -19,9 +19,11 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
-    def send_verification_email(email):
+    def send_verification_email(request, email):
         encoded_email = encode_string(email)
-        url_verify = 'http://localhost:8000/users/verify/' + encoded_email
+        #url_verify = 'http://localhost:8000/users/verify/' + encoded_email
+        url_verify = 'http://' + request.get_host() + '/users/verify/' + encoded_email
+        print('ASDASD:', url_verify)
         send_mail(
             'Hortum - verifique seu email',
 			'Você está a um passo de acessar o Hortum, clique no link abaixo para concluir seu registro:\n' + url_verify,

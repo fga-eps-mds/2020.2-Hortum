@@ -24,7 +24,7 @@ class CustomerRegistrationAPIView (GenericViewSet, mixins.CreateModelMixin, mixi
         response = super().create(request, *args, **kwargs)
         if response.status_code == 201:
             email = self.request.data['user']['email']
-            User.send_verification_email(email)
+            User.send_verification_email(request, email)
         return response
 
 class CustomerListFavoritesAPIView (GenericViewSet, mixins.RetrieveModelMixin):
