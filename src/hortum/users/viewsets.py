@@ -13,7 +13,7 @@ from django.shortcuts import render
 from ..encode import decode_string
 
 @api_view(["GET"])
-@permission_classes([permissions.IsAuthenticated,])
+@permission_classes([permissions.IsAuthenticated, ])
 def is_token_valid(request):
     '''
     EndPoint para checagem do token
@@ -61,11 +61,6 @@ class UserDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
     def get_object(self):
         return User.objects.get(email=self.request.user)
 
-    def get_serializer_context(self):
-        context = super(UserDeleteAPIView, self).get_serializer_context()
-        context.update({'user': self.request.user})
-        return context
-
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(data=request.data)
@@ -82,11 +77,6 @@ class ChangePasswordView(GenericViewSet, mixins.UpdateModelMixin):
 
     def get_object(self):
         return User.objects.get(email=self.request.user)
-
-    def get_serializer_context(self):
-        context = super(ChangePasswordView, self).get_serializer_context()
-        context.update({'user': self.request.user})
-        return context
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -106,8 +96,3 @@ class UpdateUserView(GenericViewSet, mixins.UpdateModelMixin):
 
     def get_object(self):
         return User.objects.get(email=self.request.user)
-
-    def get_serializer_context(self):
-        context = super(UpdateUserView, self).get_serializer_context()
-        context.update({'queryset': self.get_queryset()})
-        return context
