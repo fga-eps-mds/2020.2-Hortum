@@ -5,6 +5,7 @@
 |--|--|--|--|
 |17/02/2021|1.0|Abertura do Documento|Vitor Lamego e Victor Lima|  
 |17/02/2021|1.1|Descrição das metodologias|Vitor Lamego|
+|05/05/2021|1.2|Mudança nos papeis de equipe|Carlos Eduardo e Matheus Calixto|
 
 ## 1. Introdução
 <p align = "justify"> &emsp;&emsp; Este documento possui a finalidade de descrever e explicar quais serão as metodologias utilizadas no projeto. Será feito uma breve introdução das metodologias que serão utilizadas, assim como uma apresentação de quais artefatos e rituais/cerimônias serão realizadas pela equipe. </p>
@@ -90,10 +91,10 @@
 | Nome do Integrante | Papel |
 |--|--|
 |Brenno Oliveira|Product Owner
-|Carlos Eduardo|Desenvolvedor
+|Carlos Eduardo|Desenvolvedor / DevOps
 |João Pedro|Scrum Master
 |Lucas Braun|Desenvolvedor
-|Matheus Calixto|Desenvolvedor
+|Matheus Calixto|Desenvolvedor / DevOps
 |Victor Lima|Desenvolvedor
 |Vitor Lamego|Desenvolvedor
 

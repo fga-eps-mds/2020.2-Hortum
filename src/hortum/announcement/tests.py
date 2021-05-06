@@ -12,7 +12,8 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Mário",
             "email": "mario@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "is_verified": True
         }
 
         url_signup = '/signup/productor/'
@@ -133,7 +134,8 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "João",
             "email": "joao@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "is_verified": True
         }
 
         url_signup = '/signup/productor/'
@@ -302,7 +304,8 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "João",
             "email": "joao@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "is_verified": True
         }
 
         url_signup = '/signup/productor/'
@@ -464,7 +467,8 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
         self.productor_data = {
 	        "username": "Mário",
             "email": "mario@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "is_verified": True
         }
 
         url_signup = '/signup/productor/'
@@ -492,7 +496,8 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
         self.customer_data = {
 	        "username": "João Pedro",
             "email": "joao@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "is_verified": True
         }
 
         url_signup = '/signup/customer/'

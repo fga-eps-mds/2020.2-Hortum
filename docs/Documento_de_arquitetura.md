@@ -20,6 +20,7 @@ Data|Versão|Descrição|Autor
 29/03/2021|1.7.3|Revisão do documento|Joao Moura e Matheus Calixto
 04/04/2021|1.7.4|Revisão tópico 6|Carlos Eduardo
 25/04/2021|1.8|Mudanças na visão de implementação e casos de uso|Carlos Eduardo
+03/05/2021|1.9|Atualização dos diagramas DER e e modelagem de banco de dados|João Pedro
 
 ## 1. Introdução
 
