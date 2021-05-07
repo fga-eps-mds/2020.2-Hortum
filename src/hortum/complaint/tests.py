@@ -10,7 +10,9 @@ class ComplaintRegistrationAPIViewTestCase(APITestCase):
         self.user_data = {
             "username": "Jose",
             "email": "customer@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'phone_number': '61123456787',
+            'is_verified': True
         }
 
         url_signup = '/signup/customer/'
@@ -42,7 +44,9 @@ class ComplaintRegistrationAPIViewTestCase(APITestCase):
         productor_data = {
             "username": "Raimundo",
             "email": "productor@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'phone_number': '62123456787',
+            'is_verified': True
         }
 
         url_signup = '/signup/productor/'
@@ -124,7 +128,9 @@ class ComplaintListAPIViewTestCase(APITestCase):
         self.user_data = {
             "username": "Jose",
             "email": "customer@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'phone_number': '63123456787',
+            'is_verified': True
         }
 
         url_signup = '/signup/customer/'
@@ -156,7 +162,9 @@ class ComplaintListAPIViewTestCase(APITestCase):
         productor_data = {
             "username": "Raimundo",
             "email": "productor@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'phone_number': '64123456787',
+            'is_verified': True
         }
 
         url_signup = '/signup/productor/'
@@ -230,12 +238,12 @@ class ComplaintListAPIViewTestCase(APITestCase):
 
 class ReclmationDeleteAPIViewTestCase(APITestCase):
     def create_admin(self):
-        admin = User(username='admin', email='admin@teste.com', is_staff=True)
+        admin = User(username='admin', email='admin@teste.com', is_verified=True, is_staff=True)
         admin.set_password('test')
         admin.save()
         self.admin_data = {
-            "email": 'admin@teste.com',
-	        "password": 'test'
+            'email': 'admin@teste.com',
+	        'password': 'test'
         }
 
     def create_tokens(self, user_data):
@@ -266,7 +274,9 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
         self.productor_data = {
             "username": "Raimundo",
             "email": "productor@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'phone_number': '65123456787',
+            'is_verified': True
         }
 
         url_signup = '/signup/productor/'
@@ -283,7 +293,9 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
         self.customer_data = {
             "username": "Jose",
             "email": "customer@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'phone_number': '66123456787',
+            'is_verified': True
         }
 
         url_signup = '/signup/customer/'

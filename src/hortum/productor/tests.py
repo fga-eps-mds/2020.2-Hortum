@@ -7,7 +7,9 @@ class ProductorRegisterAPIViewTestCase(APITestCase):
         self.user_data = {
             'username': 'Marcos',
             'email': 'marcos@productor.com',
-            'password': 'teste'
+            'password': 'teste',
+            'phone_number': '61123456757',
+            'is_verified': True
         }
 
         self.url_signup = '/signup/productor/'
@@ -44,7 +46,9 @@ class ProductorRegisterAPIViewTestCase(APITestCase):
         new_user = {
             'username': 'Marcos Segundo',
             'email': 'marcos@productor.com',
-            'password': 'teste dois'
+            'password': 'teste dois',
+            'phone_number': '51123456787',
+            'is_verified': True
         }
 
         response = self.client.post(
@@ -60,7 +64,9 @@ class ProductorListAPIViewTestCase(APITestCase):
         self.user_data = {
             'username': 'Marcos',
             'email': 'marcos@productor.com',
-            'password': 'teste'
+            'password': 'teste',
+            'phone_number': '61123456787',
+            'is_verified': True
         }
 
         url_signup = '/signup/productor/'
@@ -78,12 +84,16 @@ class ProductorListAPIViewTestCase(APITestCase):
             {
                 'username': 'João',
                 'email': 'joao@productor.com',
-                'password': 'teste'
+                'password': 'teste',
+                'phone_number': '61123456786',
+                'is_verified': True
             },
             {
                 'username': 'Mario',
                 'email': 'mario@productor.com',
-                'password': 'teste'
+                'password': 'teste',
+                'phone_number': '61123456785',
+                'is_verified': True
             }
         ]
 
@@ -148,7 +158,9 @@ class ProductorListAPIViewTestCase(APITestCase):
         customer_data = {
             'username': 'Customer',
             'email': 'customer@customer.com',
-            'password': 'teste'
+            'password': 'teste',
+            'phone_number': '61123456783',
+            'is_verified': True
         }
 
         url_signup_customer = '/signup/customer/'
