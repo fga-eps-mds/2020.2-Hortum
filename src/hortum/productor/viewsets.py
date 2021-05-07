@@ -28,10 +28,9 @@ class ProductorListAPIView(GenericViewSet, mixins.ListModelMixin):
 	'''
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = ProductorListSerializer
-    queryset = Productor.objects.all()
 
     def get_queryset(self):
-        query = Productor.objects.all()
+        queryset = Productor.objects.all()
         if 'productorName' in self.kwargs:
-            query = query.filter(user__username__icontains=self.kwargs['productorName'])
-        return query.order_by('user__username')
+            queryset = queryset.filter(user__username__icontains=self.kwargs['productorName'])
+        return queryset.order_by('user__username')

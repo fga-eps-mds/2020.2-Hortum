@@ -12,6 +12,7 @@ router.register(r'fav-productor', viewsets.FavoriteProductorsAPIView, basename='
 
 listRouter = SimpleRouter()
 listRouter.register(r'favorites', viewsets.CustomerListFavoritesAPIView, basename='listFavAnnouncements')
+
 slashless_router = SimpleRouter(trailing_slash=False)
 slashless_router.registry = listRouter.registry[:]
 

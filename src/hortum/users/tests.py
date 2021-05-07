@@ -17,8 +17,7 @@ class UserCreateAPIViewTestCase(APITestCase):
             "username": "João",
             "email": "joao@email.com",
             "phone_number": "61121456789",
-            "password": "teste",
-            "is_verified": True
+            "password": "teste"
         }
 
         response = self.client.post(
@@ -26,6 +25,8 @@ class UserCreateAPIViewTestCase(APITestCase):
             {'user': user_data},
             format='json'
         )
+
+        User.objects.filter(email=user_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
@@ -58,6 +59,8 @@ class UserCreateAPIViewTestCase(APITestCase):
             format='json'
         )
 
+        User.objects.filter(email=user_data['email']).update(is_verified=True)
+
         self.assertEqual(response.status_code, 400, msg='Falha na criação de usuário')
 
 class UserTokenObtainAPIViewTestCase(APITestCase):
@@ -66,8 +69,7 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
 	        "username": "Luís",
             "email": "luis@teste.com",
 	        "password": "teste",
-            "phone_number": "62123456787",
-            "is_verified": True
+            "phone_number": "62123456787"
         }
 
         url_signup = '/signup/customer/'
@@ -77,6 +79,8 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
 
     def setUp(self):
         self.create_user()
@@ -150,7 +154,6 @@ class UpdateUserViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
-            "is_verified": True,
             "phone_number": "61133456789",
 	        "password": "teste"
         }
@@ -162,6 +165,8 @@ class UpdateUserViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
     
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
@@ -187,8 +192,7 @@ class UpdateUserViewTestCase(APITestCase):
             'username': 'Marcos Segundo',
             'email': 'marcos@productor.com',
             'password': 'teste dois',
-            'phone_number': "41123456787",
-            'is_verified': True
+            'phone_number': "41123456787"
         }
         
         user_username_email = {
@@ -203,6 +207,8 @@ class UpdateUserViewTestCase(APITestCase):
             {'user': other_user_data},
             format='json'
         )
+
+        User.objects.filter(email=other_user_data['email']).update(is_verified=True)
 
         response = self.client.patch(
             path=self.url_update_user,
@@ -314,7 +320,6 @@ class ChangePasswordViewTestCase(APITestCase):
 	        "username": "Luís",
             "email": "luis@teste.com",
 	        "password": "teste",
-            "is_verified": True
         }
 
         url_signup = '/signup/customer/'
@@ -324,6 +329,8 @@ class ChangePasswordViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
     
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
@@ -432,8 +439,7 @@ class DeleteUserAPIViewTestCase(APITestCase):
 	        "username": "Luís",
             "email": "luis@teste.com",
 	        "password": "teste",
-            "phone_number": "61123456757",
-            "is_verified": True
+            "phone_number": "61123456757"
         }
 
         url_signup = '/signup/customer/'
@@ -444,6 +450,8 @@ class DeleteUserAPIViewTestCase(APITestCase):
 	        format='json'
 	    )
 
+        User.objects.filter(email=self.customer_data['email']).update(is_verified=True)
+
         self.assertEqual(response.status_code, 201, msg='Erro na criação do customer')
 
     def create_productor(self):
@@ -451,8 +459,7 @@ class DeleteUserAPIViewTestCase(APITestCase):
 	        "username": "João",
             "email": "joao@teste.com",
 	        "password": "teste",
-            "phone_number": "61123416787",
-            "is_verified": True
+            "phone_number": "61123416787"
         }
 
         url_signup = '/signup/productor/'
@@ -462,6 +469,8 @@ class DeleteUserAPIViewTestCase(APITestCase):
 	        {'user': self.productor_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.productor_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Erro na criação do productor')
 

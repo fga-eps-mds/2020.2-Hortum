@@ -1,9 +1,8 @@
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
-from . import serializer
-
 from .permissions import IsVerified
+from . import serializer
 
 from rest_framework import permissions, mixins, status
 from rest_framework.viewsets import GenericViewSet
@@ -13,7 +12,7 @@ from django.shortcuts import render
 
 from ..encode import decode_string
 
-@api_view(["GET", "PUT"])
+@api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated, ])
 def is_token_valid(request):
     '''
@@ -62,11 +61,6 @@ class UserDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
     def get_object(self):
         return User.objects.get(email=self.request.user)
 
-    def get_serializer_context(self):
-        context = super(UserDeleteAPIView, self).get_serializer_context()
-        context.update({'user': self.request.user})
-        return context
-
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(data=request.data)
@@ -75,19 +69,14 @@ class UserDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class ChangePasswordView(GenericViewSet, mixins.UpdateModelMixin):
-    """
+    '''
     EndPoint para trocar a senha
-    """
+    '''
     serializer_class = serializer.ChangePasswordSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_object(self):
         return User.objects.get(email=self.request.user)
-
-    def get_serializer_context(self):
-        context = super(ChangePasswordView, self).get_serializer_context()
-        context.update({'user': self.get_object()})
-        return context
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -95,8 +84,7 @@ class ChangePasswordView(GenericViewSet, mixins.UpdateModelMixin):
         serializer.is_valid(raise_exception=True)
         instance.set_password(serializer.data.get('new_password'))
         instance.save()
-
-        return Response('Senha alterada com sucesso!', status=200)
+        return Response('Senha alterada com sucesso!', status=status.HTTP_200_OK)
 
 class UpdateUserView(GenericViewSet, mixins.UpdateModelMixin):
     '''
@@ -108,8 +96,3 @@ class UpdateUserView(GenericViewSet, mixins.UpdateModelMixin):
 
     def get_object(self):
         return User.objects.get(email=self.request.user)
-
-    def get_serializer_context(self):
-        context = super(UpdateUserView, self).get_serializer_context()
-        context.update({'user': self.get_object(), 'queryset': self.get_queryset()})
-        return context

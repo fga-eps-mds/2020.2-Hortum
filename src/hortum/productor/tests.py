@@ -1,6 +1,7 @@
 from rest_framework.test import APITestCase
 
 from .models import Productor
+from ..users.models import User
 
 class ProductorRegisterAPIViewTestCase(APITestCase):
     def setUp(self):
@@ -8,8 +9,7 @@ class ProductorRegisterAPIViewTestCase(APITestCase):
             'username': 'Marcos',
             'email': 'marcos@productor.com',
             'password': 'teste',
-            'phone_number': '61123456757',
-            'is_verified': True
+            'phone_number': '61123456757'
         }
 
         self.url_signup = '/signup/productor/'
@@ -23,6 +23,8 @@ class ProductorRegisterAPIViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
 
         self.assertEqual(
             response.status_code,
@@ -47,8 +49,7 @@ class ProductorRegisterAPIViewTestCase(APITestCase):
             'username': 'Marcos Segundo',
             'email': 'marcos@productor.com',
             'password': 'teste dois',
-            'phone_number': '51123456787',
-            'is_verified': True
+            'phone_number': '51123456787'
         }
 
         response = self.client.post(
@@ -56,6 +57,8 @@ class ProductorRegisterAPIViewTestCase(APITestCase):
             {'user': new_user},
             format='json'
         )
+
+        User.objects.filter(email=new_user['email']).update(is_verified=True)
         
         self.assertEqual(response.status_code, 400, msg='Email inexistente')
 
@@ -65,8 +68,7 @@ class ProductorListAPIViewTestCase(APITestCase):
             'username': 'Marcos',
             'email': 'marcos@productor.com',
             'password': 'teste',
-            'phone_number': '61123456787',
-            'is_verified': True
+            'phone_number': '61123456787'
         }
 
         url_signup = '/signup/productor/'
@@ -77,6 +79,8 @@ class ProductorListAPIViewTestCase(APITestCase):
             format='json'
         )
 
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
+
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
     def create_productors(self):
@@ -85,15 +89,13 @@ class ProductorListAPIViewTestCase(APITestCase):
                 'username': 'João',
                 'email': 'joao@productor.com',
                 'password': 'teste',
-                'phone_number': '61123456786',
-                'is_verified': True
+                'phone_number': '61123456786'
             },
             {
                 'username': 'Mario',
                 'email': 'mario@productor.com',
                 'password': 'teste',
-                'phone_number': '61123456785',
-                'is_verified': True
+                'phone_number': '61123456785'
             }
         ]
 
@@ -105,6 +107,9 @@ class ProductorListAPIViewTestCase(APITestCase):
                 {'user': prod_data},
                 format='json'
             )
+
+            User.objects.filter(email=prod_data['email']).update(is_verified=True)
+
             self.assertEqual(response.status_code, 201, msg='Falha na criação de outros produtores')
 
     def create_tokens(self):
@@ -160,7 +165,6 @@ class ProductorListAPIViewTestCase(APITestCase):
             'email': 'customer@customer.com',
             'password': 'teste',
             'phone_number': '61123456783',
-            'is_verified': True
         }
 
         url_signup_customer = '/signup/customer/'
@@ -170,6 +174,8 @@ class ProductorListAPIViewTestCase(APITestCase):
             {'user': customer_data},
             format='json'
         )
+
+        User.objects.filter(email=customer_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Falha na criação de comprador')
 
