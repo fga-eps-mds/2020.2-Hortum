@@ -1,4 +1,4 @@
-from .serializer import ComplaintListSerializer, ComplaintCreateSerializer, ComplaintDeleteSerializer
+from .serializer import ComplaintSerializer, ComplaintDeleteSerializer
 
 from .models import Complaint
 from ..productor.models import Productor
@@ -15,7 +15,7 @@ class ComplaintRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
     EndPoint para registro de reclamação
     '''
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = ComplaintCreateSerializer
+    serializer_class = ComplaintSerializer
     queryset = Complaint.objects.all()
 
     def get_serializer_context(self):
@@ -28,7 +28,7 @@ class ComplaintListAPIView(GenericViewSet, mixins.ListModelMixin):
     EndPoint para listagem de reclamações
     '''
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = ComplaintListSerializer
+    serializer_class = ComplaintSerializer
     
     def get_queryset(self):
         emailProductor = decode_string(self.kwargs['emailProductor'])

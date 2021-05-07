@@ -11,8 +11,7 @@ class ComplaintRegistrationAPIViewTestCase(APITestCase):
             "username": "Jose",
             "email": "customer@teste.com",
 	        "password": "teste",
-            'phone_number': '61123456787',
-            'is_verified': True
+            'phone_number': '61123456787'
         }
 
         url_signup = '/signup/customer/'
@@ -22,6 +21,8 @@ class ComplaintRegistrationAPIViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
     
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
@@ -45,8 +46,7 @@ class ComplaintRegistrationAPIViewTestCase(APITestCase):
             "username": "Raimundo",
             "email": "productor@teste.com",
 	        "password": "teste",
-            'phone_number': '62123456787',
-            'is_verified': True
+            'phone_number': '62123456787'
         }
 
         url_signup = '/signup/productor/'
@@ -56,6 +56,8 @@ class ComplaintRegistrationAPIViewTestCase(APITestCase):
 	        {'user': productor_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=productor_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Falha no signup de productor')
     
@@ -129,8 +131,7 @@ class ComplaintListAPIViewTestCase(APITestCase):
             "username": "Jose",
             "email": "customer@teste.com",
 	        "password": "teste",
-            'phone_number': '63123456787',
-            'is_verified': True
+            'phone_number': '63123456787'
         }
 
         url_signup = '/signup/customer/'
@@ -140,6 +141,8 @@ class ComplaintListAPIViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
     
@@ -163,8 +166,7 @@ class ComplaintListAPIViewTestCase(APITestCase):
             "username": "Raimundo",
             "email": "productor@teste.com",
 	        "password": "teste",
-            'phone_number': '64123456787',
-            'is_verified': True
+            'phone_number': '64123456787'
         }
 
         url_signup = '/signup/productor/'
@@ -174,6 +176,8 @@ class ComplaintListAPIViewTestCase(APITestCase):
 	        {'user': productor_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=productor_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Falha no signup de productor')
     
@@ -275,8 +279,7 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
             "username": "Raimundo",
             "email": "productor@teste.com",
 	        "password": "teste",
-            'phone_number': '65123456787',
-            'is_verified': True
+            'phone_number': '65123456787'
         }
 
         url_signup = '/signup/productor/'
@@ -287,6 +290,8 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
 	        format='json'
 	    )
 
+        User.objects.filter(email=self.productor_data['email']).update(is_verified=True)
+
         self.assertEqual(response.status_code, 201, msg='Falha no signup de productor')
 
     def register_customer(self):
@@ -294,8 +299,7 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
             "username": "Jose",
             "email": "customer@teste.com",
 	        "password": "teste",
-            'phone_number': '66123456787',
-            'is_verified': True
+            'phone_number': '66123456787'
         }
 
         url_signup = '/signup/customer/'
@@ -305,6 +309,8 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
 	        {'user': self.customer_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.customer_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Falha no signup de customer')
 

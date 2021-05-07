@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Complaint
 from ..productor.models import Productor
 
-class ComplaintCreateSerializer(serializers.ModelSerializer):
+class ComplaintSerializer(serializers.ModelSerializer):
     emailProductor = serializers.EmailField(required=True, write_only=True)
 
     class Meta:
@@ -19,11 +19,6 @@ class ComplaintCreateSerializer(serializers.ModelSerializer):
         productor_pk = Productor.objects.get(user__email=validated_data.pop('emailProductor'))
         complaint = Complaint.objects.create(idProductor=productor_pk, **validated_data, emailCustomer=self.context['customer'])
         return complaint
-
-class ComplaintListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Complaint
-        fields = ['author', 'description', 'image']
 
 class ComplaintDeleteSerializer(serializers.ModelSerializer):
     emailProductor = serializers.EmailField(required=True, write_only=True)
