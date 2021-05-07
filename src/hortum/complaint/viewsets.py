@@ -18,11 +18,6 @@ class ComplaintRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
     serializer_class = ComplaintSerializer
     queryset = Complaint.objects.all()
 
-    def get_serializer_context(self):
-        context = super(ComplaintRegistrationAPIView, self).get_serializer_context()
-        context.update({'customer': self.request.user})
-        return context
-
 class ComplaintListAPIView(GenericViewSet, mixins.ListModelMixin):
     '''
     EndPoint para listagem de reclamações
@@ -34,8 +29,7 @@ class ComplaintListAPIView(GenericViewSet, mixins.ListModelMixin):
         emailProductor = decode_string(self.kwargs['emailProductor'])
         if not Productor.objects.filter(user__email=emailProductor).exists():
             raise ParseError({'emailProductor': 'Email inexistente de produtor'})
-        queryset = Complaint.objects.filter(idProductor__user__email=emailProductor)
-        return queryset.order_by('author')
+        return Complaint.objects.filter(idProductor__user__email=emailProductor).order_by('author')
 
 class ComplaintDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
     '''
@@ -47,13 +41,7 @@ class ComplaintDeleteAPIView(GenericViewSet, mixins.DestroyModelMixin):
 
     def get_queryset(self):
         emailCustomer = decode_string(self.kwargs['emailCustomer'])
-        queryset = Complaint.objects.filter(emailCustomer=emailCustomer)
-        return queryset
-
-    def get_serializer_context(self):
-        context = super(ComplaintDeleteAPIView, self).get_serializer_context()
-        context.update({'queryset': self.get_queryset()})
-        return context
+        return Complaint.objects.filter(emailCustomer=emailCustomer)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_queryset()
