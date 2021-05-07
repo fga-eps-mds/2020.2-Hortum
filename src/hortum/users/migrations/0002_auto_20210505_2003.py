@@ -7,7 +7,7 @@ import hortum.users.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0002_auto_20210505_1754'),
+        ('users', '0001_initial'),
     ]
 
     operations = [
@@ -15,5 +15,10 @@ class Migration(migrations.Migration):
             model_name='user',
             name='profile_picture',
             field=models.ImageField(default='person-male.png', null=True, upload_to=hortum.users.models.upload_image),
+        ),
+        migrations.AddField(
+            model_name='user',
+            name='is_verified',
+            field=models.BooleanField(default=False),
         ),
     ]
