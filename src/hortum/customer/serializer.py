@@ -11,12 +11,11 @@ from ..productor.serializer import ProductorListSerializer
 
 class CustomerSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
-    idAnunFav = AnnouncementListSerializer(many=True, read_only=True)
-    idProdFav = ProductorListSerializer(many=True, read_only=True)
 
     class Meta:
         model = Customer
         fields = ['user', 'idAnunFav', 'idProdFav']
+        read_only_fields = ['idAnunFav', 'idProdFav']
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
@@ -41,13 +40,6 @@ class CustomerAddAnnouncementSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Nome de anúncio inexistente')
         return name
 
-class CustomerFavoritesAnnouncementsSerializer(serializers.ModelSerializer):
-    idAnunFav = AnnouncementListSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = Customer
-        fields = ['idAnunFav']
-
 class CustomerAddProductorSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
 
@@ -59,6 +51,13 @@ class CustomerAddProductorSerializer(serializers.ModelSerializer):
         if not Productor.objects.filter(user__email=email).exists():
             raise serializers.ValidationError('Email de produtor inexistente')
         return email
+
+class CustomerFavoritesAnnouncementsSerializer(serializers.ModelSerializer):
+    idAnunFav = AnnouncementListSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Customer
+        fields = ['idAnunFav']
 
 class CustomerFavoritesProductorsSerializer(serializers.ModelSerializer):
     idProdFav = ProductorListSerializer(many=True, read_only=True)

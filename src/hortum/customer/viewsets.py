@@ -12,7 +12,7 @@ from rest_framework.exceptions import ParseError
 
 from django.db.models import F
 
-class CustomerRegistrationAPIView (GenericViewSet, mixins.CreateModelMixin, mixins.ListModelMixin):
+class CustomerRegistrationAPIView (GenericViewSet, mixins.CreateModelMixin):
     '''
     EndPoint para registro de User's
     '''
@@ -60,7 +60,7 @@ class FavoritesAnnouncementsAPIView (GenericViewSet, mixins.UpdateModelMixin):
         instance = self.get_object()
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        anun = Announcement.objects.get(idProductor=Productor.objects.get(user__email=serializer.data.get('email')), name=serializer.data.get('announcementName'))
+        anun = Announcement.objects.get(idProductor__user__email=serializer.data.get('email'), name=serializer.data.get('announcementName'))
         if instance.idAnunFav.filter(pk=anun.pk).exists():
             instance.idAnunFav.remove(anun)
             anun.likes = F('likes') - 1 if F('likes') != 0 else 0
@@ -69,7 +69,7 @@ class FavoritesAnnouncementsAPIView (GenericViewSet, mixins.UpdateModelMixin):
             anun.likes = F('likes') + 1
 
         anun.save()
-        return Response('Anúncio atualizado com sucesso', status=200)
+        return Response('Anúncio atualizado com sucesso')
 
 class FavoriteProductorsAPIView(GenericViewSet, mixins.UpdateModelMixin):
     '''

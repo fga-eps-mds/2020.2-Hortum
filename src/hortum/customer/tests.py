@@ -1,6 +1,7 @@
 from rest_framework.test import APITestCase
 
 from .models import Customer
+from ..users.models import User
 from ..productor.models import Productor
 from ..announcement.models import Announcement
 
@@ -9,8 +10,7 @@ class CustomerRegisterAPIViewTestCase(APITestCase):
         self.user_data = {
             'username': 'Pedro',
             'email': 'pedro@customer.com',
-            'password': 'teste',
-            'is_verified': True
+            'password': 'teste'
         }
 
         self.url_signup = '/signup/customer/'
@@ -24,6 +24,8 @@ class CustomerRegisterAPIViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Falha no registro de comprador')
 
@@ -43,8 +45,7 @@ class CustomerRegisterAPIViewTestCase(APITestCase):
         new_user = {
             'username': 'João',
             'email': 'pedro@customer.com',
-            'password': 'teste',
-            'is_verified': True
+            'password': 'teste'
         }
         
         response = self.client.post(
@@ -60,17 +61,20 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
         self.productor_data = {
 	        "username": "Mário",
             "email": "mario@teste.com",
-	        "password": "teste",
-            'is_verified': True
+	        "password": "teste"
         }
 
         url_signup = '/signup/productor/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.productor_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.productor_data['email']).update(is_verified=True)
+
+        self.assertEqual(response.status_code, 201, msg='Falha no registro de produtor')
 
     def create_tokens(self, user):
         user_cred = {'email': user['email'], 'password': user['password']}
@@ -88,17 +92,20 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
         self.customer_data = {
 	        "username": "João Pedro",
             "email": "joao@teste.com",
-	        "password": "teste",
-            'is_verified': True
+	        "password": "teste"
         }
 
         url_signup = '/signup/customer/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.customer_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.customer_data['email']).update(is_verified=True)
+
+        self.assertEqual(response.status_code, 201, msg='Falha no registro de consumidor')
 
     def create_announcements(self):
         self.announcement_one = {
