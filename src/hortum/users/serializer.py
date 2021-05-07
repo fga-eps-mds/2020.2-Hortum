@@ -50,7 +50,7 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'phone_number']
+        fields = ['username', 'email', 'phone_number', 'profile_picture']
 
     def validate(self, data):
         if len(data) == 0:
