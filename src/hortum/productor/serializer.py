@@ -4,7 +4,6 @@ from .models import Productor
 from ..users.models import User
 
 from ..users.serializer import UserSerializer
-from ..announcement.serializer import AnnouncementCreateSerializer, AnnouncementListSerializer
 
 class ProductorSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)

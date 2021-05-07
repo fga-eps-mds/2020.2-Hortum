@@ -53,6 +53,43 @@ class UniqueValidator:
             smart_repr(self.queryset)
         )
 
+class ExistingValidator:
+    '''
+    Validação que checa se um campo é existe.
+    Implementação baseada no `UniqueValidator`
+    '''
+    message = '{value} inexistente.'
+    requires_context = True
+
+    def __init__(self, queryset, lookup='exact'):
+        self.queryset = queryset
+        self.lookup = lookup
+
+    def filter_queryset(self, value, queryset, field_name):
+        '''
+        Queryset que filtra todos values iguais
+        '''
+        filter_kwargs = {'%s__%s' % (field_name, self.lookup): value}
+        return qs_filter(queryset, **filter_kwargs)
+
+    def __call__(self, value, serializer_field):
+        # Determinando o nome do campo
+        field_name = '__'.join(serializer_field.source_attrs)
+
+        # Montando a mensagem baseada no campo
+        self.message = self.message.format(value=' '.join(serializer_field.source_attrs).capitalize())
+
+        queryset = self.queryset
+        queryset = self.filter_queryset(value, queryset, field_name)
+        if not qs_exists(queryset):
+            raise ValidationError(self.message, code='unique')
+
+    def __repr__(self):
+        return '<%s(queryset=%s)>' % (
+            self.__class__.__name__,
+            smart_repr(self.queryset)
+        )
+
 class PasswordValidator:
     '''
     Validação que checa se a senha passada está correta.

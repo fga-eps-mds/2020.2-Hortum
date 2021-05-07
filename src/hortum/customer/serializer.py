@@ -9,6 +9,8 @@ from ..users.serializer import UserSerializer
 from ..announcement.serializer import AnnouncementListSerializer
 from ..productor.serializer import ProductorListSerializer
 
+from ..validators import ExistingValidator
+
 class CustomerSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=True)
 
@@ -23,34 +25,19 @@ class CustomerSerializer(serializers.ModelSerializer):
         return Customer.objects.create(user=user, **validated_data)
 
 class CustomerAddAnnouncementSerializer(serializers.ModelSerializer):
-    announcementName = serializers.CharField(required=True)
-    email = serializers.EmailField(required=True)
+    announcementName = serializers.CharField(required=True, source='name', validators=[ExistingValidator(Announcement.objects.all())])
+    email = serializers.EmailField(required=True, source='user.email', validators=[ExistingValidator(Productor.objects.all())])
 
     class Meta:
         model = Customer
         fields = ['email', 'announcementName']
 
-    def validate_email(self, email):
-        if not Productor.objects.filter(user__email=email).exists():
-            raise serializers.ValidationError('Email de produtor inexistente')
-        return email
-
-    def validate_announcementName(self, name):
-        if not Announcement.objects.filter(name=name).exists():
-            raise serializers.ValidationError('Nome de anúncio inexistente')
-        return name
-
 class CustomerAddProductorSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(required=True)
+    email = serializers.EmailField(required=True, source='user.email', validators=[ExistingValidator(Productor.objects.all())])
 
     class Meta:
         model = Customer
         fields = ['email']
-
-    def validate_email(self, email):
-        if not Productor.objects.filter(user__email=email).exists():
-            raise serializers.ValidationError('Email de produtor inexistente')
-        return email
 
 class CustomerFavoritesAnnouncementsSerializer(serializers.ModelSerializer):
     idAnunFav = AnnouncementListSerializer(many=True, read_only=True)
