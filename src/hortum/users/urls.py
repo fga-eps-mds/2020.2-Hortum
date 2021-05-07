@@ -16,7 +16,9 @@ customRouter.register(r'delete', viewsets.UserDeleteAPIView, basename='deleteUse
 routerVerify = routers.SimpleRouter(trailing_slash=True)
 routerVerify.register(r'verify', viewsets.VerifyAccountView, basename='verifyEmail')
 
-urlpatterns = [
+urlpatterns = router.urls + routerVerify.urls + customRouter.urls
+
+signup_urls = [
     path('customer/', include(customerRegister.urls)),
     path('productor/', include(productorRegister.urls)),
-] + router.urls + routerVerify.urls + customRouter.urls
+]

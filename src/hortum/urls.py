@@ -1,15 +1,17 @@
-from django.contrib import admin
-from django.urls import path, include
-from hortum.users import viewsets
-from django.conf.urls import url
+from .users import viewsets
+from .users.urls import signup_urls
 
+from django.urls import path, include
+from django.contrib import admin
+from django.conf.urls import url
 from django.conf.urls.static import static
 from django.conf import settings
 
 from rest_framework import permissions
+from rest_framework_simplejwt.views import TokenRefreshView
+
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from rest_framework_simplejwt.views import TokenRefreshView
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -30,7 +32,7 @@ urlpatterns = [
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/test_token/', viewsets.is_token_valid, name='is_token_valid'),
     path('admin/', admin.site.urls),
-    path('signup/', include('hortum.users.urls')),
+    path('signup/', include(signup_urls)),
     path('announcement/', include('hortum.announcement.urls')),
     path('productor/', include('hortum.productor.urls')),
     path('customer/', include('hortum.customer.urls')),
