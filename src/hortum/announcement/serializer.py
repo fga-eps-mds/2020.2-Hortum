@@ -3,6 +3,8 @@ from rest_framework import serializers
 from django.db.models import Q
 
 from .models import Announcement, AnnouncementImage, Localization
+from ..productor.models import Productor
+from ..validators import UniqueValidator
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
     localizations = serializers.ListField(child=serializers.CharField(), write_only=True, max_length=3)
@@ -11,16 +13,13 @@ class AnnouncementCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
         fields = ['name', 'images', 'type_of_product', 'description', 'price', 'inventory', 'localizations', 'likes']
-
-    def validate_name(self, name):
-        if self.context['productor'].announcements.all().filter(name=name).exists():
-            raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
-        return name
+        extra_kwargs = {'name': {'validators': [UniqueValidator()]}}
 
     def create(self, validated_data):
         localizations = validated_data.pop('localizations')
         images = validated_data.pop('images')
-        announcement = Announcement.objects.create(idProductor=self.context['productor'], **validated_data)
+        produtor_pk = Productor.objects.get(user__email=self.context['request'].user)
+        announcement = Announcement.objects.create(idProductor=produtor_pk, **validated_data)
         [AnnouncementImage.objects.create(idImage=announcement, picture=picture) for picture in images]
         [Localization.objects.create(idAnnoun=announcement, adress=local) for local in localizations]
         return announcement
@@ -31,11 +30,7 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
         fields = ['name', 'type_of_product', 'description', 'price', 'inventory', 'localizations']
-
-    def validate_name(self, name):
-        if self.context['view'].get_queryset().filter(name=name).exists():
-            raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
-        return name
+        extra_kwargs = {'name': {'validators': [UniqueValidator()]}}
 
     def update(self, instance, validated_data):
         if 'localizations' in validated_data:

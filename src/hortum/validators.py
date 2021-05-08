@@ -26,7 +26,7 @@ class UniqueValidator:
     message = 'Este campo deve ser único.'
     requires_context = True
 
-    def __init__(self, queryset, message=None, lookup='exact'):
+    def __init__(self, queryset=None, message=None, lookup='exact'):
         self.queryset = queryset
         self.message = message or self.message
         self.lookup = lookup
@@ -40,9 +40,9 @@ class UniqueValidator:
 
     def __call__(self, value, serializer_field):
         # Determinando o nome do campo
-        field_name = serializer_field.source_attrs[-1]
+        field_name = '__'.join(serializer_field.source_attrs)
 
-        queryset = self.queryset
+        queryset = self.queryset or serializer_field.context['view'].get_queryset()
         queryset = self.filter_queryset(value, queryset, field_name)
         if qs_exists(queryset):
             raise ValidationError(self.message, code='unique')

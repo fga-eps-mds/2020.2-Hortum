@@ -16,12 +16,9 @@ class AnnouncementRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
 	'''
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = serializer.AnnouncementCreateSerializer
-    queryset = Announcement.objects.all()
 
-    def get_serializer_context(self):
-        context = super(AnnouncementRegistrationAPIView, self).get_serializer_context()
-        context.update({'productor': Productor.objects.get(user__email=self.request.user)})
-        return context
+    def get_queryset(self):
+        return Productor.objects.get(user__email=self.request.user).announcements.all()
 
 class AnnouncementDeleteUpdateAPIView(GenericViewSet, mixins.DestroyModelMixin, mixins.UpdateModelMixin):
     '''
@@ -32,8 +29,7 @@ class AnnouncementDeleteUpdateAPIView(GenericViewSet, mixins.DestroyModelMixin, 
     lookup_field = 'name'
 
     def get_queryset(self):
-        productor = Productor.objects.get(user__email=self.request.user)
-        return productor.announcements.all()
+        return Productor.objects.get(user__email=self.request.user).announcements.all()
 
 class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
     '''
