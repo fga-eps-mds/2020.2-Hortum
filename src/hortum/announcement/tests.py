@@ -12,17 +12,19 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Mário",
             "email": "mario@teste.com",
-	        "password": "teste",
-            "is_verified": True
+	        "password": "teste"
         }
 
         url_signup = '/signup/productor/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.user_data},
 	        format='json'
 	    )
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
+    
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
@@ -134,8 +136,7 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "João",
             "email": "joao@teste.com",
-	        "password": "teste",
-            "is_verified": True
+	        "password": "teste"
         }
 
         url_signup = '/signup/productor/'
@@ -146,6 +147,8 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
 	        format='json'
 	    )
         
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
+    
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
     def create_tokens(self):
@@ -304,8 +307,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "João",
             "email": "joao@teste.com",
-	        "password": "teste",
-            "is_verified": True
+	        "password": "teste"
         }
 
         url_signup = '/signup/productor/'
@@ -316,6 +318,8 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
 	        format='json'
 	    )
         
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
+
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
     def create_tokens(self):
@@ -467,17 +471,20 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
         self.productor_data = {
 	        "username": "Mário",
             "email": "mario@teste.com",
-	        "password": "teste",
-            "is_verified": True
+	        "password": "teste"
         }
 
         url_signup = '/signup/productor/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.productor_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.productor_data['email']).update(is_verified=True)
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
     def create_tokens(self, user):
         user_cred = {'email': user['email'], 'password': user['password']}
@@ -496,17 +503,20 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
         self.customer_data = {
 	        "username": "João Pedro",
             "email": "joao@teste.com",
-	        "password": "teste",
-            "is_verified": True
+	        "password": "teste"
         }
 
         url_signup = '/signup/customer/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.customer_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.customer_data['email']).update(is_verified=True)
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
     def create_announcements(self):
         self.announcement_one = {

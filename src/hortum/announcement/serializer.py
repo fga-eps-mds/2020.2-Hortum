@@ -4,24 +4,18 @@ from django.db.models import Q
 
 from .models import Announcement, AnnouncementImage, Localization
 
-
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
-    localizations = serializers.ListField(child=serializers.CharField(), allow_empty=True, write_only=True)
-    images = serializers.ListField(child=serializers.ImageField(), write_only=True, allow_empty=True)
+    localizations = serializers.ListField(child=serializers.CharField(), write_only=True, max_length=3)
+    images = serializers.ListField(child=serializers.ImageField(), write_only=True)
 
     class Meta:
         model = Announcement
-        fields = ['likes', 'name', 'type_of_product', 'description', 'price', 'inventory', 'localizations', 'images']
+        fields = ['name', 'images', 'type_of_product', 'description', 'price', 'inventory', 'localizations', 'likes']
 
     def validate_name(self, name):
         if self.context['productor'].announcements.all().filter(name=name).exists():
             raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
         return name
-
-    def validate_localizations(self, localizations):
-        if len(localizations) > 3:
-            raise serializers.ValidationError('Mais de três localizações para um único anúncio')
-        return localizations
 
     def create(self, validated_data):
         localizations = validated_data.pop('localizations')
@@ -32,21 +26,16 @@ class AnnouncementCreateSerializer(serializers.ModelSerializer):
         return announcement
 
 class AnnouncementUpdateSerializer(serializers.ModelSerializer):
-    localizations = serializers.ListField(child=serializers.CharField(), allow_empty=True, write_only=True)
+    localizations = serializers.ListField(child=serializers.CharField(), write_only=True, max_length=3)
 
     class Meta:
         model = Announcement
         fields = ['name', 'type_of_product', 'description', 'price', 'inventory', 'localizations']
 
     def validate_name(self, name):
-        if self.context['queryset'].filter(name=name).exists():
+        if self.context['view'].get_queryset().filter(name=name).exists():
             raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
         return name
-
-    def validate_localizations(self, localizations):
-        if len(localizations) > 3:
-            raise serializers.ValidationError('Mais de três localizações para um único anúncio')
-        return localizations
 
     def update(self, instance, validated_data):
         if 'localizations' in validated_data:
@@ -73,4 +62,4 @@ class AnnouncementListSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Announcement
-        fields = ['email', 'username', 'phone_number', 'pictureProductor', 'name', 'type_of_product', 'description', 'price', 'likes', 'images', 'localizations']
+        fields = ['email', 'username', 'phone_number', 'pictureProductor', 'name', 'images', 'type_of_product', 'description', 'price', 'localizations', 'likes']

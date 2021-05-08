@@ -12,10 +12,11 @@ from ..encode import decode_string
 
 class AnnouncementRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
     '''
-	EndPoint para registro de anúncio
+	EndPoint para registro de anúncios
 	'''
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = serializer.AnnouncementCreateSerializer
+    queryset = Announcement.objects.all()
 
     def get_serializer_context(self):
         context = super(AnnouncementRegistrationAPIView, self).get_serializer_context()
@@ -24,20 +25,15 @@ class AnnouncementRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
 
 class AnnouncementDeleteUpdateAPIView(GenericViewSet, mixins.DestroyModelMixin, mixins.UpdateModelMixin):
     '''
-	EndPoint para remoção de anúncio
+	EndPoint para atualização/remoção de anúncios
 	'''
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = serializer.AnnouncementUpdateSerializer
     lookup_field = 'name'
 
     def get_queryset(self):
-        productor = Productor.objects.get(user=User.objects.get(email=self.request.user))
+        productor = Productor.objects.get(user__email=self.request.user)
         return productor.announcements.all()
-
-    def get_serializer_context(self):
-        context = super(AnnouncementDeleteUpdateAPIView, self).get_serializer_context()
-        context.update({'queryset': self.get_queryset()})
-        return context
 
 class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
     '''
