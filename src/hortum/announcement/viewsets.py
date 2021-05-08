@@ -3,6 +3,7 @@ from . import serializer
 from .models import Announcement
 from ..productor.models import Productor
 from ..users.models import User
+from .permissions import IsProductor, IsOwnerAnnouncement
 
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins, permissions
@@ -14,7 +15,7 @@ class AnnouncementRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
     '''
 	EndPoint para registro de anúncios
 	'''
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsProductor,)
     serializer_class = serializer.AnnouncementCreateSerializer
 
     def get_queryset(self):
@@ -24,7 +25,7 @@ class AnnouncementDeleteUpdateAPIView(GenericViewSet, mixins.DestroyModelMixin, 
     '''
 	EndPoint para atualização/remoção de anúncios
 	'''
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsProductor, IsOwnerAnnouncement)
     serializer_class = serializer.AnnouncementUpdateSerializer
     lookup_field = 'name'
 
