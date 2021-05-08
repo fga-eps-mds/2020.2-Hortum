@@ -217,7 +217,7 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
             **self.creds
         )
 
-        self.assertEqual(response.status_code, 404, msg='Anúncio válido')
+        self.assertEqual(response.status_code, 403, msg='Anúncio válido')
 
     def test_update_one_attr_announcement(self):
         new_data = {

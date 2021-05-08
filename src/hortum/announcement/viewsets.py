@@ -2,7 +2,6 @@ from . import serializer
 
 from .models import Announcement
 from ..productor.models import Productor
-from ..users.models import User
 from .permissions import IsProductor, IsOwnerAnnouncement
 
 from rest_framework.viewsets import GenericViewSet

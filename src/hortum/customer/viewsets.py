@@ -1,6 +1,6 @@
 from . import serializer
-
 from .models import Customer
+
 from ..announcement.models import Announcement
 from ..productor.models import Productor
 from ..users.models import User
