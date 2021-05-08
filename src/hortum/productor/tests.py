@@ -134,7 +134,7 @@ class ProductorListAPIViewTestCase(APITestCase):
         self.create_user()
         self.create_productors()
         self.create_tokens()
-        self.url_list = '/productor/list/'
+        self.url_list = '/productor/list'
 
     def tearDown(self):
         Productor.objects.all().delete()
@@ -149,7 +149,7 @@ class ProductorListAPIViewTestCase(APITestCase):
         self.assertEqual(len(response.data), 3, msg='Falha na quantidade de produtores listados')
 
     def test_search_productors(self):
-        url_search = self.url_list + 'mar/'
+        url_search = self.url_list + '/mar'
 
         response = self.client.get(
             url_search,

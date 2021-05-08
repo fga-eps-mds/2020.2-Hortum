@@ -66,7 +66,7 @@ class ComplaintRegistrationAPIViewTestCase(APITestCase):
         self.create_tokens()
         self.register_productor()
         self.url_login = '/login/'
-        self.url_register_complaint = '/complaint/create/'
+        self.url_register_complaint = '/complaint/create'
 
     def test_register_Complaint(self):
         complaint_data = {
@@ -186,7 +186,7 @@ class ComplaintListAPIViewTestCase(APITestCase):
         self.create_tokens()
         self.register_productor()
         self.url_login = '/login/'
-        self.url_register_complaint = '/complaint/create/'
+        self.url_register_complaint = '/complaint/create'
         encodedEmail = 'cHJvZHVjdG9yQHRlc3RlLmNvbQ=='
         self.url_list_complaints = '/complaint/list/' + encodedEmail
         
@@ -240,7 +240,7 @@ class ComplaintListAPIViewTestCase(APITestCase):
         Complaint.objects.all().delete()
         User.objects.all().delete()
 
-class ReclmationDeleteAPIViewTestCase(APITestCase):
+class ComplaintDeleteAPIViewTestCase(APITestCase):
     def create_admin(self):
         admin = User(username='admin', email='admin@teste.com', is_verified=True, is_staff=True)
         admin.set_password('test')
@@ -272,7 +272,7 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
         self.creds = self.create_tokens(user_data=self.admin_data)
         self.url_login = '/login/'
         self.url_delete_Complaint = '/complaint/delete/'
-        self.url_register_complaint = '/complaint/create/'
+        self.url_register_complaint = '/complaint/create'
 
     def register_productor(self):
         self.productor_data = {
@@ -339,7 +339,7 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
     def test_delete_complaint(self):
         self.register_complaint()
 
-        emailCustomer = 'Y3VzdG9tZXJAdGVzdGUuY29t/'
+        emailCustomer = 'Y3VzdG9tZXJAdGVzdGUuY29t'
 
         delete_data = {
             'emailProductor': self.productor_data['email']
@@ -360,7 +360,7 @@ class ReclmationDeleteAPIViewTestCase(APITestCase):
 
         self.register_customer()
 
-        emailCustomer = 'Y3VzdG9tZXJAdGVzdGUuY29t/'
+        emailCustomer = 'Y3VzdG9tZXJAdGVzdGUuY29t'
 
         delete_data = {
             'emailProductor': self.productor_data['email']

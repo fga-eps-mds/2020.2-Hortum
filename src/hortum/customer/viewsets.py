@@ -45,7 +45,6 @@ class CustomerListFavoritesAPIView (GenericViewSet, mixins.RetrieveModelMixin):
             return serializer.CustomerFavoritesProductorsSerializer
         raise ParseError({'Favorites': 'Atributo inválido!'})
 
-
 class FavoritesAnnouncementsAPIView (GenericViewSet, mixins.UpdateModelMixin):
     '''
 	EndPoint para adição/remoção de anúncios da lista de favoritos

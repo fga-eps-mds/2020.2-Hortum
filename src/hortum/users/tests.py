@@ -185,7 +185,7 @@ class UpdateUserViewTestCase(APITestCase):
         self.create_user()
         self.create_tokens()
         self.url_login = '/login/'
-        self.url_update_user = '/users/update/'
+        self.url_update_user = '/users/update'
 
     def test_change_existent_email(self):
         other_user_data = {
@@ -349,7 +349,7 @@ class ChangePasswordViewTestCase(APITestCase):
         self.create_user()
         self.create_tokens()
         self.url_login = '/login/'
-        self.url_change_password = '/users/change-password/'
+        self.url_change_password = '/users/change-password'
 
     def test_wrong_old_password(self):
         user_password = {

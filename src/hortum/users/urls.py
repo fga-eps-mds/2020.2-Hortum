@@ -3,7 +3,7 @@ from rest_framework import routers
 
 from ..productor.urls import routerRegister as productorRegister
 from ..customer.urls import routerRegister as customerRegister
-from ..routers import CustomUpdateRouter, CustomDeleteRouter
+from ..routers import CustomUpdateRouter, CustomDeleteRouter, OptionalSlashRouter
 from . import viewsets
 
 router = CustomUpdateRouter()
@@ -13,12 +13,12 @@ router.register(r'update', viewsets.UpdateUserView, basename='updateUser')
 customRouter = CustomDeleteRouter()
 customRouter.register(r'delete', viewsets.UserDeleteAPIView, basename='deleteUser')
 
-routerVerify = routers.SimpleRouter(trailing_slash=True)
+routerVerify = OptionalSlashRouter()
 routerVerify.register(r'verify', viewsets.VerifyAccountView, basename='verifyEmail')
 
 urlpatterns = router.urls + routerVerify.urls + customRouter.urls
 
 signup_urls = [
-    path('customer/', include(customerRegister.urls)),
-    path('productor/', include(productorRegister.urls)),
+    path('customer', include(customerRegister.urls)),
+    path('productor', include(productorRegister.urls)),
 ]
