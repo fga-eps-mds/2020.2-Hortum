@@ -339,7 +339,9 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Linquiça",
             "price": 35.50,
-            "localizations": [],
+            "localizations": [
+                "local 1"
+            ],
             "images": []
         }
     
@@ -348,7 +350,10 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
             "type_of_product": "Linguiça artesanal e defumados",
             "description": "Defumados",
             "price": 10.15,
-            "localizations": [],
+            "localizations": [
+                "local 1",
+                "local 2"
+            ],
             "images": []
         }
 
@@ -394,6 +399,8 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.create_announcement()
 
         self.url_list_announ = '/announcement/list'
+        self.filter_option = '/?filter='
+        self.value_option = '&value='
 
     def tearDown(self):
         Announcement.objects.all().delete()
@@ -421,7 +428,9 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(len(response.data), 1, msg='Falha na quantidade de anúncios listados')
     
     def test_list_names_multiples_annoucement(self):
-        self.url_list_announ += '/Meio'
+        self.filter_option += 'name'
+        self.value_option += 'Meio'
+        self.url_list_announ += self.filter_option + self.value_option
 
         response = self.client.get(
             path=self.url_list_announ,
@@ -432,7 +441,9 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(len(response.data), 2, msg='Falha na quantidade de anúncios listados')
 
     def test_list_names_one_announcement(self):
-        self.url_list_announ += '/Meio quilo de linguíça'
+        self.filter_option += 'name'
+        self.value_option += 'Meio quilo de linguíça'
+        self.url_list_announ += self.filter_option + self.value_option
 
         response = self.client.get(
             path=self.url_list_announ,
@@ -443,7 +454,9 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(len(response.data), 1, msg='Falha na busca por anúncio')
 
     def test_list_containing_name_announcement(self):
-        self.url_list_announ += '/quilo de'
+        self.filter_option += 'name'
+        self.value_option += 'quilo de'
+        self.url_list_announ += self.filter_option + self.value_option
 
         response = self.client.get(
             path=self.url_list_announ,
@@ -452,6 +465,81 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200, msg='Nenhum anúncio encontrado')
         self.assertEqual(len(response.data), 2, msg='Falha na busca por anúncio')
+
+    def test_list_locals_multiples_annoucement(self):
+        self.filter_option += 'localizations__adress'
+        self.value_option += 'local 1'
+        self.url_list_announ += self.filter_option + self.value_option
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Nenhum anúncio com o nome inserido')
+        self.assertEqual(len(response.data), 2, msg='Falha na quantidade de anúncios listados')
+
+    def test_list_local_one_announcement(self):
+        self.filter_option += 'localizations__adress'
+        self.value_option += 'local 2'
+        self.url_list_announ += self.filter_option + self.value_option
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Nenhum anúncio encontrado')
+        self.assertEqual(len(response.data), 1, msg='Falha na busca por anúncio')
+
+    def test_list_containing_local_announcement(self):
+        self.filter_option += 'localizations__adress'
+        self.value_option += 'local'
+        self.url_list_announ += self.filter_option + self.value_option
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Nenhum anúncio encontrado')
+        self.assertEqual(len(response.data), 2, msg='Falha na busca por anúncio')
+
+    def test_list_invalid_query_params_announcement(self):
+        self.filter_option += 'name'
+        self.url_list_announ += self.filter_option
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 404, msg='Opção válida para busca')
+
+    def test_list_tree_query_params_announcement(self):
+        self.filter_option += 'name'
+        self.value_option += 'invalid'
+        third_option = '&third=invalid'
+        self.url_list_announ += self.filter_option + self.value_option + third_option
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 404, msg='Quantidade válida para busca')
+
+    def test_list_invalid_filter_announcement(self):
+        self.filter_option += 'invalid'
+        self.value_option += 'invalid'
+        self.url_list_announ += self.filter_option + self.value_option
+
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Filtro válido para busca')
 
     def test_announcement_order(self):
         response = self.client.get(
