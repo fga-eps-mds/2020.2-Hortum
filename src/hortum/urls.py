@@ -1,11 +1,13 @@
 from .users import viewsets
 from .users.urls import signup_urls
+from .users.forms import CustomPasswordForm
 
-from django.urls import path, include
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
+from django.urls import path, include
+from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
-from django.conf import settings
 
 from rest_framework import permissions
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -26,7 +28,6 @@ schema_view = get_schema_view(
    permission_classes=(permissions.AllowAny,),
 )
 
-
 urlpatterns = [
     path('login/', viewsets.CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
@@ -38,6 +39,21 @@ urlpatterns = [
     path('customer/', include('hortum.customer.urls')),
     path('users/', include('hortum.users.urls')),
     path('complaint/', include('hortum.complaint.urls')),
+
+    path('reset_password/', auth_views.PasswordResetView.as_view(
+       template_name="hortum/password_reset.html",
+       html_email_template_name="hortum/email_template_name.htm",), name='reset_password'),
+
+    path('reset_password_done/', auth_views.PasswordResetDoneView.as_view(
+       template_name="hortum/password_reset_done.html"), name='password_reset_done'),
+
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(
+       template_name="hortum/password_reset_confirm.html",
+       form_class=CustomPasswordForm), name='password_reset_confirm'),
+
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(
+      template_name="hortum/password_reset_complete.html"), name='password_reset_complete'),
+      
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

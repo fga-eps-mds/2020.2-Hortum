@@ -18,7 +18,7 @@ class ProductorRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
 	def create(self, request, *args, **kwargs):
 		response = super().create(request, *args, **kwargs)
 		if response.status_code == 201:
-			email = self.request.data['user']['email']
+			email = self.request.data['user']['email'] if request.content_type == 'application/json' else self.request.data['user.email']
 			User.send_verification_email(request, email)
 		return response
 

@@ -5,6 +5,24 @@ class OptionalSlashRouter(SimpleRouter):
         super().__init__()
         self.trailing_slash = '/?'
 
+class CustomListRouter(SimpleRouter):
+    routes = [
+        Route(
+            url=r'^{prefix}/{lookup}/?',
+            mapping={'get': 'list'},
+            name='{basename}-list',
+            detail=False,
+            initkwargs={}
+        ),
+        Route(
+            url=r'^{prefix}/?',
+            mapping={'get': 'list'},
+            name='{basename}-list',
+            detail=False,
+            initkwargs={}
+        )
+    ]
+
 class CustomUpdateRouter(SimpleRouter):
     routes = [
         Route(

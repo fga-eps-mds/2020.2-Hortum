@@ -1,5 +1,4 @@
 from django.urls import path, include
-from rest_framework import routers
 
 from ..productor.urls import routerRegister as productorRegister
 from ..customer.urls import routerRegister as customerRegister
@@ -19,6 +18,6 @@ routerVerify.register(r'verify', viewsets.VerifyAccountView, basename='verifyEma
 urlpatterns = router.urls + routerVerify.urls + customRouter.urls
 
 signup_urls = [
-    path('customer', include(customerRegister.urls)),
-    path('productor', include(productorRegister.urls)),
+    path('customer/', include(customerRegister.urls)),
+    path('productor/', include(productorRegister.urls)),
 ]
