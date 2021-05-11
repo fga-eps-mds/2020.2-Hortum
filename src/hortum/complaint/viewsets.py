@@ -1,6 +1,7 @@
 from .serializer import ComplaintSerializer, ComplaintDeleteSerializer
 from .models import Complaint
-from .permissions import IsCustomer
+
+from ..customer.permissions import IsCustomer
 
 from ..productor.models import Productor
 

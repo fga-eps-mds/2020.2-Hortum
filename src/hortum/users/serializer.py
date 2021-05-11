@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from ..validators import UniqueValidator 
+from ..validators import UniqueValidator
 from .validators import PasswordValidator
 
 from .models import User
@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'phone_number', 'password', 'profile_picture']
-        extra_kwargs = {'password': {'write_only': True}}
+        extra_kwargs = {'password': {'write_only': True}},
 
 class UserDeleteSerializer(serializers.ModelSerializer):
     class Meta:

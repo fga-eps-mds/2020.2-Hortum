@@ -1,5 +1,6 @@
 from . import serializer
 from .models import Customer
+from .permissions import IsCustomer
 
 from ..announcement.models import Announcement
 from ..productor.models import Productor
@@ -31,7 +32,7 @@ class CustomerListFavoritesAPIView (GenericViewSet, mixins.RetrieveModelMixin):
     '''
 	EndPoint para listagem dos favoritos
 	'''
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsCustomer,)
     lookup_field = 'favorites'
 
     def get_object(self):
@@ -49,7 +50,7 @@ class FavoritesAnnouncementsAPIView (GenericViewSet, mixins.UpdateModelMixin):
     '''
 	EndPoint para adição/remoção de anúncios da lista de favoritos
 	'''
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsCustomer,)
     serializer_class = serializer.CustomerAddAnnouncementSerializer
 
     def get_object(self):
@@ -74,7 +75,7 @@ class FavoriteProductorsAPIView(GenericViewSet, mixins.UpdateModelMixin):
     '''
 	EndPoint para adição/remoção de produtores na lista de favoritos
 	'''
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsCustomer,)
     serializer_class = serializer.CustomerAddProductorSerializer
 
     def get_object(self):

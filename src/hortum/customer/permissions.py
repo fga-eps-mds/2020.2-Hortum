@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-from ..customer.models import Customer
+from .models import Customer
 
 class IsCustomer(permissions.BasePermission):
     message = 'Usuário não é um consumidor.'
