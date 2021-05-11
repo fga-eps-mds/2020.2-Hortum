@@ -6,7 +6,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'phone_number', 'password', 'profile_picture']
+        fields = ['username', 'email', 'phone_number', 'password', 'profile_picture', 'is_verified']
 
 class UserDeleteSerializer(serializers.ModelSerializer):
     password = serializers.CharField(required=True)
@@ -50,7 +50,7 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'phone_number']
+        fields = ['username', 'email', 'phone_number', 'profile_picture']
 
     def validate(self, data):
         if len(data) == 0:

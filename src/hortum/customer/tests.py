@@ -9,7 +9,8 @@ class CustomerRegisterAPIViewTestCase(APITestCase):
         self.user_data = {
             'username': 'Pedro',
             'email': 'pedro@customer.com',
-            'password': 'teste'
+            'password': 'teste',
+            'is_verified': True
         }
 
         self.url_signup = '/signup/customer/'
@@ -42,7 +43,8 @@ class CustomerRegisterAPIViewTestCase(APITestCase):
         new_user = {
             'username': 'João',
             'email': 'pedro@customer.com',
-            'password': 'teste'
+            'password': 'teste',
+            'is_verified': True
         }
         
         response = self.client.post(
@@ -58,7 +60,8 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
         self.productor_data = {
 	        "username": "Mário",
             "email": "mario@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'is_verified': True
         }
 
         url_signup = '/signup/productor/'
@@ -79,14 +82,14 @@ class CustomerFavoritesAPIViewTestCase(APITestCase):
 	        user_cred,
 	        format='json'
         )
-
         self.creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
 
     def create_customer(self):
         self.customer_data = {
 	        "username": "João Pedro",
             "email": "joao@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            'is_verified': True
         }
 
         url_signup = '/signup/customer/'

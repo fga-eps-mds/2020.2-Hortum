@@ -16,8 +16,9 @@ class UserCreateAPIViewTestCase(APITestCase):
         user_data = {
             "username": "João",
             "email": "joao@email.com",
-            "phone_number": "61123456789",
-            "password": "teste"
+            "phone_number": "61121456789",
+            "password": "teste",
+            "is_verified": True
         }
 
         response = self.client.post(
@@ -47,7 +48,7 @@ class UserCreateAPIViewTestCase(APITestCase):
         user_data = {
             "username": "João",
             "email": "joao@email.com",
-            "phone_number": "61123456789",
+            "phone_number": "11123456789",
             "password": "teste"
         }
 
@@ -64,7 +65,9 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "phone_number": "62123456787",
+            "is_verified": True
         }
 
         url_signup = '/signup/customer/'
@@ -147,7 +150,8 @@ class UpdateUserViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
-            "phone_number": "61123456789",
+            "is_verified": True,
+            "phone_number": "61133456789",
 	        "password": "teste"
         }
 
@@ -182,7 +186,9 @@ class UpdateUserViewTestCase(APITestCase):
         other_user_data = {
             'username': 'Marcos Segundo',
             'email': 'marcos@productor.com',
-            'password': 'teste dois'
+            'password': 'teste dois',
+            'phone_number': "41123456787",
+            'is_verified': True
         }
         
         user_username_email = {
@@ -224,7 +230,7 @@ class UpdateUserViewTestCase(APITestCase):
     
     def test_update_valid_phone_number_user(self):
         new_information = {
-            "phone_number": "61987654321"
+            "phone_number": "62887654321"
         }
 
         response = self.client.patch(
@@ -238,7 +244,7 @@ class UpdateUserViewTestCase(APITestCase):
 
     def test_update_duplicate_phone_number_user(self):
         new_information = {
-            "phone_number": "61123456789"
+            "phone_number": "61133456789"
         }
 
         response = self.client.patch(
@@ -307,7 +313,8 @@ class ChangePasswordViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "is_verified": True
         }
 
         url_signup = '/signup/customer/'
@@ -424,7 +431,9 @@ class DeleteUserAPIViewTestCase(APITestCase):
         self.customer_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "phone_number": "61123456757",
+            "is_verified": True
         }
 
         url_signup = '/signup/customer/'
@@ -441,7 +450,9 @@ class DeleteUserAPIViewTestCase(APITestCase):
         self.productor_data = {
 	        "username": "João",
             "email": "joao@teste.com",
-	        "password": "teste"
+	        "password": "teste",
+            "phone_number": "61123416787",
+            "is_verified": True
         }
 
         url_signup = '/signup/productor/'
@@ -573,3 +584,42 @@ class DeleteUserAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 200, msg='Falha na listagem de anúncios favoritos')
         self.assertEqual(len(response.data['idAnunFav']), 0, msg='Falha na quantidade de anúncios listados')
+
+class VerifyAccountViewTestCase(APITestCase):
+    def create_user(self):
+        self.user_data = {
+	        "username": "Luís",
+            "email": "luis@teste.com",
+	        "password": "teste",
+            "phone_number": "61121456789"
+        }
+
+        url_signup = '/signup/customer/'
+
+        self.client.post(
+            url_signup,
+	        {'user': self.user_data},
+	        format='json'
+	    )
+    
+    def user_login(self):
+        user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
+
+        url_login = '/login/'
+
+        self.login_response = self.client.post(
+            url_login,
+	        user_cred,
+	        format='json'
+        )
+
+    def setUp(self):
+        self.create_user()
+
+    def test_user_not_verified(self):
+        self.user_login()
+        self.assertEqual(self.login_response.status_code, 403, msg='Usuário logou sem ser verificado')
+
+    def tearDown(self):
+        Customer.objects.all().delete()
+        User.objects.all().delete()

@@ -2,7 +2,8 @@
 ##Histórico de Revisão
 Data|Versão|Descrição|Autor(es)
 -|-|-|-
-26/02/2021|1.0|Abertura do Documento|Brenno Oliveira, Carlos Eduardo, João Pedro, Matheus, Victor Lima e Vitor Lamego
+26/02/2021|1.0|Abertura do Documento|Brenno Oliveira, Carlos Eduardo, João Pedro, Matheus, Victor Lima e Vitor Lamego|
+05/05/2021|1.1|Adição de tópico|Carlos Eduardo e Matheus Calixto|
 
 ## 1. Épicos
 Épico|Descrição
@@ -51,3 +52,13 @@ E3|FT08|US19|Eu, como comprador, gostaria de fazer um comentário sobre determin
 E3|FT09|US20|Eu, como comprador, gostaria de entrar em contato com determinado produtor pelo chat do aplicativo|3
 E3|FT10|US21|Eu, como usuário, gostaria de denunciar outro usuário|5
 
+
+### Histórias de Usuário Canceladas
+<p align = "justify">&emsp;&emsp; As histórias abaixo foram retiradas do escopo do projeto dentro do tempo de disciplina, apesar de serem funcionalidades interessantes para a proposta do aplicativo.</p>
+
+Épico|Feature|US|Descrição|Pontuação
+-|-|-|-|-
+E2|FT05|US15|Eu, como comprador, gostaria de compartilhar um anúncio para outras plataformas|2
+E2|FT05|US16|Eu, como comprador, gostaria de compartilhar um produtor para outras plataformas|2
+E3|FT08|US19|Eu, como comprador, gostaria de fazer um comentário sobre determinado produtor|3
+E3|FT09|US20|Eu, como comprador, gostaria de entrar em contato com determinado produtor pelo chat do aplicativo|3

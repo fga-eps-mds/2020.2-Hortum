@@ -10,6 +10,7 @@
 |01/03/2021|1.1.1|Alteração na formatação dos tópicos 2.2, 2.3, 3.3.1, 3.3.2, 3.4.1, 3.4.2|Brenno Oliveira e Carlos Eduardo
 |12/03/2021|1.1.2|Correções na digitação do documento|Lucas Braun
 |29/03/2021|1.1.3|Revisão do documento|Joao Moura e Matheus Calixto
+|05/05/2021|1.2|Remoção de tópicos|Carlos Eduardo e Matheus Calixto
 
 ## 1. Introdução
 ### 1.1 Objetivo
@@ -151,8 +152,6 @@ Auxiliar compradores a encontrar produtos|Interface de fácil utilização para 
 - Cadastrar na plataforma
 - Anunciar produtos
 - Editar anúncios
-- Compartilhar anúncio
-- Denunciar outro usuário
 
 ### 5.2 Recursos do Comprador
 - Cadastrar na plataforma
@@ -160,9 +159,7 @@ Auxiliar compradores a encontrar produtos|Interface de fácil utilização para 
 - Pesquisar produtor
 - Favoritar produtor
 - Curtir anúncio
-- Compartilhar anúncio
-- Avaliar produtor
-- Denunciar outro usuário
+- Denunciar um produtor
 
 ## 6 Restrições
 ### 6.1 Restrições de Design
