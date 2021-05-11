@@ -1,9 +1,16 @@
+import os
+import io
+
+from PIL import Image
+
 from rest_framework.test import APITestCase
+
+from django.conf import settings
 
 from ..productor.models import Productor
 from ..customer.models import Customer
 from ..users.models import User
-from .models import Announcement
+from .models import Announcement, AnnouncementImage
 
 from ..encode import encode_string
 
@@ -39,6 +46,14 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
 
         self.auth_token = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
 
+    def generate_photo_file(self):
+        file = io.BytesIO()
+        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+        image.save(file, 'png')
+        file.name = 'test.png'
+        file.seek(0)
+        return file
+
     def setUp(self):
         self.create_productor()
         self.create_tokens()
@@ -56,6 +71,10 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
         Announcement.objects.all().delete()
         Productor.objects.all().delete()
         User.objects.all().delete()
+        for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+            for name in files:
+                if name != 'person-male.png':
+                    os.remove(root + '/' + name)
 
     def test_create_announcement(self):
         response = self.client.post(
@@ -69,6 +88,31 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             response.status_code,
             201,
             msg='Falha na criação de anúncio'
+        )
+
+    def test_create_announcement_with_image(self):
+        photo_file = self.generate_photo_file()
+        self.announcement_data['images'] += [photo_file]
+        response = self.client.post(
+            self.url_announcement,
+            self.announcement_data,
+            format='multipart',
+            **self.auth_token
+        )
+
+        self.assertEqual(
+            response.status_code,
+            201,
+            msg='Falha na criação de anúncio'
+        )
+
+        announcementImage = AnnouncementImage.objects.get(idImage__idProductor__user__email=self.user_data['email'])
+        expected = AnnouncementImage.upload_image_announ(announcementImage, photo_file.name)
+        self.assertEqual(response.status_code, 201, msg="Falha ao registrar anúncio")
+        self.assertEqual(
+            announcementImage.picture.url,
+            '/images/' + expected,
+            msg='Falha no link da foto'
         )
 
     def test_duplicate_announcement_name(self):
@@ -187,6 +231,14 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 201, msg='Falha na criação do anúncio')
 
+    def generate_photo_file(self):
+        file = io.BytesIO()
+        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+        image.save(file, 'png')
+        file.name = 'test.png'
+        file.seek(0)
+        return file
+
     def setUp(self):
         self.create_user()
         self.create_tokens()
@@ -198,6 +250,10 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         Announcement.objects.all().delete()
         Productor.objects.all().delete()
         User.objects.all().delete()
+        for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+            for name in files:
+                if name != 'person-male.png':
+                    os.remove(root + '/' + name)
 
     def test_delete_announcement(self):
         response = self.client.delete(
@@ -302,6 +358,21 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 400, msg='Anúncio atualizado com sucesso')
 
+    def test_update_images_announcement(self):
+        photo_file = self.generate_photo_file()
+        new_data = {
+            "images": [photo_file]
+        }
+
+        response = self.client.patch(
+            path=self.url_update_announ,
+            format='multipart',
+            data=new_data,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na alteração das imagens')
+
 class AnnouncementsListAPIViewTestCase(APITestCase):
     def create_user(self):
         self.user_data = {
@@ -337,7 +408,16 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
 
         self.creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
 
+    def generate_photo_file(self):
+        file = io.BytesIO()
+        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+        image.save(file, 'png')
+        file.name = 'test.png'
+        file.seek(0)
+        return file
+
     def create_announcement(self):
+        photo_file = self.generate_photo_file()
         self.announcement_data = {
             "name": "Meio quilo de linguíça",
             "type_of_product": "Linguiça artesanal e defumados",
@@ -346,7 +426,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
             "localizations": [
                 "local 1"
             ],
-            "images": []
+            "images": [photo_file]
         }
     
         self.announcement_data_extra = {
@@ -366,7 +446,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         response = self.client.post(
             path=url_create_announ,
 	        data=self.announcement_data,
-	        format='json',
+	        format='multipart',
 	        **self.creds
         )
 
@@ -410,6 +490,10 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         Announcement.objects.all().delete()
         Productor.objects.all().delete()
         User.objects.all().delete()
+        for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+            for name in files:
+                if name != 'person-male.png':
+                    os.remove(root + '/' + name)
 
     def test_list_all_true_announcement(self):
         response = self.client.get(

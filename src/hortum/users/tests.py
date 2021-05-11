@@ -1,4 +1,11 @@
+import os
+import io
+
+from PIL import Image
+
 from rest_framework.test import APITestCase
+
+from django.conf import settings
 
 from ..customer.models import Customer
 from ..productor.models import Productor
@@ -6,11 +13,23 @@ from ..announcement.models import Announcement
 from .models import User
 
 class UserCreateAPIViewTestCase(APITestCase):
+    def generate_photo_file(self):
+        file = io.BytesIO()
+        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+        image.save(file, 'png')
+        file.name = 'test.png'
+        file.seek(0)
+        return file
+
     def setUp(self):
         self.url_login = '/signup/customer/'
 
     def tearDown(self):
         User.objects.all().delete()
+        for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+            for name in files:
+                if name != 'person-male.png':
+                    os.remove(root + '/' + name)
 
     def test_create_valid_user(self):
         user_data = {
@@ -29,6 +48,28 @@ class UserCreateAPIViewTestCase(APITestCase):
         User.objects.filter(email=user_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
+
+    def test_create_valid_user_with_image(self):
+        photo_file = self.generate_photo_file()
+        user_data = {
+            "user.username": "Cleber",
+            "user.email": "cleber@email.com",
+            "user.phone_number": "61121456789",
+            "user.password": "teste",
+            "user.profile_picture": photo_file
+        }
+
+        response = self.client.post(
+            self.url_login,
+            user_data,
+            format='multipart'
+        )
+
+        User.objects.filter(email=user_data['user.email']).update(is_verified=True)
+
+        expected = User.upload_image(User.objects.get(username=user_data['user.username']), photo_file.name)
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
+        self.assertEqual(response.data['user']['profile_picture'], 'http://testserver/images/' + expected, msg='Falha no link da foto')
 
     def test_create_invalid_user(self):
         user_data = {

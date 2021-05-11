@@ -253,7 +253,7 @@ class Localization(models.Model):
 
 class AnnouncementImage(models.Model):
     def upload_image_announ(instance, filename):
-        return f"Announcement-{instance.idImage}-{filename}"
+        return f"Announcement-{instance.idImage.name}-{filename}"
 
     idImage = models.ForeignKey(Announcement, on_delete=models.CASCADE, related_name='images')
     picture = models.ImageField(upload_to=upload_image_announ, null=True)

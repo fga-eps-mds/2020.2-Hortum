@@ -7,17 +7,23 @@ from ..productor.models import Productor
 from ..validators import UniqueValidator
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
-    localizations = serializers.ListField(child=serializers.CharField(), write_only=True, max_length=3)
-    images = serializers.ListField(child=serializers.ImageField(), write_only=True)
+    localizations = serializers.ListField(required=False, child=serializers.CharField(allow_blank=True), write_only=True, max_length=3)
+    images = serializers.ListField(required=False, child=serializers.ImageField(), write_only=True)
 
     class Meta:
         model = Announcement
         fields = ['name', 'images', 'type_of_product', 'description', 'price', 'inventory', 'localizations', 'likes']
-        extra_kwargs = {'name': {'validators': [UniqueValidator()]}}
+        extra_kwargs = {
+            'name': {'validators': [UniqueValidator()]},
+            'inventory': {'required': False, 'default': True}
+        }
 
     def create(self, validated_data):
-        localizations = validated_data.pop('localizations')
-        images = validated_data.pop('images')
+        localizations = images = []
+        if 'localizations' in validated_data:
+            localizations = validated_data.pop('localizations')
+        if 'images' in validated_data:
+            images = validated_data.pop('images')
         produtor_pk = Productor.objects.get(user__email=self.context['request'].user)
         announcement = Announcement.objects.create(idProductor=produtor_pk, **validated_data)
         [AnnouncementImage.objects.create(idImage=announcement, picture=picture) for picture in images]
@@ -47,13 +53,12 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
         if 'localizations' in validated_data:
             self.multiple_update(instance, validated_data, 'localizations', Localization, **{'idAnnoun': instance, 'adress': validated_data.pop('localizations')})
         if 'images' in validated_data:
-            self.multiple_update(instance, validated_data, 'images', Localization, **{'idImage': instance, 'picture': validated_data.pop('images')})
+            self.multiple_update(instance, validated_data, 'images', AnnouncementImage, **{'idImage': instance, 'picture': validated_data.pop('images')})
         return super().update(instance, validated_data)
 
 class AnnouncementImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AnnouncementImage
-        fields = ['picture']
+    def to_representation(self, value):
+        return '%s://%s%s' % ('https' if self.context['request'].is_secure() else 'http', self.context['request'].get_host(), value.picture.url)
 
 class AnnouncementListSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True, source='idProductor.user.username')

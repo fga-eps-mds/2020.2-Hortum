@@ -1,4 +1,11 @@
+import os
+import io
+
+from PIL import Image
+
 from rest_framework.test import APITestCase
+
+from django.conf import settings
 
 from ..complaint.models import Complaint
 from ..customer.models import Customer
@@ -61,6 +68,14 @@ class ComplaintRegistrationAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 201, msg='Falha no signup de productor')
     
+    def generate_photo_file(self):
+        file = io.BytesIO()
+        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+        image.save(file, 'png')
+        file.name = 'test.png'
+        file.seek(0)
+        return file
+
     def setUp(self):
         self.create_user()
         self.create_tokens()
@@ -83,6 +98,26 @@ class ComplaintRegistrationAPIViewTestCase(APITestCase):
         )
 
         self.assertEqual(response.status_code, 201, msg="Falha ao registrar reclamação")
+
+    def test_register_Complaint_with_photo(self):
+        photo_file = self.generate_photo_file()
+        complaint_data = {
+            'author': "Jose",
+            'description': "produtor do bom",
+            'emailProductor': "productor@teste.com",
+            'image': photo_file
+        }
+
+        response = self.client.post(
+            path=self.url_register_complaint,
+            data=complaint_data,
+            format='multipart',
+            **self.creds
+        )
+
+        expected = Complaint.upload_image(Complaint.objects.get(author=complaint_data['author']), photo_file.name)
+        self.assertEqual(response.status_code, 201, msg="Falha ao registrar reclamação")
+        self.assertEqual(response.data['image'], 'http://testserver/images/' + expected, msg='Falha no link da foto')
 
     def test_register_complaint_again(self):
         complaint_data = {
@@ -124,6 +159,10 @@ class ComplaintRegistrationAPIViewTestCase(APITestCase):
         Productor.objects.all().delete()
         Complaint.objects.all().delete()
         User.objects.all().delete()
+        for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+            for name in files:
+                if name != 'person-male.png':
+                    os.remove(root + '/' + name)
 
 class ComplaintListAPIViewTestCase(APITestCase):
     def create_user(self):
@@ -187,8 +226,7 @@ class ComplaintListAPIViewTestCase(APITestCase):
         self.register_productor()
         self.url_login = '/login/'
         self.url_register_complaint = '/complaint/create'
-        encodedEmail = 'cHJvZHVjdG9yQHRlc3RlLmNvbQ=='
-        self.url_list_complaints = '/complaint/list/' + encodedEmail
+        self.url_list_complaints = '/complaint/list/'
         
     def test_list_complaint(self):
         complaint_data = {
@@ -206,6 +244,8 @@ class ComplaintListAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 201, msg='Falha ao registrar reclamação')
 
+        self.url_list_complaints += 'cHJvZHVjdG9yQHRlc3RlLmNvbQ=='
+
         response = self.client.get(
             path=self.url_list_complaints,
             **self.creds,
@@ -215,6 +255,7 @@ class ComplaintListAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 200, msg="Falha ao listar reclamações")
 
     def test_list_complaint_empty(self):
+        self.url_list_complaints += 'cHJvZHVjdG9yQHRlc3RlLmNvbQ=='
         response = self.client.get(
             path=self.url_list_complaints,
             **self.creds,
@@ -222,6 +263,15 @@ class ComplaintListAPIViewTestCase(APITestCase):
         )
 
         self.assertEqual(response.status_code, 200, msg="Falha ao listar produtor sem reclamações")
+
+    def test_list_complaint_invalid_url(self):
+        response = self.client.get(
+            path=self.url_list_complaints,
+            **self.creds,
+            follow=True
+        )
+
+        self.assertEqual(response.status_code, 400, msg='Reclamações listadas com sucesso')
 
     def test_list_complaint_non_existent_productor(self):
         emailNonExistentProductor = 'cHJvZHVjdG9yMjNAZ21haWwuY29t'
