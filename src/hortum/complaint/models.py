@@ -3,7 +3,7 @@ from hortum.productor.models import Productor
 
 class Complaint(models.Model):
     def upload_image(instance, filename):
-        return f"{instance.author}-{filename}"
+        return f"Complaint-{instance.author}-{filename}"
 
     author = models.CharField(max_length=100)
     description = models.CharField(max_length=450)
