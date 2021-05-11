@@ -33,21 +33,21 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
         fields = ['name', 'type_of_product', 'description', 'price', 'inventory', 'localizations', 'images']
         extra_kwargs = {'name': {'validators': [UniqueValidator()]}}
 
+    def multiple_update(self, instance, validated_data, field_name, filter_obj, **query):
+        query_items = list(query.items())
+        data = query_items[1][1]
+        filter_obj.objects.filter(Q(query_items[0]) & ~Q(query_items[1])).delete()
+        for value in data:
+            if not instance.__class__.objects.filter(name=instance.name, **{'%s__%s' % (field_name, query_items[1][0]): value}).exists():
+                query[query_items[1][0]] = value
+                filter_obj.objects.create(**query)
+        instance.save()
+
     def update(self, instance, validated_data):
         if 'localizations' in validated_data:
-            localizations = validated_data.pop('localizations')
-            Localization.objects.filter(Q(idAnnoun=instance) & ~Q(adress=localizations)).delete()
-            for local in localizations:
-                if not instance.__class__.objects.filter(name=instance.name, localizations__adress=local).exists():
-                    Localization.objects.create(idAnnoun=instance, adress=local)
-            instance.save()
+            self.multiple_update(instance, validated_data, 'localizations', Localization, **{'idAnnoun': instance, 'adress': validated_data.pop('localizations')})
         if 'images' in validated_data:
-            images = validated_data.pop('images')
-            AnnouncementImage.objects.filter(Q(idImage=instance) & ~Q(picture=images)).delete()
-            for image in images:
-                if not instance.__class__.objects.filter(name=instance.name, images__picture=image).exists():
-                    AnnouncementImage.objects.create(idImage=instance, picture=image)
-            instance.save()
+            self.multiple_update(instance, validated_data, 'images', Localization, **{'idImage': instance, 'picture': validated_data.pop('images')})
         return super().update(instance, validated_data)
 
 class AnnouncementImageSerializer(serializers.ModelSerializer):
