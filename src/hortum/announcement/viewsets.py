@@ -44,9 +44,9 @@ class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
         queryset = Announcement.objects.filter(inventory=True)
         query_params = self.request.GET
         possible_filters = ['name', 'localizations__adress']
+        if Customer.objects.filter(user__email=self.request.user).exists():
+            queryset = queryset.exclude(customer__user__email=self.request.user)
         if len(query_params) == 0:
-            if Customer.objects.filter(user__email=self.request.user).exists():
-                return queryset.exclude(customer__user__email=self.request.user)
             return queryset
         if 'filter' and 'value' not in query_params or len(query_params) != 2:
             raise NotFound({'query_params': 'Parametros passados para a query incoerentes'})
