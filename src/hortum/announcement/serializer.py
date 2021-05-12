@@ -70,4 +70,4 @@ class AnnouncementListSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Announcement
-        fields = ['email', 'username', 'phone_number', 'pictureProductor', 'name', 'images', 'type_of_product', 'description', 'price', 'localizations', 'likes']
+        fields = ['email', 'username', 'phone_number', 'pictureProductor', 'name', 'images', 'type_of_product', 'description', 'price', 'localizations', 'likes', 'inventory']
