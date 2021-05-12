@@ -16,9 +16,3 @@ class PasswordValidator:
     def __call__(self, value, serializer):
         if not serializer.context['request'].user.check_password(value):
             raise ValidationError(self.message)
-
-    def __repr__(self):
-        return '<%s(password=%s)>' % (
-            self.__class__.__name__,
-            smart_repr(self.password)
-        )

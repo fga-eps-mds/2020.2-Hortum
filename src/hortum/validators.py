@@ -46,12 +46,6 @@ class UniqueValidator:
         if qs_exists(queryset):
             raise ValidationError(self.message, code='unique')
 
-    def __repr__(self):
-        return '<%s(queryset=%s)>' % (
-            self.__class__.__name__,
-            smart_repr(self.queryset)
-        )
-
 class ExistingValidator:
     '''
     Validação que checa se um campo é existe.
@@ -76,9 +70,3 @@ class ExistingValidator:
         queryset = filter_queryset(value, queryset, field_name, self.lookup)
         if not qs_exists(queryset):
             raise ValidationError(self.message, code='unique')
-
-    def __repr__(self):
-        return '<%s(queryset=%s)>' % (
-            self.__class__.__name__,
-            smart_repr(self.queryset)
-        )

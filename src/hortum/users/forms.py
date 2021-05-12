@@ -10,16 +10,18 @@ class CustomPasswordForm(SetPasswordForm):
     error_messages = {
         'password_mismatch': ("As senhas inseridas não são iguais"),
     }
-    new_password1 = forms.CharField(label=("Nova senha"),
-                                    widget=forms.PasswordInput,
-                                    strip=False,
-                                    help_text=password_validation.password_validators_help_text_html(),
-                                    )
+    new_password1 = forms.CharField(
+        label=("Nova senha"),
+        widget=forms.PasswordInput,
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
 
-    new_password2 = forms.CharField(label=("Confirme nova senha"),
-                                    widget=forms.PasswordInput,
-                                    strip=False,
-                                    )
+    new_password2 = forms.CharField(
+        label=("Confirme nova senha"),
+        widget=forms.PasswordInput,
+        strip=False,
+    )
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
@@ -34,7 +36,6 @@ class CustomPasswordForm(SetPasswordForm):
                     self.error_messages['password_mismatch'],
                     code='password_mismatch',
                 )
-
         return password2
 
     def save(self, commit=True):

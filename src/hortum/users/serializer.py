@@ -9,8 +9,8 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'phone_number', 'password', 'profile_picture']
-        extra_kwargs = {'password': {'write_only': True}},
+        fields = ['username', 'email', 'password', 'phone_number', 'profile_picture']
+        extra_kwargs = {'password': {'write_only': True}}
 
 class UserDeleteSerializer(serializers.ModelSerializer):
     class Meta:
