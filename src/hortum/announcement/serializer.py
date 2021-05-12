@@ -33,10 +33,11 @@ class AnnouncementCreateSerializer(serializers.ModelSerializer):
 
 class AnnouncementUpdateSerializer(serializers.ModelSerializer):
     localizations = serializers.ListField(child=serializers.CharField(), allow_empty=True, write_only=True)
+    images = serializers.ListField(child=serializers.ImageField(), allow_empty=True, write_only=True)
 
     class Meta:
         model = Announcement
-        fields = ['name', 'type_of_product', 'description', 'price', 'inventory', 'localizations']
+        fields = ['name', 'type_of_product', 'description', 'price', 'inventory', 'localizations', 'images']
 
     def validate_name(self, name):
         if self.context['queryset'].filter(name=name).exists():
@@ -55,6 +56,13 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
             for local in localizations:
                 if not instance.__class__.objects.filter(name=instance.name, localizations__adress=local).exists():
                     Localization.objects.create(idAnnoun=instance, adress=local)
+            instance.save()
+        if 'images' in validated_data:
+            images = validated_data.pop('images')
+            AnnouncementImage.objects.filter(Q(idImage=instance) & ~Q(picture=images)).delete()
+            for image in images:
+                if not instance.__class__.objects.filter(name=instance.name, images__picture=image).exists():
+                    AnnouncementImage.objects.create(idImage=instance, picture=image)
             instance.save()
         return super().update(instance, validated_data)
 
