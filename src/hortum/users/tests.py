@@ -44,6 +44,7 @@ class GlobalValidatorTestCase(APITestCase):
         class TypeErrorQueryset:
             def filter(self, **kwargs):
                 raise TypeError
+
             def none(self):
                 return None
         self.assertEqual(qs_filter(TypeErrorQueryset()), None)
@@ -52,6 +53,7 @@ class GlobalValidatorTestCase(APITestCase):
         class ValueErrorQueryset:
             def filter(self, **kwargs):
                 raise ValueError
+
             def none(self):
                 return None
         self.assertEqual(qs_filter(ValueErrorQueryset()), None)
@@ -60,6 +62,7 @@ class GlobalValidatorTestCase(APITestCase):
         class DataErrorQueryset:
             def filter(self, **kwargs):
                 raise DataError
+                
             def none(self):
                 return None
         self.assertEqual(qs_filter(DataErrorQueryset()), None)

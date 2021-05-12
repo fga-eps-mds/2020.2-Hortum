@@ -1,4 +1,3 @@
-from rest_framework.utils.representation import smart_repr
 from rest_framework.exceptions import ValidationError
 
 class PasswordValidator:

@@ -1,6 +1,5 @@
 from django.db import DataError
 
-from rest_framework.utils.representation import smart_repr
 from rest_framework.exceptions import ValidationError
 
 # Implementação para retornar `False` em vez de uma exceção
