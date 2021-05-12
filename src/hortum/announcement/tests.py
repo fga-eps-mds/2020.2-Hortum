@@ -374,8 +374,8 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 200, msg='Falha na alteração das imagens')
 
 class AnnouncementsListAPIViewTestCase(APITestCase):
-    def create_user(self):
-        self.user_data = {
+    def create_productor(self):
+        self.productor_data = {
 	        "username": "João",
             "email": "joao@teste.com",
 	        "password": "teste"
@@ -385,16 +385,35 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
 
         response = self.client.post(
             url_signup,
-	        {'user': self.user_data},
+	        {'user': self.productor_data},
 	        format='json'
 	    )
         
-        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
+        User.objects.filter(email=self.productor_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
-    def create_tokens(self):
-        user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
+    def create_customer(self):
+        self.customer_data = {
+	        "username": "Cleber",
+            "email": "cleber@teste.com",
+	        "password": "teste"
+        }
+
+        url_signup = '/signup/customer/'
+
+        response = self.client.post(
+            url_signup,
+	        {'user': self.customer_data},
+	        format='json'
+	    )
+
+        User.objects.filter(email=self.customer_data['email']).update(is_verified=True)
+
+        self.assertEqual(response.status_code, 201, msg='Falha no registro de consumidor')
+
+    def create_tokens(self, user):
+        user_cred = {'email': user['email'], 'password': user['password']}
 
         url_token = '/login/'
 
@@ -403,9 +422,6 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
 	        user_cred,
 	        format='json'
         )
-
-        self.assertEqual(response.status_code, 200, msg='Credenciais inválidas')
-
         self.creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
 
     def generate_photo_file(self):
@@ -462,6 +478,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 201, msg='Falha na criação do anúncio')
 
     def change_inventory(self):
+        self.create_tokens(self.productor_data)
         new_data = {
             "inventory": False
         }
@@ -478,9 +495,11 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 200, msg='Falha na alteração do anúncio')
 
     def setUp(self):
-        self.create_user()
-        self.create_tokens()
+        self.create_productor()
+        self.create_tokens(self.productor_data)
         self.create_announcement()
+        self.create_customer()
+        self.create_tokens(self.customer_data)
 
         self.url_list_announ = '/announcement/list'
         self.filter_option = '/?filter='
@@ -489,6 +508,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
     def tearDown(self):
         Announcement.objects.all().delete()
         Productor.objects.all().delete()
+        Customer.objects.all().delete()
         User.objects.all().delete()
         for root, dirs, files in os.walk(settings.MEDIA_ROOT):
             for name in files:
@@ -515,6 +535,31 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 200, msg='Falha na listagem do anúncio')
         self.assertEqual(len(response.data), 1, msg='Falha na quantidade de anúncios listados')
     
+    def test_list_announcement_with_favorites(self):
+        self.create_tokens(self.customer_data)
+        announcement_fav_url = '/customer/fav-announcement'
+        fav_announ = {
+            'email': self.productor_data['email'],
+            'announcementName': self.announcement_data['name']
+        }
+
+        response = self.client.patch(
+            path=announcement_fav_url,
+            format='json',
+            data=fav_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha no registro do favorito')
+        
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na listagem do anúncio')
+        self.assertEqual(len(response.data), 1, msg='Falha na quantidade de anúncios listados')
+
     def test_list_names_multiples_annoucement(self):
         self.filter_option += 'name'
         self.value_option += 'Meio'

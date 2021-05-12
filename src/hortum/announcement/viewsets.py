@@ -1,8 +1,9 @@
 from . import serializer
 
 from .models import Announcement
-from ..productor.models import Productor
 
+from ..customer.models import Customer
+from ..productor.models import Productor
 from ..productor.permissions import IsProductor, IsOwnerAnnouncement
 
 from rest_framework.viewsets import GenericViewSet
@@ -44,6 +45,8 @@ class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
         query_params = self.request.GET
         possible_filters = ['name', 'localizations__adress']
         if len(query_params) == 0:
+            if Customer.objects.filter(user__email=self.request.user).exists():
+                return queryset.exclude(customer__user__email=self.request.user)
             return queryset
         if 'filter' and 'value' not in query_params or len(query_params) != 2:
             raise NotFound({'query_params': 'Parametros passados para a query incoerentes'})
