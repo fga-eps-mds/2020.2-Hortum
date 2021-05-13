@@ -26,7 +26,7 @@ class CustomListRouter(SimpleRouter):
 class CustomUpdateRouter(SimpleRouter):
     routes = [
         Route(
-            url=r'^{prefix}$/?',
+            url=r'^{prefix}/?',
             mapping={'patch': 'update'},
             name='{basename}-update',
             detail=False,
@@ -37,7 +37,7 @@ class CustomUpdateRouter(SimpleRouter):
 class CustomDeleteRouter(SimpleRouter):
     routes = [
         Route(
-            url=r'^{prefix}$/?',
+            url=r'^{prefix}/?',
             mapping={'delete': 'destroy'},
             name='{basename}-destroy',
             detail=False,
