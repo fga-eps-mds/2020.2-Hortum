@@ -21,7 +21,7 @@ class ProductorSerializer(serializers.ModelSerializer):
 class ProductorListSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username')
     email = serializers.EmailField(source='user.email')
-    phone_number = serializer.CharField(source='user.phone_number')
+    phone_number = serializers.CharField(source='user.phone_number')
     profile_picture = serializers.ImageField(source='user.profile_picture')
 
     class Meta:
