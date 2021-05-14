@@ -42,7 +42,7 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
         self.create_tokens()
         self.announcement_data = {
             "name": "Banana",
-            "type_of_product": "Banana",
+            "type_of_product": "Frutas",
             "description": "vendendo banana",
             "price": 10.0,
             "localizations": [],
@@ -72,7 +72,7 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
     def test_duplicate_announcement_name(self):
         other_announcement = {
             "name": "Banana",
-            "type_of_product": "Banana",
+            "type_of_product": "Frutas",
             "description": "banana à venda",
             "price": 12.5,
             "localizations": [],
@@ -166,7 +166,7 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
     def create_announcement(self):
         self.announcement_data = {
             "name": "Meio quilo de linguíça",
-            "type_of_product": "Linguiça artesanal e defumados",
+            "type_of_product": "Defumados",
             "description": "Linquiça",
             "price": 35.50,
             "localizations": [],
@@ -336,7 +336,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
     def create_announcement(self):
         self.announcement_data = {
             "name": "Meio quilo de linguíça",
-            "type_of_product": "Linguiça artesanal e defumados",
+            "type_of_product": "Defumados",
             "description": "Linquiça",
             "price": 35.50,
             "localizations": [
@@ -347,7 +347,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
     
         self.announcement_data_extra = {
             "name": "Meio quilo de defumado",
-            "type_of_product": "Linguiça artesanal e defumados",
+            "type_of_product": "Defumados",
             "description": "Defumados",
             "price": 10.15,
             "localizations": [
@@ -599,7 +599,7 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
     def create_announcements(self):
         self.announcement_one = {
             "name": "Meio quilo de linguíça",
-            "type_of_product": "Linguiça artesanal e defumados",
+            "type_of_product": "Defumados",
             "description": "Linquiça",
             "price": 35.50,
             "localizations": [],
@@ -608,7 +608,7 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
     
         self.announcement_two = {
             "name": "Meio quilo de defumado",
-            "type_of_product": "Linguiça artesanal e defumados",
+            "type_of_product": "Defumados",
             "description": "Defumados",
             "price": 10.15,
             "inventory": False,
