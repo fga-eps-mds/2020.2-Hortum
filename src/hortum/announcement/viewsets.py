@@ -43,7 +43,7 @@ class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
     def get_queryset(self):
         queryset = Announcement.objects.filter(inventory=True)
         query_params = self.request.GET
-        possible_filters = ['name', 'localizations__adress']
+        possible_filters = ['name', 'localizations__adress', 'type_of_product']
         if Customer.objects.filter(user__email=self.request.user).exists():
             queryset = queryset.exclude(customer__user__email=self.request.user)
         if len(query_params) == 0:

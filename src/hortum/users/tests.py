@@ -665,7 +665,7 @@ class DeleteUserAPIViewTestCase(APITestCase):
     def create_announcements(self):
         self.announcement = {
             "name": "Meio quilo de linguíça",
-            "type_of_product": "Linguiça artesanal e defumados",
+            "type_of_product": "Defumados",
             "description": "Linquiça",
             "price": 35.50,
             "images": [],
