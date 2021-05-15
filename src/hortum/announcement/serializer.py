@@ -8,7 +8,7 @@ from ..validators import UniqueValidator
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
     localizations = serializers.ListField(required=False, child=serializers.CharField(allow_blank=True), write_only=True, max_length=3)
-    images = serializers.ListField(required=False, child=serializers.ImageField(), write_only=True, max_length=5)
+    images = serializers.ListField(required=True, child=serializers.ImageField(), write_only=True, max_length=5)
 
     class Meta:
         model = Announcement
