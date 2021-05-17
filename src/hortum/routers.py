@@ -1,16 +1,21 @@
 from rest_framework.routers import SimpleRouter, Route
 
+class OptionalSlashRouter(SimpleRouter):
+    def __init__(self):
+        super().__init__()
+        self.trailing_slash = '/?'
+
 class CustomListRouter(SimpleRouter):
     routes = [
         Route(
-            url=r'^{prefix}/{lookup}/?$',
+            url=r'^{prefix}/{lookup}/?',
             mapping={'get': 'list'},
             name='{basename}-list',
             detail=False,
             initkwargs={}
         ),
         Route(
-            url=r'^{prefix}/?$',
+            url=r'^{prefix}/?',
             mapping={'get': 'list'},
             name='{basename}-list',
             detail=False,
@@ -21,7 +26,7 @@ class CustomListRouter(SimpleRouter):
 class CustomUpdateRouter(SimpleRouter):
     routes = [
         Route(
-            url=r'^{prefix}/?$',
+            url=r'^{prefix}/?',
             mapping={'patch': 'update'},
             name='{basename}-update',
             detail=False,
@@ -32,7 +37,7 @@ class CustomUpdateRouter(SimpleRouter):
 class CustomDeleteRouter(SimpleRouter):
     routes = [
         Route(
-            url=r'^{prefix}/?$',
+            url=r'^{prefix}/?',
             mapping={'delete': 'destroy'},
             name='{basename}-destroy',
             detail=False,

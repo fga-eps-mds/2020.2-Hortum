@@ -1,10 +1,12 @@
-from rest_framework import routers
+from rest_framework.routers import SimpleRouter
 
+from ..routers import OptionalSlashRouter
 from . import viewsets
 
-routerRegister = routers.SimpleRouter()
+routerRegister = SimpleRouter()
 routerRegister.register(r'', viewsets.ProductorRegistrationAPIView, basename='productor')
-router = routers.SimpleRouter(trailing_slash=True)
+
+router = OptionalSlashRouter()
 router.register(r'list(:?/(?P<productorName>.+))?', viewsets.ProductorListAPIView, basename='searchProductor')
 
 urlpatterns = [

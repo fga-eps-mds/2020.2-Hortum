@@ -1,8 +1,10 @@
 from . import serializer
 
 from .models import Announcement
+
+from ..customer.models import Customer
 from ..productor.models import Productor
-from ..users.models import User
+from ..productor.permissions import IsProductor, IsOwnerAnnouncement
 
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins, permissions
@@ -12,32 +14,24 @@ from ..encode import decode_string
 
 class AnnouncementRegistrationAPIView(GenericViewSet, mixins.CreateModelMixin):
     '''
-	EndPoint para registro de anúncio
+	EndPoint para registro de anúncios
 	'''
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsProductor,)
     serializer_class = serializer.AnnouncementCreateSerializer
 
-    def get_serializer_context(self):
-        context = super(AnnouncementRegistrationAPIView, self).get_serializer_context()
-        context.update({'productor': Productor.objects.get(user__email=self.request.user)})
-        return context
+    def get_queryset(self):
+        return Productor.objects.get(user__email=self.request.user).announcements.all()
 
 class AnnouncementDeleteUpdateAPIView(GenericViewSet, mixins.DestroyModelMixin, mixins.UpdateModelMixin):
     '''
-	EndPoint para remoção de anúncio
+	EndPoint para atualização/remoção de anúncios
 	'''
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, IsProductor, IsOwnerAnnouncement)
     serializer_class = serializer.AnnouncementUpdateSerializer
     lookup_field = 'name'
 
     def get_queryset(self):
-        productor = Productor.objects.get(user=User.objects.get(email=self.request.user))
-        return productor.announcements.all()
-
-    def get_serializer_context(self):
-        context = super(AnnouncementDeleteUpdateAPIView, self).get_serializer_context()
-        context.update({'queryset': self.get_queryset()})
-        return context
+        return Productor.objects.get(user__email=self.request.user).announcements.all()
 
 class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
     '''
@@ -50,6 +44,8 @@ class AnnouncementListAPIView(GenericViewSet, mixins.ListModelMixin):
         queryset = Announcement.objects.filter(inventory=True)
         query_params = self.request.GET
         possible_filters = ['name', 'localizations__adress', 'type_of_product']
+        if Customer.objects.filter(user__email=self.request.user).exists():
+            queryset = queryset.exclude(customer__user__email=self.request.user)
         if len(query_params) == 0:
             return queryset
         if 'filter' and 'value' not in query_params or len(query_params) != 2:

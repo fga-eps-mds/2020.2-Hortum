@@ -2,6 +2,7 @@ from .serializer import ProductorSerializer, ProductorListSerializer
 
 from .models import Productor
 from ..users.models import User
+from ..customer.models import Customer
 
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
@@ -28,10 +29,11 @@ class ProductorListAPIView(GenericViewSet, mixins.ListModelMixin):
 	'''
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = ProductorListSerializer
-    queryset = Productor.objects.all()
 
     def get_queryset(self):
-        query = Productor.objects.all()
+        queryset = Productor.objects.all()
+        if Customer.objects.filter(user__email=self.request.user).exists():
+            queryset = queryset.exclude(customer__user__email=self.request.user)
         if 'productorName' in self.kwargs:
-            query = query.filter(user__username__icontains=self.kwargs['productorName'])
-        return query.order_by('user__username')
+            queryset = queryset.filter(user__username__icontains=self.kwargs['productorName'])
+        return queryset.order_by('user__username')

@@ -3,73 +3,62 @@ from rest_framework import serializers
 from django.db.models import Q
 
 from .models import Announcement, AnnouncementImage, Localization
-
+from ..productor.models import Productor
+from ..validators import UniqueValidator
 
 class AnnouncementCreateSerializer(serializers.ModelSerializer):
-    localizations = serializers.ListField(child=serializers.CharField(), allow_empty=True, write_only=True)
-    images = serializers.ListField(child=serializers.ImageField(), write_only=True, allow_empty=True)
+    localizations = serializers.ListField(required=False, child=serializers.CharField(allow_blank=True), write_only=True, max_length=3)
+    images = serializers.ListField(required=True, child=serializers.ImageField(), write_only=True, max_length=5)
 
     class Meta:
         model = Announcement
-        fields = ['likes', 'name', 'type_of_product', 'description', 'price', 'inventory', 'localizations', 'images']
-
-    def validate_name(self, name):
-        if self.context['productor'].announcements.all().filter(name=name).exists():
-            raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
-        return name
-
-    def validate_localizations(self, localizations):
-        if len(localizations) > 3:
-            raise serializers.ValidationError('Mais de três localizações para um único anúncio')
-        return localizations
+        fields = ['name', 'images', 'type_of_product', 'description', 'price', 'inventory', 'localizations', 'likes']
+        extra_kwargs = {
+            'name': {'validators': [UniqueValidator()]},
+            'inventory': {'required': False, 'default': True}
+        }
 
     def create(self, validated_data):
-        localizations = validated_data.pop('localizations')
-        images = validated_data.pop('images')
-        announcement = Announcement.objects.create(idProductor=self.context['productor'], **validated_data)
+        localizations = images = []
+        if 'localizations' in validated_data:
+            localizations = validated_data.pop('localizations')
+        if 'images' in validated_data:
+            images = validated_data.pop('images')
+        produtor_pk = Productor.objects.get(user__email=self.context['request'].user)
+        announcement = Announcement.objects.create(idProductor=produtor_pk, **validated_data)
         [AnnouncementImage.objects.create(idImage=announcement, picture=picture) for picture in images]
         [Localization.objects.create(idAnnoun=announcement, adress=local) for local in localizations]
         return announcement
 
 class AnnouncementUpdateSerializer(serializers.ModelSerializer):
-    localizations = serializers.ListField(child=serializers.CharField(), allow_empty=True, write_only=True)
-    images = serializers.ListField(child=serializers.ImageField(), allow_empty=True, write_only=True)
+    localizations = serializers.ListField(child=serializers.CharField(), write_only=True, max_length=3)
+    images = serializers.ListField(child=serializers.ImageField(), allow_empty=True, write_only=True, max_length=5)
 
     class Meta:
         model = Announcement
         fields = ['name', 'type_of_product', 'description', 'price', 'inventory', 'localizations', 'images']
+        extra_kwargs = {'name': {'validators': [UniqueValidator()]}}
 
-    def validate_name(self, name):
-        if self.context['queryset'].filter(name=name).exists():
-            raise serializers.ValidationError('Este nome de anúncio ja foi utilizado.')
-        return name
-
-    def validate_localizations(self, localizations):
-        if len(localizations) > 3:
-            raise serializers.ValidationError('Mais de três localizações para um único anúncio')
-        return localizations
+    def multiple_update(self, instance, validated_data, field_name, filter_obj, **query):
+        query_items = list(query.items())
+        data = query_items[1][1]
+        filter_obj.objects.filter(Q(query_items[0]) & ~Q(query_items[1])).delete()
+        for value in data:
+            if not instance.__class__.objects.filter(name=instance.name, **{'%s__%s' % (field_name, query_items[1][0]): value}).exists():
+                query[query_items[1][0]] = value
+                filter_obj.objects.create(**query)
+        instance.save()
 
     def update(self, instance, validated_data):
         if 'localizations' in validated_data:
-            localizations = validated_data.pop('localizations')
-            Localization.objects.filter(Q(idAnnoun=instance) & ~Q(adress=localizations)).delete()
-            for local in localizations:
-                if not instance.__class__.objects.filter(name=instance.name, localizations__adress=local).exists():
-                    Localization.objects.create(idAnnoun=instance, adress=local)
-            instance.save()
+            self.multiple_update(instance, validated_data, 'localizations', Localization, **{'idAnnoun': instance, 'adress': validated_data.pop('localizations')})
         if 'images' in validated_data:
-            images = validated_data.pop('images')
-            AnnouncementImage.objects.filter(Q(idImage=instance) & ~Q(picture=images)).delete()
-            for image in images:
-                if not instance.__class__.objects.filter(name=instance.name, images__picture=image).exists():
-                    AnnouncementImage.objects.create(idImage=instance, picture=image)
-            instance.save()
+            self.multiple_update(instance, validated_data, 'images', AnnouncementImage, **{'idImage': instance, 'picture': validated_data.pop('images')})
         return super().update(instance, validated_data)
 
 class AnnouncementImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AnnouncementImage
-        fields = ['picture']
+    def to_representation(self, value):
+        return '%s://%s%s' % ('https' if self.context['request'].is_secure() else 'http', self.context['request'].get_host(), value.picture.url)
 
 class AnnouncementListSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True, source='idProductor.user.username')
@@ -81,4 +70,4 @@ class AnnouncementListSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Announcement
-        fields = ['email', 'username', 'phone_number', 'pictureProductor', 'name', 'type_of_product', 'description', 'price', 'likes', 'images', 'localizations', 'inventory']
+        fields = ['email', 'username', 'phone_number', 'pictureProductor', 'name', 'images', 'type_of_product', 'description', 'price', 'localizations', 'likes', 'inventory']

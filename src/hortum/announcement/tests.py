@@ -1,9 +1,16 @@
+import os
+import io
+
+from PIL import Image
+
 from rest_framework.test import APITestCase
+
+from django.conf import settings
 
 from ..productor.models import Productor
 from ..customer.models import Customer
 from ..users.models import User
-from .models import Announcement
+from .models import Announcement, AnnouncementImage
 
 from ..encode import encode_string
 
@@ -12,17 +19,19 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Mário",
             "email": "mario@teste.com",
-	        "password": "teste",
-            "is_verified": True
+	        "password": "teste"
         }
 
         url_signup = '/signup/productor/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.user_data},
 	        format='json'
 	    )
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
+    
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
@@ -36,6 +45,14 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
         )
 
         self.auth_token = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
+
+    def generate_photo_file(self):
+        file = io.BytesIO()
+        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+        image.save(file, 'png')
+        file.name = 'test.png'
+        file.seek(0)
+        return file
 
     def setUp(self):
         self.create_productor()
@@ -54,6 +71,10 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
         Announcement.objects.all().delete()
         Productor.objects.all().delete()
         User.objects.all().delete()
+        for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+            for name in files:
+                if name != 'person-male.png':
+                    os.remove(root + '/' + name)
 
     def test_create_announcement(self):
         response = self.client.post(
@@ -67,6 +88,31 @@ class AnnouncementCreateAPIViewTestCase(APITestCase):
             response.status_code,
             201,
             msg='Falha na criação de anúncio'
+        )
+
+    def test_create_announcement_with_image(self):
+        photo_file = self.generate_photo_file()
+        self.announcement_data['images'] += [photo_file]
+        response = self.client.post(
+            self.url_announcement,
+            self.announcement_data,
+            format='multipart',
+            **self.auth_token
+        )
+
+        self.assertEqual(
+            response.status_code,
+            201,
+            msg='Falha na criação de anúncio'
+        )
+
+        announcementImage = AnnouncementImage.objects.get(idImage__idProductor__user__email=self.user_data['email'])
+        expected = AnnouncementImage.upload_image_announ(announcementImage, photo_file.name)
+        self.assertEqual(response.status_code, 201, msg="Falha ao registrar anúncio")
+        self.assertEqual(
+            announcementImage.picture.url,
+            '/images/' + expected,
+            msg='Falha no link da foto'
         )
 
     def test_duplicate_announcement_name(self):
@@ -134,8 +180,7 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "João",
             "email": "joao@teste.com",
-	        "password": "teste",
-            "is_verified": True
+	        "password": "teste"
         }
 
         url_signup = '/signup/productor/'
@@ -146,6 +191,8 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
 	        format='json'
 	    )
         
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
+    
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
     def create_tokens(self):
@@ -184,6 +231,14 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 201, msg='Falha na criação do anúncio')
 
+    def generate_photo_file(self):
+        file = io.BytesIO()
+        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+        image.save(file, 'png')
+        file.name = 'test.png'
+        file.seek(0)
+        return file
+
     def setUp(self):
         self.create_user()
         self.create_tokens()
@@ -195,6 +250,10 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
         Announcement.objects.all().delete()
         Productor.objects.all().delete()
         User.objects.all().delete()
+        for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+            for name in files:
+                if name != 'person-male.png':
+                    os.remove(root + '/' + name)
 
     def test_delete_announcement(self):
         response = self.client.delete(
@@ -214,7 +273,7 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
             **self.creds
         )
 
-        self.assertEqual(response.status_code, 404, msg='Anúncio válido')
+        self.assertEqual(response.status_code, 403, msg='Anúncio válido')
 
     def test_update_one_attr_announcement(self):
         new_data = {
@@ -299,27 +358,62 @@ class AnnouncementsDeleteUpdateAPIViewTestCase(APITestCase):
 
         self.assertEqual(response.status_code, 400, msg='Anúncio atualizado com sucesso')
 
+    def test_update_images_announcement(self):
+        photo_file = self.generate_photo_file()
+        new_data = {
+            "images": [photo_file]
+        }
+
+        response = self.client.patch(
+            path=self.url_update_announ,
+            format='multipart',
+            data=new_data,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na alteração das imagens')
+
 class AnnouncementsListAPIViewTestCase(APITestCase):
-    def create_user(self):
-        self.user_data = {
+    def create_productor(self):
+        self.productor_data = {
 	        "username": "João",
             "email": "joao@teste.com",
-	        "password": "teste",
-            "is_verified": True
+	        "password": "teste"
         }
 
         url_signup = '/signup/productor/'
 
         response = self.client.post(
             url_signup,
-	        {'user': self.user_data},
+	        {'user': self.productor_data},
 	        format='json'
 	    )
         
+        User.objects.filter(email=self.productor_data['email']).update(is_verified=True)
+
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
-    def create_tokens(self):
-        user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
+    def create_customer(self):
+        self.customer_data = {
+	        "username": "Cleber",
+            "email": "cleber@teste.com",
+	        "password": "teste"
+        }
+
+        url_signup = '/signup/customer/'
+
+        response = self.client.post(
+            url_signup,
+	        {'user': self.customer_data},
+	        format='json'
+	    )
+
+        User.objects.filter(email=self.customer_data['email']).update(is_verified=True)
+
+        self.assertEqual(response.status_code, 201, msg='Falha no registro de consumidor')
+
+    def create_tokens(self, user):
+        user_cred = {'email': user['email'], 'password': user['password']}
 
         url_token = '/login/'
 
@@ -328,12 +422,18 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
 	        user_cred,
 	        format='json'
         )
-
-        self.assertEqual(response.status_code, 200, msg='Credenciais inválidas')
-
         self.creds = {'HTTP_AUTHORIZATION': 'Bearer ' + response.data['access']}
 
+    def generate_photo_file(self):
+        file = io.BytesIO()
+        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+        image.save(file, 'png')
+        file.name = 'test.png'
+        file.seek(0)
+        return file
+
     def create_announcement(self):
+        photo_file = self.generate_photo_file()
         self.announcement_data = {
             "name": "Meio quilo de linguíça",
             "type_of_product": "Defumados",
@@ -342,7 +442,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
             "localizations": [
                 "local 1"
             ],
-            "images": []
+            "images": [photo_file]
         }
     
         self.announcement_data_extra = {
@@ -362,7 +462,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         response = self.client.post(
             path=url_create_announ,
 	        data=self.announcement_data,
-	        format='json',
+	        format='multipart',
 	        **self.creds
         )
 
@@ -378,6 +478,7 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 201, msg='Falha na criação do anúncio')
 
     def change_inventory(self):
+        self.create_tokens(self.productor_data)
         new_data = {
             "inventory": False
         }
@@ -394,9 +495,11 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 200, msg='Falha na alteração do anúncio')
 
     def setUp(self):
-        self.create_user()
-        self.create_tokens()
+        self.create_productor()
+        self.create_tokens(self.productor_data)
         self.create_announcement()
+        self.create_customer()
+        self.create_tokens(self.customer_data)
 
         self.url_list_announ = '/announcement/list'
         self.filter_option = '/?filter='
@@ -405,7 +508,12 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
     def tearDown(self):
         Announcement.objects.all().delete()
         Productor.objects.all().delete()
+        Customer.objects.all().delete()
         User.objects.all().delete()
+        for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+            for name in files:
+                if name != 'person-male.png':
+                    os.remove(root + '/' + name)
 
     def test_list_all_true_announcement(self):
         response = self.client.get(
@@ -427,6 +535,31 @@ class AnnouncementsListAPIViewTestCase(APITestCase):
         self.assertEqual(response.status_code, 200, msg='Falha na listagem do anúncio')
         self.assertEqual(len(response.data), 1, msg='Falha na quantidade de anúncios listados')
     
+    def test_list_announcement_with_favorites(self):
+        self.create_tokens(self.customer_data)
+        announcement_fav_url = '/customer/fav-announcement'
+        fav_announ = {
+            'email': self.productor_data['email'],
+            'announcementName': self.announcement_data['name']
+        }
+
+        response = self.client.patch(
+            path=announcement_fav_url,
+            format='json',
+            data=fav_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha no registro do favorito')
+        
+        response = self.client.get(
+            path=self.url_list_announ,
+            **self.creds
+        )
+
+        self.assertEqual(response.status_code, 200, msg='Falha na listagem do anúncio')
+        self.assertEqual(len(response.data), 1, msg='Falha na quantidade de anúncios listados')
+
     def test_list_names_multiples_annoucement(self):
         self.filter_option += 'name'
         self.value_option += 'Meio'
@@ -555,17 +688,20 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
         self.productor_data = {
 	        "username": "Mário",
             "email": "mario@teste.com",
-	        "password": "teste",
-            "is_verified": True
+	        "password": "teste"
         }
 
         url_signup = '/signup/productor/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.productor_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.productor_data['email']).update(is_verified=True)
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
     def create_tokens(self, user):
         user_cred = {'email': user['email'], 'password': user['password']}
@@ -584,17 +720,20 @@ class AnnouncementRetrieveAPIViewTestCase(APITestCase):
         self.customer_data = {
 	        "username": "João Pedro",
             "email": "joao@teste.com",
-	        "password": "teste",
-            "is_verified": True
+	        "password": "teste"
         }
 
         url_signup = '/signup/customer/'
 
-        self.client.post(
+        response = self.client.post(
             url_signup,
 	        {'user': self.customer_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.customer_data['email']).update(is_verified=True)
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
 
     def create_announcements(self):
         self.announcement_one = {

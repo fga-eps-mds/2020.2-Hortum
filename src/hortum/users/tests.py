@@ -1,24 +1,189 @@
+import os
+import io
+
+from PIL import Image
+from unittest import mock
+
 from rest_framework.test import APITestCase
+
+from django.conf import settings
+from django.db import DataError
 
 from ..customer.models import Customer
 from ..productor.models import Productor
 from ..announcement.models import Announcement
+from ..validators import qs_exists, qs_filter
+
 from .models import User
+from .forms import CustomPasswordForm
+
+class GlobalValidatorTestCase(APITestCase):
+    '''
+    Validação retirada do `ValidatorTests`
+    do Django Rest e adaptada para o projeto
+    '''
+    def test_qs_exists_handles_type_error(self):
+        class TypeErrorQueryset:
+            def exists(self):
+                raise TypeError
+        self.assertFalse(qs_exists(TypeErrorQueryset()))
+
+    def test_qs_exists_handles_value_error(self):
+        class ValueErrorQueryset:
+            def exists(self):
+                raise ValueError
+        self.assertFalse(qs_exists(ValueErrorQueryset()))
+
+    def test_qs_exists_handles_data_error(self):
+        class DataErrorQueryset:
+            def exists(self):
+                raise DataError
+        self.assertFalse(qs_exists(DataErrorQueryset()))
+
+    def test_qs_filter_handles_type_error(self):
+        class TypeErrorQueryset:
+            def filter(self, **kwargs):
+                raise TypeError
+
+            def none(self):
+                return None
+        self.assertEqual(qs_filter(TypeErrorQueryset()), None)
+
+    def test_qs_filter_handles_value_error(self):
+        class ValueErrorQueryset:
+            def filter(self, **kwargs):
+                raise ValueError
+
+            def none(self):
+                return None
+        self.assertEqual(qs_filter(ValueErrorQueryset()), None)
+
+    def test_qs_filter_handles_data_error(self):
+        class DataErrorQueryset:
+            def filter(self, **kwargs):
+                raise DataError
+                
+            def none(self):
+                return None
+        self.assertEqual(qs_filter(DataErrorQueryset()), None)
+
+class CustomPasswordFormTestCase(APITestCase):
+    '''
+    Validação retirada do `SetPasswordFormTest`
+    do Django e adaptada para o projeto.
+    '''
+    def create_user(self):
+        self.user_data = {
+	        "username": "Luís",
+            "email": "luis@teste.com",
+	        "password": "teste",
+            "phone_number": "62123456787"
+        }
+
+        url_signup = '/signup/customer/'
+
+        self.client.post(
+            url_signup,
+	        {'user': self.user_data},
+	        format='json'
+	    )
+
+        self.user = User.objects.get(email=self.user_data['email'])
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
+
+    def setUp(self):
+        self.create_user()
+
+    def test_password_verification(self):
+        data = {
+            'new_password1': '12345',
+            'new_password2': '123'
+        }
+        form = CustomPasswordForm(self.user, data)
+        self.assertFalse(form.is_valid())
+        self.assertEqual(form['new_password2'].errors, [str(form.error_messages['password_mismatch'])])
+
+    @mock.patch('django.contrib.auth.password_validation.password_changed')
+    def test_success_change_password(self, password_changed):
+        data = {
+            'new_password1': '12345',
+            'new_password2': '12345'
+        }
+        form = CustomPasswordForm(self.user, data)
+        self.assertTrue(form.is_valid())
+        form.save(commit=False)
+        self.assertEqual(password_changed.call_count, 0)
+        form.save()
+        self.assertEqual(password_changed.call_count, 1)
 
 class UserCreateAPIViewTestCase(APITestCase):
+    def generate_photo_file(self):
+        file = io.BytesIO()
+        image = Image.new('RGBA', size=(100, 100), color=(155, 0, 0))
+        image.save(file, 'png')
+        file.name = 'test.png'
+        file.seek(0)
+        return file
+
     def setUp(self):
+        self.url_verified_page = '/users/verify/'
         self.url_login = '/signup/customer/'
 
     def tearDown(self):
         User.objects.all().delete()
+        for root, dirs, files in os.walk(settings.MEDIA_ROOT):
+            for name in files:
+                if name != 'person-male.png':
+                    os.remove(root + '/' + name)
 
     def test_create_valid_user(self):
         user_data = {
             "username": "João",
             "email": "joao@email.com",
             "phone_number": "61121456789",
-            "password": "teste",
-            "is_verified": True
+            "password": "teste"
+        }
+
+        response = self.client.post(
+            self.url_login,
+            {'user': user_data},
+            format='json'
+        )
+
+        User.objects.filter(email=user_data['email']).update(is_verified=True)
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
+        # self.assertTemplateUsed(response, 'hortum/user_verify_page.html')
+
+    def test_create_valid_user_with_image(self):
+        photo_file = self.generate_photo_file()
+        user_data = {
+            "user.username": "Cleber",
+            "user.email": "cleber@email.com",
+            "user.phone_number": "61121456789",
+            "user.password": "teste",
+            "user.profile_picture": photo_file
+        }
+
+        response = self.client.post(
+            self.url_login,
+            user_data,
+            format='multipart'
+        )
+
+        User.objects.filter(email=user_data['user.email']).update(is_verified=True)
+
+        expected = User.upload_image(User.objects.get(username=user_data['user.username']), photo_file.name)
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
+        self.assertEqual(response.data['user']['profile_picture'], 'http://testserver/images/' + expected, msg='Falha no link da foto')
+
+    def test_is_verified_render_page(self):
+        self.url_verified_page += 'am9hb0BlbWFpbC5jb20='
+        user_data = {
+            "username": "João",
+            "email": "joao@email.com",
+            "phone_number": "61121456789",
+            "password": "teste"
         }
 
         response = self.client.post(
@@ -28,6 +193,30 @@ class UserCreateAPIViewTestCase(APITestCase):
         )
 
         self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
+
+        response = self.client.get(self.url_verified_page)
+        self.assertTemplateUsed(response, 'hortum/user_verify_page.html')
+
+    def test_is_already_verified_render_page(self):
+        self.url_verified_page += 'am9hb0BlbWFpbC5jb20='
+        user_data = {
+            "username": "João",
+            "email": "joao@email.com",
+            "phone_number": "61121456789",
+            "password": "teste"
+        }
+
+        response = self.client.post(
+            self.url_login,
+            {'user': user_data},
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, 201, msg='Falha na criação de usuário')
+        User.objects.filter(email=user_data['email']).update(is_verified=True)
+
+        response = self.client.get(self.url_verified_page)
+        self.assertTemplateUsed(response, 'hortum/user_already_verified_page.html')
 
     def test_create_invalid_user(self):
         user_data = {
@@ -58,6 +247,8 @@ class UserCreateAPIViewTestCase(APITestCase):
             format='json'
         )
 
+        User.objects.filter(email=user_data['email']).update(is_verified=True)
+
         self.assertEqual(response.status_code, 400, msg='Falha na criação de usuário')
 
 class UserTokenObtainAPIViewTestCase(APITestCase):
@@ -66,8 +257,7 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
 	        "username": "Luís",
             "email": "luis@teste.com",
 	        "password": "teste",
-            "phone_number": "62123456787",
-            "is_verified": True
+            "phone_number": "62123456787"
         }
 
         url_signup = '/signup/customer/'
@@ -77,6 +267,8 @@ class UserTokenObtainAPIViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
 
     def setUp(self):
         self.create_user()
@@ -150,7 +342,6 @@ class UpdateUserViewTestCase(APITestCase):
         self.user_data = {
 	        "username": "Luís",
             "email": "luis@teste.com",
-            "is_verified": True,
             "phone_number": "61133456789",
 	        "password": "teste"
         }
@@ -162,6 +353,8 @@ class UpdateUserViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
     
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
@@ -180,15 +373,14 @@ class UpdateUserViewTestCase(APITestCase):
         self.create_user()
         self.create_tokens()
         self.url_login = '/login/'
-        self.url_update_user = '/users/update/'
+        self.url_update_user = '/users/update'
 
     def test_change_existent_email(self):
         other_user_data = {
             'username': 'Marcos Segundo',
             'email': 'marcos@productor.com',
             'password': 'teste dois',
-            'phone_number': "41123456787",
-            'is_verified': True
+            'phone_number': "41123456787"
         }
         
         user_username_email = {
@@ -203,6 +395,8 @@ class UpdateUserViewTestCase(APITestCase):
             {'user': other_user_data},
             format='json'
         )
+
+        User.objects.filter(email=other_user_data['email']).update(is_verified=True)
 
         response = self.client.patch(
             path=self.url_update_user,
@@ -314,7 +508,6 @@ class ChangePasswordViewTestCase(APITestCase):
 	        "username": "Luís",
             "email": "luis@teste.com",
 	        "password": "teste",
-            "is_verified": True
         }
 
         url_signup = '/signup/customer/'
@@ -324,6 +517,8 @@ class ChangePasswordViewTestCase(APITestCase):
 	        {'user': self.user_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.user_data['email']).update(is_verified=True)
     
     def create_tokens(self):
         user_cred = {'email': self.user_data['email'], 'password': self.user_data['password']}
@@ -342,7 +537,7 @@ class ChangePasswordViewTestCase(APITestCase):
         self.create_user()
         self.create_tokens()
         self.url_login = '/login/'
-        self.url_change_password = '/users/change-password/'
+        self.url_change_password = '/users/change-password'
 
     def test_wrong_old_password(self):
         user_password = {
@@ -432,8 +627,7 @@ class DeleteUserAPIViewTestCase(APITestCase):
 	        "username": "Luís",
             "email": "luis@teste.com",
 	        "password": "teste",
-            "phone_number": "61123456757",
-            "is_verified": True
+            "phone_number": "61123456757"
         }
 
         url_signup = '/signup/customer/'
@@ -444,6 +638,8 @@ class DeleteUserAPIViewTestCase(APITestCase):
 	        format='json'
 	    )
 
+        User.objects.filter(email=self.customer_data['email']).update(is_verified=True)
+
         self.assertEqual(response.status_code, 201, msg='Erro na criação do customer')
 
     def create_productor(self):
@@ -451,8 +647,7 @@ class DeleteUserAPIViewTestCase(APITestCase):
 	        "username": "João",
             "email": "joao@teste.com",
 	        "password": "teste",
-            "phone_number": "61123416787",
-            "is_verified": True
+            "phone_number": "61123416787"
         }
 
         url_signup = '/signup/productor/'
@@ -462,6 +657,8 @@ class DeleteUserAPIViewTestCase(APITestCase):
 	        {'user': self.productor_data},
 	        format='json'
 	    )
+
+        User.objects.filter(email=self.productor_data['email']).update(is_verified=True)
 
         self.assertEqual(response.status_code, 201, msg='Erro na criação do productor')
 
