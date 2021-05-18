@@ -21,6 +21,7 @@ plugins:
 
 nav:
     - Home: "index.md"
+    - Post Mortem: "Post_mortem.md"
     - Projeto:
         - Documento de Visão: "Documento_de_visao.md"
         - Documento de Metodologia: "Documento_metodologia.md"
