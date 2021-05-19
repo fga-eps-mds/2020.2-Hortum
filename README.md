@@ -111,7 +111,7 @@ Ao rodar o código a *porta 8000* estará aberta para o uso da API.
 ### Baixando e rodando o Frontend
 Para rodar o frontend acesse o repositório [mobile](https://github.com/fga-eps-mds/2020.2-Hortum-Mobile) e siga o passo a passo da instalação.
 
-## Baixando da Play Store
+### Baixando da Play Store
 Para baixar e utilizar acesse o app [Hortum](https://play.google.com/store/apps/details?id=com.hortum_mobile.mds) na Play Store.
 
 <!-- Usando o Sistema -->
