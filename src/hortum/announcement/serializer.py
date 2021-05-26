@@ -56,7 +56,7 @@ class AnnouncementUpdateSerializer(serializers.ModelSerializer):
             self.multiple_update(instance, validated_data, 'images', AnnouncementImage, **{'idImage': instance, 'picture': validated_data.pop('images')})
         return super().update(instance, validated_data)
 
-class AnnouncementImageSerializer(serializers.ModelSerializer):
+class AnnouncementImageSerializer(serializers.Serializer):
     def to_representation(self, value):
         return '%s://%s%s' % ('https' if self.context['request'].is_secure() else 'http', self.context['request'].get_host(), value.picture.url)
 
